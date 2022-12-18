@@ -1,5 +1,4 @@
-import { ItheumApp } from './extensions/itheum/register'
-import { CoindripApp } from './extensions/coindrip/register'
+import { CoindripApp } from '../extensions/coindrip/register'
 
 export const Config = {
   AvailableApps: [

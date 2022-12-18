@@ -1,5 +1,5 @@
 import React from 'react'
-import { App, AppConfig } from './types'
+import { App, AppConfig } from '../types'
 import { ProposalAction } from '@superciety/core-ts'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
