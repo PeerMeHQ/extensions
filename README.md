@@ -1,27 +1,27 @@
-# Superciety Apps & Extensions
+# Superciety Extensions
 
-## Available Apps
+## Available Extensions
 
 - Coindrip: [coindrip.finance](https://coindrip.finance)
 
-## Create your App
+## Create your Extension
 
-> Please get in touch or create an Github Issue before starting to work on your app integration!
+> Please get in touch or create an Github Issue before starting to work on your integration!
 
 ### Overview
 
 1. Fork this repository & work on it locally
-2. Make a copy of apps/template and adapt it to your needs
-3. Register your app in the root's `config.ts`
+2. Make a copy of `extensions/template` and adapt it to your needs
+3. Register your extension in the root's `config.ts`
 4. Start & keep working inside this directory
 5. Create a pull request with your changes to this repository
 
 ### Guideliness
 
 - Don't pull in any dependencies that are not absolutely necessary.
-- Only work inside the working directory of your app
+- Only work inside the working directory of your extension
 
-### Install all the dependencies
+### Installation
 
 To install the repository run:
 
