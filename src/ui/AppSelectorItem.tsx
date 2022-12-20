@@ -17,6 +17,7 @@ export const AppSelectorItem = (props: Props) => (
       src={props.app.Logo}
       alt={props.app.Name + ' Logo'}
       className="w-10 sm:w-12 md:w-16"
+      width={100}
     />
     <div>
       <h3>{props.app.Name}</h3>
