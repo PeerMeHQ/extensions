@@ -1,8 +1,8 @@
 import Logo from './meta/logo.svg'
 import { Coindrip } from './Coindrip'
-import type { App } from '../../src/types'
+import type { AppInfo } from '../../types'
 
-export const CoindripApp: App = {
+export const CoindripApp: AppInfo = {
   Enabled: true,
   Name: 'Coindrip',
   Description: 'A protocol for real-time ESDT payments.',

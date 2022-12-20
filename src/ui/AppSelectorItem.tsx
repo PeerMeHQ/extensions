@@ -1,10 +1,10 @@
 import React from 'react'
-import { App } from '../types'
+import { AppInfo } from '../types'
 import Image from 'next/image'
 
 type Props = {
-  app: App
-  onClick: (app: App) => void
+  app: AppInfo
+  onClick: (app: AppInfo) => void
 }
 
 export const AppSelectorItem = (props: Props) => (

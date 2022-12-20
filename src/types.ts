@@ -15,7 +15,7 @@ export type AppRootProps = {
   onActionAddRequest: (action: ProposalAction) => void
 }
 
-export type App = {
+export type AppInfo = {
   Enabled: boolean
   Name: string
   Description: string

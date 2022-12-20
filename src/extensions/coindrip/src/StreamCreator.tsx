@@ -1,5 +1,5 @@
+import { AppHook } from '../../../hooks/useApp'
 import { TokenPayment } from '@elrondnetwork/erdjs'
-import { AppHook } from '../../../src/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
 import {
   Input,

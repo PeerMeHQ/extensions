@@ -1,11 +1,11 @@
 import React from 'react'
-import { App, AppConfig } from '../types'
+import { AppInfo, AppConfig } from '../types'
 import { ProposalAction } from '@superciety/core-ts'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
-  app: App
+  app: AppInfo
   config: AppConfig
   onCloseRequest: () => void
   onActionAddRequest: (action: ProposalAction) => void

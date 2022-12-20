@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppRootProps } from '../../src/types'
-import { useApp } from '../../src/hooks/useApp'
-import { AppSection } from '../../src/ui/extension/AppSection'
+import { AppRootProps } from '../../types'
+import { useApp } from '../../hooks/useApp'
+import { AppSection } from '../../ui/elements/AppSection'
 
 export const Itheum = (props: AppRootProps) => {
   const app = useApp(props)

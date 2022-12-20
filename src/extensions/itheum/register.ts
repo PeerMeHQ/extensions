@@ -1,8 +1,8 @@
 import { Itheum } from './Itheum'
 import Logo from './meta/logo.svg'
-import type { App } from '../../src/types'
+import type { AppInfo } from '../../types'
 
-export const ItheumApp: App  = {
+export const ItheumApp: AppInfo = {
   Enabled: true,
   Name: 'Itheum Data Dex',
   Description: 'Truly own and trade your data.',
@@ -13,5 +13,5 @@ export const ItheumApp: App  = {
   Developer: {
     Name: 'Superciety',
     Website: 'https://superciety.com',
-  }
+  },
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Config } from '../config'
-import { App, AppConfig } from '../types'
+import { AppInfo, AppConfig } from '../types'
 import { useEffect, useState } from 'react'
 import { AppPresenter } from './AppPresenter'
 import { ProposalAction } from '@superciety/core-ts'
@@ -11,14 +11,14 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 
 type Props = {
   config: AppConfig
-  onAppSelected?: (app: App | null) => void
+  onAppSelected?: (app: AppInfo | null) => void
   onActionAddRequest: (action: ProposalAction) => void
   onNotificationRequest: (text: string, type: NotificationType) => void
 }
 
 export const AppSelector = (props: Props) => {
   const [autoAnimate] = useAutoAnimate<HTMLDivElement>()
-  const [activeApp, setActiveApp] = useState<App | null>(null)
+  const [activeApp, setActiveApp] = useState<AppInfo | null>(null)
 
   const availableApps = Config.AvailableApps.filter((app) => app.Enabled)
 
