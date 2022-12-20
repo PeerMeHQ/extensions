@@ -1,11 +1,13 @@
-import { Input } from '../../../../Controls/Input'
 import { TokenPayment } from '@elrondnetwork/erdjs'
 import { AppHook } from '../../../src/hooks/useApp'
-import { Button } from '../../../../Controls/Button'
-import { showToast } from '../../../../Feedback/Toast'
 import React, { SyntheticEvent, useState } from 'react'
-import { AddressSelector } from '../../../../User/AddressSelector'
-import { PaymentSelector } from '../../../../Entity/PaymentSelector'
+import {
+  Input,
+  Button,
+  showToast,
+  UserSelector,
+  PaymentSelector,
+} from '@superciety/web-ui'
 
 type Props = {
   app: AppHook
@@ -42,7 +44,7 @@ export const StreamCreator = (props: Props) => {
       <label htmlFor="recipient" className="sr-only">
         Recipient
       </label>
-      <AddressSelector
+      <UserSelector
         id="recipient"
         placeholder="Recipient address ..."
         onSelect={(val) => setRecipient(val.address)}
