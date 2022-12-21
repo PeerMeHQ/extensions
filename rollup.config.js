@@ -3,6 +3,7 @@ import image from '@rollup/plugin-image'
 import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import typescript from 'rollup-plugin-typescript2'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 
@@ -24,6 +25,7 @@ export default {
   ],
   plugins: [
     peerDepsExternal(),
+    resolve(),
     commonjs({ sourceMap: false }),
     typescript({ useTsconfigDeclarationDir: true }),
     image(),
