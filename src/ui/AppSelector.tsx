@@ -1,10 +1,10 @@
 import React from 'react'
 import { Config } from '../config'
-import { AppInfo, AppConfig } from '../types'
 import { useEffect, useState } from 'react'
+import { AppInfo, AppConfig } from '../types'
 import { AppPresenter } from './AppPresenter'
-import { ProposalAction } from '@superciety/core-ts'
 import { AppSelectorItem } from './AppSelectorItem'
+import { ProposalAction } from '@superciety/core-ts'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'vibe'

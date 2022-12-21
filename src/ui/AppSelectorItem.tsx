@@ -1,6 +1,6 @@
 import React from 'react'
-import { AppInfo } from '../types'
 import Image from 'next/image'
+import { AppInfo } from '../types'
 
 type Props = {
   app: AppInfo
