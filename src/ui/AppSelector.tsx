@@ -5,7 +5,6 @@ import { AppInfo, AppConfig } from '../types'
 import { AppPresenter } from './AppPresenter'
 import { AppSelectorItem } from './AppSelectorItem'
 import { ProposalAction } from '@superciety/core-ts'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 
@@ -17,7 +16,6 @@ type Props = {
 }
 
 export const AppSelector = (props: Props) => {
-  const [autoAnimate] = useAutoAnimate<HTMLDivElement>()
   const [activeApp, setActiveApp] = useState<AppInfo | null>(null)
 
   const availableApps = Config.AvailableApps.filter((app) => app.Enabled)
@@ -27,22 +25,15 @@ export const AppSelector = (props: Props) => {
   }, [activeApp])
 
   return (
-    <section ref={autoAnimate}>
+    <section>
       {activeApp === null && (
         <header className="mb-4">
           <h2 className="mb-1">Third-party Apps</h2>
-          <p className="text-xl">
-            Fellowship DAOs can interact easily interact with the third-party
-            apps you love the most.
-          </p>
+          <p className="text-xl">Fellowship DAOs can interact easily interact with the third-party apps you love the most.</p>
         </header>
       )}
       {activeApp ? (
-        <AppPresenter
-          {...props}
-          app={activeApp}
-          onCloseRequest={() => setActiveApp(null)}
-        />
+        <AppPresenter {...props} app={activeApp} onCloseRequest={() => setActiveApp(null)} />
       ) : (
         <ul className="flex flex-wrap">
           {availableApps.map((app) => (
