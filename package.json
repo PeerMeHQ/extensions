@@ -1,6 +1,6 @@
 {
   "name": "@superciety/extensions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Extensions",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
