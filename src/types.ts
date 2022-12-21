@@ -2,7 +2,7 @@ import { Entity, ProposalAction } from '@superciety/core-ts'
 
 export type AppNetwork = 'devnet' | 'testnet' | 'mainnet'
 
-// if you would like to add a tags that is not available, please open a Github issue before adding it here
+// if you would like to add a tags that is not available, please get in touch before adding it here
 export type AppTag = 'payments' | 'exchange' | 'gaming'
 
 export type AppConfig = {
