@@ -1,0 +1,42 @@
+<link
+  href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+  rel="stylesheet"
+/>
+
+<style>
+  .text-primary-400,
+  .text-primary-500 {
+    color: red;
+  }
+  .bg-primary-400,
+  .bg-primary-500 {
+    background-color: red;
+  }
+
+  .highlight {
+    background-image: linear-gradient(
+      180deg,
+      transparent 70%,
+      rgba(79, 209, 197, 0.4) 0
+    );
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 32px;
+  }
+</style>
+
+<script>
+  window.process = {
+    env: {
+      NODE_ENV: 'test',
+    },
+  }
+</script>
