@@ -1,5 +1,5 @@
 import Logo from './meta/logo.svg'
-import { Coindrip } from './Coindrip'
+import { Coindrip } from './src/Coindrip'
 import type { AppInfo } from '../../types'
 
 export const CoindripApp: AppInfo = {
