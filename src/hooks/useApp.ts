@@ -23,7 +23,7 @@ export const useApp = (appProps: AppRootProps): AppHook => {
    * @param {string | null} endpoint - The name of the endpoint to call on the destination smart contract.
    * @param {BigNumber.Value} value - The amount of EGLD to send.
    * @param {ProposalActionArg[]} args - The arguments to pass to the smart contract endpoint.
-   * @param {ProposalActionPayment[]} payments - The payments to send to the smart contract endpoint.
+   * @param {TokenPayment[]} payments - The payments to send to the smart contract endpoint.
    */
   const requestProposalAction = (
     destination: string,
@@ -31,10 +31,7 @@ export const useApp = (appProps: AppRootProps): AppHook => {
     value: BigNumber.Value,
     args: ProposalActionArg[] = [],
     payments: TokenPayment[] = []
-  ) =>
-    appProps.onActionAddRequest(
-      createProposalAction(destination, endpoint, value, args, payments)
-    )
+  ) => appProps.onActionAddRequest(createProposalAction(destination, endpoint, value, args, payments))
 
   return {
     config: appProps.config,
