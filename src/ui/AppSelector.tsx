@@ -3,8 +3,8 @@ import { Config } from '../config'
 import { useEffect, useState } from 'react'
 import { AppInfo, AppConfig } from '../types'
 import { AppPresenter } from './AppPresenter'
+import { ProposalAction } from '@peerme/core-ts'
 import { AppSelectorItem } from './AppSelectorItem'
-import { ProposalAction } from '@superciety/core-ts'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 
@@ -29,7 +29,9 @@ export const AppSelector = (props: Props) => {
       {activeApp === null && (
         <header className="mb-4">
           <h2 className="mb-1">Third-party Apps</h2>
-          <p className="text-xl">Fellowship DAOs can interact easily interact with the third-party apps you love the most.</p>
+          <p className="text-xl">
+            Fellowship DAOs can interact easily interact with the third-party apps you love the most.
+          </p>
         </header>
       )}
       {activeApp ? (

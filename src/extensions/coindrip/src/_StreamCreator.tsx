@@ -2,7 +2,7 @@ import { getContractAddress } from './config'
 import { AppHook } from '../../../hooks/useApp'
 import { TokenPayment } from '@elrondnetwork/erdjs'
 import React, { SyntheticEvent, useState } from 'react'
-import { Input, Button, showToast, UserSelector, PaymentSelector } from '@superciety/web-ui'
+import { Input, Button, showToast, UserSelector, PaymentSelector } from '@peerme/web-ui'
 
 type Props = {
   app: AppHook

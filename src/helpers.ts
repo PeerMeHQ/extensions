@@ -1,10 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { TokenPayment } from '@elrondnetwork/erdjs'
-import {
-  ProposalAction,
-  ProposalActionArg,
-  toProposalActionPayment,
-} from '@superciety/core-ts'
+import { ProposalAction, ProposalActionArg, toProposalActionPayment } from '@peerme/core-ts'
 
 export const createProposalAction = (
   destination: string,
