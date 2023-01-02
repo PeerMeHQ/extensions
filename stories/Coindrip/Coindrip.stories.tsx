@@ -1,7 +1,7 @@
 import React from 'react'
 import { Setup } from '../setup'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Coindrip } from '../../src/extensions/coindrip/Coindrip'
+import { Coindrip } from '../../src/extensions/coindrip/src/Coindrip'
 
 export default {
   title: 'Extensions/Coindrip',
