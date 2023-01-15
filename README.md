@@ -1,8 +1,8 @@
-# Superciety Extensions
+# Peerme Extensions
 
-Extensions for the DAOs in Superciety.
+Extensions for the DAOs on [peerme.io](https://peerme.io).
 
-[![npm (scoped)](https://img.shields.io/npm/v/@superciety/extensions?style=for-the-badge)](https://www.npmjs.com/package/@superciety/extensions)
+[![npm (scoped)](https://img.shields.io/npm/v/@peerme/extensions?style=for-the-badge)](https://www.npmjs.com/package/@peerme/extensions)
 
 ## Available Extensions
 

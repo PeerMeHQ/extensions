@@ -11,7 +11,7 @@ export const CoindripApp: AppInfo = {
   Tags: ['payments'],
   AppRoot: Coindrip,
   Developer: {
-    Name: 'Superciety',
-    Website: 'https://superciety.com',
+    Name: 'Peerme',
+    Website: 'https://peerme.io',
   },
 }

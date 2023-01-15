@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { createProposalAction } from '../helpers'
 import { AppConfig, AppRootProps } from '../types'
 import { TokenPayment } from '@elrondnetwork/erdjs'
-import { ProposalActionArg } from '@superciety/core-ts'
+import { ProposalActionArg } from '@peerme/core-ts'
 
 export type AppHook = {
   config: AppConfig

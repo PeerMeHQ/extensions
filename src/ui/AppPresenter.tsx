@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppInfo, AppConfig } from '../types'
-import { ProposalAction } from '@superciety/core-ts'
+import { ProposalAction } from '@peerme/core-ts'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -19,10 +19,7 @@ export const AppPresenter = (props: Props) => (
         type="button"
         className="text-2xl text-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700 rounded-xl px-4 py-2 transition duration-300"
       >
-        <FontAwesomeIcon
-          icon={faAngleLeft}
-          className="inline-block mr-2 text-blue-500 text-xl"
-        />
+        <FontAwesomeIcon icon={faAngleLeft} className="inline-block mr-2 text-blue-500 text-xl" />
         <span>{props.app.Name}</span>
       </button>
     </header>

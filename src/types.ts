@@ -1,4 +1,4 @@
-import { Entity, ProposalAction } from '@superciety/core-ts'
+import { Entity, ProposalAction } from '@peerme/core-ts'
 
 export type AppNetwork = 'devnet' | 'testnet' | 'mainnet'
 
