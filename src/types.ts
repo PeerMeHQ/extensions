@@ -1,4 +1,4 @@
-import { Entity, ProposalAction } from '@peerme/core-ts'
+import { Entity, ProposalAction, SearchServiceConfig } from '@peerme/core-ts'
 
 export type AppNetwork = 'devnet' | 'testnet' | 'mainnet'
 
@@ -8,6 +8,7 @@ export type AppTag = 'payments' | 'exchange' | 'gaming'
 export type AppConfig = {
   network: AppNetwork
   entity: Entity
+  searchConfig: SearchServiceConfig
 }
 
 export type AppRootProps = {

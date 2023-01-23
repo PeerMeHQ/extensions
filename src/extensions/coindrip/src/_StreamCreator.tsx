@@ -42,6 +42,7 @@ export const _StreamCreator = (props: Props) => {
         Recipient
       </label>
       <UserSelector
+        searchConfig={props.app.config.searchConfig}
         id="recipient"
         placeholder="Recipient address ..."
         onSelect={(val) => setRecipient(val.address)}
