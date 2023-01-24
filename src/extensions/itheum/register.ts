@@ -11,7 +11,7 @@ export const ItheumApp: AppInfo = {
   Tags: ['exchange'],
   AppRoot: Itheum,
   Developer: {
-    Name: 'Peerme',
+    Name: 'PeerMe',
     Website: 'https://peerme.io',
   },
 }
