@@ -30,7 +30,7 @@ export const AppSelector = (props: Props) => {
         <header className="mb-4">
           <h2 className="mb-1">Third-party Apps</h2>
           <p className="text-xl">
-            Fellowship DAOs can interact easily interact with the third-party apps you love the most.
+            Peering DAOs can interact easily interact with the third-party apps you love the most.
           </p>
         </header>
       )}
