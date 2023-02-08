@@ -2,6 +2,15 @@ import { AppConfig, AppRootProps } from '../src/types'
 
 const defaultConfig: AppConfig = {
   network: 'devnet',
+  searchConfig: {
+    HostUrl: '',
+    ApiKey: '',
+    Indexes: {
+      Users: 'users',
+      Entities: 'entities',
+      Proposals: 'proposals',
+    },
+  },
   entity: {
     address: 'erd1...',
     slug: 'my-dao',
