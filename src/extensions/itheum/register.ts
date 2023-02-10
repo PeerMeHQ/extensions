@@ -3,7 +3,7 @@ import Logo from './meta/logo.svg'
 import type { ExtensionInfo } from '../../types'
 
 export const ItheumExtension: ExtensionInfo = {
-  Enabled: true,
+  Enabled: false,
   Name: 'Itheum',
   Description: 'Truly own and trade your data.',
   Website: 'https://www.itheum.io',
