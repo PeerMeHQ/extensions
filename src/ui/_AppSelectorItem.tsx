@@ -1,12 +1,12 @@
 import React from 'react'
-import { AppInfo } from '../types'
+import { ExtensionInfo } from '../types'
 
 type Props = {
-  app: AppInfo
-  onClick: (app: AppInfo) => void
+  app: ExtensionInfo
+  onClick: (app: ExtensionInfo) => void
 }
 
-export const AppSelectorItem = (props: Props) => (
+export const _AppSelectorItem = (props: Props) => (
   <button
     type="button"
     onClick={() => props.onClick(props.app)}
@@ -20,7 +20,9 @@ export const AppSelectorItem = (props: Props) => (
         <ul role="list" className="flex gap-2">
           {props.app.Tags.map((tag) => (
             <li className={tag}>
-              <span className="inline-flex items-center rounded-lg bg-gray-100 px-2 py-0.5 text-sm text-gray-600">{'#' + tag}</span>
+              <span className="inline-flex items-center rounded-lg bg-gray-100 px-2 py-0.5 text-sm text-gray-600">
+                {'#' + tag}
+              </span>
             </li>
           ))}
         </ul>

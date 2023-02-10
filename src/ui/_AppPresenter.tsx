@@ -1,17 +1,17 @@
 import React from 'react'
-import { AppInfo, AppConfig } from '../types'
+import { ExtensionInfo, ExtensionConfig } from '../types'
 import { ProposalAction } from '@peerme/core-ts'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
-  app: AppInfo
-  config: AppConfig
+  app: ExtensionInfo
+  config: ExtensionConfig
   onCloseRequest: () => void
   onActionAddRequest: (action: ProposalAction) => void
 }
 
-export const AppPresenter = (props: Props) => (
+export const _AppPresenter = (props: Props) => (
   <div>
     <header className="mb-4">
       <button

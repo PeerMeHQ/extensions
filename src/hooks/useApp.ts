@@ -1,11 +1,11 @@
 import BigNumber from 'bignumber.js'
 import { createProposalAction } from '../helpers'
-import { AppConfig, AppRootProps } from '../types'
 import { TokenPayment } from '@elrondnetwork/erdjs'
 import { ProposalActionArg } from '@peerme/core-ts'
+import { ExtensionConfig, AppRootProps } from '../types'
 
 export type AppHook = {
-  config: AppConfig
+  config: ExtensionConfig
   requestProposalAction: (
     destination: string,
     endpoint: string | null,

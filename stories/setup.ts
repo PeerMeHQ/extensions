@@ -1,7 +1,10 @@
-import { AppConfig, AppRootProps } from '../src/types'
+import { ExtensionConfig, AppRootProps } from '../src/types'
 
-const defaultConfig: AppConfig = {
+const defaultConfig: ExtensionConfig = {
   network: 'devnet',
+
+  hasEarlyAccess: true,
+
   searchConfig: {
     HostUrl: '',
     ApiKey: '',
@@ -11,6 +14,7 @@ const defaultConfig: AppConfig = {
       Proposals: 'proposals',
     },
   },
+
   entity: {
     address: 'erd1...',
     slug: 'my-dao',

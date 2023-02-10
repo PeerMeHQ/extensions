@@ -4,7 +4,7 @@ import { useApp } from '../../../hooks/useApp'
 import { _StreamCreator } from './_StreamCreator'
 import { AppSection } from '../../../ui/elements/AppSection'
 
-export const Coindrip = (props: AppRootProps) => {
+export const CoindripApp = (props: AppRootProps) => {
   const app = useApp(props)
 
   return (

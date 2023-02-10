@@ -1,9 +1,10 @@
-import { CoindripApp } from './extensions/coindrip/register'
+import { ItheumExtension } from './extensions/itheum/register'
+import { CoindripExtension } from './extensions/coindrip/register'
 
 export const Config = {
-  AvailableApps: [
-    // register your app here
-    CoindripApp,
-    // ItheumApp, TODO: enable when MVP ready
+  Extensions: [
+    // Register your extension below
+    CoindripExtension,
+    ItheumExtension,
   ],
 }

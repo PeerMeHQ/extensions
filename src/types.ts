@@ -1,31 +1,46 @@
-import { Entity, ProposalAction, SearchServiceConfig } from '@peerme/core-ts'
+import { Entity, EntityTag, ProposalAction, SearchServiceConfig } from '@peerme/core-ts'
 
-export type AppNetwork = 'devnet' | 'testnet' | 'mainnet'
+export type Network = 'devnet' | 'testnet' | 'mainnet'
 
-// if you would like to add a tags that is not available, please get in touch before adding it here
-export type AppTag = 'payments' | 'exchange' | 'gaming'
+/**
+ * Extension
+ */
 
-export type AppConfig = {
-  network: AppNetwork
+export type ExtensionConfig = {
+  network: Network
   entity: Entity
   searchConfig: SearchServiceConfig
+  hasEarlyAccess: boolean
 }
 
-export type AppRootProps = {
-  config: AppConfig
-  onActionAddRequest: (action: ProposalAction) => void
-}
-
-export type AppInfo = {
+export type ExtensionInfo = {
   Enabled: boolean
   Name: string
   Description: string
   Website: string
   Logo: string
-  Tags: AppTag[]
+  Tags: EntityTag[]
   AppRoot: React.FC<AppRootProps>
+  WidgetRoots: {
+    Info: React.FC<WidgetRootProps> | null
+  }
   Developer: {
     Name: string
     Website: string
   }
+}
+
+/**
+ * App
+ */
+export type AppRootProps = {
+  config: ExtensionConfig
+  onActionAddRequest: (action: ProposalAction) => void
+}
+
+/**
+ * Widget
+ */
+export type WidgetRootProps = {
+  config: ExtensionConfig
 }

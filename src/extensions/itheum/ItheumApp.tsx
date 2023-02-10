@@ -3,7 +3,7 @@ import { AppRootProps } from '../../types'
 import { useApp } from '../../hooks/useApp'
 import { AppSection } from '../../ui/elements/AppSection'
 
-export const Itheum = (props: AppRootProps) => {
+export const ItheumApp = (props: AppRootProps) => {
   const app = useApp(props)
 
   console.log(app)

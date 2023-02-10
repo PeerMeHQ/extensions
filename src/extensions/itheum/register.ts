@@ -1,15 +1,18 @@
-import { Itheum } from './Itheum'
+import { ItheumApp } from './ItheumApp'
 import Logo from './meta/logo.svg'
-import type { AppInfo } from '../../types'
+import type { ExtensionInfo } from '../../types'
 
-export const ItheumApp: AppInfo = {
+export const ItheumExtension: ExtensionInfo = {
   Enabled: true,
-  Name: 'Itheum Data Dex',
+  Name: 'Itheum',
   Description: 'Truly own and trade your data.',
   Website: 'https://www.itheum.io',
   Logo: Logo,
-  Tags: ['exchange'],
-  AppRoot: Itheum,
+  Tags: ['itheum-data-coalition'],
+  AppRoot: ItheumApp,
+  WidgetRoots: {
+    Info: null,
+  },
   Developer: {
     Name: 'PeerMe',
     Website: 'https://peerme.io',
