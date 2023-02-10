@@ -44,12 +44,12 @@ export const AppSelector = (props: Props) => {
         </header>
       )}
       {activeApp ? (
-        <_AppPresenter {...props} app={activeApp} onCloseRequest={() => setActiveApp(null)} />
+        <_AppPresenter {...props} extension={activeApp} onCloseRequest={() => setActiveApp(null)} />
       ) : (
         <ul className="flex flex-wrap">
           {availableApps.map((app) => (
             <li key={app.Name} className="w-full md:w-1/2 p-2">
-              <_AppSelectorItem config={props.config} app={app} onClick={() => setActiveApp(app)} />
+              <_AppSelectorItem config={props.config} extension={app} onClick={() => setActiveApp(app)} />
             </li>
           ))}
         </ul>

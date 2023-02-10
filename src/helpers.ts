@@ -1,6 +1,10 @@
 import BigNumber from 'bignumber.js'
 import { TokenPayment } from '@elrondnetwork/erdjs'
+import { ExtensionConfig, ExtensionInfo } from './types'
 import { ProposalAction, ProposalActionArg, toProposalActionPayment } from '@peerme/core-ts'
+
+export const toExtensionName = (config: ExtensionConfig, extension: ExtensionInfo) =>
+  extension.Name.replace(':entityName', config.entity.name)
 
 export const createProposalAction = (
   destination: string,
