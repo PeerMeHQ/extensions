@@ -3,8 +3,8 @@ import { Config } from '../config'
 import { useEffect, useState } from 'react'
 import { _AppPresenter } from './_AppPresenter'
 import { ProposalAction } from '@peerme/core-ts'
-import { ExtensionInfo, ExtensionConfig } from '../types'
 import { _AppSelectorItem } from './_AppSelectorItem'
+import { ExtensionInfo, ExtensionConfig } from '../types'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 

@@ -1,4 +1,4 @@
-import { ExtensionConfig, AppRootProps } from '../src/types'
+import { ExtensionConfig, AppRootProps } from '../../src/types'
 
 const defaultConfig: ExtensionConfig = {
   network: 'devnet',
@@ -30,6 +30,7 @@ const defaultConfig: ExtensionConfig = {
     socials: {} as any,
     features: [],
     governance: {
+      plug: null,
       nft: false,
       owned: true,
       token: 'TEST-123456',

@@ -1,6 +1,6 @@
 import Logo from './meta/logo.svg'
+import { ExtensionInfo } from '../../types'
 import { CoindripApp } from './src/CoindripApp'
-import type { ExtensionInfo } from '../../types'
 
 export const CoindripExtension: ExtensionInfo = {
   Enabled: true,

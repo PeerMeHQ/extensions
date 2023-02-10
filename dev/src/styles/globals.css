@@ -1,0 +1,65 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/utilities';
+
+@import 'tailwindcss/components';
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-gray-900 dark:text-gray-100 font-medium antialiased;
+  line-height: 1.2 !important;
+}
+
+h1 {
+  @apply text-4xl;
+}
+@screen lg {
+  h1 {
+    @apply text-5xl;
+  }
+}
+
+h2 {
+  @apply text-3xl;
+}
+@screen lg {
+  h2 {
+    @apply text-4xl;
+  }
+}
+
+h3 {
+  @apply text-xl;
+}
+@screen lg {
+  h3 {
+    @apply text-2xl;
+  }
+}
+
+h4 {
+  @apply text-lg;
+}
+@screen lg {
+  h4 {
+    @apply text-xl;
+  }
+}
+
+p {
+  @apply antialiased text-gray-600 dark:text-gray-400 leading-relaxed whitespace-pre-line break-words text-lg;
+}
+
+p a {
+  @apply inline-block text-primary-500 border-b-4 border-primary-200;
+  line-height: 0.8;
+}
+
+p a:hover,
+p a:active {
+  @apply text-primary-500 font-bold no-underline border-transparent;
+}
