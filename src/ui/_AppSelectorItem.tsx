@@ -1,7 +1,8 @@
 import React from 'react'
-import { ExtensionInfo } from '../types'
+import { ExtensionConfig, ExtensionInfo } from '../types'
 
 type Props = {
+  config: ExtensionConfig
   app: ExtensionInfo
   onClick: (app: ExtensionInfo) => void
 }
@@ -12,7 +13,11 @@ export const _AppSelectorItem = (props: Props) => (
     onClick={() => props.onClick(props.app)}
     className="flex gap-4 text-left px-6 py-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200"
   >
-    <img src={props.app.Logo} alt={props.app.Name + ' Logo'} className="w-10 sm:w-12 md:w-16" />
+    <img
+      src={props.config.dark ? props.app.Logo.Light : props.app.Logo.Dark}
+      alt={props.app.Name + ' Logo'}
+      className="w-10 sm:w-12 md:w-16"
+    />
     <div>
       <h3>{props.app.Name}</h3>
       <p className="mb-1">{props.app.Description}</p>

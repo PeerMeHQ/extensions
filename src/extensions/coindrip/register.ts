@@ -7,7 +7,10 @@ export const CoindripExtension: ExtensionInfo = {
   Name: 'Coindrip',
   Description: 'A protocol for real-time ESDT payments.',
   Website: 'https://coindrip.finance',
-  Logo: Logo,
+  Logo: {
+    Light: Logo,
+    Dark: Logo,
+  },
   Tags: ['defi'],
   AppRoot: CoindripApp,
   WidgetRoots: {

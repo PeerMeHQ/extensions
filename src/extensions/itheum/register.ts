@@ -7,7 +7,10 @@ export const ItheumExtension: ExtensionInfo = {
   Name: 'Itheum',
   Description: 'Truly own and trade your data.',
   Website: 'https://www.itheum.io',
-  Logo: Logo,
+  Logo: {
+    Light: Logo,
+    Dark: Logo,
+  },
   Tags: ['itheum-data-coalition'],
   AppRoot: ItheumApp,
   WidgetRoots: {

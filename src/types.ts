@@ -11,6 +11,7 @@ export type ExtensionConfig = {
   entity: Entity
   searchConfig: SearchServiceConfig
   hasEarlyAccess: boolean
+  dark: boolean
 }
 
 export type ExtensionInfo = {
@@ -18,7 +19,10 @@ export type ExtensionInfo = {
   Name: string
   Description: string
   Website: string
-  Logo: string
+  Logo: {
+    Light: string
+    Dark: string
+  }
   Tags: EntityTag[]
   AppRoot: React.FC<AppRootProps>
   WidgetRoots: {

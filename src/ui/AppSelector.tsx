@@ -49,7 +49,7 @@ export const AppSelector = (props: Props) => {
         <ul className="flex flex-wrap">
           {availableApps.map((app) => (
             <li key={app.Name} className="w-full md:w-1/2 p-2">
-              <_AppSelectorItem app={app} onClick={() => setActiveApp(app)} />
+              <_AppSelectorItem config={props.config} app={app} onClick={() => setActiveApp(app)} />
             </li>
           ))}
         </ul>
