@@ -27,7 +27,7 @@ export const _AppPresenter = (props: Props) => (
     <div className="mb-2">{<props.extension.AppRoot {...props} />}</div>
     <footer className="px-4">
       <small className="text-sm text-gray-500">
-        This third-party app is maintained by{' '}
+        This app is maintained by{' '}
         <a
           href={props.extension.Developer.Website}
           target="_blank"
