@@ -15,7 +15,7 @@ export default function Home() {
         <title>PeerMe Extensions Development</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className={classNames('h-screen w-screen max-w-4xl mx-auto')}>
+      <div className={classNames('min-h-screen w-screen max-w-4xl mx-auto pb-4')}>
         <header className="px-8 py-4 flex space-x-8">
           <div className="flex items-center space-x-2">
             <span className="text-xl text-gray-500">Dark Mode</span>
