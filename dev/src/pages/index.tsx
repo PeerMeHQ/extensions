@@ -6,7 +6,7 @@ import { classNames, EntityTag } from '@peerme/core-ts'
 import { AppSelector, WidgetInfoPresenter } from '../../../lib'
 
 export default function Home() {
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(true)
   const [entityTag, setEntityTag] = useState('')
 
   return (
