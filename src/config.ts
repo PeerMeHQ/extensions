@@ -13,4 +13,8 @@ export const Config = {
     ItheumExtension,
     XBulkExtension,
   ],
+
+  KnowledgeBase: {
+    Extensions: 'https://know.peerme.io/developers/extensions.html',
+  },
 }

@@ -34,8 +34,8 @@ export const AppSelector = (props: Props) => {
     <section>
       {activeApp === null && (
         <header className="mb-4">
-          <h2 className="mb-1">Third-party Apps</h2>
-          <p className="text-xl mb-2">Peering DAOs can easily interact with the third-party apps you love the most.</p>
+          <h2 className="mb-1">Apps</h2>
+          <p className="text-xl mb-2">Peering DAOs can easily interact with the apps you love the most.</p>
           {props.config.hasEarlyAccess && (
             <Input placeholder="Search Apps ..." value={searchQuery} onChange={(val) => setSearchQuery(val)} />
           )}
@@ -52,6 +52,21 @@ export const AppSelector = (props: Props) => {
           ))}
         </ul>
       )}
+      <footer className="mt-4">
+        <small className="text-base text-gray-500">
+          Learn how to create your own app in the{' '}
+          <a
+            href={Config.KnowledgeBase.Extensions}
+            target="_blank"
+            rel="noopener"
+            className="text-blue-500 hover:text-blue-600 hover:cursor-pointer"
+            style={{ border: 0 }}
+          >
+            Knowledge Base
+          </a>
+          .
+        </small>
+      </footer>
     </section>
   )
 }
