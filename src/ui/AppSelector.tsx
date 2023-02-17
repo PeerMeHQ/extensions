@@ -44,9 +44,9 @@ export const AppSelector = (props: Props) => {
       {activeApp ? (
         <_AppPresenter {...props} extension={activeApp} onCloseRequest={() => setActiveApp(null)} />
       ) : (
-        <ul className="flex flex-wrap">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {availableApps.map((app) => (
-            <li key={app.Name} className="w-full md:w-1/2 p-2">
+            <li key={app.Name}>
               <_AppSelectorItem config={props.config} extension={app} onClick={() => setActiveApp(app)} />
             </li>
           ))}
