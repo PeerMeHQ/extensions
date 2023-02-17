@@ -4,7 +4,7 @@ import { CoindripApp } from './src/CoindripApp'
 
 export const CoindripExtension: ExtensionInfo = {
   Enabled: true,
-  Name: 'Coindrip',
+  Name: 'CoinDrip',
   Description: 'A protocol for real-time ESDT payments.',
   Website: 'https://coindrip.finance',
   Logo: {

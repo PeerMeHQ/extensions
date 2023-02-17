@@ -35,9 +35,7 @@ export const AppSelector = (props: Props) => {
       {activeApp === null && (
         <header className="mb-4">
           <h2 className="mb-1">Third-party Apps</h2>
-          <p className="text-xl mb-2">
-            Peering DAOs can interact easily interact with the third-party apps you love the most.
-          </p>
+          <p className="text-xl mb-2">Peering DAOs can easily interact with the third-party apps you love the most.</p>
           {props.config.hasEarlyAccess && (
             <Input placeholder="Search Apps ..." value={searchQuery} onChange={(val) => setSearchQuery(val)} />
           )}
