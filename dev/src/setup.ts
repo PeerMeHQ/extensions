@@ -1,7 +1,9 @@
 import { ExtensionConfig, AppRootProps } from '../../src/types'
 
-const defaultConfig: ExtensionConfig = {
+const defaultConfig = (dark: boolean): ExtensionConfig => ({
   network: 'devnet',
+
+  dark,
 
   hasEarlyAccess: true,
 
@@ -49,13 +51,13 @@ const defaultConfig: ExtensionConfig = {
     children: [],
     extra: [],
   },
-}
+})
 
-export const Setup = {
-  Config: defaultConfig,
+export const Setup = (dark: boolean) => ({
+  Config: defaultConfig(dark),
 
   AppRootProps: {
-    config: defaultConfig,
+    config: defaultConfig(dark),
     onActionAddRequest: () => {},
   } as AppRootProps,
-}
+})

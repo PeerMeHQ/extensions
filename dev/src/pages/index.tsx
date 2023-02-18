@@ -30,7 +30,7 @@ export default function Home() {
           <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
           <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
             <AppSelector
-              config={Setup.Config}
+              config={Setup(dark).Config}
               onActionAddRequest={(action) => alert('Requested Action:' + JSON.stringify(action))}
               onNotificationRequest={(text, type) => alert(`${type} -> ${text}`)}
               onAppSelected={() => {}}
@@ -43,9 +43,9 @@ export default function Home() {
           <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
             <WidgetInfoPresenter
               config={{
-                ...Setup.Config,
+                ...Setup(dark).Config,
                 entity: {
-                  ...Setup.Config.entity,
+                  ...Setup(dark).Config.entity,
                   tags: [entityTag as EntityTag],
                 },
               }}
