@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Setup } from '@/setup'
 import { useState } from 'react'
 import { Switch, Input } from '@peerme/web-ui'
+import { DocsNotice } from '@/components/DocsNotice'
 import { classNames, EntityTag } from '@peerme/core-ts'
 import { AppSelector, WidgetInfoPresenter } from '../../../lib'
 
@@ -25,6 +26,9 @@ export default function Home() {
             <Input pre="#" placeholder="Active Tag" value={entityTag} onChange={(val) => setEntityTag(val)} />
           </div>
         </header>
+        <div>
+          <DocsNotice />
+        </div>
         <main className="rounded-2xl mt-8">
           <h2 className="block rounded-xl -ml-16 mb-2">App Selector 👇</h2>
           <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
