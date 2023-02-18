@@ -63,3 +63,126 @@ p a:hover,
 p a:active {
   @apply text-primary-500 font-bold no-underline border-transparent;
 }
+
+/** toast */
+.Toastify__toast-container {
+  z-index: 9999;
+  -webkit-transform: translate3d(0, 0, 9999px);
+  position: fixed;
+  padding: 4px;
+  width: 360px;
+  box-sizing: border-box;
+  color: #fff;
+}
+.Toastify__toast-container--top-center {
+  top: 1em;
+  left: 50%;
+  margin-left: -180px;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 100vw;
+    padding: 0 1.5rem;
+    left: 0;
+    margin: 0;
+  }
+  .Toastify__toast-container--top-center {
+    top: 1.5rem;
+  }
+}
+
+.Toastify__toast {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-height: 800px;
+  overflow: hidden;
+  cursor: pointer;
+  direction: ltr;
+  margin-bottom: 8px;
+}
+.Toastify__toast-body {
+  margin: auto 0;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast {
+    margin-bottom: 0;
+  }
+}
+
+@keyframes Toastify__trackProgress {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+.Toastify__progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0.1;
+  transform-origin: bottom;
+}
+.Toastify__progress-bar--animated {
+  animation: Toastify__trackProgress linear 1 forwards;
+}
+.Toastify__progress-bar--controlled {
+  transition: transform 0.2s;
+}
+
+@keyframes Toastify__flipIn {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+  to {
+    transform: perspective(400px);
+  }
+}
+
+@keyframes Toastify__flipOut {
+  from {
+    transform: perspective(400px);
+  }
+  30% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    opacity: 1;
+  }
+  to {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    opacity: 0;
+  }
+}
+
+.Toastify__flip-enter {
+  animation-name: Toastify__flipIn;
+}
+.Toastify__flip-exit {
+  animation-name: Toastify__flipOut;
+}
