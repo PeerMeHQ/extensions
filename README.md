@@ -44,3 +44,46 @@ npm run dev
 ```
 
 After doing changes to your extension, you may need to run `npm run build` from the root of the repository while keeping the dev-server running.
+
+### Framework
+
+The Extension Framework provides developers with useful components & utilities to quickly develop their integrations.
+
+By default, each App makes use of the `useApp` hook which exposes useful functions to hook into the main [peerme.io](https://peerme.io) application for DAOs:
+
+- `app.requestProposalAction`: assemble a transaction/smart contract call to be attached to a proposal
+- `showToast(message, type)`: show a toast message to the user
+
+To use these app hook functions in child components, simply pass it to them as a prop with type `AppHook`.
+
+**UI Components you can use from** `src/ui/elements`:
+
+- `<AppSection />`: use to structure your app in sections
+
+**UI Components you can use from** `@peerme/web-ui`:
+
+Form components:
+
+- `<Button />`
+- `<Input />`
+- `<Textarea />`
+- `<Editor />`: use to collect formatted text input (HTML)
+- `<Select />`
+- `<Dropdown />`
+- `<LinkButton />`
+- `<Pagination />`
+- `<RadioGroup />`
+- `<Switch />`
+- `<Slider />`
+- `<UserSelector />`: use select a user (recommended when asking for e.g. blockchain address)
+- `<EntitySelector />`: use to select a registered DAO
+- `<PaymentSelector />`: use to select assets from the [DAO Vault](https://know.peerme.io/daos/vault.html)
+
+Feedback:
+
+- `<Alert />`
+- `<Tooltip />`
+
+Loaders:
+
+- `<EllipsisLoader />`
