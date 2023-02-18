@@ -38,7 +38,7 @@
     "@fortawesome/free-solid-svg-icons": ">=6.1.1",
     "@fortawesome/react-fontawesome": ">=0.2.0",
     "@peerme/core-ts": ">=1.1.8",
-    "@peerme/web-ui": ">=1.0.4",
+    "@peerme/web-ui": ">=1.1.4",
     "next": ">=13.0.0",
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0"
