@@ -55,7 +55,7 @@ p {
 }
 
 p a {
-  @apply inline-block text-primary-500 border-b-4 border-primary-200;
+  @apply inline-block text-primary-500;
   line-height: 0.8;
 }
 
