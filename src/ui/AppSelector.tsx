@@ -44,29 +44,31 @@ export const AppSelector = (props: Props) => {
       {activeApp ? (
         <_AppPresenter {...props} extension={activeApp} onCloseRequest={() => setActiveApp(null)} />
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {availableApps.map((app) => (
-            <li key={app.Name}>
-              <_AppSelectorItem config={props.config} extension={app} onClick={() => setActiveApp(app)} />
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {availableApps.map((app) => (
+              <li key={app.Name}>
+                <_AppSelectorItem config={props.config} extension={app} onClick={() => setActiveApp(app)} />
+              </li>
+            ))}
+          </ul>
+          <footer className="mt-4">
+            <small className="text-base text-gray-500">
+              Learn how to create your own app in the{' '}
+              <a
+                href={Config.KnowledgeBase.Extensions}
+                target="_blank"
+                rel="noopener"
+                className="text-blue-500 hover:text-blue-600 hover:cursor-pointer"
+                style={{ border: 0 }}
+              >
+                Knowledge Base
+              </a>
+              .
+            </small>
+          </footer>
+        </div>
       )}
-      <footer className="mt-4">
-        <small className="text-base text-gray-500">
-          Learn how to create your own app in the{' '}
-          <a
-            href={Config.KnowledgeBase.Extensions}
-            target="_blank"
-            rel="noopener"
-            className="text-blue-500 hover:text-blue-600 hover:cursor-pointer"
-            style={{ border: 0 }}
-          >
-            Knowledge Base
-          </a>
-          .
-        </small>
-      </footer>
     </section>
   )
 }
