@@ -37,7 +37,10 @@ export const useApp = (appProps: AppRootProps): AppHook => {
     payments: TokenPayment[] = []
   ) => appProps.onActionAddRequest(createProposalAction(destination, endpoint, value, args, payments))
 
-  const showToast = (text: string, type?: ToastType) => showAppToast(text, type)
+  const showToast = (text: string, type?: ToastType) => {
+    console.log(`[App] ${type}: ${text}`)
+    showAppToast(text, type)
+  }
 
   return {
     config: appProps.config,
