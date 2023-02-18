@@ -2,7 +2,7 @@ import { getContractAddress } from './config'
 import { AppHook } from '../../../hooks/useApp'
 import { TokenPayment } from '@elrondnetwork/erdjs'
 import React, { SyntheticEvent, useState } from 'react'
-import { Input, Button, showToast, UserSelector, PaymentSelector } from '@peerme/web-ui'
+import { Input, Button, UserSelector, PaymentSelector } from '@peerme/web-ui'
 
 type Props = {
   app: AppHook
@@ -19,7 +19,7 @@ export const _StreamCreator = (props: Props) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     if (!payment) {
-      showToast('Please add a payment', 'error')
+      props.app.showToast('Please add a payment', 'error')
       return
     }
     const startsAtTs = Math.floor(new Date(startsAt).getTime() / 1000)

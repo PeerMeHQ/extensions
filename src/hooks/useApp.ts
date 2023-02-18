@@ -3,6 +3,9 @@ import { createProposalAction } from '../helpers'
 import { TokenPayment } from '@elrondnetwork/erdjs'
 import { ProposalActionArg } from '@peerme/core-ts'
 import { ExtensionConfig, AppRootProps } from '../types'
+import { showToast as showAppToast } from '@peerme/web-ui'
+
+type ToastType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 
 export type AppHook = {
   config: ExtensionConfig
@@ -13,6 +16,7 @@ export type AppHook = {
     args: ProposalActionArg[],
     payments: TokenPayment[]
   ) => void
+  showToast: (text: string, type?: ToastType) => void
 }
 
 export const useApp = (appProps: AppRootProps): AppHook => {
@@ -33,8 +37,11 @@ export const useApp = (appProps: AppRootProps): AppHook => {
     payments: TokenPayment[] = []
   ) => appProps.onActionAddRequest(createProposalAction(destination, endpoint, value, args, payments))
 
+  const showToast = (text: string, type?: ToastType) => showAppToast(text, type)
+
   return {
     config: appProps.config,
     requestProposalAction,
+    showToast,
   }
 }
