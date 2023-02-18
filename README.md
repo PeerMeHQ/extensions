@@ -1,6 +1,6 @@
 # Peerme Extensions
 
-Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For a general overview, please visit our [Knowledge Base](https://know.superciety.com/developers/extensions.html).
+Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For a general overview, please visit our [Knowledge Base](https://know.peerme.io/developers/extensions.html).
 
 [![npm (scoped)](https://img.shields.io/npm/v/@peerme/extensions?style=for-the-badge)](https://www.npmjs.com/package/@peerme/extensions)
 
