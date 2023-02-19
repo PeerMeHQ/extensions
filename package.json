@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/peermehq/extensions#readme",
   "peerDependencies": {
+    "@apollo/client": ">=3.7.7",
     "@elrondnetwork/erdjs": ">=11.1.0",
     "@elrondnetwork/erdjs-network-providers": ">=1.2.0",
     "@fortawesome/fontawesome-svg-core": ">=6.1.1",
@@ -44,6 +45,7 @@
     "react-dom": ">=18.2.0"
   },
   "devDependencies": {
+    "@apollo/client": "^3.7.7",
     "@babel/core": "^7.20.5",
     "@elrondnetwork/erdjs": "^11.1.2",
     "@elrondnetwork/erdjs-network-providers": "^1.1.3",
