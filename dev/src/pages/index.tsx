@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import { Setup } from '@/setup'
 import { useState } from 'react'
+import * as Extensions from '../../../lib'
 import { Switch, Input } from '@peerme/web-ui'
 import { DocsNotice } from '@/components/DocsNotice'
 import { classNames, EntityTag } from '@peerme/core-ts'
-import { AppSelector, WidgetInfoPresenter } from '../../../lib'
 
 export default function Home() {
   const [dark, setDark] = useState(true)
@@ -33,7 +33,7 @@ export default function Home() {
           <h2 className="block rounded-xl -ml-16 mb-2">App Selector 👇</h2>
           <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
           <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
-            <AppSelector
+            <Extensions.AppSelector
               config={Setup(dark).Config}
               onActionAddRequest={(action) => alert('Requested Action:' + JSON.stringify(action))}
               onNotificationRequest={(text, type) => alert(`${type} -> ${text}`)}
@@ -45,7 +45,7 @@ export default function Home() {
           </h2>
           <p className="mb-2">Shown on the DAO Info page if DAO is tagged with same tag as widget.</p>
           <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
-            <WidgetInfoPresenter
+            <Extensions.WidgetInfoPresenter
               config={{
                 ...Setup(dark).Config,
                 entity: {
