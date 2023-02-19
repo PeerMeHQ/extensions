@@ -30,6 +30,7 @@ export const WidgetInfoPresenter = (props: Props) => {
 }
 
 const findApplicableWidgets = (config: ExtensionConfig) => () =>
-  Config.Extensions.filter((e) => e.Enabled || config.hasEarlyAccess)
+  Config(config)
+    .Extensions.filter((e) => e.Enabled || config.hasEarlyAccess)
     .filter((e) => e.Tags.some((t) => config.entity.tags.includes(t)))
     .filter((e) => e.WidgetRoots.Info !== null)

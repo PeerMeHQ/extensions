@@ -1,4 +1,4 @@
-import { CoindripConfig } from './config'
+import { CoindripContracts } from './contracts'
 import { AppHook } from '../../../hooks/useApp'
 import { TokenPayment } from '@elrondnetwork/erdjs'
 import React, { SyntheticEvent, useState } from 'react'
@@ -36,8 +36,8 @@ export const _StreamCreator = (props: Props) => {
     }
 
     props.app.requestProposalAction(
-      CoindripConfig.ContractAddress(props.app.config.network),
-      CoindripConfig.Endpoints.CreateStream,
+      CoindripContracts(props.app.config).StreamCreate.Address,
+      CoindripContracts(props.app.config).StreamCreate.Endpoint,
       value,
       [recipient, startsAtTs, endsAtTs, cancellable],
       tokenPayments

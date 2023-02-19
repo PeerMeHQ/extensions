@@ -62,7 +62,7 @@ export const AppSelector = (props: Props) => {
             <small className="text-base text-gray-500">
               Learn how to create your own app in the{' '}
               <a
-                href={Config.KnowledgeBase.Extensions}
+                href={Config(props.config).KnowledgeBase.Extensions}
                 target="_blank"
                 rel="noopener"
                 className="text-blue-500 hover:text-blue-600 hover:cursor-pointer"
@@ -80,7 +80,9 @@ export const AppSelector = (props: Props) => {
 }
 
 const getAvailableApps = (config: ExtensionConfig) =>
-  Config.Extensions.filter((app) => app.Enabled || config.hasEarlyAccess)
+  Config(config)
+    .Extensions.filter((app) => app.Enabled || config.hasEarlyAccess)
+    .filter((app) => !!app.AppRoot)
 
 const getSearchResults = (config: ExtensionConfig, query: string) =>
   query.length === 0

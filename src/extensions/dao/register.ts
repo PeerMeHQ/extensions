@@ -1,9 +1,9 @@
 import { DaoApp } from './src/DaoApp'
-import { ExtensionInfo } from '../../types'
 import LogoBlack from './meta/logo-black.svg'
 import LogoWhite from './meta/logo-white.svg'
+import { ExtensionConfig, ExtensionInfo } from '../../types'
 
-export const DaoExtension: ExtensionInfo = {
+export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'Configure :entityName',
   Description: 'Configure your DAO on peerme.io',
@@ -13,6 +13,7 @@ export const DaoExtension: ExtensionInfo = {
     Dark: LogoWhite,
   },
   Tags: [],
+  Contracts: {},
   AppRoot: DaoApp,
   WidgetRoots: {
     Info: null,
@@ -21,4 +22,4 @@ export const DaoExtension: ExtensionInfo = {
     Name: 'PeerMe',
     Website: 'https://peerme.io',
   },
-}
+})

@@ -1,8 +1,9 @@
 import Logo from './meta/logo.svg'
-import { ExtensionInfo } from '../../types'
 import { CoindripApp } from './src/CoindripApp'
+import { CoindripContracts } from './src/contracts'
+import { ExtensionConfig, ExtensionInfo } from '../../types'
 
-export const CoindripExtension: ExtensionInfo = {
+export const CoindripExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: true,
   Name: 'CoinDrip',
   Description: 'A protocol for real-time ESDT payments.',
@@ -12,6 +13,7 @@ export const CoindripExtension: ExtensionInfo = {
     Dark: Logo,
   },
   Tags: ['defi'],
+  Contracts: CoindripContracts(config),
   AppRoot: CoindripApp,
   WidgetRoots: {
     Info: null,
@@ -20,4 +22,4 @@ export const CoindripExtension: ExtensionInfo = {
     Name: 'PeerMe',
     Website: 'https://peerme.io',
   },
-}
+})

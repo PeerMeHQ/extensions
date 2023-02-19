@@ -1,4 +1,4 @@
-import { Entity, EntityTag, ProposalAction, SearchServiceConfig } from '@peerme/core-ts'
+import { Entity, EntityTag, ProposalAction, ScInfo, SearchServiceConfig } from '@peerme/core-ts'
 
 export type Network = 'devnet' | 'testnet' | 'mainnet'
 
@@ -14,6 +14,10 @@ export type ExtensionConfig = {
   dark: boolean
 }
 
+export type ExtensionScInfo = {
+  [key: string]: ScInfo
+}
+
 export type ExtensionInfo = {
   Enabled: boolean
   Name: string
@@ -24,7 +28,8 @@ export type ExtensionInfo = {
     Dark: string
   }
   Tags: EntityTag[]
-  AppRoot: React.FC<AppRootProps>
+  Contracts: ExtensionScInfo
+  AppRoot: React.FC<AppRootProps> | null
   WidgetRoots: {
     Info: React.FC<WidgetRootProps> | null
   }

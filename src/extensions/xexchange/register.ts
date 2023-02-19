@@ -1,8 +1,8 @@
 import Logo from './meta/logo.svg'
-import { ExtensionInfo } from '../../types'
 import { XExchangeApp } from './src/XExchangeApp'
+import { ExtensionConfig, ExtensionInfo } from '../../types'
 
-export const XExchangeExtension: ExtensionInfo = {
+export const XExchangeExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xExchange',
   Description: 'Swap assets instantly & inexpensively.',
@@ -12,6 +12,7 @@ export const XExchangeExtension: ExtensionInfo = {
     Dark: Logo,
   },
   Tags: ['defi'],
+  Contracts: {},
   AppRoot: XExchangeApp,
   WidgetRoots: {
     Info: null,
@@ -20,4 +21,4 @@ export const XExchangeExtension: ExtensionInfo = {
     Name: 'PeerMe',
     Website: 'https://peerme.io',
   },
-}
+})

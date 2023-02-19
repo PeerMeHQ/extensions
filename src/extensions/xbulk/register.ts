@@ -1,8 +1,8 @@
 import Logo from './meta/logo.svg'
 import { XBulkApp } from './src/XBulkApp'
-import { ExtensionInfo } from '../../types'
+import { ExtensionConfig, ExtensionInfo } from '../../types'
 
-export const XBulkExtension: ExtensionInfo = {
+export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xBulk',
   Description: 'Sends DAO transactions in bulk.',
@@ -12,6 +12,7 @@ export const XBulkExtension: ExtensionInfo = {
     Dark: Logo,
   },
   Tags: ['defi'],
+  Contracts: {},
   AppRoot: XBulkApp,
   WidgetRoots: {
     Info: null,
@@ -20,4 +21,4 @@ export const XBulkExtension: ExtensionInfo = {
     Name: 'PeerMe',
     Website: 'https://peerme.io',
   },
-}
+})

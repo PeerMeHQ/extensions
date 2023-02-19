@@ -24,7 +24,7 @@ export const _AppPresenter = (props: Props) => (
         <span>{toExtensionName(props.config, props.extension)}</span>
       </button>
     </header>
-    <div className="mb-2">{<props.extension.AppRoot {...props} />}</div>
+    <div className="mb-2">{!!props.extension.AppRoot && <props.extension.AppRoot {...props} />}</div>
     <footer className="px-4">
       <small className="text-sm text-gray-500">
         This app is maintained by{' '}

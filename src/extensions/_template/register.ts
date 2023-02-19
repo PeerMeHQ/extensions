@@ -1,8 +1,8 @@
 import Logo from './meta/logo.svg'
 import { MyApp } from './src/MyApp'
-import { ExtensionInfo } from '../../types'
+import { ExtensionConfig, ExtensionInfo } from '../../types'
 
-export const MyExtension: ExtensionInfo = {
+export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false, // leave this as false, we'll enable it after the review process
   Name: '<your app name>',
   Description: '<describe your extension in a few words>',
@@ -12,6 +12,7 @@ export const MyExtension: ExtensionInfo = {
     Dark: Logo,
   },
   Tags: [],
+  Contracts: {},
   AppRoot: MyApp,
   WidgetRoots: {
     Info: null,
@@ -20,4 +21,4 @@ export const MyExtension: ExtensionInfo = {
     Name: '<your name>',
     Website: '<your website>',
   },
-}
+})
