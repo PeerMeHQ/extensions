@@ -37,7 +37,13 @@ export const AppSelector = (props: Props) => {
           <h2 className="mb-1">Apps</h2>
           <p className="text-xl mb-2">Peering DAOs can easily interact with the apps you love the most.</p>
           {props.config.hasEarlyAccess && (
-            <Input placeholder="Search Apps ..." value={searchQuery} onChange={(val) => setSearchQuery(val)} />
+            <Input
+              placeholder="Search Apps ..."
+              value={searchQuery}
+              onChange={(val) => setSearchQuery(val)}
+              autoComplete="off"
+              autoFocus
+            />
           )}
         </header>
       )}
