@@ -27,7 +27,7 @@ export const _AppSelectorItem = (props: Props) => (
       {props.extension.Tags.length > 0 && (
         <ul role="list" className="flex gap-2">
           {props.extension.Tags.map((tag) => (
-            <li className={tag}>
+            <li key={tag}>
               <span className="inline-flex items-center rounded-lg bg-gray-100 dark:bg-gray-700 px-2 py-0.5 text-sm text-gray-600 dark:text-gray-300">
                 {'#' + tag}
               </span>
