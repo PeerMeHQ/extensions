@@ -11,22 +11,23 @@
   "dependencies": {
     "@apollo/client": "^3.7.8",
     "@headlessui/react": "^1.7.11",
-    "@next/font": "13.1.6",
     "@peerme/extensions": "file:..",
     "@peerme/web-ui": "^1.1.4",
+    "collect.js": "^4.34.3",
+    "graphql": "^16.6.0",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
-    "next": "13.1.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.5"
-  },
-  "devDependencies": {
     "autoprefixer": "^10.4.13",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.6"
+    "tailwindcss": "^3.2.6",
+    "typescript": "4.9.5"
   }
 }
