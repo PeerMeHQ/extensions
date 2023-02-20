@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.8",
+    "@headlessui/react": "^1.7.11",
     "@next/font": "13.1.6",
     "@peerme/extensions": "file:..",
     "@peerme/web-ui": "^1.1.4",
