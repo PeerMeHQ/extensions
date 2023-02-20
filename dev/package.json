@@ -11,7 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.8",
     "@headlessui/react": "^1.7.11",
-    "@peerme/extensions": "file:..",
+    "@peerme/extensions": "*",
     "@peerme/web-ui": "^1.1.4",
     "collect.js": "^4.34.3",
     "graphql": "^16.6.0",
