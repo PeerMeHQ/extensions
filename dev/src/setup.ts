@@ -43,6 +43,7 @@ const defaultConfig = (dark: boolean): ExtensionConfig => ({
       minProposeWeight: null,
       quorum: null,
       votingPeriodMinutes: null,
+      rolesRestrictPropose: [],
     },
     level: 0,
     credits: null,
