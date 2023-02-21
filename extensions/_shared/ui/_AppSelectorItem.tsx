@@ -1,19 +1,24 @@
 import React from 'react'
 import Image from 'next/image'
 import { toExtensionName } from '../helpers'
+import { classNames } from '@peerme/core-ts'
 import { ExtensionConfig, ExtensionInfo } from '../types'
 
 type Props = {
   config: ExtensionConfig
   extension: ExtensionInfo
   onClick: (app: ExtensionInfo) => void
+  className?: string
 }
 
 export const _AppSelectorItem = (props: Props) => (
   <button
     type="button"
     onClick={() => props.onClick(props.extension)}
-    className="flex gap-4 w-full text-left px-6 py-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200"
+    className={classNames(
+      'flex gap-4 w-full text-left px-6 py-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200',
+      props.className
+    )}
   >
     <div className="flex justify-center">
       {props.config.dark ? (

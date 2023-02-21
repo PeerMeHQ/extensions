@@ -53,8 +53,13 @@ export const AppSelector = (props: Props) => {
         <div>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {availableApps.map((app) => (
-              <li key={app.Name}>
-                <_AppSelectorItem config={props.config} extension={app} onClick={() => setActiveApp(app)} />
+              <li key={app.Name} className="min-h-full">
+                <_AppSelectorItem
+                  config={props.config}
+                  extension={app}
+                  onClick={() => setActiveApp(app)}
+                  className="min-h-full"
+                />
               </li>
             ))}
           </ul>
