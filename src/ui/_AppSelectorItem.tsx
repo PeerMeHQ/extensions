@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { toExtensionName } from '../helpers'
 import { ExtensionConfig, ExtensionInfo } from '../types'
 
@@ -16,9 +17,19 @@ export const _AppSelectorItem = (props: Props) => (
   >
     <div className="flex justify-center">
       {props.config.dark ? (
-        <img src={props.extension.Logo.Dark} alt={props.extension.Name + ' Logo'} className="w-10 sm:w-12 md:w-14" />
+        <Image
+          src={props.extension.Logo.Dark}
+          alt={props.extension.Name + ' Logo'}
+          className="w-10 sm:w-12 md:w-14"
+          unoptimized
+        />
       ) : (
-        <img src={props.extension.Logo.Light} alt={props.extension.Name + ' Logo'} className="w-10 sm:w-12 md:w-14" />
+        <Image
+          src={props.extension.Logo.Light}
+          alt={props.extension.Name + ' Logo'}
+          className="w-10 sm:w-12 md:w-14"
+          unoptimized
+        />
       )}
     </div>
     <div>

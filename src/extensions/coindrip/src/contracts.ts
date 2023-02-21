@@ -1,3 +1,4 @@
+import { ProposalAction } from '@peerme/core-ts'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../types'
 
 const getContractAddress = (network: Network) => {
@@ -10,5 +11,7 @@ export const CoindripContracts = (config: ExtensionConfig): ExtensionScInfo => (
   StreamCreate: {
     Address: getContractAddress(config.network),
     Endpoint: 'createStream',
+    ActionPreview: (action: ProposalAction) =>
+      `create a token stream of ${action.payments[0].amount} to ${action.arguments[0]!}`,
   },
 })

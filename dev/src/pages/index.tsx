@@ -2,13 +2,15 @@ import Head from 'next/head'
 import { Setup } from '@/setup'
 import { useState } from 'react'
 import { Switch, Input } from '@peerme/web-ui'
+import * as Extensions from '../../../src/index'
 import { DocsNotice } from '@/components/DocsNotice'
 import { classNames, EntityTag } from '@peerme/core-ts'
-import { AppSelector, WidgetInfoPresenter } from '@peerme/extensions'
+import { ExtensionActionPreviewDemo } from '@/components/ExtensionActionPreviewDemo'
 
 export default function Home() {
   const [dark, setDark] = useState(true)
   const [entityTag, setEntityTag] = useState('')
+  const [selectedExtension, setSelectedExtension] = useState<Extensions.ExtensionInfo | null>(null)
 
   return (
     <div className={dark ? 'dark bg-gray-800' : 'bg-gray-100'}>
@@ -33,19 +35,30 @@ export default function Home() {
           <h2 className="block rounded-xl lg:-ml-16 mb-2">App Selector 👇</h2>
           <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
           <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
-            <AppSelector
+            <Extensions.AppSelector
               config={Setup(dark).Config}
               onActionAddRequest={(action) => alert('Requested Action:' + JSON.stringify(action))}
               onNotificationRequest={(text, type) => alert(`${type} -> ${text}`)}
-              onAppSelected={() => {}}
+              onAppSelected={(val) => setSelectedExtension(val)}
             />
+          </section>
+          <h2 className="block rounded-xl lg:-ml-16 mb-2">Extension Action Preview 👇</h2>
+          <p className="mb-2">Shown on the proposal page for actions concerning your app.</p>
+          <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
+            {selectedExtension ? (
+              <ExtensionActionPreviewDemo config={Setup(dark).Config} extension={selectedExtension} />
+            ) : (
+              <span className="text-lg text-yellow-500">
+                Please select an app in the selector above to show the preview.
+              </span>
+            )}
           </section>
           <h2 className="block rounded-xl lg:-ml-16 mb-2">
             Widget - Info 👇 <span className="text-2xl">[Active Tag: {entityTag || 'None'}]</span>
           </h2>
           <p className="mb-2">Shown on the DAO Info page if DAO is tagged with same tag as widget.</p>
           <section className={classNames('mb-8 p-8 rounded-2xl', dark ? 'bg-gray-900' : 'bg-gray-50')}>
-            <WidgetInfoPresenter
+            <Extensions.WidgetInfoPresenter
               config={{
                 ...Setup(dark).Config,
                 entity: {
