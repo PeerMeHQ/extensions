@@ -4,8 +4,6 @@ const nextConfig = {
     externalDir: true,
   },
 
-  transpilePackages: ['@peerme/core-ts'],
-
   webpack: (config, options) => {
     if (!options.isServer) {
       config.resolve.fallback.fs = false

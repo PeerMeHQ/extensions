@@ -12,12 +12,13 @@
     "@apollo/client": "^3.7.8",
     "@headlessui/react": "^1.7.11",
     "@peerme/extensions": "*",
-    "@peerme/web-ui": "^1.1.4",
+    "@peerme/web-ui": "^1.2.1",
     "collect.js": "^4.34.3",
     "graphql": "^16.6.0",
     "next": "13.1.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "use-clipboard-copy": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "18.13.0",

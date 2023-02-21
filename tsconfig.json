@@ -30,6 +30,6 @@
       "fs": ["./node_modules/browserify-fs"]
     }
   },
-  "include": ["src"],
+  "include": ["extensions"],
   "exclude": ["node_modules", "lib"]
 }

@@ -1,4 +1,4 @@
-import { ExtensionConfig, AppRootProps } from '../../src/types'
+import { ExtensionConfig, AppRootProps } from '@peerme/extensions'
 
 const defaultConfig = (dark: boolean): ExtensionConfig => ({
   network: 'devnet',
