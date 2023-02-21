@@ -16,7 +16,7 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 
 1. Fork this repository & work on it locally
 2. Make a copy of `extensions/_template` and adapt it to your needs
-3. Register your extension in the root's `config.ts`
+3. Register your extension in `extensions/config.ts`
 4. Start & keep working inside this directory
 5. Create a pull request with your changes to this repository when done
 
@@ -38,12 +38,8 @@ npm install
 To start working, run the development server which opens a [NextJs](https://nextjs.org) app with a development environment:
 
 ```bash
-cd dev
-npm install # only once
 npm run dev
 ```
-
-After doing changes to your extension, you may need to run `npm run build` from the root of the repository while keeping the dev-server running.
 
 ### Framework
 
@@ -79,11 +75,15 @@ Form components:
 - `<EntitySelector />`: use to select a registered DAO
 - `<PaymentSelector />`: use to select assets from the [DAO Vault](https://know.peerme.io/daos/vault.html)
 
-Feedback:
+User components:
+
+- `<AddressPresenter />`: use to show blockchain addresses with link to the MultiversX Explorer
+
+Feedback components:
 
 - `<Alert />`
 - `<Tooltip />`
 
-Loaders:
+Loaders components:
 
 - `<EllipsisLoader />`
