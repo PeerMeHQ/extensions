@@ -2,7 +2,8 @@ module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
     '../src/**/*.{js,ts,jsx,tsx}',
-    '../node_modules/@peerme/extensions/**/*.{js,ts,jsx,tsx}',
+    '../extensions/**/*.{js,ts,jsx,tsx}',
+    '../extensions/_shared/**/*.{js,ts,jsx,tsx}',
     '../node_modules/@peerme/web-ui/**/*.{js,ts,jsx,tsx}',
   ],
 
