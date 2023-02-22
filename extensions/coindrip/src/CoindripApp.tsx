@@ -9,7 +9,7 @@ export const CoindripApp = (props: AppRootProps) => {
 
   return (
     <div>
-      <AppSection title="Create a Stream 1">
+      <AppSection title="Create a Stream">
         <_StreamCreator app={app} />
       </AppSection>
     </div>
