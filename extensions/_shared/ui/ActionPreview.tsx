@@ -19,7 +19,7 @@ type Props = {
   className?: string
 }
 
-export const ExtensionActionPreview = (props: Props) => {
+export const ActionPreview = (props: Props) => {
   const hasValue = !new BigNumber(props.action.value).isZero()
   const hasPayment = props.action.payments.length > 0
 
