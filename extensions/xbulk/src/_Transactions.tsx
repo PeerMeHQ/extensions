@@ -1,6 +1,6 @@
 import { XBulkConfig } from './config'
 import { AppHook } from '../../_shared/hooks/useApp'
-import { TokenPayment } from '@elrondnetwork/erdjs'
+import { TokenPayment } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useState } from 'react'
 import { Button, showToast, PaymentSelector } from '@peerme/web-ui'
 

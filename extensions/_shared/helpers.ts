@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { TokenPayment } from '@elrondnetwork/erdjs'
+import { TokenPayment } from '@multiversx/sdk-core'
 import { ExtensionConfig, ExtensionInfo } from './types'
 import { ProposalAction, ProposalActionArg, toProposalActionPayment } from '@peerme/core-ts'
 

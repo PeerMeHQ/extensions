@@ -1,5 +1,5 @@
 import { CoindripContracts } from './contracts'
-import { TokenPayment } from '@elrondnetwork/erdjs'
+import { TokenPayment } from '@multiversx/sdk-core'
 import { AppHook } from '../../_shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
 import { Input, Button, UserSelector, PaymentSelector, Switch } from '@peerme/web-ui'

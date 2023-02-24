@@ -1,6 +1,6 @@
 import React from 'react'
 import { AddressPresenter } from '@peerme/web-ui'
-import { TokenPayment } from '@elrondnetwork/erdjs'
+import { TokenPayment } from '@multiversx/sdk-core'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {

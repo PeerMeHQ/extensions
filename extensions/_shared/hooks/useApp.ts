@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { createProposalAction } from '../helpers'
-import { TokenPayment } from '@elrondnetwork/erdjs'
+import { TokenPayment } from '@multiversx/sdk-core'
 import { ProposalActionArg } from '@peerme/core-ts'
 import { ExtensionConfig, AppRootProps } from '../types'
 import { showToast as showAppToast } from '@peerme/web-ui'
