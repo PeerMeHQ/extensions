@@ -1,4 +1,4 @@
-import { Entity, EntityTag, ProposalAction, ScInfo, SearchServiceConfig } from '@peerme/core-ts'
+import { ChainWallet, Entity, EntityTag, ProposalAction, ScInfo, SearchServiceConfig } from '@peerme/core-ts'
 
 export type Network = 'devnet' | 'testnet' | 'mainnet'
 
@@ -9,6 +9,7 @@ export type Network = 'devnet' | 'testnet' | 'mainnet'
 export type ExtensionConfig = {
   network: Network
   entity: Entity
+  walletConfig: ChainWallet
   searchConfig: SearchServiceConfig
   hasEarlyAccess: boolean
   dark: boolean

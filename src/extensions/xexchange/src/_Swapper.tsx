@@ -46,6 +46,7 @@ export const _Swapper = (props: Props) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentSelector
+        config={props.app.config.walletConfig}
         entity={props.app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}

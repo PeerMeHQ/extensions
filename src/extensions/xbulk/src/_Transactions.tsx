@@ -35,6 +35,7 @@ export const _Transactions = (props: Props) => {
         Which token do you want to send?
       </label>
       <PaymentSelector
+        config={props.app.config.walletConfig}
         entity={props.app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}

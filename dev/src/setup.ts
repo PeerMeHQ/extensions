@@ -7,6 +7,14 @@ const defaultConfig = (dark: boolean): ExtensionConfig => ({
 
   hasEarlyAccess: true,
 
+  walletConfig: {
+    Debug: true,
+    ApiAddress: 'https://devnet-api.multiversx.com',
+    Explorer: 'https://explorer.multiversx.com',
+    WalletConnectProjectId: 'b5682bd383460cd7c5c99f21c07d40ed',
+    ChainId: 'D',
+  },
+
   searchConfig: {
     HostUrl: '',
     ApiKey: '',

@@ -57,6 +57,7 @@ export const _StreamCreator = (props: Props) => {
         className="mb-8"
       />
       <PaymentSelector
+        config={props.app.config.walletConfig}
         entity={props.app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}

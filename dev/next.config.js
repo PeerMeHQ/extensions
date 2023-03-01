@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@multiversx/sdk-dapp'],
+
   experimental: {
     externalDir: true,
   },
