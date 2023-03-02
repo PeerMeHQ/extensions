@@ -1,9 +1,9 @@
-import { DaoExtension } from './dao/register'
-import { XBulkExtension } from './xbulk/register'
-import { ItheumExtension } from './itheum/register'
-import { CoindripExtension } from './coindrip/register'
-import { XExchangeExtension } from './xexchange/register'
-import { ExtensionConfig, ExtensionInfo } from './_shared/types'
+import { ExtensionConfig, ExtensionInfo } from './shared/types'
+import { DaoExtension } from './extensions/dao/register'
+import { XBulkExtension } from './extensions/xbulk/register'
+import { ItheumExtension } from './extensions/itheum/register'
+import { CoindripExtension } from './extensions/coindrip/register'
+import { XExchangeExtension } from './extensions/xexchange/register'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [

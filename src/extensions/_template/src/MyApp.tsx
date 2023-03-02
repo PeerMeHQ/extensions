@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppRootProps } from '../../_shared/types'
-import { useApp } from '../../_shared/hooks/useApp'
-import { AppSection } from '../../_shared/ui/elements/AppSection'
+import { AppRootProps } from '../../../shared/types'
+import { useApp } from '../../../shared/hooks/useApp'
+import { AppSection } from '../../../shared/ui/elements/AppSection'
 
 export const MyApp = (props: AppRootProps) => {
   const app = useApp(props)

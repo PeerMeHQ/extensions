@@ -1,7 +1,7 @@
 import { DaoApp } from './src/DaoApp'
 import LogoBlack from './meta/logo-black.svg'
 import LogoWhite from './meta/logo-white.svg'
-import { ExtensionConfig, ExtensionInfo } from '../_shared/types'
+import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,

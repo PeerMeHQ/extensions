@@ -1,6 +1,6 @@
 import Logo from './meta/logo.svg'
 import { XExchangeApp } from './src/XExchangeApp'
-import { ExtensionConfig, ExtensionInfo } from '../_shared/types'
+import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XExchangeExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,

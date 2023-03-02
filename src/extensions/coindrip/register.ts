@@ -1,7 +1,7 @@
 import Logo from './meta/logo.svg'
 import { CoindripApp } from './src/CoindripApp'
 import { CoindripContracts } from './src/contracts'
-import { ExtensionConfig, ExtensionInfo } from '../_shared/types'
+import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const CoindripExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: true,

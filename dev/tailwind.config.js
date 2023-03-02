@@ -3,7 +3,7 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
     '../src/**/*.{js,ts,jsx,tsx}',
     '../extensions/**/*.{js,ts,jsx,tsx}',
-    '../extensions/_shared/**/*.{js,ts,jsx,tsx}',
+    '../extensions/shared/**/*.{js,ts,jsx,tsx}',
     '../node_modules/@peerme/web-ui/**/*.{js,ts,jsx,tsx}',
   ],
 

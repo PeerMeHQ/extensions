@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProposalAction } from '@peerme/core-ts'
 import { StreamCreateActionPreview } from './previews/StreamCreateActionPreview'
-import { Network, ExtensionScInfo, ExtensionConfig } from '../../_shared/types'
+import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: Network) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqlrveeg222qgjgk60h7waf8md2fehtv7dlpzq9knlxq'

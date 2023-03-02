@@ -1,4 +1,4 @@
-import { Network } from '../../_shared/types'
+import { Network } from '../../../shared/types'
 
 export const XBulkConfig = {
   ContractAddress: (network: Network) => {

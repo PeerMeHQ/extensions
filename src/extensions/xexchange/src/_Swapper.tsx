@@ -1,8 +1,8 @@
 import { GraphQl } from './graphql'
 import { BigNumber } from 'bignumber.js'
-import { AppHook } from '../../_shared/hooks/useApp'
 import { PaymentSelector } from '@peerme/web-ui'
 import { TokenPayment } from '@multiversx/sdk-core'
+import { AppHook } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client'
 

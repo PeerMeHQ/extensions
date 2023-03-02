@@ -5,11 +5,13 @@
     "src"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "npm run package:build",
     "dev": "turbo run dev",
     "start": "turbo run start",
     "lint": "turbo run lint",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "package:build": "cd src && npm run build",
+    "package:publish": "cd src && npm version major"
   },
   "devDependencies": {
     "eslint": "^8.35.0",

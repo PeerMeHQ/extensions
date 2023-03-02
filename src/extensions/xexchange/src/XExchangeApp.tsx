@@ -1,10 +1,10 @@
 import React from 'react'
 import { _Swapper } from './_Swapper'
 import { XExchangeConfig } from './config'
-import { AppRootProps } from '../../_shared/types'
-import { useApp } from '../../_shared/hooks/useApp'
+import { AppRootProps } from '../../../shared/types'
+import { useApp } from '../../../shared/hooks/useApp'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { AppSection } from '../../_shared/ui/elements/AppSection'
+import { AppSection } from '../../../shared/ui/elements/AppSection'
 
 const XExchangeApolloClient = new ApolloClient({
   cache: new InMemoryCache(),

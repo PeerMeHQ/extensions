@@ -1,6 +1,6 @@
 import Logo from './meta/logo.svg'
 import { MyApp } from './src/MyApp'
-import { ExtensionConfig, ExtensionInfo } from '../_shared/types'
+import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false, // leave this as false, we'll enable it after the review process

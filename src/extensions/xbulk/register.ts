@@ -1,6 +1,6 @@
 import Logo from './meta/logo.svg'
 import { XBulkApp } from './src/XBulkApp'
-import { ExtensionConfig, ExtensionInfo } from '../_shared/types'
+import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
