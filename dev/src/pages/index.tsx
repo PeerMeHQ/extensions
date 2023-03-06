@@ -28,6 +28,8 @@ export default function Home() {
               if (result) {
                 sendTransactions({ transactions: [toDemoTransaction(action, account)] })
               }
+            } else {
+              alert('Action added. Connect your wallet to simulate the transaction.')
             }
           }}
           onNotificationRequest={(text, type) => alert(`${type} -> ${text}`)}
