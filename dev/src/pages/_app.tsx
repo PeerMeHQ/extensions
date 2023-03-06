@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import dynamic from 'next/dynamic'
 import type { AppProps } from 'next/app'
 import { DevServerConfig } from '@/config'
+import 'react-tooltip/dist/react-tooltip.css'
 import { ToastContainer } from '@peerme/web-ui'
 import { DappProvider } from '@multiversx/sdk-dapp/wrappers/DappProvider'
 
