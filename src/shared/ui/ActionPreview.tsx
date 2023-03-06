@@ -56,7 +56,7 @@ export const ActionPreview = (props: Props) => {
               unoptimized
             />
           )}
-          {props.extension.Name}
+          <span className="inline-block ml-1">{props.extension.Name}</span>
         </a>
         {!!scInfo?.ActionPreview && (
           <span className="text-gray-600 dark:text-gray-400">
