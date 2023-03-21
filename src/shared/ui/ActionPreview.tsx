@@ -1,16 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import BigNumber from 'bignumber.js'
+import { ProposalAction } from '@peerme/core-ts'
 import { ExtensionConfig, ExtensionInfo } from '../types'
-import {
-  trimHash,
-  Constants,
-  ProposalAction,
-  ProposalActionArg,
-  toFormattedTokenAmount,
-  ProposalActionPayment,
-  isValidBlockchainAddress,
-} from '@peerme/core-ts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
   config: ExtensionConfig
@@ -26,6 +20,8 @@ export const ActionPreview = (props: Props) => {
   const scInfo = Object.values(props.extension.Contracts)
     .filter((c) => c.Address === props.action.destination)
     .filter((c) => c.Endpoint === props.action.endpoint)[0]
+
+  const showRawTransaction = () => alert(JSON.stringify(props.action, null, 2))
 
   return (
     <div className={props.className}>
@@ -65,29 +61,21 @@ export const ActionPreview = (props: Props) => {
           </span>
         )}
       </h3>
-      {props.action.arguments.length > 0 && (
-        <span className="block mt-1 pl-4 text-lg text-gray-700 dark:text-gray-200 break-words">
-          Arguments: <strong>{toDisplayableArguments(props.action.arguments)}</strong>
-        </span>
-      )}
       {hasValue && (
-        <span className="block mt-1 pl-4 text-lg text-gray-700 dark:text-gray-200 break-words">
-          Value: <strong>{toFormattedTokenAmount(props.action.value, Constants.EgldDecimals)} EGLD</strong>
+        <span className="block pl-4 text-sm text-yellow-600 dark:text-yellow-500 mb-4">
+          <FontAwesomeIcon icon={faInfoCircle} className="inline-block mr-1 opacity-80" />
+          This action is transferring EGLD.
         </span>
       )}
       {hasPayment && (
-        <span className="block mt-1 pl-4 text-lg text-gray-700 dark:text-gray-200">
-          Payments: <strong>{props.action.payments.map(toFormattedPayment).join(', ')}</strong>
+        <span className="block pl-4 text-sm text-yellow-600 dark:text-yellow-500 mb-4">
+          <FontAwesomeIcon icon={faInfoCircle} className="inline-block mr-1 opacity-80" />
+          This action is transferring tokens.
         </span>
       )}
+      <button onClick={showRawTransaction} className="block text-blue-500 hover:text-blue-400">
+        View Raw Transaction
+      </button>
     </div>
   )
 }
-
-const toFormattedPayment = (payment: ProposalActionPayment) =>
-  `${toFormattedTokenAmount(payment.amount, payment.tokenDecimals || 0)} ${payment.tokenId} ${
-    payment.tokenNonce ? `(Nonce: ${payment.tokenNonce})` : ''
-  }`
-
-const toDisplayableArguments = (args: ProposalActionArg[]) =>
-  args.map((arg) => (isValidBlockchainAddress(arg as string) ? trimHash(arg as string, 8) : arg)).join(', ')
