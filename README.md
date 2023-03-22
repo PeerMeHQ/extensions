@@ -24,6 +24,7 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 
 - Don't pull in any dependencies that are not absolutely necessary
 - Only work inside the working directory of your extension
+- Keep the code as clean as possible by following [our Clean Code Guidelines](https://know.peerme.io/developers/clean-code.html)
 
 ### Installation
 
@@ -47,8 +48,8 @@ The Extension Framework provides developers with useful components & utilities t
 
 By default, each App makes use of the `useApp` hook which exposes useful functions to hook into the main [peerme.io](https://peerme.io) application for DAOs:
 
-- `app.requestProposalAction`: assemble a transaction/smart contract call to be attached to a proposal
-- `showToast(message, type)`: show a toast message to the user
+- `app.requestProposalAction(...)`: assemble a transaction/smart contract call to be attached to a proposal
+- `app.showToast(...)`: show a toast message to the user
 
 To use these app hook functions in child components, simply pass it to them as a prop with type `AppHook`.
 
