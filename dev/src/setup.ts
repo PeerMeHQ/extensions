@@ -26,7 +26,7 @@ const defaultConfig = (dark: boolean): ExtensionConfig => ({
   },
 
   entity: {
-    address: 'erd1...',
+    address: 'erd1qqqqqqqqqqqqqpgqg8t3yh3hr5vxpgsrwwqf3qh0v7e6ydd327rschchqc',
     slug: 'my-dao',
     name: 'MyDAO',
     description: 'A DAO for testing purposes.',
