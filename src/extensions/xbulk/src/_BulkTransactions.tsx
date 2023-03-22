@@ -27,6 +27,21 @@ export const _BulkTransactions = (props: Props) => {
     return true
   }
 
+  const createTokenPayment = (amount) => {
+    if (useSameAmount) {
+      if (payment.isEgld()) {
+        return TokenPayment.egldFromAmount(amount)
+      }
+      return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
+    } else {
+      if (token === 'EGLD') {
+        return TokenPayment.egldFromAmount(amount)
+      } else {
+        return TokenPayment.fungibleFromAmount(token, amount, 18)
+      }
+    }
+  }
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     if (!payment) {
