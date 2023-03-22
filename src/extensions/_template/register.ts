@@ -1,5 +1,6 @@
 import Logo from './meta/logo.svg'
 import { MyApp } from './src/MyApp'
+import { Contracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
@@ -12,7 +13,7 @@ export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Dark: Logo,
   },
   Tags: [],
-  Contracts: {},
+  Contracts: Contracts(config),
   AppRoot: MyApp,
   WidgetRoots: {
     Info: null,
