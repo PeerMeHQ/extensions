@@ -1,5 +1,5 @@
+import { App } from './src/App'
 import Logo from './meta/logo.svg'
-import { MyApp } from './src/MyApp'
 import { Contracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
@@ -14,7 +14,7 @@ export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   },
   Tags: [],
   Contracts: Contracts(config),
-  AppRoot: MyApp,
+  AppRoot: App,
   WidgetRoots: {
     Info: null,
   },
