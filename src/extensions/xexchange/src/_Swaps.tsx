@@ -11,7 +11,7 @@ type Props = {
   apolloClient: ApolloClient<NormalizedCacheObject>
 }
 
-export const _Swapper = (props: Props) => {
+export const _Swaps = (props: Props) => {
   const [payment, setPayment] = useState<TokenPayment | null>(null)
   const [tokenWantedId, _] = useState('')
   const [predictedOutAmount, setPredictedOutAmount] = useState<BigNumber>(new BigNumber(0))
@@ -22,11 +22,11 @@ export const _Swapper = (props: Props) => {
     variables: {
       amountIn: payment?.amountAsBigInteger.toString(),
       tokenInID: payment?.tokenIdentifier,
-      tokenOutID: '',
+      tokenOutID: tokenWantedId,
       tolerance: 0.01,
     },
     errorPolicy: 'ignore',
-    skip: !payment,
+    skip: !payment || !tokenWantedId,
     client: props.apolloClient,
   })
 

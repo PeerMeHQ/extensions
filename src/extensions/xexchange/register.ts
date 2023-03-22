@@ -1,5 +1,6 @@
+import { App } from './src/App'
 import Logo from './meta/logo.svg'
-import { XExchangeApp } from './src/XExchangeApp'
+import { Contracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XExchangeExtension = (config: ExtensionConfig): ExtensionInfo => ({
@@ -12,8 +13,8 @@ export const XExchangeExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Dark: Logo,
   },
   Tags: ['defi'],
-  Contracts: {},
-  AppRoot: XExchangeApp,
+  Contracts: Contracts(config),
+  AppRoot: App,
   WidgetRoots: {
     Info: null,
   },
