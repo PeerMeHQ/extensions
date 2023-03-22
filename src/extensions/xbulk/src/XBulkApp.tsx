@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tab } from '@headlessui/react'
-import { _Transactions } from './_Transactions'
+import { _BulkTransactions } from './_BulkTransactions'
 import { AppRootProps } from '../../../shared/types'
 import { useApp } from '../../../shared/hooks/useApp'
 import { AppSection, TabButton } from '../../../shared/ui/elements/index'
@@ -20,7 +20,7 @@ export const XBulkApp = (props: AppRootProps) => {
         <Tab.Panels>
           <Tab.Panel>
             <AppSection title="Send Bulk Transactions">
-              <_Transactions app={app} />
+              <_BulkTransactions app={app} />
             </AppSection>
           </Tab.Panel>
           <Tab.Panel>
