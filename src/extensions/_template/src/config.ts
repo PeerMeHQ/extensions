@@ -1,1 +1,1 @@
-export const MyExtensionConfig = {}
+export const Config = {}
