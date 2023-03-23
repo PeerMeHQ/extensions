@@ -4,6 +4,7 @@ import { XBulkExtension } from './extensions/xbulk/register'
 import { ItheumExtension } from './extensions/itheum/register'
 import { CoindripExtension } from './extensions/coindrip/register'
 import { XExchangeExtension } from './extensions/xexchange/register'
+import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [
@@ -13,6 +14,7 @@ export const Config = (config: ExtensionConfig) => ({
     CoindripExtension(config),
     ItheumExtension(config),
     XBulkExtension(config),
+    PulsarMoneyExtension(config),
   ],
 
   KnowledgeBase: {
