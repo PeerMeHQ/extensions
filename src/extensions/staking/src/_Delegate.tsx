@@ -16,6 +16,7 @@ export const _Delegate = (props: Props) => {
   const [providers, setProviders] = useState<DelegationProvider[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProvider, setSelectedProvider] = useState<DelegationProvider | null>(null)
+  const filteredProviders = filterProviders(providers, searchQuery)
 
   useEffect(() => {
     fetchDelegationProviders()
@@ -55,7 +56,7 @@ export const _Delegate = (props: Props) => {
           </tr>
         </thead>
         <tbody className="block divide-y divide-gray-200 dark:divide-gray-700 max-h-80 overflow-y-auto">
-          {providers.map((provider) => (
+          {filteredProviders.map((provider) => (
             <tr
               role="button"
               tabIndex={0}
@@ -94,6 +95,14 @@ export const _Delegate = (props: Props) => {
     </div>
   )
 }
+
+const filterProviders = (providers: DelegationProvider[], query: string) =>
+  providers
+    .filter((p) => p.identity.name)
+    .filter((p) => p.identity.name.toLowerCase().includes(query.toLowerCase()))
+    .filter((p) => p.identity.url)
+    .sort((a, b) => (a.identity.name > b.identity.name ? 1 : -1))
+    .sort((a, b) => (a.featured ? -1 : 1))
 
 const calculateProviderFilledPercentage = (provider: DelegationProvider) =>
   provider.totalActiveStake.div(provider.maxDelegationCap).times(100)
