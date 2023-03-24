@@ -5,20 +5,20 @@ import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xBulk',
-  Description: 'Sends DAO transactions in bulk.',
+  Description: "Making your DAO's life easier with lots of transactions.",
   Website: 'https://xbulk.app',
   Logo: {
     Light: Logo,
     Dark: Logo,
   },
-  Tags: ['defi'],
+  Tags: ['bulk'],
   Contracts: {},
   AppRoot: XBulkApp,
   WidgetRoots: {
     Info: null,
   },
   Developer: {
-    Name: 'PeerMe',
-    Website: 'https://peerme.io',
+    Name: 'Tortuga Staking',
+    Website: 'https://tortuga-staking.com/',
   },
 })
