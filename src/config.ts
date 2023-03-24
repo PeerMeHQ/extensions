@@ -2,6 +2,7 @@ import { ExtensionConfig, ExtensionInfo } from './shared/types'
 import { DaoExtension } from './extensions/dao/register'
 import { XBulkExtension } from './extensions/xbulk/register'
 import { ItheumExtension } from './extensions/itheum/register'
+import { StakingExtension } from './extensions/staking/register'
 import { CoindripExtension } from './extensions/coindrip/register'
 import { XExchangeExtension } from './extensions/xexchange/register'
 import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
@@ -10,6 +11,7 @@ export const Config = (config: ExtensionConfig) => ({
   Extensions: [
     // Register at the end of the list
     DaoExtension(config),
+    StakingExtension(config),
     XExchangeExtension(config),
     CoindripExtension(config),
     ItheumExtension(config),
