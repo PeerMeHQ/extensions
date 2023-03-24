@@ -2,7 +2,7 @@ import { BigNumber } from 'bignumber.js'
 import { DelegationInfo, DelegationProvider } from './types'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 
-export const getDelegationProvidersRequest = async (provider: ApiNetworkProvider) => {
+export const getDelegationProvidersRequest = async (provider: ApiNetworkProvider): Promise<DelegationProvider[]> => {
   const res = await provider.doGetGeneric('providers?size=10000')
 
   return res.map(
