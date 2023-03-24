@@ -4,11 +4,13 @@ import { TokenPayment } from '@multiversx/sdk-core'
 import { ProposalActionArg } from '@peerme/core-ts'
 import { ExtensionConfig, AppRootProps } from '../types'
 import { showToast as showAppToast } from '@peerme/web-ui'
+import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 
 type ToastType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 
 export type AppHook = {
   config: ExtensionConfig
+  networkProvider: ApiNetworkProvider
   requestProposalAction: (
     destination: string,
     endpoint: string | null,
@@ -20,6 +22,10 @@ export type AppHook = {
 }
 
 export const useApp = (appProps: AppRootProps): AppHook => {
+  const networkProvider = new ApiNetworkProvider(appProps.config.walletConfig.ApiAddress, {
+    timeout: 10_000,
+  })
+
   /**
    * Creates a proposal action request.
    *
@@ -44,6 +50,7 @@ export const useApp = (appProps: AppRootProps): AppHook => {
 
   return {
     config: appProps.config,
+    networkProvider,
     requestProposalAction,
     showToast,
   }
