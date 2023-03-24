@@ -2,7 +2,9 @@ import { Network } from '../../../shared/types'
 
 export const Config = {
   Endpoints: {
+    ClaimRewards: 'claimRewards',
     Delegate: 'delegate',
+    ReDelegateRewards: 'reDelegateRewards',
   },
 
   Urls: {

@@ -16,13 +16,19 @@ export const getDelegationProvidersRequest = async (provider: ApiNetworkProvider
   )
 }
 
-export const getDelegationInfoRequest = async (provider: ApiNetworkProvider, address: string) => {
+export const getDelegationInfoRequest = async (
+  provider: ApiNetworkProvider,
+  address: string
+): Promise<DelegationInfo[]> => {
   const res = await provider.doGetGeneric(`accounts/${address}/delegations?size=10000`)
 
-  return {
-    ...res,
-    userUnBondable: new BigNumber(res.userUnBondable || 0),
-    userActiveStake: new BigNumber(res.userActiveStake || 0),
-    claimableRewards: new BigNumber(res.claimableRewards || 0),
-  } as DelegationInfo
+  return res.map(
+    (r: any) =>
+      ({
+        ...r,
+        userUnBondable: new BigNumber(r.userUnBondable || 0),
+        userActiveStake: new BigNumber(r.userActiveStake || 0),
+        claimableRewards: new BigNumber(r.claimableRewards || 0),
+      } as DelegationInfo)
+  )
 }
