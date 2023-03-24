@@ -3,9 +3,9 @@ import Logo from './meta/logo.svg'
 import { Contracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
-export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
+export const PulsarMoneyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false, // leave this as false, we'll enable it after the review process
-  Name: '<your app name>',
+  Name: 'PulsarMoney',
   Description: '<describe your extension in a few words>',
   Website: '<your app website>',
   Logo: {

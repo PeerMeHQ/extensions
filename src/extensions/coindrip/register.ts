@@ -1,5 +1,5 @@
+import { App } from './src/App'
 import Logo from './meta/logo.svg'
-import { CoindripApp } from './src/CoindripApp'
 import { CoindripContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
@@ -14,7 +14,7 @@ export const CoindripExtension = (config: ExtensionConfig): ExtensionInfo => ({
   },
   Tags: ['defi'],
   Contracts: CoindripContracts(config),
-  AppRoot: CoindripApp,
+  AppRoot: App,
   WidgetRoots: {
     Info: null,
   },

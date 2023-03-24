@@ -13,7 +13,7 @@
     "@headlessui/react": "^1.7.11",
     "@multiversx/sdk-dapp": "2.10.1",
     "@peerme/extensions": "*",
-    "@peerme/web-ui": "^1.4.0",
+    "@peerme/web-ui": "^1.5.0",
     "collect.js": "^4.34.3",
     "graphql": "^16.6.0",
     "next": "13.1.6",

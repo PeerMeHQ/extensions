@@ -72,9 +72,11 @@ Form components:
 - `<RadioGroup />`
 - `<Switch />`
 - `<Slider />`
+- `<FileSelector />`
 - `<UserSelector />`: use select a user (recommended when asking for e.g. blockchain address)
 - `<EntitySelector />`: use to select a registered DAO
-- `<PaymentSelector />`: use to select assets from the [DAO Vault](https://know.peerme.io/daos/vault.html)
+- `<TokenSelector />`: use to select assets from the [DAO Vault](https://know.peerme.io/daos/vault.html)
+- `<PaymentSelector />`: use to select assets from the [DAO Vault](https://know.peerme.io/daos/vault.html) including amount
 
 User components:
 

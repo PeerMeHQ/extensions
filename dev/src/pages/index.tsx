@@ -20,7 +20,7 @@ export default function Home() {
       <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
       <section className="mb-8 p-8 rounded-2xl bg-gray-50 dark:bg-gray-900">
         <Extensions.AppSelector
-          config={Setup(dark).Config}
+          config={Setup(dark, address).Config}
           onActionAddRequest={(action) => {
             setActiveProposalAction(action)
             if (address) {
@@ -41,7 +41,7 @@ export default function Home() {
       <section className="mb-8 p-8 rounded-2xl dark:bg-gray-900 bg-gray-50">
         {selectedExtension && activeProposalAction ? (
           <Extensions.ActionPreview
-            config={Setup(dark).Config}
+            config={Setup(dark, address).Config}
             extension={selectedExtension}
             action={activeProposalAction}
           />
@@ -58,9 +58,9 @@ export default function Home() {
       <section className="mb-8 p-8 rounded-2xl dark:bg-gray-900 bg-gray-50">
         <Extensions.WidgetInfoPresenter
           config={{
-            ...Setup(dark).Config,
+            ...Setup(dark, address).Config,
             entity: {
-              ...Setup(dark).Config.entity,
+              ...Setup(dark, address).Config.entity,
               tags: [entityTag as EntityTag],
             },
           }}

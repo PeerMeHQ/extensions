@@ -1,6 +1,8 @@
 import { ExtensionConfig, AppRootProps } from '@peerme/extensions'
 
-const defaultConfig = (dark: boolean): ExtensionConfig => ({
+const DemoDaoScAddress = 'erd1qqqqqqqqqqqqqpgqg8t3yh3hr5vxpgsrwwqf3qh0v7e6ydd327rschchqc'
+
+const defaultConfig = (dark: boolean, currentUserAddress: string | null): ExtensionConfig => ({
   network: 'devnet',
 
   dark,
@@ -26,7 +28,7 @@ const defaultConfig = (dark: boolean): ExtensionConfig => ({
   },
 
   entity: {
-    address: 'erd1qqqqqqqqqqqqqpgqzjz2qw7xrue0gjxnvsmnmsyusfn8crdc27rs06xp6c',
+    address: currentUserAddress || DemoDaoScAddress,
     slug: 'my-dao',
     name: 'MyDAO',
     description: 'A DAO for testing purposes.',
@@ -62,11 +64,11 @@ const defaultConfig = (dark: boolean): ExtensionConfig => ({
   },
 })
 
-export const Setup = (dark: boolean) => ({
-  Config: defaultConfig(dark),
+export const Setup = (dark: boolean, currentUserAddress: string | null) => ({
+  Config: defaultConfig(dark, currentUserAddress),
 
   AppRootProps: {
-    config: defaultConfig(dark),
+    config: defaultConfig(dark, currentUserAddress),
     onActionAddRequest: () => {},
   } as AppRootProps,
 })
