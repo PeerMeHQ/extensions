@@ -13,7 +13,7 @@ type Props = {
 
 export const _ActiveDelegationsSection = (props: Props) => {
   return (
-    <AppSection title="My Delegations" className={props.className}>
+    <AppSection title="Our Delegations" className={props.className}>
       <table className="min-w-full">
         <thead className="block bg-gray-200 dark:bg-gray-700 rounded-t-xl rounded-b">
           <tr className="flex w-full">

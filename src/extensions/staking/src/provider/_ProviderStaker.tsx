@@ -5,7 +5,7 @@ import { Address } from '@multiversx/sdk-core'
 import { Button, Input } from '@peerme/web-ui'
 import React, { useEffect, useState } from 'react'
 import { AppHook } from '../../../../shared/hooks/useApp'
-import { Constants, sanitizeNumeric } from '@peerme/core-ts'
+import { Constants, sanitizeNumeric, toFormattedTokenAmount } from '@peerme/core-ts'
 
 type Props = {
   app: AppHook
@@ -19,17 +19,16 @@ export const _ProviderStaker = (props: Props) => {
   useEffect(() => {
     props.app.networkProvider
       .getAccount(new Address(props.app.config.entity.address))
-      .then((acc) => setEntityBalance(acc.balance.shiftedBy(-Constants.EgldDecimals)))
+      .then((acc) => setEntityBalance(acc.balance))
   }, [])
 
   const handleAdd = () => {
-    const valueBig = new BigNumber(amount)
+    const valueBig = new BigNumber(amount).shiftedBy(Constants.EgldDecimals)
     if (valueBig.isGreaterThan(entityBalance)) {
       props.app.showToast('Insufficient balance', 'error')
       return
     }
-    const valueSerializable = valueBig.shiftedBy(Constants.EgldDecimals)
-    props.app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueSerializable, [], [])
+    props.app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueBig, [], [])
   }
 
   return (
@@ -67,11 +66,11 @@ export const _ProviderStaker = (props: Props) => {
           autoFocus
           autoComplete="off"
         />
-        {+amount !== entityBalance.toNumber() && (
+        {+amount !== entityBalance.shiftedBy(-Constants.EgldDecimals).toNumber() && (
           <div className="absolute bottom-1/2 right-4 transform translate-y-1/2">
             <button
               type="button"
-              onClick={() => setAmount(entityBalance.toString())}
+              onClick={() => setAmount(entityBalance.shiftedBy(-Constants.EgldDecimals).toString())}
               className="px-3 py-1 uppercase bg-gray-800 hover:bg-gray-900 text-gray-100 rounded-xl shadow-lg transition duration-300"
             >
               Max
@@ -79,7 +78,7 @@ export const _ProviderStaker = (props: Props) => {
           </div>
         )}
       </div>
-      <p className="text-right mb-4">Balance: {entityBalance.toFormat(4)}</p>
+      <p className="text-right mb-4">Balance: {toFormattedTokenAmount(entityBalance, Constants.EgldDecimals)}</p>
       <Button onClick={handleAdd} color="blue" disabled={+amount <= 0} className="block w-full">
         Add Stake Action to Proposal
       </Button>
