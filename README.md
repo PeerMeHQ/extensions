@@ -25,6 +25,7 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 - Don't pull in any dependencies that are not absolutely necessary
 - Only work inside the working directory of your extension
 - Keep the code as clean as possible by following [our Clean Code Guidelines](https://know.peerme.io/developers/clean-code.html)
+- Do not add extra promotional content or links
 
 ### Installation
 
