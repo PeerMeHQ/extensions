@@ -35,6 +35,7 @@ export const _ActiveDelegationsSection = (props: Props) => {
           {props.delegations.map((delegation) => (
             <_ActiveDelegationRow
               key={delegation.contract}
+              app={props.app}
               delegation={delegation}
               provider={findProvider(props.providers, delegation.contract)}
             />

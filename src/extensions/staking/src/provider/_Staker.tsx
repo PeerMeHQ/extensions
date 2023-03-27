@@ -3,16 +3,17 @@ import { BigNumber } from 'bignumber.js'
 import { DelegationProvider } from '../types'
 import { Address } from '@multiversx/sdk-core'
 import { Button, Input } from '@peerme/web-ui'
+import { toEgldDisplayAmount } from '../helpers'
 import React, { useEffect, useState } from 'react'
 import { AppHook } from '../../../../shared/hooks/useApp'
-import { Constants, sanitizeNumeric, toFormattedTokenAmount } from '@peerme/core-ts'
+import { Constants, sanitizeNumeric } from '@peerme/core-ts'
 
 type Props = {
   app: AppHook
   provider: DelegationProvider
 }
 
-export const _ProviderStaker = (props: Props) => {
+export const _Staker = (props: Props) => {
   const [amount, setAmount] = useState('')
   const [entityBalance, setEntityBalance] = useState<BigNumber>(new BigNumber(0))
 
@@ -32,7 +33,7 @@ export const _ProviderStaker = (props: Props) => {
   }
 
   return (
-    <div onSubmit={handleAdd} className="relative pt-2">
+    <div className="relative pt-2">
       <h2 className="sr-only">Stake with {props.provider.identity.name}</h2>
       <a
         href={props.provider.identity.url}
@@ -78,7 +79,7 @@ export const _ProviderStaker = (props: Props) => {
           </div>
         )}
       </div>
-      <p className="text-right mb-4">Balance: {toFormattedTokenAmount(entityBalance, Constants.EgldDecimals)}</p>
+      <p className="text-right mb-4">Balance: {toEgldDisplayAmount(entityBalance)}</p>
       <Button onClick={handleAdd} color="blue" disabled={+amount <= 0} className="block w-full">
         Add Stake Action to Proposal
       </Button>

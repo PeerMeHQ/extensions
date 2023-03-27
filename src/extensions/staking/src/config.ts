@@ -5,6 +5,7 @@ export const Config = {
     ClaimRewards: 'claimRewards',
     Delegate: 'delegate',
     ReDelegateRewards: 'reDelegateRewards',
+    UnDelegate: 'unDelegate',
   },
 
   Urls: {
