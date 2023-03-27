@@ -1,9 +1,9 @@
 import React from 'react'
 import { AppSection } from '../../../../shared/ui/elements'
 
-export const TradeSection = () => {
+export const _ClaimsSection = () => {
   return (
-    <AppSection title="Trade">
+    <AppSection title="Claims">
       <p>Coming soon.</p>
     </AppSection>
   )
