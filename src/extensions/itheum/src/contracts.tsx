@@ -1,7 +1,9 @@
 import React from 'react'
 import { ProposalAction } from '@peerme/core-ts'
 import JsonAbiClaims from '../meta/claims.abi.json'
+import JsonAbiMarket from '../meta/data_market.abi.json'
 import { ClaimActionPreview } from './previews/ClaimActionPreview'
+import { AcceptOfferActionPreview } from './previews/AcceptOfferActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getClaimsContractAddress = (network: Network) => {
@@ -27,5 +29,17 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     Address: getClaimsContractAddress(config.network),
     Endpoint: 'viewClaimWithDate',
     AbiContent: JsonAbiClaims as any,
+  },
+  // Market
+  AcceptOffer: {
+    Address: getMarketContractAddress(config.network),
+    Endpoint: 'acceptOffer',
+    AbiContent: JsonAbiMarket as any,
+    ActionPreview: (action: ProposalAction) => <AcceptOfferActionPreview action={action} config={config} />,
+  },
+  ViewOffer: {
+    Address: getMarketContractAddress(config.network),
+    Endpoint: 'viewOffer',
+    AbiContent: JsonAbiMarket as any,
   },
 })

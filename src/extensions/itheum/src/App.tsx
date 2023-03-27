@@ -16,8 +16,8 @@ export const App = (props: AppRootProps) => {
     <Tab.Group>
       <Tab.List className="flex items-center space-x-2 md:space-x-4 mb-4">
         <TabButton icon={faHome}>General</TabButton>
-        <TabButton icon={faHandshakeSimple}>Trade</TabButton>
         <TabButton icon={faWallet}>Wallet</TabButton>
+        <TabButton icon={faHandshakeSimple}>Trade</TabButton>
         <TabButton icon={faShop}>Market</TabButton>
       </Tab.List>
       <Tab.Panels>
@@ -25,13 +25,13 @@ export const App = (props: AppRootProps) => {
           <GeneralTab app={app} />
         </Tab.Panel>
         <Tab.Panel>
-          <TradeSection />
-        </Tab.Panel>
-        <Tab.Panel>
           <WalletSection />
         </Tab.Panel>
         <Tab.Panel>
-          <MarketSection />
+          <TradeSection />
+        </Tab.Panel>
+        <Tab.Panel>
+          <MarketSection app={app} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

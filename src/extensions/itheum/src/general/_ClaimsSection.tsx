@@ -1,8 +1,8 @@
 import { Config } from '../config'
 import { ClaimInfo } from '../types'
-import { BigNumber } from 'bignumber.js'
 import React, { useEffect } from 'react'
 import { Contracts } from '../contracts'
+import { toTypedClaimInfo } from '../helpers'
 import { AppHook } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
@@ -14,7 +14,11 @@ export const _ClaimsSection = (props: { app: AppHook }) => {
   const claimsScQuery = useScQuery(props.app.config.walletConfig, contracts.ViewClaimWithDate)
 
   useEffect(() => {
-    claimsScQuery.query([props.app.config.entity.address]).then((bundle) => setClaimInfos(toTypedClaimInfos(bundle)))
+    claimsScQuery.query([props.app.config.entity.address]).then((bundle) => {
+      const values = bundle.firstValue?.valueOf().map(toTypedClaimInfo)
+      if (!values) return
+      setClaimInfos(values.slice(0, Config.Claims.OrderedTypeNames.length))
+    })
   }, [])
 
   const handleClaim = (index: number) =>
@@ -45,15 +49,3 @@ export const _ClaimsSection = (props: { app: AppHook }) => {
     </AppSection>
   )
 }
-
-const toTypedClaimInfos = (bundle: any): ClaimInfo[] =>
-  bundle.firstValue
-    ?.valueOf()
-    .map(
-      (item: any) =>
-        ({
-          amount: new BigNumber(item.amount),
-          lastModified: item.date.toNumber() * 1000,
-        } as ClaimInfo)
-    )
-    .slice(0, Config.Claims.OrderedTypeNames.length)
