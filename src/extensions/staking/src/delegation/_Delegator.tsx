@@ -13,7 +13,7 @@ type Props = {
   provider: DelegationProvider
 }
 
-export const _Staker = (props: Props) => {
+export const _Delegator = (props: Props) => {
   const [amount, setAmount] = useState('')
   const [entityBalance, setEntityBalance] = useState<BigNumber>(new BigNumber(0))
 

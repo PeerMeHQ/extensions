@@ -6,7 +6,7 @@ import { DelegateSection } from './delegation/DelegateSection'
 import { OverviewSection } from './delegation/OverviewSection'
 import { DelegationInfo, DelegationProvider } from './types'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
-import { DelegationActiveSection } from './delegation/DelegationActiveSection'
+import { DelegationsSection } from './delegation/DelegationsSection'
 import { getDelegationInfoRequest, getDelegationProvidersRequest } from './api'
 
 export const App = (props: AppRootProps) => {
@@ -23,7 +23,7 @@ export const App = (props: AppRootProps) => {
   return (
     <>
       <OverviewSection app={app} delegations={delegations} className="mb-4" />
-      <DelegationActiveSection app={app} providers={providers} delegations={delegations} className="mb-4" />
+      <DelegationsSection app={app} providers={providers} delegations={delegations} className="mb-4" />
       <DelegateSection app={app} providers={providers} className="mb-4" />
     </>
   )

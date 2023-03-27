@@ -7,7 +7,7 @@ type Props = {
   onSelect: (provider: DelegationProvider) => void
 }
 
-export const _ProviderList = (props: Props) => (
+export const _DelegateProviderList = (props: Props) => (
   <table className="min-w-full">
     <thead className="block bg-gray-200 dark:bg-gray-700 rounded-t-xl rounded-b">
       <tr className="flex w-full">

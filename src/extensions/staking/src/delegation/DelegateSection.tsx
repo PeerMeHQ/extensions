@@ -1,10 +1,10 @@
 import { Input } from '@peerme/web-ui'
 import React, { useState } from 'react'
+import { _Delegator } from './_Delegator'
 import { DelegationProvider } from '../types'
-import { _Staker } from '../provider/_Staker'
 import { AppHook } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { _ProviderList } from '../provider/_ProviderList'
+import { _DelegateProviderList } from './_DelegateProviderList'
 
 type Props = {
   app: AppHook
@@ -26,7 +26,7 @@ export const DelegateSection = (props: Props) => {
       className={props.className}
     >
       {selectedProvider ? (
-        <_Staker app={props.app} provider={selectedProvider} />
+        <_Delegator app={props.app} provider={selectedProvider} />
       ) : (
         <>
           <header className="mb-4">
@@ -37,7 +37,7 @@ export const DelegateSection = (props: Props) => {
               autoComplete="off"
             />
           </header>
-          <_ProviderList providers={filteredProviders} onSelect={(val) => setSelectedProvider(val)} />
+          <_DelegateProviderList providers={filteredProviders} onSelect={(val) => setSelectedProvider(val)} />
         </>
       )}
     </AppSection>

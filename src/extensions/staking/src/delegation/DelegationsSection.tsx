@@ -1,8 +1,8 @@
 import React from 'react'
+import { _DelegationsRow } from './_DelegationsRow'
 import { AppHook } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { DelegationInfo, DelegationProvider } from '../types'
-import { _DelegationActiveRow } from './_DelegationActiveRow'
 
 type Props = {
   app: AppHook
@@ -11,7 +11,7 @@ type Props = {
   className?: string
 }
 
-export const DelegationActiveSection = (props: Props) => (
+export const DelegationsSection = (props: Props) => (
   <AppSection title="Our Delegations" className={props.className}>
     <table className="min-w-full">
       <thead className="block bg-gray-200 dark:bg-gray-700 rounded-t-xl rounded-b">
@@ -32,7 +32,7 @@ export const DelegationActiveSection = (props: Props) => (
       </thead>
       <tbody className="block divide-y divide-gray-200 dark:divide-gray-700 max-h-80 overflow-y-auto">
         {props.delegations.map((delegation) => (
-          <_DelegationActiveRow
+          <_DelegationsRow
             key={delegation.contract}
             app={props.app}
             delegation={delegation}
