@@ -1,11 +1,9 @@
 import React from 'react'
 import { _DelegationsRow } from './_DelegationsRow'
-import { AppHook } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { DelegationInfo, DelegationProvider } from '../types'
 
 type Props = {
-  app: AppHook
   providers: DelegationProvider[]
   delegations: DelegationInfo[]
   className?: string
@@ -34,7 +32,6 @@ export const DelegationsSection = (props: Props) => (
         {props.delegations.map((delegation) => (
           <_DelegationsRow
             key={delegation.contract}
-            app={props.app}
             delegation={delegation}
             provider={findProvider(props.providers, delegation.contract)}
           />

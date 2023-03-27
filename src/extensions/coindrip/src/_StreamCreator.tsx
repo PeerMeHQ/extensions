@@ -1,14 +1,11 @@
 import { CoindripContracts } from './contracts'
 import { TokenPayment } from '@multiversx/sdk-core'
-import { AppHook } from '../../../shared/hooks/useApp'
+import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
 import { Input, Button, UserSelector, PaymentSelector, Switch } from '@peerme/web-ui'
 
-type Props = {
-  app: AppHook
-}
-
-export const _StreamCreator = (props: Props) => {
+export const _StreamCreator = () => {
+  const app = useApp()
   const [recipient, setRecipient] = useState('')
   const [payment, setPayment] = useState<TokenPayment | null>(null)
   const [startsAt, setStartsAt] = useState('')
@@ -26,18 +23,18 @@ export const _StreamCreator = (props: Props) => {
     const tokenPayments = payment.isEgld() ? [] : [payment]
 
     if (startsAtTs < nowTs) {
-      props.app.showToast('Start date must be set to the future', 'error')
+      app.showToast('Start date must be set to the future', 'error')
       return
     }
 
     if (endsAtTs < startsAtTs) {
-      props.app.showToast('Start date must be before end date', 'error')
+      app.showToast('Start date must be before end date', 'error')
       return
     }
 
-    props.app.requestProposalAction(
-      CoindripContracts(props.app.config).StreamCreate.Address,
-      CoindripContracts(props.app.config).StreamCreate.Endpoint,
+    app.requestProposalAction(
+      CoindripContracts(app.config).StreamCreate.Address,
+      CoindripContracts(app.config).StreamCreate.Endpoint,
       value,
       [recipient, startsAtTs, endsAtTs, cancellable],
       tokenPayments
@@ -50,15 +47,15 @@ export const _StreamCreator = (props: Props) => {
         Recipient
       </label>
       <UserSelector
-        searchConfig={props.app.config.searchConfig}
+        searchConfig={app.config.searchConfig}
         id="recipient"
         placeholder="Recipient address ..."
         onSelect={(val) => setRecipient(val.address)}
         className="mb-8"
       />
       <PaymentSelector
-        config={props.app.config.walletConfig}
-        entity={props.app.config.entity}
+        config={app.config.walletConfig}
+        entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}
         className="mb-8"

@@ -5,31 +5,29 @@ import { Address } from '@multiversx/sdk-core'
 import { Button, Input } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
 import React, { useEffect, useState } from 'react'
-import { AppHook } from '../../../../shared/hooks/useApp'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { Constants, sanitizeNumeric } from '@peerme/core-ts'
 
 type Props = {
-  app: AppHook
   provider: DelegationProvider
 }
 
 export const _Delegator = (props: Props) => {
+  const app = useApp()
   const [amount, setAmount] = useState('')
   const [entityBalance, setEntityBalance] = useState<BigNumber>(new BigNumber(0))
 
   useEffect(() => {
-    props.app.networkProvider
-      .getAccount(new Address(props.app.config.entity.address))
-      .then((acc) => setEntityBalance(acc.balance))
+    app.networkProvider.getAccount(new Address(app.config.entity.address)).then((acc) => setEntityBalance(acc.balance))
   }, [])
 
   const handleAdd = () => {
     const valueBig = new BigNumber(amount).shiftedBy(Constants.EgldDecimals)
     if (valueBig.isGreaterThan(entityBalance)) {
-      props.app.showToast('Insufficient balance', 'error')
+      app.showToast('Insufficient balance', 'error')
       return
     }
-    props.app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueBig, [], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueBig, [], [])
   }
 
   return (

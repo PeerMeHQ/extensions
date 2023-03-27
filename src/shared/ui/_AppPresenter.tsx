@@ -1,7 +1,8 @@
 import React from 'react'
-import { toExtensionName } from '../helpers'
 import { ProposalAction } from '@peerme/core-ts'
+import { AppContext } from '../contexts/AppContext'
 import { ExtensionInfo, ExtensionConfig } from '../types'
+import { toAppContextValue, toExtensionName } from '../helpers'
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -13,7 +14,7 @@ type Props = {
 }
 
 export const _AppPresenter = (props: Props) => (
-  <div>
+  <AppContext.Provider value={toAppContextValue(props.config, props.onActionAddRequest)}>
     <header className="mb-4">
       <button
         onClick={props.onCloseRequest}
@@ -24,7 +25,7 @@ export const _AppPresenter = (props: Props) => (
         <span>{toExtensionName(props.config, props.extension)}</span>
       </button>
     </header>
-    <div className="mb-2">{!!props.extension.AppRoot && <props.extension.AppRoot {...props} />}</div>
+    <div className="mb-2">{!!props.extension.AppRoot && <props.extension.AppRoot />}</div>
     <footer className="px-4">
       <small className="text-sm text-gray-500">
         This app is maintained by{' '}
@@ -40,5 +41,5 @@ export const _AppPresenter = (props: Props) => (
         .
       </small>
     </footer>
-  </div>
+  </AppContext.Provider>
 )

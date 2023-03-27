@@ -1,14 +1,11 @@
 import { XBulkConfig } from './config'
 import { TokenPayment } from '@multiversx/sdk-core'
-import { AppHook } from '../../../shared/hooks/useApp'
+import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
 import { Button, showToast, PaymentSelector } from '@peerme/web-ui'
 
-type Props = {
-  app: AppHook
-}
-
-export const _Transactions = (props: Props) => {
+export const _Transactions = () => {
+  const app = useApp()
   const [payment, setPayment] = useState<TokenPayment | null>(null)
 
   const handleSubmit = (e: SyntheticEvent) => {
@@ -20,8 +17,8 @@ export const _Transactions = (props: Props) => {
     const value = payment.isEgld() ? payment.amountAsBigInteger : 0
     const tokenPayments = payment.isEgld() ? [] : [payment]
 
-    props.app.requestProposalAction(
-      XBulkConfig.ContractAddress(props.app.config.network),
+    app.requestProposalAction(
+      XBulkConfig.ContractAddress(app.config.network),
       XBulkConfig.Endpoints.BulkSend,
       value,
       [],
@@ -35,8 +32,8 @@ export const _Transactions = (props: Props) => {
         Which token do you want to send?
       </label>
       <PaymentSelector
-        config={props.app.config.walletConfig}
-        entity={props.app.config.entity}
+        config={app.config.walletConfig}
+        entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}
         className="mb-8"

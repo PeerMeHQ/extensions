@@ -1,10 +1,9 @@
 import React from 'react'
-import { AppRootProps } from '../../../shared/types'
 import { useApp } from '../../../shared/hooks/useApp'
 import { AppSection } from '../../../shared/ui/elements'
 
-export const App = (props: AppRootProps) => {
-  const app = useApp(props)
+export const App = () => {
+  const app = useApp()
 
   // The app hook provides access to the extension configuration
   // and useful methods for interacting with DAOs.

@@ -1,14 +1,10 @@
 import React from 'react'
 import { Tab } from '@headlessui/react'
 import { _Transactions } from './_Transactions'
-import { AppRootProps } from '../../../shared/types'
-import { useApp } from '../../../shared/hooks/useApp'
 import { AppSection, TabButton } from '../../../shared/ui/elements/index'
 import { faCertificate, faCoins, faTrophy } from '@fortawesome/free-solid-svg-icons'
 
-export const XBulkApp = (props: AppRootProps) => {
-  const app = useApp(props)
-
+export const XBulkApp = () => {
   return (
     <div>
       <Tab.Group>
@@ -20,7 +16,7 @@ export const XBulkApp = (props: AppRootProps) => {
         <Tab.Panels>
           <Tab.Panel>
             <AppSection title="Send Bulk Transactions">
-              <_Transactions app={app} />
+              <_Transactions />
             </AppSection>
           </Tab.Panel>
           <Tab.Panel>

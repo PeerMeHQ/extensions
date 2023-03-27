@@ -1,10 +1,5 @@
 import React from 'react'
-import { AppHook } from '../../../shared/hooks/useApp'
 
-type Props = {
-  app: AppHook
-}
-
-export const _Vesting = (props: Props) => {
+export const _Vesting = () => {
   return <p>Coming soon.</p>
 }
