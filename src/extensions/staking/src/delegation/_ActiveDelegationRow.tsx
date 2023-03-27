@@ -1,3 +1,4 @@
+import { Config } from '../config'
 import { _Withdrawer } from './_Withdrawer'
 import { StickyModal } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
@@ -19,6 +20,16 @@ export const _ActiveDelegationRow = (props: Props) => {
   const handleWithdraw = (e: SyntheticEvent) => {
     e.stopPropagation()
     setIsWithdrawing(true)
+  }
+
+  const handleRewardClaim = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    props.app.requestProposalAction(props.provider!.contract, Config.Endpoints.ClaimRewards, 0, [], [])
+  }
+
+  const handleRewardStake = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    props.app.requestProposalAction(props.provider!.contract, Config.Endpoints.ReDelegateRewards, 0, [], [])
   }
 
   return (
@@ -48,8 +59,12 @@ export const _ActiveDelegationRow = (props: Props) => {
             <button onClick={handleWithdraw} className="text-blue-500 hover:text-blue-400 px-2 py-1">
               Withdraw
             </button>
-            <button className="text-blue-500">Claim Rewards</button>
-            <button className="text-blue-500">Stake Rewards</button>
+            <button onClick={handleRewardClaim} className="text-blue-500">
+              Claim Rewards
+            </button>
+            <button onClick={handleRewardStake} className="text-blue-500">
+              Stake Rewards
+            </button>
           </div>
         )}
         <StickyModal open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
