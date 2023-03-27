@@ -13,5 +13,6 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
     .withChainID(DevServerConfig.ChainId)
     .withGasLimit(50_000_000)
     .withNonce(account.nonce)
+    .withValue(action.value)
     .buildTransaction()
 }

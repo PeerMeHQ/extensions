@@ -64,6 +64,43 @@ p a:active {
   @apply text-primary-500 font-bold no-underline border-transparent;
 }
 
+/** sticky modal */
+.modal-overlay {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.3);
+  background-size: 1800% 1800%;
+  -webkit-animation: rainbow 10s ease infinite;
+  -z-animation: rainbow 10s ease infinite;
+  -o-animation: rainbow 10s ease infinite;
+  animation: rainbow 10s ease infinite;
+}
+
+.modal-container-sticky {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  box-shadow: 0 -1rem 50rem 75rem rgba(20, 150, 200, 0.1);
+}
+
+.modal-overlay-slide {
+  transition: all 500ms ease-out;
+  transform: translateY(80%) scale(5);
+}
+.ReactModal__Overlay--after-open.modal-overlay-slide {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.ReactModal__Overlay--before-close.modal-overlay-slide {
+  opacity: 0;
+  transform: translateY(80%) scale(5);
+}
+
 /** toast */
 .Toastify__toast-container {
   z-index: 9999;
