@@ -1,4 +1,5 @@
 import { App } from './src/App'
+import { Contracts } from './src/contracts'
 import LogoBlack from './meta/logo-black.svg'
 import LogoWhite from './meta/logo-white.svg'
 import type { ExtensionConfig, ExtensionInfo } from '../../shared/types'
@@ -13,7 +14,7 @@ export const ItheumExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Dark: LogoWhite,
   },
   Tags: ['itheum-data-coalition'],
-  Contracts: {},
+  Contracts: Contracts(config),
   AppRoot: App,
   WidgetRoots: {
     Info: null,
