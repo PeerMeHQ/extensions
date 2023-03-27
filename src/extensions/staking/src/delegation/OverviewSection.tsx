@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react'
 import { BigNumber } from 'bignumber.js'
-import { DelegationInfo } from './types'
-import { toEgldDisplayAmount } from './helpers'
-import { AppHook } from '../../../shared/hooks/useApp'
-import { AppSection } from '../../../shared/ui/elements'
+import { DelegationInfo } from '../types'
+import { toEgldDisplayAmount } from '../helpers'
+import { AppHook } from '../../../../shared/hooks/useApp'
+import { AppSection } from '../../../../shared/ui/elements'
 
 type Props = {
   app: AppHook
@@ -11,7 +11,7 @@ type Props = {
   className?: string
 }
 
-export const _OverviewSection = (props: Props) => {
+export const OverviewSection = (props: Props) => {
   const activeStake = useMemo(
     () => props.delegations.reduce((carry, item) => carry.plus(item.userActiveStake), new BigNumber(0)),
     [props.delegations]

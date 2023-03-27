@@ -12,7 +12,7 @@ type Props = {
   provider: DelegationProvider | null
 }
 
-export const _ActiveDelegationRow = (props: Props) => {
+export const _DelegationActiveRow = (props: Props) => {
   if (!props.provider) return null
   const [isOpen, setIsOpen] = useState(false)
   const [isWithdrawing, setIsWithdrawing] = useState(false)

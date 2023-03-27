@@ -1,10 +1,10 @@
 import { Input } from '@peerme/web-ui'
 import React, { useState } from 'react'
-import { DelegationProvider } from './types'
-import { _Staker } from './provider/_Staker'
-import { AppHook } from '../../../shared/hooks/useApp'
-import { AppSection } from '../../../shared/ui/elements'
-import { _ProviderList } from './provider/_ProviderList'
+import { DelegationProvider } from '../types'
+import { _Staker } from '../provider/_Staker'
+import { AppHook } from '../../../../shared/hooks/useApp'
+import { AppSection } from '../../../../shared/ui/elements'
+import { _ProviderList } from '../provider/_ProviderList'
 
 type Props = {
   app: AppHook
@@ -12,7 +12,7 @@ type Props = {
   className?: string
 }
 
-export const _DelegateSection = (props: Props) => {
+export const DelegateSection = (props: Props) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProvider, setSelectedProvider] = useState<DelegationProvider | null>(null)
   const filteredProviders = filterProviders(props.providers, searchQuery)

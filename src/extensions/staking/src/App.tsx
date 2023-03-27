@@ -2,11 +2,11 @@ import { Config } from './config'
 import React, { useEffect, useState } from 'react'
 import { AppRootProps } from '../../../shared/types'
 import { useApp } from '../../../shared/hooks/useApp'
-import { _DelegateSection } from './_DelegateSection'
-import { _OverviewSection } from './_OverviewSection'
+import { DelegateSection } from './delegation/DelegateSection'
+import { OverviewSection } from './delegation/OverviewSection'
 import { DelegationInfo, DelegationProvider } from './types'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
-import { _ActiveDelegationsSection } from './_ActiveDelegationsSection'
+import { DelegationActiveSection } from './delegation/DelegationActiveSection'
 import { getDelegationInfoRequest, getDelegationProvidersRequest } from './api'
 
 export const App = (props: AppRootProps) => {
@@ -22,9 +22,9 @@ export const App = (props: AppRootProps) => {
 
   return (
     <>
-      <_OverviewSection app={app} delegations={delegations} className="mb-4" />
-      <_ActiveDelegationsSection app={app} providers={providers} delegations={delegations} className="mb-4" />
-      <_DelegateSection app={app} providers={providers} className="mb-4" />
+      <OverviewSection app={app} delegations={delegations} className="mb-4" />
+      <DelegationActiveSection app={app} providers={providers} delegations={delegations} className="mb-4" />
+      <DelegateSection app={app} providers={providers} className="mb-4" />
     </>
   )
 }
