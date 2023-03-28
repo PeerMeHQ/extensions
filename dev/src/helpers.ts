@@ -1,7 +1,7 @@
 import { DevServerConfig } from './config'
 import { AccountType } from '@multiversx/sdk-dapp/types'
-import { ProposalAction, toActionArgsTypedValue } from '@peerme/core-ts'
-import { Address, ContractFunction, Interaction, SmartContract } from '@multiversx/sdk-core'
+import { ProposalAction, toActionArgsTypedValue, toSanitizedProposalPaymentAmount } from '@peerme/core-ts'
+import { Address, ContractFunction, Interaction, SmartContract, TokenPayment } from '@multiversx/sdk-core'
 
 export const toDemoTransaction = (action: ProposalAction, account: AccountType) => {
   console.log('Creating transaction for action', action, 'with account', account)
@@ -9,10 +9,31 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
   const sc = new SmartContract({ address: Address.fromBech32(action.destination) })
   const typedArgs = action.arguments.map(toActionArgsTypedValue)
 
-  return new Interaction(sc, new ContractFunction(action.endpoint), typedArgs)
+  let interaction = new Interaction(sc, new ContractFunction(action.endpoint), typedArgs)
     .withChainID(DevServerConfig.ChainId)
     .withGasLimit(50_000_000)
     .withNonce(account.nonce)
     .withValue(action.value)
-    .buildTransaction()
+
+  if (action.payments.length === 1) {
+    const payment = action.payments[0]
+    const tokenPayment = new TokenPayment(
+      payment.tokenId,
+      payment.tokenNonce,
+      toSanitizedProposalPaymentAmount(payment.amount),
+      payment.tokenDecimals!
+    )
+    const isFungible = payment.tokenNonce === 0
+
+    interaction = isFungible
+      ? interaction.withSingleESDTTransfer(tokenPayment)
+      : interaction.withSingleESDTNFTTransfer(tokenPayment, new Address(account.address))
+  } else if (action.payments.length > 1) {
+    const tokenPayments = action.payments.map(
+      (p) => new TokenPayment(p.tokenId, p.tokenNonce, toSanitizedProposalPaymentAmount(p.amount), p.tokenDecimals!)
+    )
+    interaction = interaction.withMultiESDTNFTTransfer(tokenPayments, new Address(account.address))
+  }
+
+  return interaction.buildTransaction()
 }
