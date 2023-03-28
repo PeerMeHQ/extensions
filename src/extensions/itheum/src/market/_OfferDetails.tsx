@@ -4,23 +4,23 @@ import { Contracts } from '../contracts'
 import { decodeNftMetadata } from '../helpers'
 import React, { useEffect, useState } from 'react'
 import { DataNftMetadata, OfferInfo } from '../types'
-import { AppHook } from '../../../../shared/hooks/useApp'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExternalLink } from '@fortawesome/free-solid-svg-icons'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
 
 type Props = {
-  app: AppHook
   offer: OfferInfo
 }
 
 export const _OfferDetails = (props: Props) => {
+  const app = useApp()
   const [nft, setNft] = useState<NonFungibleTokenOfAccountOnNetwork | null>(null)
   const [nftMetadata, setNftMetadata] = useState<DataNftMetadata | null>(null)
   const [quantity] = useState(1)
 
   useEffect(() => {
-    props.app.networkProvider
+    app.networkProvider
       .getNonFungibleToken(props.offer.offeredTokenIdentifier, props.offer.offeredTokenNonce)
       .then((val) => {
         setNft(val)
@@ -30,11 +30,11 @@ export const _OfferDetails = (props: Props) => {
 
   const handleProcure = () => {
     if (+quantity > +props.offer.quantity || +quantity <= 0) {
-      props.app.showToast('Invalid quantity', 'error')
+      app.showToast('Invalid quantity', 'error')
       return
     }
-    const contract = Contracts(props.app.config).AcceptOffer
-    props.app.requestProposalAction(contract.Address, contract.Endpoint, 0, [props.offer.index, +quantity], [])
+    const contract = Contracts(app.config).AcceptOffer
+    app.requestProposalAction(contract.Address, contract.Endpoint, 0, [props.offer.index, +quantity], [])
   }
 
   if (!nft || !nftMetadata) return null
@@ -45,7 +45,7 @@ export const _OfferDetails = (props: Props) => {
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl">{nftMetadata?.title}</h2>
         <Link
-          href={props.app.config.walletConfig.Explorer + '/nfts/' + nft.identifier}
+          href={app.config.walletConfig.Explorer + '/nfts/' + nft.identifier}
           target="_blank"
           rel="noreferrer"
           className="text-blue-500 hover:text-blue-400"

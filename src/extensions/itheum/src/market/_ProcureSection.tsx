@@ -3,22 +3,22 @@ import { Input } from '@peerme/web-ui'
 import { Contracts } from '../contracts'
 import { _OfferDetails } from './_OfferDetails'
 import React, { useEffect, useState } from 'react'
-import { AppHook } from '../../../../shared/hooks/useApp'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { useDebounce, useScQuery } from '@peerme/core-ts'
 import { AppSection } from '../../../../shared/ui/elements'
 import { getOfferIdFromUrlOrNull, isValidItheumMarketplaceUrl, toTypedOfferInfo } from '../helpers'
 
 type Props = {
-  app: AppHook
   className?: string
 }
 
 export const _ProcureSection = (props: Props) => {
+  const app = useApp()
   const [activeOffer, setActiveOffer] = useState<OfferInfo | null>(null)
   const [url, setUrl] = useState('')
   const debouncedUrl = useDebounce(url, 500)
 
-  const viewOfferScQuery = useScQuery(props.app.config.walletConfig, Contracts(props.app.config).ViewOffer)
+  const viewOfferScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).ViewOffer)
 
   useEffect(() => {
     if (!url) return
@@ -27,7 +27,7 @@ export const _ProcureSection = (props: Props) => {
       loadOffer(offerId)
     } else {
       setUrl('')
-      props.app.showToast('Invalid Marketplace Url', 'error')
+      app.showToast('Invalid Marketplace Url', 'error')
     }
   }, [debouncedUrl])
 
@@ -36,7 +36,7 @@ export const _ProcureSection = (props: Props) => {
     const offerValue = offerBundle.firstValue?.valueOf()
     if (!offerValue) {
       setUrl('')
-      props.app.showToast('Offer not found', 'error')
+      app.showToast('Offer not found', 'error')
       return
     }
     setActiveOffer(toTypedOfferInfo(offerValue))
@@ -50,7 +50,7 @@ export const _ProcureSection = (props: Props) => {
   return (
     <AppSection title="Procure" onCloseRequest={activeOffer ? resetSection : undefined} className={props.className}>
       {activeOffer ? (
-        <_OfferDetails app={props.app} offer={activeOffer} />
+        <_OfferDetails offer={activeOffer} />
       ) : (
         <Input placeholder="Pasted a Marketplace Url ..." value={url} onChange={(val) => setUrl(val)} />
       )}

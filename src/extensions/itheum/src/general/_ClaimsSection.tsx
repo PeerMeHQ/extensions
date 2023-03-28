@@ -3,18 +3,19 @@ import { ClaimInfo } from '../types'
 import React, { useEffect } from 'react'
 import { Contracts } from '../contracts'
 import { toTypedClaimInfo } from '../helpers'
-import { AppHook } from '../../../../shared/hooks/useApp'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { classNames, toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 
-export const _ClaimsSection = (props: { app: AppHook }) => {
+export const _ClaimsSection = () => {
+  const app = useApp()
   const [claimInfos, setClaimInfos] = React.useState<ClaimInfo[]>([])
-  const contracts = Contracts(props.app.config)
+  const contracts = Contracts(app.config)
 
-  const claimsScQuery = useScQuery(props.app.config.walletConfig, contracts.ViewClaimWithDate)
+  const claimsScQuery = useScQuery(app.config.walletConfig, contracts.ViewClaimWithDate)
 
   useEffect(() => {
-    claimsScQuery.query([props.app.config.entity.address]).then((bundle) => {
+    claimsScQuery.query([app.config.entity.address]).then((bundle) => {
       const values = bundle.firstValue?.valueOf().map(toTypedClaimInfo)
       if (!values) return
       setClaimInfos(values.slice(0, Config.Claims.OrderedTypeNames.length))
@@ -22,7 +23,7 @@ export const _ClaimsSection = (props: { app: AppHook }) => {
   }, [])
 
   const handleClaim = (index: number) =>
-    props.app.requestProposalAction(contracts.Claim.Address, contracts.Claim.Endpoint, 0, [index], [])
+    app.requestProposalAction(contracts.Claim.Address, contracts.Claim.Endpoint, 0, [index], [])
 
   return (
     <AppSection title="Claims">
