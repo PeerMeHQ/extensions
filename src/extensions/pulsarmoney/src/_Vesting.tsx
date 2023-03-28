@@ -3,7 +3,6 @@ import { Button, Input, PaymentSelector, Switch, UserSelector, Dropdown, Dropdow
 import React, { SyntheticEvent, useState } from 'react'
 import { AppHook } from '../../../shared/hooks/useApp'
 import { Transactions } from '@astrarizon/pulsar-money-sdk-js/lib/entities/payments'
-import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks'
 import { TransactionDecoder } from '@multiversx/sdk-transaction-decoder/lib/src/transaction.decoder'
 import { BigNumber } from 'bignumber.js'
 import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
@@ -13,8 +12,6 @@ type Props = {
 }
 
 export const _Vesting = (props: Props) => {
-  const { address } = useGetAccountInfo()
-
   const [receiver, setReceiver] = useState('')
   const [tokenPayment, setTokenPayment] = useState<TokenPayment | null>(null)
   const [cliffAmount, setCliffAmount] = useState('')
@@ -31,6 +28,8 @@ export const _Vesting = (props: Props) => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
+
+    const address = props?.app?.config?.entity?.address
 
     if (!tokenPayment) return
     if (!address) return
