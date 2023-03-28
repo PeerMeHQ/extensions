@@ -1,4 +1,7 @@
-import { ChainWallet, Entity, EntityTag, ProposalAction, ScInfo, SearchServiceConfig } from '@peerme/core-ts'
+import { BigNumber } from 'bignumber.js'
+import { TokenPayment } from '@multiversx/sdk-core'
+import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
+import { ScInfo, Entity, EntityTag, ChainWallet, ProposalActionArg, SearchServiceConfig } from '@peerme/core-ts'
 
 export type Network = 'devnet' | 'testnet' | 'mainnet'
 
@@ -30,7 +33,7 @@ export type ExtensionInfo = {
   }
   Tags: EntityTag[]
   Contracts: ExtensionScInfo
-  AppRoot: React.FC<AppRootProps> | null
+  AppRoot: React.FC | null
   WidgetRoots: {
     Info: React.FC<WidgetRootProps> | null
   }
@@ -43,9 +46,19 @@ export type ExtensionInfo = {
 /**
  * App
  */
-export type AppRootProps = {
+export type AppToastType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
+
+export type AppContextValue = {
   config: ExtensionConfig
-  onActionAddRequest: (action: ProposalAction) => void
+  networkProvider: ApiNetworkProvider
+  requestProposalAction: (
+    destination: string,
+    endpoint: string | null,
+    value: BigNumber.Value,
+    args: ProposalActionArg[],
+    payments: TokenPayment[]
+  ) => void
+  showToast: (text: string, type?: AppToastType) => void
 }
 
 /**

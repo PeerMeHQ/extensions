@@ -1,4 +1,4 @@
-import { ExtensionConfig, AppRootProps } from '@peerme/extensions'
+import { ExtensionConfig } from '@peerme/extensions'
 
 const DemoDaoScAddress = 'erd1qqqqqqqqqqqqqpgqg8t3yh3hr5vxpgsrwwqf3qh0v7e6ydd327rschchqc'
 
@@ -66,9 +66,4 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
 
 export const Setup = (dark: boolean, currentUserAddress: string | null) => ({
   Config: defaultConfig(dark, currentUserAddress),
-
-  AppRootProps: {
-    config: defaultConfig(dark, currentUserAddress),
-    onActionAddRequest: () => {},
-  } as AppRootProps,
 })

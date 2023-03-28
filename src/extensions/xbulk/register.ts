@@ -1,11 +1,11 @@
 import Logo from './meta/logo.svg'
-import { XBulkApp } from './src/XBulkApp'
+import { App } from './src/XBulkApp'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xBulk',
-  Description: 'Sends DAO transactions in bulk.',
+  Description: "Making your DAO's life easier with lots of transactions.",
   Website: 'https://xbulk.app',
   Logo: {
     Light: Logo,
@@ -13,12 +13,12 @@ export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   },
   Tags: ['defi'],
   Contracts: {},
-  AppRoot: XBulkApp,
+  AppRoot: App,
   WidgetRoots: {
     Info: null,
   },
   Developer: {
-    Name: 'PeerMe',
-    Website: 'https://peerme.io',
+    Name: 'Tortuga Staking',
+    Website: 'https://tortuga-staking.com/',
   },
 })

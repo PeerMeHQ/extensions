@@ -1,4 +1,4 @@
-import { DaoApp } from './src/DaoApp'
+import { App } from './src/DaoApp'
 import LogoBlack from './meta/logo-black.svg'
 import LogoWhite from './meta/logo-white.svg'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
@@ -14,7 +14,7 @@ export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
   },
   Tags: [],
   Contracts: {},
-  AppRoot: DaoApp,
+  AppRoot: App,
   WidgetRoots: {
     Info: null,
   },

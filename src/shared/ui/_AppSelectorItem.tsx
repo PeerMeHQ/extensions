@@ -43,7 +43,7 @@ export const _AppSelectorItem = (props: Props) => (
     </div>
     <div>
       <h3>{toExtensionName(props.config, props.extension)}</h3>
-      <p className="mb-1">{props.extension.Description}</p>
+      <p className="mb-1 text-base">{props.extension.Description}</p>
       {props.extension.Tags.length > 0 && (
         <ul role="list" className="flex gap-2">
           {props.extension.Tags.map((tag) => (
