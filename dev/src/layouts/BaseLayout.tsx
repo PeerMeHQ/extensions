@@ -17,6 +17,13 @@ export const BaseLayout = (props: Props) => {
 
   useEffect(() => {
     props.onDarkModeChange?.(dark)
+
+    const docHtmlClassList = document.getElementsByTagName('html')[0].classList
+    if (dark) {
+      docHtmlClassList.add('dark')
+    } else {
+      docHtmlClassList.remove('dark')
+    }
   }, [dark])
 
   return (
