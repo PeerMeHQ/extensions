@@ -6,21 +6,22 @@ import { Tab } from '@headlessui/react'
 import { AppRootProps } from '../../../shared/types'
 import { useApp } from '../../../shared/hooks/useApp'
 import { AppSection, TabButton } from '../../../shared/ui/elements'
-import { faMoneyBill, faVault, faVest } from '@fortawesome/free-solid-svg-icons'
+import { faVest } from '@fortawesome/free-solid-svg-icons'
 
 export const App = (props: AppRootProps) => {
   const app = useApp(props)
 
   // The app hook provides access to the extension configuration
   // and useful methods for interacting with DAOs.
-  console.log(app)
+  // console.log(app)
 
   return (
     <Tab.Group>
       <Tab.List className="flex items-center space-x-2 md:space-x-4 mb-4">
         <TabButton icon={faVest}>Vesting</TabButton>
-        <TabButton icon={faVault}>Vaults</TabButton>
-        <TabButton icon={faMoneyBill}>Payments</TabButton>
+        {/* disabled for now, soon to be implemented along with claim/list/cancel/wallet */}
+        {/* <TabButton icon={faVault}>Vaults</TabButton>
+        <TabButton icon={faMoneyBill}>Payments</TabButton> */}
       </Tab.List>
       <Tab.Panels>
         <Tab.Panel>
@@ -28,7 +29,7 @@ export const App = (props: AppRootProps) => {
             <_Vesting app={app} />
           </AppSection>
         </Tab.Panel>
-        <Tab.Panel>
+        {/* <Tab.Panel>
           <AppSection title="Lock Assets">
             <_Vaults app={app} />
           </AppSection>
@@ -37,7 +38,7 @@ export const App = (props: AppRootProps) => {
           <AppSection title="Create a Pulsar Token Stream">
             <_Payments app={app} />
           </AppSection>
-        </Tab.Panel>
+        </Tab.Panel> */}
       </Tab.Panels>
     </Tab.Group>
   )
