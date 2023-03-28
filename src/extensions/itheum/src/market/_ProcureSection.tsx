@@ -52,7 +52,7 @@ export const _ProcureSection = (props: Props) => {
       {activeOffer ? (
         <_OfferDetails offer={activeOffer} />
       ) : (
-        <Input placeholder="Pasted a Marketplace Url ..." value={url} onChange={(val) => setUrl(val)} />
+        <Input placeholder="Paste a Marketplace Offer Url ..." value={url} onChange={(val) => setUrl(val)} />
       )}
     </AppSection>
   )
