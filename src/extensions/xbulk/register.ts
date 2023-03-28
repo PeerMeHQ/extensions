@@ -1,11 +1,11 @@
+import { App } from './src/App'
 import Logo from './meta/logo.svg'
-import { App } from './src/XBulkApp'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xBulk',
-  Description: "Making your DAO's life easier with lots of transactions.",
+  Description: "Making your DAO's life easier with lots of transactions",
   Website: 'https://xbulk.app',
   Logo: {
     Light: Logo,
@@ -19,6 +19,6 @@ export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   },
   Developer: {
     Name: 'Tortuga Staking',
-    Website: 'https://tortuga-staking.com/',
+    Website: 'https://tortuga-staking.com',
   },
 })
