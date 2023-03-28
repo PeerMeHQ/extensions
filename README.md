@@ -7,6 +7,9 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 ## Available Extensions
 
 - Coindrip: [coindrip.finance](https://coindrip.finance)
+- MultiversX Staking: [multiversx.com](https://multiversx.com) (in progress)
+- xBulk: [xbulk.app](https://xbulk.app) (in progress)
+- Itheum: [itheum.io](https://www.itheum.io) (in progress)
 
 ## Create your App
 
