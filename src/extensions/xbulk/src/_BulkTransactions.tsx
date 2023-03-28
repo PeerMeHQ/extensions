@@ -1,18 +1,17 @@
 import { BigNumber } from 'bignumber.js'
 import { XBulkConfig } from './config'
 import { useApp } from '../../../shared/hooks/useApp'
-import React, { SyntheticEvent, useState } from 'react'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
-import { Button, Switch, Textarea, showToast, PaymentSelector } from '@peerme/web-ui'
+import React, { SyntheticEvent, useMemo, useState } from 'react'
+import { Button, Switch, Textarea, showToast, PaymentSelector, TokenSelector, FileSelector } from '@peerme/web-ui'
 
 export const _BulkTransactions = () => {
   const app = useApp()
   const [payment, setPayment] = useState<TokenPayment | null>(null)
-  // const [token, setToken] = useState<string>('') TODO
   const [userTxList, setUserTxList] = useState<string>('')
   const [useSameAmount, setUseSameAmount] = useState<boolean>(false)
 
-  const isValid = () => {
+  const isValid = useMemo(() => {
     // Get an array containing all the lines of the user input
     if (userTxList.trim() === '') {
       return false
@@ -22,7 +21,7 @@ export const _BulkTransactions = () => {
       return false
     }
     return true
-  }
+  }, [userTxList])
 
   // TODO
   // const createTokenPayment = (amount) => {
@@ -96,6 +95,16 @@ export const _BulkTransactions = () => {
     )
   }
 
+  const handleCsvSelect = (files: File[]) => {
+    if (files.length === 0) return
+    const reader = new FileReader()
+    reader.onload = function (e) {
+      if (!e.target?.result) return
+      setUserTxList(e.target.result as string)
+    }
+    reader.readAsText(files[0])
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex items-center space-x-4 py-4 mb-4">
@@ -125,7 +134,7 @@ export const _BulkTransactions = () => {
           <label htmlFor="recipient" className="text-xl text-gray-700 dark:text-gray-200">
             Select the token you want to send:
           </label>
-          <PaymentSelector
+          <TokenSelector
             config={app.config.walletConfig}
             entity={app.config.entity}
             permissions={[]}
@@ -146,11 +155,9 @@ export const _BulkTransactions = () => {
         onChange={(val) => setUserTxList(val)}
       />
 
-      {/**
-       * TODO: Add File Input
-       */}
+      <FileSelector accept={{ 'text/*': ['.csv'] }} onSelect={handleCsvSelect} className="mb-8" />
 
-      <Button color="blue" className="block w-full" disabled={!isValid()} submit>
+      <Button color="blue" className="block w-full" disabled={!isValid} submit>
         Add Bulk transaction
       </Button>
     </form>
