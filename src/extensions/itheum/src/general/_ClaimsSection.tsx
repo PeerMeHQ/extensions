@@ -5,7 +5,7 @@ import { Contracts } from '../contracts'
 import { toTypedClaimInfo } from '../helpers'
 import { AppHook } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
+import { classNames, toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 
 export const _ClaimsSection = (props: { app: AppHook }) => {
   const [claimInfos, setClaimInfos] = React.useState<ClaimInfo[]>([])
@@ -31,13 +31,20 @@ export const _ClaimsSection = (props: { app: AppHook }) => {
           <li key={index} className="col-span-1">
             <div className="bg-gray-100 dark:bg-gray-700 rounded-2xl px-6 py-4">
               <h2 className="text-base mb-1">{Config.Claims.OrderedTypeNames[index]}</h2>
-              <strong className="font-head text-4xl text-primary-500 dark:text-primary-400">
-                {toFormattedTokenAmount(claimInfo.amount, 18)}
+              <strong
+                className={classNames(
+                  'font-head text-4xl',
+                  claimInfo.amount.isZero()
+                    ? 'text-gray-600 dark:text-gray-400'
+                    : 'text-primary-500 dark:text-primary-400'
+                )}
+              >
+                {toFormattedTokenAmount(claimInfo.amount, Config.TokenDecimals)}
               </strong>
               {!claimInfo.amount.isZero() && (
                 <button
                   onClick={() => handleClaim(index)}
-                  className="block text-base text-primary-400 hover:text-primary-500 px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-lg mt-2"
+                  className="block text-base text-primary-500 hover:text-primary-400 px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-lg mt-2"
                 >
                   Claim
                 </button>

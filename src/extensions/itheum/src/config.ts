@@ -1,6 +1,8 @@
 import { Network } from '../../../shared/types'
 
 export const Config = {
+  TokenDecimals: 18,
+
   Urls: {
     MarketplaceOffer: (network: Network, offerId: number) => {
       if (network === 'devnet')
