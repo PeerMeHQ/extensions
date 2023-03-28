@@ -1,16 +1,17 @@
 import { Tab } from '@headlessui/react'
 import { Contracts } from './contracts'
 import { TradeTab } from './trade/TradeTab'
+import { MarketRequirements } from './types'
 import { useScQuery } from '@peerme/core-ts'
 import { WalletTab } from './wallet/WalletTab'
 import { MarketTab } from './market/MarketTab'
+import { EllipsisLoader } from '@peerme/web-ui'
 import { GeneralTab } from './general/GeneralTab'
 import React, { useEffect, useState } from 'react'
+import { toTypedMarketRequirements } from './helpers'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TabButton } from '../../../shared/ui/elements'
 import { faHandshakeSimple, faHome, faShop, faWallet } from '@fortawesome/free-solid-svg-icons'
-import { toTypedMarketRequirements } from './helpers'
-import { MarketRequirements } from './types'
 
 export const App = () => {
   const app = useApp()
@@ -22,6 +23,8 @@ export const App = () => {
       .query([])
       .then((bundle) => setMarketRequirements(toTypedMarketRequirements(bundle.firstValue?.valueOf())))
   }, [])
+
+  if (!marketRequirements) return <EllipsisLoader />
 
   return (
     <Tab.Group>
