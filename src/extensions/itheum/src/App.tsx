@@ -1,33 +1,50 @@
-import React from 'react'
 import { Tab } from '@headlessui/react'
+import { Contracts } from './contracts'
+import { TradeTab } from './trade/TradeTab'
+import { useScQuery } from '@peerme/core-ts'
+import { WalletTab } from './wallet/WalletTab'
+import { MarketTab } from './market/MarketTab'
 import { GeneralTab } from './general/GeneralTab'
-import { TradeSection } from './trade/TradeSection'
-import { WalletSection } from './wallet/WalletSection'
-import { MarketSection } from './market/MarketSection'
+import React, { useEffect, useState } from 'react'
+import { useApp } from '../../../shared/hooks/useApp'
 import { TabButton } from '../../../shared/ui/elements'
 import { faHandshakeSimple, faHome, faShop, faWallet } from '@fortawesome/free-solid-svg-icons'
+import { toTypedMarketRequirements } from './helpers'
+import { MarketRequirements } from './types'
 
-export const App = () => (
-  <Tab.Group>
-    <Tab.List className="flex items-center space-x-2 md:space-x-4 mb-4">
-      <TabButton icon={faHome}>General</TabButton>
-      <TabButton icon={faWallet}>Wallet</TabButton>
-      <TabButton icon={faHandshakeSimple}>Trade</TabButton>
-      <TabButton icon={faShop}>Market</TabButton>
-    </Tab.List>
-    <Tab.Panels>
-      <Tab.Panel>
-        <GeneralTab />
-      </Tab.Panel>
-      <Tab.Panel>
-        <WalletSection />
-      </Tab.Panel>
-      <Tab.Panel>
-        <TradeSection />
-      </Tab.Panel>
-      <Tab.Panel>
-        <MarketSection />
-      </Tab.Panel>
-    </Tab.Panels>
-  </Tab.Group>
-)
+export const App = () => {
+  const app = useApp()
+  const [marketRequirements, setMarketRequirements] = useState<MarketRequirements | null>(null)
+  const marketRequirementsScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).GetMarketRequirements)
+
+  useEffect(() => {
+    marketRequirementsScQuery
+      .query([])
+      .then((bundle) => setMarketRequirements(toTypedMarketRequirements(bundle.firstValue?.valueOf())))
+  }, [])
+
+  return (
+    <Tab.Group>
+      <Tab.List className="flex items-center space-x-2 md:space-x-4 mb-4">
+        <TabButton icon={faHome}>General</TabButton>
+        <TabButton icon={faWallet}>Wallet</TabButton>
+        <TabButton icon={faHandshakeSimple}>Trade</TabButton>
+        <TabButton icon={faShop}>Market</TabButton>
+      </Tab.List>
+      <Tab.Panels>
+        <Tab.Panel>
+          <GeneralTab />
+        </Tab.Panel>
+        <Tab.Panel>
+          <WalletTab marketRequirements={marketRequirements} />
+        </Tab.Panel>
+        <Tab.Panel>
+          <TradeTab />
+        </Tab.Panel>
+        <Tab.Panel>
+          <MarketTab />
+        </Tab.Panel>
+      </Tab.Panels>
+    </Tab.Group>
+  )
+}

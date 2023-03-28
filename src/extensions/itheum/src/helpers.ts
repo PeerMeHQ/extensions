@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import JsonAbiNftMint from '../meta/datanftmint.abi.json'
-import { ClaimInfo, DataNftMetadata, OfferInfo } from './types'
+import { ClaimInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
 
@@ -19,6 +19,18 @@ export const getOfferIdFromUrlOrNull = (url: string) => {
   const match = url.match(/offer-(\d+)/)
   return match ? parseInt(match[1]) : null
 }
+
+export const toTypedMarketRequirements = (value: any): MarketRequirements => ({
+  acceptedTokens: value.accepted_tokens.map((v: any) => v.toString()),
+  acceptedPayments: value.accepted_payments.map((v: any) => v.toString()),
+  maximumPaymentFees: value.maximum_payment_fees.map((v: any) => new BigNumber(v)),
+  discountFeePercentageBuyer: new BigNumber(value.discount_fee_percentage_buyer),
+  discountFeePercentageSeller: new BigNumber(value.discount_fee_percentage_seller),
+  percentageCutFromBuyer: new BigNumber(value.percentage_cut_from_buyer),
+  percentageCutFromSeller: new BigNumber(value.percentage_cut_from_seller),
+  buyerFee: 0,
+  sellerFee: 0,
+})
 
 export const toTypedOfferInfo = (value: any): OfferInfo => ({
   index: value.index.toNumber(),

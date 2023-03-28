@@ -3,6 +3,7 @@ import { ProposalAction } from '@peerme/core-ts'
 import JsonAbiClaims from '../meta/claims.abi.json'
 import JsonAbiMarket from '../meta/data_market.abi.json'
 import { ClaimActionPreview } from './previews/ClaimActionPreview'
+import { AddOfferActionPreview } from './previews/AddOfferActionPreview'
 import { AcceptOfferActionPreview } from './previews/AcceptOfferActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
@@ -31,6 +32,17 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     AbiContent: JsonAbiClaims as any,
   },
   // Market
+  GetMarketRequirements: {
+    Address: getMarketContractAddress(config.network),
+    Endpoint: 'getRequirements',
+    AbiContent: JsonAbiMarket as any,
+  },
+  AddOffer: {
+    Address: getMarketContractAddress(config.network),
+    Endpoint: 'addOffer',
+    AbiContent: JsonAbiMarket as any,
+    ActionPreview: (action: ProposalAction) => <AddOfferActionPreview action={action} config={config} />,
+  },
   AcceptOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'acceptOffer',

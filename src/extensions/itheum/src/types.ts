@@ -5,6 +5,18 @@ export type ClaimInfo = {
   lastModified: number
 }
 
+export type MarketRequirements = {
+  acceptedTokens: string[]
+  acceptedPayments: string[]
+  maximumPaymentFees: BigNumber[]
+  discountFeePercentageBuyer: BigNumber
+  discountFeePercentageSeller: BigNumber
+  percentageCutFromBuyer: BigNumber
+  percentageCutFromSeller: BigNumber
+  buyerFee: number
+  sellerFee: number
+}
+
 export type OfferInfo = {
   index: number
   owner: string

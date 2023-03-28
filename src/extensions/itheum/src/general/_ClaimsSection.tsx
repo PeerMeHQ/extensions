@@ -45,7 +45,7 @@ export const _ClaimsSection = () => {
               {!claimInfo.amount.isZero() && (
                 <button
                   onClick={() => handleClaim(index)}
-                  className="block text-base text-primary-500 hover:text-primary-400 px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-lg mt-2"
+                  className="block text-base text-primary-400 hover:text-primary-500 px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-lg mt-2"
                 >
                   Claim
                 </button>

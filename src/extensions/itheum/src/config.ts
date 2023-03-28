@@ -1,7 +1,20 @@
 import { Network } from '../../../shared/types'
 
 export const Config = {
+  TokenName: 'ITHEUM',
   TokenDecimals: 18,
+
+  TokenId: (network: Network) => {
+    if (network === 'devnet') return 'ITHEUM-a61317'
+    if (network === 'testnet') return '#'
+    return 'ITHEUM-df6f26'
+  },
+
+  DataNftCollection: (network: Network) => {
+    if (network === 'devnet') return 'DATANFTFT2-71ac28'
+    if (network === 'testnet') return '#'
+    return '#'
+  },
 
   Urls: {
     MarketplaceOffer: (network: Network, offerId: number) => {
