@@ -11,7 +11,7 @@ export const ItheumExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Light: Logo,
     Dark: Logo,
   },
-  Tags: ['itheum-data-coalition'],
+  Tags: ['itheum'],
   Contracts: {},
   AppRoot: ItheumApp,
   WidgetRoots: {
