@@ -1,17 +1,14 @@
-import { XBulkConfig } from './config'
-import { TokenPayment, Address } from '@multiversx/sdk-core'
-import { AppHook } from '../../../shared/hooks/useApp'
-import React, { SyntheticEvent, useState } from 'react'
-import { Button, Switch, Textarea, showToast, PaymentSelector } from '@peerme/web-ui'
 import { BigNumber } from 'bignumber.js'
+import { XBulkConfig } from './config'
+import { useApp } from '../../../shared/hooks/useApp'
+import React, { SyntheticEvent, useState } from 'react'
+import { TokenPayment, Address } from '@multiversx/sdk-core'
+import { Button, Switch, Textarea, showToast, PaymentSelector } from '@peerme/web-ui'
 
-type Props = {
-  app: AppHook
-}
-
-export const _BulkTransactions = (props: Props) => {
+export const _BulkTransactions = () => {
+  const app = useApp()
   const [payment, setPayment] = useState<TokenPayment | null>(null)
-  const [token, setToken] = useState<string>('')
+  // const [token, setToken] = useState<string>('') TODO
   const [userTxList, setUserTxList] = useState<string>('')
   const [useSameAmount, setUseSameAmount] = useState<boolean>(false)
 
@@ -27,20 +24,21 @@ export const _BulkTransactions = (props: Props) => {
     return true
   }
 
-  const createTokenPayment = (amount) => {
-    if (useSameAmount) {
-      if (payment.isEgld()) {
-        return TokenPayment.egldFromAmount(amount)
-      }
-      return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
-    } else {
-      if (token === 'EGLD') {
-        return TokenPayment.egldFromAmount(amount)
-      } else {
-        return TokenPayment.fungibleFromAmount(token, amount, 18)
-      }
-    }
-  }
+  // TODO
+  // const createTokenPayment = (amount) => {
+  //   if (useSameAmount) {
+  //     if (payment.isEgld()) {
+  //       return TokenPayment.egldFromAmount(amount)
+  //     }
+  //     return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
+  //   } else {
+  //     if (token === 'EGLD') {
+  //       return TokenPayment.egldFromAmount(amount)
+  //     } else {
+  //       return TokenPayment.fungibleFromAmount(token, amount, 18)
+  //     }
+  //   }
+  // }
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -55,7 +53,7 @@ export const _BulkTransactions = (props: Props) => {
     const lines = userTxList.trim().split(/[\r\n]+/)
 
     // Prepare the arguments for the transaction
-    let callAmount = BigNumber(0)
+    let callAmount = new BigNumber(0)
     let args = Array<string>()
 
     lines.forEach((line, i) => {
@@ -75,7 +73,7 @@ export const _BulkTransactions = (props: Props) => {
           args.push(amount)
         } else {
         }
-      } catch (error) {
+      } catch (error: any) {
         errors += `Line ${i + 1}: ${error.message}\n`
       }
     })
@@ -89,8 +87,8 @@ export const _BulkTransactions = (props: Props) => {
     const value = payment.isEgld() ? payment.amountAsBigInteger : 0
     const tokenPayments = payment.isEgld() ? [] : [payment]
 
-    props.app.requestProposalAction(
-      XBulkConfig.ContractAddress(props.app.config.network),
+    app.requestProposalAction(
+      XBulkConfig.ContractAddress(app.config.network),
       useSameAmount ? XBulkConfig.Endpoints.BulkSendSameAmount : XBulkConfig.Endpoints.BulkSend,
       value,
       args,
@@ -115,8 +113,8 @@ export const _BulkTransactions = (props: Props) => {
             Select the token and amount you want to send:
           </label>
           <PaymentSelector
-            config={props.app.config.walletConfig}
-            entity={props.app.config.entity}
+            config={app.config.walletConfig}
+            entity={app.config.entity}
             permissions={[]}
             onSelected={(val) => setPayment(val)}
             className="mb-4 mt-2"
@@ -128,8 +126,8 @@ export const _BulkTransactions = (props: Props) => {
             Select the token you want to send:
           </label>
           <PaymentSelector
-            config={props.app.config.walletConfig}
-            entity={props.app.config.entity}
+            config={app.config.walletConfig}
+            entity={app.config.entity}
             permissions={[]}
             onSelected={(val) => setPayment(val)}
             className="mb-4 mt-2"
@@ -141,7 +139,6 @@ export const _BulkTransactions = (props: Props) => {
         Enter the list of the transactions:
       </label>
       <Textarea
-        label="Transactions"
         placeholder={'address' + (useSameAmount ? '' : ';amount')}
         className="mb-4 mt-2"
         style={{ height: '180px' }}
