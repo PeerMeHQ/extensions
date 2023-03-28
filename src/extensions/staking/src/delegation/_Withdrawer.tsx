@@ -3,26 +3,26 @@ import BigNumber from 'bignumber.js'
 import React, { useState } from 'react'
 import { Button, Input } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
-import { AppHook } from '../../../../shared/hooks/useApp'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { Constants, sanitizeNumeric } from '@peerme/core-ts'
 import { DelegationInfo, DelegationProvider } from '../types'
 
 type Props = {
-  app: AppHook
   provider: DelegationProvider
   delegation: DelegationInfo
 }
 
 export const _Withdrawer = (props: Props) => {
+  const app = useApp()
   const [amount, setAmount] = useState('')
 
   const handleWithdraw = () => {
     const valueBig = new BigNumber(amount).shiftedBy(Constants.EgldDecimals)
     if (valueBig.isGreaterThan(props.delegation.userActiveStake)) {
-      props.app.showToast('Can not unstake more than is staked', 'error')
+      app.showToast('Can not unstake more than is staked', 'error')
       return
     }
-    props.app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0, [valueBig], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0, [valueBig], [])
   }
 
   return (

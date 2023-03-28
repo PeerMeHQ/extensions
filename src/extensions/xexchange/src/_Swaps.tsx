@@ -2,16 +2,16 @@ import { GraphQl } from './graphql'
 import { BigNumber } from 'bignumber.js'
 import { PaymentSelector } from '@peerme/web-ui'
 import { TokenPayment } from '@multiversx/sdk-core'
-import { AppHook } from '../../../shared/hooks/useApp'
+import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client'
 
 type Props = {
-  app: AppHook
   apolloClient: ApolloClient<NormalizedCacheObject>
 }
 
 export const _Swaps = (props: Props) => {
+  const app = useApp()
   const [payment, setPayment] = useState<TokenPayment | null>(null)
   const [tokenWantedId, _] = useState('')
   const [predictedOutAmount, setPredictedOutAmount] = useState<BigNumber>(new BigNumber(0))
@@ -40,14 +40,14 @@ export const _Swaps = (props: Props) => {
     e.preventDefault()
     if (!payment) return
 
-    props.app.requestProposalAction('', '', 0, [], [payment])
+    app.requestProposalAction('', '', 0, [], [payment])
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <PaymentSelector
-        config={props.app.config.walletConfig}
-        entity={props.app.config.entity}
+        config={app.config.walletConfig}
+        entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}
         className="mb-8"

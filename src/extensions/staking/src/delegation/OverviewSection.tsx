@@ -2,11 +2,9 @@ import React, { useMemo } from 'react'
 import { BigNumber } from 'bignumber.js'
 import { DelegationInfo } from '../types'
 import { toEgldDisplayAmount } from '../helpers'
-import { AppHook } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 
 type Props = {
-  app: AppHook
   delegations: DelegationInfo[]
   className?: string
 }

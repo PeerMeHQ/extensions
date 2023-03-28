@@ -1,5 +1,5 @@
 import Logo from './meta/logo.svg'
-import { XBulkApp } from './src/XBulkApp'
+import { App } from './src/XBulkApp'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
@@ -11,9 +11,9 @@ export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Light: Logo,
     Dark: Logo,
   },
-  Tags: ['bulk'],
+  Tags: ['defi'],
   Contracts: {},
-  AppRoot: XBulkApp,
+  AppRoot: App,
   WidgetRoots: {
     Info: null,
   },
