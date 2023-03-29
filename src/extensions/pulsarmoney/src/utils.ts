@@ -1,4 +1,5 @@
 import { DropdownOption } from '@peerme/web-ui'
+import { PaymentTypeAttributes } from './sdk/types'
 
 export const VestingMessages = {
   successMessage: 'Vesting creation successful.',
@@ -38,3 +39,30 @@ export const options = [
   createOption(1 * 60 * 60 * 24 * 7, 'week'),
   createOption(1 * 60 * 60 * 24 * 30, 'month'),
 ]
+
+export const createDateFromTimestampMiliseconds = (timestamp: number) => {
+  return createUTCDateFromTimestampMiliseconds(timestamp)
+}
+
+export const createUTCDateFromTimestampMiliseconds = (timestamp: number) => {
+  const date = new Date(timestamp)
+
+  return date.toISOString()
+}
+
+export const convertTypeToString = (type: PaymentTypeAttributes) => {
+  switch (type) {
+    case PaymentTypeAttributes.Vault:
+      return 'vault'
+    case PaymentTypeAttributes.Payment:
+      return 'payment'
+    case PaymentTypeAttributes.Vesting:
+      return 'vesting'
+  }
+}
+
+export const adjustEndDateAccordingToDuration = (startDate: number, endDate: number, duration: number) => {
+  const noOfIntervals = Math.round((endDate - startDate) / duration)
+
+  return startDate + duration * noOfIntervals
+}

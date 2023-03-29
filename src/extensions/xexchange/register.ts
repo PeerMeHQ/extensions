@@ -6,7 +6,7 @@ import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 export const XExchangeExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xExchange',
-  Description: 'Swap assets instantly & inexpensively.',
+  Description: 'Swap assets instantly & inexpensively',
   Website: 'https://xexchange.com',
   Logo: {
     Light: Logo,

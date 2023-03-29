@@ -1,17 +1,16 @@
 import { TokenPayment } from '@multiversx/sdk-core/out/tokenPayment'
 import { Button, Input, PaymentSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
 import React, { SyntheticEvent, useState } from 'react'
-import { AppHook } from '../../../shared/hooks/useApp'
-import { Transactions } from '@astrarizon/pulsar-money-sdk-js/lib/entities/payments'
-import { TransactionDecoder } from '@multiversx/sdk-transaction-decoder/lib/src/transaction.decoder'
-import { BigNumber } from 'bignumber.js'
 import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
+import * as sdk from './sdk'
+import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
+import BigNumber from 'bignumber.js'
+import { BytesValue } from '@multiversx/sdk-core/out'
+import { useApp } from '../../../shared/hooks/useApp'
 
-type Props = {
-  app: AppHook
-}
+export const _Vesting = () => {
+  const app = useApp()
 
-export const _Vesting = (props: Props) => {
   const [receiver, setReceiver] = useState('')
   const [tokenPayment, setTokenPayment] = useState<TokenPayment | null>(null)
   const [cliffAmount, setCliffAmount] = useState('')
@@ -29,7 +28,7 @@ export const _Vesting = (props: Props) => {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    const address = props?.app?.config?.entity?.address
+    const address = app?.config?.entity?.address
 
     if (!tokenPayment) return
     if (!address) return
@@ -40,31 +39,31 @@ export const _Vesting = (props: Props) => {
     const totalAmount = +tokenPayment.amountAsBigInteger.dividedBy(10 ** tokenPayment.numDecimals).toString()
 
     if (cliffTimestampInMiliseconds < currentTimestamp) {
-      props.app.showToast('Cliff date must be set to the future.', 'error')
+      app.showToast('Cliff date must be set to the future.', 'error')
       return
     }
 
     if (endTimestampInMiliseconds < cliffTimestampInMiliseconds) {
-      props.app.showToast('End date must be set after the cliff date.', 'error')
+      app.showToast('End date must be set after the cliff date.', 'error')
       return
     }
 
     if (name.length > MAX_NAME_LENGTH) {
-      props.app.showToast(`Name must not have more than ${MAX_NAME_LENGTH} characters. `, 'error')
+      app.showToast(`Name must not have more than ${MAX_NAME_LENGTH} characters. `, 'error')
       return
     }
 
     if (totalAmount < +cliffAmount) {
-      props.app.showToast('Total amount must be greater than the cliff amount.', 'error')
+      app.showToast('Total amount must be greater than the cliff amount.', 'error')
       return
     }
 
     if (totalAmount < 0 || +cliffAmount < 0) {
-      props.app.showToast('Amounts must be greater than 0.', 'error')
+      app.showToast('Amounts must be greater than 0.', 'error')
       return
     }
 
-    const transaction = await Transactions.createVesting(
+    const transaction = await sdk.createVesting(
       address,
       [receiver],
       totalAmount,
@@ -79,56 +78,26 @@ export const _Vesting = (props: Props) => {
 
     const metadata = new TransactionDecoder().getTransactionMetadata(transaction)
 
-    props.app.requestProposalAction(
+    app.requestProposalAction(
       metadata.receiver,
       metadata.functionName || '',
       new BigNumber(metadata.value.toString()),
-      metadata.functionArgs || [],
-      [tokenPayment]
+      metadata.functionArgs.map((arg) => BytesValue.fromHex(arg)) || [],
+      []
     )
-
-    // could be something like this instead?:
-    // props.app.requestProposalTransaction(
-    //   transaction
-    // )
-
-    // or this?:
-    // props.app.requestProposalActionTypedArgs(    // or some other name
-    //   metadata.receiver,
-    //   metadata.functionName || '',
-    //   new BigNumber(metadata.value.toString()),
-    //   metadata.functionArgs || [], // and args already typed
-    //   [tokenPayment]
-    // )
-
-    console.log('metadata', metadata)
-
-    // props.app.requestProposalAction()
-    // await sendTransactions({
-    //   transactions: transaction,
-    //   transactionsDisplayInfo: VestingMessages,
-    //   redirectAfterSign: false,
-    // })
-    // props.app.requestProposalAction(
-    //   vestingContract.Address,
-    //   vestingContract.Endpoint,
-    //   amountWithFee,
-    //   [type, name, cancellable, [receiver], cliffTimestampInMiliseconds, endTimestampInMiliseconds],
-    //   tokenPayments
-    // )
   }
   return (
     <form onSubmit={async (e) => await handleSubmit(e)}>
       <PaymentSelector
-        config={props.app.config.walletConfig}
-        entity={props.app.config.entity}
+        config={app.config.walletConfig}
+        entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setTokenPayment(val)}
         className="mb-8"
       />
 
       <UserSelector
-        searchConfig={props.app.config.searchConfig}
+        searchConfig={app.config.searchConfig}
         placeholder="Recipient address ..."
         onSelect={(val) => setReceiver(val.address)}
         className="mb-8"

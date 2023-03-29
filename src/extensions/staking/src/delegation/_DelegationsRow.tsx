@@ -3,17 +3,17 @@ import { _Withdrawer } from './_Withdrawer'
 import { StickyModal } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
 import React, { SyntheticEvent, useState } from 'react'
-import { AppHook } from '../../../../shared/hooks/useApp'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { DelegationInfo, DelegationProvider } from '../types'
 
 type Props = {
-  app: AppHook
   delegation: DelegationInfo
   provider: DelegationProvider | null
 }
 
 export const _DelegationsRow = (props: Props) => {
   if (!props.provider) return null
+  const app = useApp()
   const [isOpen, setIsOpen] = useState(false)
   const [isWithdrawing, setIsWithdrawing] = useState(false)
 
@@ -24,12 +24,12 @@ export const _DelegationsRow = (props: Props) => {
 
   const handleRewardClaim = (e: SyntheticEvent) => {
     e.stopPropagation()
-    props.app.requestProposalAction(props.provider!.contract, Config.Endpoints.ClaimRewards, 0, [], [])
+    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ClaimRewards, 0, [], [])
   }
 
   const handleRewardStake = (e: SyntheticEvent) => {
     e.stopPropagation()
-    props.app.requestProposalAction(props.provider!.contract, Config.Endpoints.ReDelegateRewards, 0, [], [])
+    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ReDelegateRewards, 0, [], [])
   }
 
   return (
@@ -68,7 +68,7 @@ export const _DelegationsRow = (props: Props) => {
           </div>
         )}
         <StickyModal open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
-          <_Withdrawer app={props.app} provider={props.provider} delegation={props.delegation} />
+          <_Withdrawer provider={props.provider} delegation={props.delegation} />
         </StickyModal>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
