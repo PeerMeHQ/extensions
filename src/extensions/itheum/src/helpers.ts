@@ -53,7 +53,8 @@ export const decodeNftMetadata = (nft: NonFungibleTokenOfAccountOnNetwork, index
   return {
     index: index || 0, // only for view & query
     id: nft.identifier, // ID of NFT -> done
-    nftImgUrl: nft.rawResponse?.url || undefined, // image URL of of NFT -> done
+    // TODO: clean the 'as any' once this PR is merged: https://github.com/multiversx/mx-sdk-js-network-providers/pull/38
+    nftImgUrl: (nft as any)?.rawResponse?.url || undefined, // image URL of of NFT -> done
     dataPreview: decodedAttributes['data_preview_url'].toString(), // preview URL for NFT data stream -> done
     dataStream: decodedAttributes['data_stream_url'].toString(), // data stream URL -> done
     dataMarshal: decodedAttributes['data_marshal_url'].toString(), // data stream URL -> done
