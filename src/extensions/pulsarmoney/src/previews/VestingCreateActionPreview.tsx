@@ -9,8 +9,6 @@ type Props = {
 }
 
 export const VestingCreateActionPreview = (props: Props) => {
-  console.log('VestingCreateActionPreview', props)
-
   const args = props.action.arguments
   const payments = props.action.payments
   const tokenId = payments.length > 0 ? payments[0].tokenId : 'EGLD'

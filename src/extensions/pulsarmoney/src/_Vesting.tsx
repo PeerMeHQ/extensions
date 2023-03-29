@@ -94,7 +94,6 @@ export const _Vesting = () => {
       payments.push(token)
     }
 
-    console.log({ metadata })
     app.requestProposalAction(
       metadata.receiver,
       metadata.functionName || '',

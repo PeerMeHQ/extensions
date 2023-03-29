@@ -7,10 +7,6 @@ import { AppSection, TabButton } from '../../../shared/ui/elements'
 import { faVest } from '@fortawesome/free-solid-svg-icons'
 
 export const App = () => {
-  // The app hook provides access to the extension configuration
-  // and useful methods for interacting with DAOs.
-  // console.log(app)
-
   return (
     <Tab.Group>
       <Tab.List className="flex items-center space-x-2 md:space-x-4 mb-4">
