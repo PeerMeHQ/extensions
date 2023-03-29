@@ -22,10 +22,10 @@ export type OfferInfo = {
   owner: string
   offeredTokenIdentifier: string
   offeredTokenNonce: number
-  offeredTokenAmount: string
+  offeredTokenAmount: BigNumber
   wantedTokenIdentifier: string
   wantedTokenNonce: number
-  wantedTokenAmount: string
+  wantedTokenAmount: BigNumber
   quantity: number
 }
 
