@@ -32,8 +32,8 @@ export const _OffersSection = () => {
     <AppSection title="Marketplace Offers">
       <header className="flex justify-end">
         <div className="flex items-center space-x-4 mb-4">
-          <Switch label="Show ours only" checked={showOurs} onChange={(val) => setShowOurs(val)} />
-          <span className="text-xl text-gray-700 dark:text-gray-200">Show Ours only</span>
+          <Switch label="Show listed by DAO" checked={showOurs} onChange={(val) => setShowOurs(val)} />
+          <span className="text-xl text-gray-700 dark:text-gray-200">Show Listed by {app.config.entity.name}</span>
         </div>
       </header>
       <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
