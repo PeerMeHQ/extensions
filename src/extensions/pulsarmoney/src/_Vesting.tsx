@@ -53,7 +53,7 @@ export const _Vesting = () => {
       return
     }
 
-    if (totalAmount < +cliffAmount) {
+    if (totalAmount <= +cliffAmount) {
       app.showToast('Total amount must be greater than the cliff amount.', 'error')
       return
     }
