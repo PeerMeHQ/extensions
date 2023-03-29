@@ -2,11 +2,11 @@ import { Config } from '../config'
 import { Contracts } from '../contracts'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
+import { TokenPayment } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { DataNftMetadata, MarketRequirements } from '../types'
-import { TokenPayment } from '@multiversx/sdk-core/out'
 
 type Props = {
   nft: DataNftMetadata

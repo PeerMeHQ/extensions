@@ -1,11 +1,9 @@
 import React from 'react'
 import { TokenPayment } from '@multiversx/sdk-core'
-import { ExtensionConfig } from '../../../../shared/types'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
-  config: ExtensionConfig
 }
 
 export const AddOfferActionPreview = (props: Props) => {
