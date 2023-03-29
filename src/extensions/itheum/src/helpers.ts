@@ -1,7 +1,8 @@
 import BigNumber from 'bignumber.js'
+import { numberToPaddedHex } from '@peerme/core-ts'
 import JsonAbiNftMint from '../meta/datanftmint.abi.json'
-import { ClaimInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
+import { ClaimInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
 
 export const toTypedClaimInfo = (value: any): ClaimInfo =>
@@ -52,7 +53,7 @@ export const decodeNftMetadata = (nft: NonFungibleTokenOfAccountOnNetwork, index
   return {
     index: index || 0, // only for view & query
     id: nft.identifier, // ID of NFT -> done
-    nftImgUrl: nft.rawResponse.url || '#', // image URL of of NFT -> done
+    nftImgUrl: nft.rawResponse?.url || undefined, // image URL of of NFT -> done
     dataPreview: decodedAttributes['data_preview_url'].toString(), // preview URL for NFT data stream -> done
     dataStream: decodedAttributes['data_stream_url'].toString(), // data stream URL -> done
     dataMarshal: decodedAttributes['data_marshal_url'].toString(), // data stream URL -> done
@@ -68,3 +69,5 @@ export const decodeNftMetadata = (nft: NonFungibleTokenOfAccountOnNetwork, index
     balance: 0,
   }
 }
+
+export const toNftId = (collectionId: string, nonce: number) => `${collectionId}-${numberToPaddedHex(nonce)}`

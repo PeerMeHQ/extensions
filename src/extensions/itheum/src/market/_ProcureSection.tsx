@@ -48,7 +48,11 @@ export const _ProcureSection = (props: Props) => {
   }
 
   return (
-    <AppSection title="Procure" onCloseRequest={activeOffer ? resetSection : undefined} className={props.className}>
+    <AppSection
+      title="Procure on Offer"
+      onCloseRequest={activeOffer ? resetSection : undefined}
+      className={props.className}
+    >
       {activeOffer ? (
         <_OfferDetails offer={activeOffer} />
       ) : (

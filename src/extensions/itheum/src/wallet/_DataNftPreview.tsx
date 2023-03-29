@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { AddressPresenter, StickyModal } from '@peerme/web-ui'
-import { _MarketListSection } from './_MarketListSection'
-import { DataNftMetadata, MarketRequirements } from '../types'
 import { toDateDisplay } from '@peerme/core-ts'
+import { _MarketListSection } from './_MarketListSection'
+import { AddressPresenter, StickyModal } from '@peerme/web-ui'
+import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
   nft: DataNftMetadata
@@ -16,7 +16,9 @@ export const _DataNftPreview = (props: Props) => {
     <>
       <button onClick={() => setShowDetails(true)} className="block p-4 bg-gray-200 dark:bg-gray-900 rounded-xl">
         <div className="mb-4">
-          <img src={props.nft.nftImgUrl} alt="NFT Preview" className="w-32 h-32 sm:w-40 sm:h-40" />
+          {props.nft.nftImgUrl && (
+            <img src={props.nft.nftImgUrl} alt="NFT Preview" className="w-32 h-32 sm:w-40 sm:h-40" />
+          )}
         </div>
         <h3 className="text-lg">{props.nft.title}</h3>
       </button>

@@ -1,12 +1,9 @@
-import { Config } from '../config'
-import { decodeNftMetadata } from '../helpers'
+import { fetchDataNftsOfAccount } from '../api'
 import React, { useEffect, useState } from 'react'
 import { _DataNftPreview } from './_DataNftPreview'
 import { useApp } from '../../../../shared/hooks/useApp'
-import { AppContextValue } from '../../../../shared/types'
 import { AppSection } from '../../../../shared/ui/elements'
 import { DataNftMetadata, MarketRequirements } from '../types'
-import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
 
 type Props = {
   marketRequirements: MarketRequirements
@@ -17,7 +14,7 @@ export const WalletTab = (props: Props) => {
   const [nfts, setNfts] = useState<DataNftMetadata[]>([])
 
   useEffect(() => {
-    fetchDataNfts(app).then((nfts) => setNfts(nfts))
+    fetchDataNftsOfAccount(app).then((nfts) => setNfts(nfts))
   }, [])
 
   return (
@@ -37,14 +34,4 @@ export const WalletTab = (props: Props) => {
       )}
     </AppSection>
   )
-}
-
-const fetchDataNfts = async (app: AppContextValue) => {
-  const collection = Config.DataNftCollection(app.config.network)
-  const url = `accounts/${app.config.entity.address}/nfts?size=10000&collections=${collection}&withSupply=true`
-  const response: any[] = await app.networkProvider.doGetGeneric(url)
-
-  return response
-    .map((item) => NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item))
-    .map((item) => decodeNftMetadata(item))
 }

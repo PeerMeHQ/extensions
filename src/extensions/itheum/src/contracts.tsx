@@ -54,4 +54,9 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     Endpoint: 'viewOffer',
     AbiContent: JsonAbiMarket as any,
   },
+  ViewPagedOffers: {
+    Address: getMarketContractAddress(config.network),
+    Endpoint: 'viewPagedOffers',
+    AbiContent: JsonAbiMarket as any,
+  },
 })
