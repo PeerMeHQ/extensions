@@ -1,5 +1,6 @@
 import { BigNumber } from 'bignumber.js'
 import { XBulkConfig } from './config'
+import { XBulkContracts } from './contracts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
@@ -89,7 +90,9 @@ export const _BulkTransactions = () => {
 
     app.requestProposalAction(
       XBulkConfig.ContractAddress(app.config.network),
-      useSameAmount ? XBulkConfig.Endpoints.BulkSendSameAmount : XBulkConfig.Endpoints.BulkSend,
+      useSameAmount
+        ? XBulkContracts(app.config).BulkSendSameAmount.Endpoint
+        : XBulkContracts(app.config).BulkSend.Endpoint,
       value,
       args,
       tokenPayments
