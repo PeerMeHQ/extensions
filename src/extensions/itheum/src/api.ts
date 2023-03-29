@@ -14,6 +14,7 @@ export const fetchDataNftsOfAccount = async (app: AppContextValue) => {
 }
 
 export const fetchDataNftsByIds = async (app: AppContextValue, tokenIds: string[]) => {
+  if (!tokenIds.length) return Promise.resolve([])
   const url = `nfts?withSupply=true&identifiers=${tokenIds.join(',')}`
   const response: any[] = await app.networkProvider.doGetGeneric(url)
 

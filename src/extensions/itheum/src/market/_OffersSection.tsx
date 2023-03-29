@@ -21,7 +21,6 @@ export const _OffersSection = () => {
     const args = showOurs ? [0, 10, app.config.entity.address] : [0, 10]
     pagedOffersScQuery.query(args).then(async (bundle) => {
       const offers: OfferInfo[] = bundle.firstValue?.valueOf()?.map(toTypedOfferInfo) || []
-      if (offers.length < 1) return
       setOffers(offers)
       const nftIds = offers.map((o) => toNftId(o.offeredTokenIdentifier, o.offeredTokenNonce))
       const nfts = await fetchDataNftsByIds(app, nftIds)
