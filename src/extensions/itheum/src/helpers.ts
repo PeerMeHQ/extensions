@@ -38,10 +38,10 @@ export const toTypedOfferInfo = (value: any): OfferInfo => ({
   owner: value.owner.toString(),
   offeredTokenIdentifier: value.offered_token_identifier.toString(),
   offeredTokenNonce: value.offered_token_nonce.toNumber(),
-  offeredTokenAmount: value.offered_token_amount.toFixed(),
+  offeredTokenAmount: new BigNumber(value.offered_token_amount),
   wantedTokenIdentifier: value.wanted_token_identifier.toString(),
   wantedTokenNonce: value.wanted_token_nonce.toNumber(),
-  wantedTokenAmount: value.wanted_token_amount.toFixed(),
+  wantedTokenAmount: new BigNumber(value.wanted_token_amount),
   quantity: value.quantity.toNumber(),
 })
 

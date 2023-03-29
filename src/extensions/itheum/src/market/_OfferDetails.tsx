@@ -1,10 +1,15 @@
 import Link from 'next/link'
+import { Config } from '../config'
 import { Button } from '@peerme/web-ui'
+import { BigNumber } from 'bignumber.js'
 import { Contracts } from '../contracts'
+import { Constants } from '@peerme/core-ts'
 import { decodeNftMetadata } from '../helpers'
 import React, { useEffect, useState } from 'react'
+import { TokenPayment } from '@multiversx/sdk-core'
 import { DataNftMetadata, OfferInfo } from '../types'
 import { useApp } from '../../../../shared/hooks/useApp'
+import { AppContextValue } from '../../../../shared/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExternalLink } from '@fortawesome/free-solid-svg-icons'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
@@ -34,7 +39,13 @@ export const _OfferDetails = (props: Props) => {
       return
     }
     const contract = Contracts(app.config).AcceptOffer
-    app.requestProposalAction(contract.Address, contract.Endpoint, 0, [props.offer.index, +quantity], [])
+    const wantedAmount = props.offer.wantedTokenAmount.multipliedBy(quantity)
+    const wantsEgld = props.offer.wantedTokenIdentifier == Constants.EgldTokenIdentifier
+    const value = wantsEgld ? wantedAmount : 0
+    const tokenPayments =
+      wantsEgld || wantedAmount.isZero() ? [] : [toWantedTokenPayment(app, props.offer, wantedAmount)]
+
+    app.requestProposalAction(contract.Address, contract.Endpoint, value, [props.offer.index, +quantity], tokenPayments)
   }
 
   if (!nft || !nftMetadata) return null
@@ -67,4 +78,13 @@ export const _OfferDetails = (props: Props) => {
       </div>
     </div>
   )
+}
+
+const toWantedTokenPayment = (app: AppContextValue, offer: OfferInfo, amount: BigNumber.Value) =>
+  new TokenPayment(offer.wantedTokenIdentifier, offer.wantedTokenNonce, amount, getWantedTokenDecimals(app, offer))
+
+const getWantedTokenDecimals = (app: AppContextValue, offer: OfferInfo) => {
+  if (offer.wantedTokenIdentifier == Constants.EgldTokenIdentifier) return Constants.EgldDecimals
+  if (offer.wantedTokenIdentifier == Config.TokenId(app.config.network)) return Config.TokenDecimals
+  return 0
 }
