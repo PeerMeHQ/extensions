@@ -77,13 +77,30 @@ export const _Vesting = () => {
     )
 
     const metadata = new TransactionDecoder().getTransactionMetadata(transaction)
+    const value = tokenPayment.isEgld() ? new BigNumber(metadata.value.toString()) : new BigNumber(0)
 
+    let payments: TokenPayment[] = []
+
+    if (!tokenPayment.isEgld()) {
+      if (!metadata || !metadata.transfers || !metadata.transfers[0]) return
+
+      const token = new TokenPayment(
+        tokenPayment.tokenIdentifier,
+        tokenPayment.nonce,
+        new BigNumber(metadata.transfers[0].value.toString()),
+        tokenPayment.numDecimals
+      )
+
+      payments.push(token)
+    }
+
+    console.log({ metadata })
     app.requestProposalAction(
       metadata.receiver,
       metadata.functionName || '',
-      new BigNumber(metadata.value.toString()),
+      value,
       metadata.functionArgs.map((arg) => BytesValue.fromHex(arg)) || [],
-      []
+      payments
     )
   }
   return (
