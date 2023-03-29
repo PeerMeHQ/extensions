@@ -31,8 +31,8 @@ export const _OffersSection = () => {
 
   return (
     <AppSection title="Marketplace Offers">
-      <header>
-        <div className="flex items-center space-x-4 py-4 mb-4">
+      <header className="flex justify-end">
+        <div className="flex items-center space-x-4 mb-4">
           <Switch label="Show ours only" checked={showOurs} onChange={(val) => setShowOurs(val)} />
           <span className="text-xl text-gray-700 dark:text-gray-200">Show Ours only</span>
         </div>

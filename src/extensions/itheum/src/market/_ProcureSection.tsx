@@ -49,14 +49,23 @@ export const _ProcureSection = (props: Props) => {
 
   return (
     <AppSection
-      title="Procure on Offer"
+      title="Procure an Offer"
       onCloseRequest={activeOffer ? resetSection : undefined}
       className={props.className}
     >
       {activeOffer ? (
         <_OfferDetails offer={activeOffer} />
       ) : (
-        <Input placeholder="Paste a Marketplace Offer Url ..." value={url} onChange={(val) => setUrl(val)} />
+        <>
+          <Input
+            placeholder="https://itheum.com/dataNfts/marketplace/DATANFTFT2-71ac28-ae/offer-50"
+            value={url}
+            onChange={(val) => setUrl(val)}
+          />
+          <small className="block mt-2 pl-2 text-base text-gray-700 dark:text-gray-300">
+            Paste a link to an offer to view details.
+          </small>
+        </>
       )}
     </AppSection>
   )

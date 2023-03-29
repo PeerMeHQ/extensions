@@ -17,8 +17,8 @@ export const AcceptOfferActionPreview = (props: Props) => {
 
   return (
     <>
-      procure {quantity} {pluralize('pieces', quantity)} of{' '}
-      <Link href={offerUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:text-blue-400">
+      procure {quantity} {pluralize('pieces', quantity)} of this{' '}
+      <Link href={offerUrl} target="_blank" rel="noopener" className="text-blue-500 hover:text-blue-400">
         marketplace offer
       </Link>
       .
