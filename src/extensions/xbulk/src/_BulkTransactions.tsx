@@ -23,21 +23,19 @@ export const _BulkTransactions = () => {
     return true
   }, [userTxList])
 
-  // TODO
-  // const createTokenPayment = (amount) => {
-  //   if (useSameAmount) {
-  //     if (payment.isEgld()) {
-  //       return TokenPayment.egldFromAmount(amount)
-  //     }
-  //     return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
-  //   } else {
-  //     if (token === 'EGLD') {
-  //       return TokenPayment.egldFromAmount(amount)
-  //     } else {
-  //       return TokenPayment.fungibleFromAmount(token, amount, 18)
-  //     }
-  //   }
-  // }
+  const createTokenPayment = (amount: string) => {
+    if (payment.isEgld()) {
+      return TokenPayment.egldFromAmount(amount)
+    }
+    return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
+  }
+
+  const createTokenPaymentFromBigInteger = (amount: BigNumber) => {
+    if (payment.isEgld()) {
+      return TokenPayment.egldFromBigInteger(amount)
+    }
+    return TokenPayment.fungibleFromBigInteger(payment.tokenIdentifier, amount, payment.numDecimals)
+  }
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -65,12 +63,15 @@ export const _BulkTransactions = () => {
           throw Error(`"${amount}" is not a valid number`)
         }
 
+        const tp = useSameAmount
+          ? createTokenPaymentFromBigInteger(payment.amountAsBigInteger)
+          : createTokenPayment(amount)
+        callAmount = callAmount.plus(tp.amountAsBigInteger)
+
         // Add the transaction to the list
         args.push(address.bech32())
         if (!useSameAmount) {
-          callAmount = callAmount.plus(amount)
-          args.push(amount)
-        } else {
+          args.push(tp.amountAsBigInteger.toNumber()) // TODO check if it possible to remove the toNumber
         }
       } catch (error: any) {
         errors += `Line ${i + 1}: ${error.message}\n`
@@ -83,8 +84,8 @@ export const _BulkTransactions = () => {
       return
     }
 
-    const value = payment.isEgld() ? payment.amountAsBigInteger : 0
-    const tokenPayments = payment.isEgld() ? [] : [payment]
+    const value = payment.isEgld() ? callAmount : 0
+    const tokenPayments = payment.isEgld() ? [] : [createTokenPaymentFromBigInteger(callAmount)]
 
     app.requestProposalAction(
       XBulkConfig.ContractAddress(app.config.network),
