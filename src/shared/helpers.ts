@@ -3,7 +3,7 @@ import { TokenPayment } from '@multiversx/sdk-core'
 import { showToast as showAppToast } from '@peerme/web-ui'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import { AppToastType, ExtensionConfig, ExtensionInfo } from './types'
-import { ProposalAction, ProposalActionArg, toProposalActionPayment } from '@peerme/core-ts'
+import { ProposalAction, ProposalActionArg, toProposalActionPayment, toProposalActionArg } from '@peerme/core-ts'
 
 export const toExtensionName = (config: ExtensionConfig, extension: ExtensionInfo) =>
   extension.Name.replace(':entityName', config.entity.name)
@@ -33,7 +33,7 @@ export const toAppContextValue = (config: ExtensionConfig, onActionAddRequest: (
       destination,
       endpoint: endpoint || '',
       value,
-      arguments: args,
+      arguments: args.map(toProposalActionArg),
       payments: payments.map(toProposalActionPayment),
       guards: [],
     })
