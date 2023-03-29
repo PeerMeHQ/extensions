@@ -12,7 +12,12 @@ export const BulkSendActionPreview = (props: Props) => {
     if (totalPayment.isEgld()) {
       return TokenPayment.egldFromBigInteger(amount)
     }
-    return TokenPayment.fungibleFromBigInteger(totalPayment.tokenIdentifier, amount, totalPayment.numDecimals)
+    if (totalPayment.isFungible()) {
+      return TokenPayment.fungibleFromBigInteger(totalPayment.tokenIdentifier, amount, totalPayment.numDecimals)
+    }
+    const tokenIdentifier =
+      totalPayment.tokenIdentifier.split('-')[0] + '-' + totalPayment.tokenIdentifier.split('-')[1]
+    return TokenPayment.metaEsdtFromBigInteger(tokenIdentifier, totalPayment.nonce, amount, totalPayment.numDecimals)
   }
 
   //get all the arguments (addresses of the receivers and amounts)

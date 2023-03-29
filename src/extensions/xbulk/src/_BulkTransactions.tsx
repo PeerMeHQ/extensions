@@ -28,14 +28,22 @@ export const _BulkTransactions = () => {
     if (payment.isEgld()) {
       return TokenPayment.egldFromAmount(amount)
     }
-    return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
+    if (payment.isFungible()) {
+      return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
+    }
+    const tokenIdentifier = payment.tokenIdentifier.split('-')[0] + '-' + payment.tokenIdentifier.split('-')[1]
+    return TokenPayment.metaEsdtFromAmount(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
   }
 
   const createTokenPaymentFromBigInteger = (amount: BigNumber) => {
     if (payment.isEgld()) {
       return TokenPayment.egldFromBigInteger(amount)
     }
-    return TokenPayment.fungibleFromBigInteger(payment.tokenIdentifier, amount, payment.numDecimals)
+    if (payment.isFungible()) {
+      return TokenPayment.fungibleFromBigInteger(payment.tokenIdentifier, amount, payment.numDecimals)
+    }
+    const tokenIdentifier = payment.tokenIdentifier.split('-')[0] + '-' + payment.tokenIdentifier.split('-')[1]
+    return TokenPayment.metaEsdtFromBigInteger(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
   }
 
   const handleSubmit = (e: SyntheticEvent) => {
