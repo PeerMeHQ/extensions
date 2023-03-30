@@ -55,8 +55,6 @@ By default, each App makes use of the `useApp` hook which exposes useful functio
 - `app.requestProposalAction(...)`: assemble a transaction/smart contract call to be attached to a proposal
 - `app.showToast(...)`: show a toast message to the user
 
-To use these app hook functions in child components, simply pass it to them as a prop with type `AppHook`.
-
 **UI Components you can use from** `src/ui/elements`:
 
 - `<AppSection />`: use to structure your app in sections
