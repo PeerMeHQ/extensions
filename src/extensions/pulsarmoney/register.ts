@@ -1,25 +1,25 @@
 import { App } from './src/App'
-import Logo from './meta/logo.svg'
-import { Contracts } from './src/contracts'
+import { PulsarMoneyContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
+import Logo from './meta/logo.svg'
 
 export const PulsarMoneyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false, // leave this as false, we'll enable it after the review process
   Name: 'PulsarMoney',
-  Description: '<describe your extension in a few words>',
-  Website: '<your app website>',
+  Description: 'Send instant and transparent payments',
+  Website: 'https://app.pulsar.money',
   Logo: {
     Light: Logo,
     Dark: Logo,
   },
-  Tags: [],
-  Contracts: Contracts(config),
+  Tags: ['defi'],
+  Contracts: PulsarMoneyContracts(config),
   AppRoot: App,
   WidgetRoots: {
     Info: null,
   },
   Developer: {
-    Name: '<your name>',
-    Website: '<your website>',
+    Name: 'Astrarizon',
+    Website: 'https://astrarizon.netlify.app',
   },
 })
