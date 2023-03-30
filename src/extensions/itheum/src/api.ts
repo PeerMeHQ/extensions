@@ -9,15 +9,24 @@ export const fetchDataNftsOfAccount = async (app: AppContextValue) => {
   const response: any[] = await app.networkProvider.doGetGeneric(url)
 
   return response
-    .map((item) => NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item))
+    .map((item) => {
+      let nft = NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item) as any
+      nft.rawResponse = item // TODO: remove once merged: https://github.com/multiversx/mx-sdk-js-network-providers/pull/38
+      return nft
+    })
     .map((item) => decodeNftMetadata(item))
 }
 
 export const fetchDataNftsByIds = async (app: AppContextValue, tokenIds: string[]) => {
+  if (!tokenIds.length) return Promise.resolve([])
   const url = `nfts?withSupply=true&identifiers=${tokenIds.join(',')}`
   const response: any[] = await app.networkProvider.doGetGeneric(url)
 
   return response
-    .map((item) => NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item))
+    .map((item) => {
+      let nft = NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item) as any
+      nft.rawResponse = item // TODO: remove once merged: https://github.com/multiversx/mx-sdk-js-network-providers/pull/38
+      return nft
+    })
     .map((item) => decodeNftMetadata(item))
 }
