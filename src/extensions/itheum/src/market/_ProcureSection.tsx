@@ -9,16 +9,22 @@ import { AppSection } from '../../../../shared/ui/elements'
 import { getOfferIdFromUrlOrNull, isValidItheumMarketplaceUrl, toTypedOfferInfo } from '../helpers'
 
 type Props = {
+  procurable?: OfferInfo | null
   className?: string
 }
 
 export const _ProcureSection = (props: Props) => {
   const app = useApp()
-  const [activeOffer, setActiveOffer] = useState<OfferInfo | null>(null)
+  const [activeOffer, setActiveOffer] = useState<OfferInfo | null>(props.procurable || null)
   const [url, setUrl] = useState('')
   const debouncedUrl = useDebounce(url, 500)
 
   const viewOfferScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).ViewOffer)
+
+  useEffect(() => {
+    if (!props.procurable) return
+    setActiveOffer(props.procurable)
+  }, [props.procurable])
 
   useEffect(() => {
     if (!url) return

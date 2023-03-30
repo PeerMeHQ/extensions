@@ -1,12 +1,15 @@
-import React from 'react'
+import { OfferInfo } from '../types'
+import React, { useState } from 'react'
 import { _OffersSection } from './_OffersSection'
 import { _ProcureSection } from './_ProcureSection'
 
 export const MarketTab = () => {
+  const [procurable, setProcurable] = useState<OfferInfo | null>(null)
+
   return (
     <>
-      <_ProcureSection className="mb-4" />
-      <_OffersSection />
+      <_ProcureSection procurable={procurable} className="mb-4" />
+      <_OffersSection onProcureRequest={(val) => setProcurable(val)} />
     </>
   )
 }

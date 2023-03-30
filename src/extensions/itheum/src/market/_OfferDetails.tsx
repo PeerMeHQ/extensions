@@ -19,7 +19,7 @@ export const _OfferDetails = (props: Props) => {
     app.networkProvider
       .getNonFungibleToken(props.offer.offeredTokenIdentifier, props.offer.offeredTokenNonce)
       .then((val) => setNft(decodeNftMetadata(val)))
-  }, [])
+  }, [props.offer])
 
   if (!nft) return null
 

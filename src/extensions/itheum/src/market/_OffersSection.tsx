@@ -10,7 +10,11 @@ import { toNftId, toTypedOfferInfo } from '../helpers'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 
-export const _OffersSection = () => {
+type Props = {
+  onProcureRequest?: (offer: OfferInfo) => void
+}
+
+export const _OffersSection = (props: Props) => {
   const app = useApp()
   const [nfts, setNfts] = useState<DataNftMetadata[]>([])
   const [offers, setOffers] = useState<OfferInfo[]>([])
@@ -39,7 +43,11 @@ export const _OffersSection = () => {
       <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {offers.map((offer) => (
           <li key={offer.index}>
-            <_OfferPreview offer={offer} nft={findNftByOffer(offer, nfts)} />
+            <_OfferPreview
+              offer={offer}
+              nft={findNftByOffer(offer, nfts)}
+              onProcureRequest={() => props.onProcureRequest?.(offer)}
+            />
           </li>
         ))}
       </ul>
