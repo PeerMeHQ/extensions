@@ -19,7 +19,7 @@ export const _OfferPreview = (props: Props) => {
   return (
     <div className="block p-4 bg-gray-200 dark:bg-gray-900 rounded-xl">
       <div className="mb-4">
-        {props.nft.nftImgUrl && (
+        {!!props.nft.nftImgUrl && (
           <Link href={linkUrl} target="_blank" rel="noopener">
             <img src={props.nft.nftImgUrl} alt="NFT Preview" className="w-32 h-32 sm:w-40 sm:h-40" />
           </Link>

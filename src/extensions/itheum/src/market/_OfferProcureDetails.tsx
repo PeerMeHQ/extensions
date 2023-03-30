@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { fetchDataNfts } from '../api'
 import { _Procurer } from './_Procurer'
 import { decodeNftMetadata } from '../helpers'
 import React, { useEffect, useState } from 'react'
@@ -11,21 +12,21 @@ type Props = {
   offer: OfferInfo
 }
 
-export const _OfferDetails = (props: Props) => {
+export const _OfferProcureDetails = (props: Props) => {
   const app = useApp()
   const [nft, setNft] = useState<DataNftMetadata | null>(null)
 
   useEffect(() => {
-    app.networkProvider
-      .getNonFungibleToken(props.offer.offeredTokenIdentifier, props.offer.offeredTokenNonce)
-      .then((val) => setNft(decodeNftMetadata(val)))
+    fetchDataNfts(app, props.offer.offeredTokenIdentifier, props.offer.offeredTokenNonce).then((val) =>
+      setNft(decodeNftMetadata(val))
+    )
   }, [props.offer])
 
   if (!nft) return null
 
   return (
     <div className="flex flex-col sm:flex-row sm:gap-8 py-4">
-      <img src={nft.nftImgUrl} alt="NFT Preview" className="w-40 h-40 sm:w-64 sm:h-64" />
+      {!!nft.nftImgUrl && <img src={nft.nftImgUrl} alt="NFT Preview" className="w-40 h-40 sm:w-64 sm:h-64" />}
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl">{nft?.title}</h2>
         <Link

@@ -1,11 +1,11 @@
 import { OfferInfo } from '../types'
 import { Input } from '@peerme/web-ui'
 import { Contracts } from '../contracts'
-import { _OfferDetails } from './_OfferDetails'
 import React, { useEffect, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { useDebounce, useScQuery } from '@peerme/core-ts'
 import { AppSection } from '../../../../shared/ui/elements'
+import { _OfferProcureDetails } from './_OfferProcureDetails'
 import { getOfferIdFromUrlOrNull, isValidItheumMarketplaceUrl, toTypedOfferInfo } from '../helpers'
 
 type Props = {
@@ -60,7 +60,7 @@ export const _ProcureSection = (props: Props) => {
       className={props.className}
     >
       {activeOffer ? (
-        <_OfferDetails offer={activeOffer} />
+        <_OfferProcureDetails offer={activeOffer} />
       ) : (
         <>
           <Input
