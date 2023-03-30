@@ -1,8 +1,8 @@
 import React from 'react'
+import BigNumber from 'bignumber.js'
 import { Address } from '@multiversx/sdk-core'
 import { AddressPresenter, Tooltip } from '@peerme/web-ui'
-import { ProposalAction, toActionArgsTypedValue } from '@peerme/core-ts'
-import BigNumber from 'bignumber.js'
+import { Constants, ProposalAction, toActionArgsTypedValue } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
@@ -11,10 +11,10 @@ type Props = {
 export const VestingCreateActionPreview = (props: Props) => {
   const args = props.action.arguments
   const payments = props.action.payments
-  const tokenId = payments.length > 0 ? payments[0].tokenId : 'EGLD'
+  const tokenId = payments.length > 0 ? payments[0].tokenId : Constants.EgldTokenIdentifier
 
   const value =
-    tokenId === 'EGLD'
+    tokenId === Constants.EgldTokenIdentifier
       ? new BigNumber(props.action.value)
           .dividedBy(10 ** 18)
           .toFixed(2)

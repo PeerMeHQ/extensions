@@ -1,7 +1,8 @@
-import { createDateFromTimestampMiliseconds, adjustEndDateAccordingToDuration, convertTypeToString } from '../utils'
+import axios from 'axios'
+import { Constants } from '@peerme/core-ts'
 import { CREATE_PULSAR_PAYMENT } from './config'
 import { PaymentReleaseInput, PaymentTypeAttributes } from './types'
-import axios from 'axios'
+import { createDateFromTimestampMiliseconds, adjustEndDateAccordingToDuration, convertTypeToString } from '../utils'
 
 const DEFAULT_FREQUENCY_SECONDS = 1
 
@@ -16,7 +17,7 @@ const getPulsarPaymentTransaction = async (
 ) => {
   const createPulsarPaymentUrl = CREATE_PULSAR_PAYMENT
 
-  const token = tokenId === 'EGLD' ? '' : tokenId
+  const token = tokenId === Constants.EgldTokenIdentifier ? '' : tokenId
 
   try {
     const { data: createPulsarPaymentTransaction } = await axios.post(createPulsarPaymentUrl, {
