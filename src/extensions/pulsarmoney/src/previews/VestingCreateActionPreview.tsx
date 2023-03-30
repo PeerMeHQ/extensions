@@ -24,12 +24,8 @@ export const VestingCreateActionPreview = (props: Props) => {
           .toFixed(2)
           .toString()
 
-  // how to get the receiver address from the arguments
-  // unless doing like : args[3].slice(4) , or is there a better way?
-  const receiverUintArr = toActionArgsTypedValue(args[3]).valueOf() as Uint8Array
-  const receiverCharsDecimal = Array.from(receiverUintArr)
-  const receiverAddrHex = receiverCharsDecimal.map((char) => char.toString(16).padStart(2, '0')).join('')
-  const receiverAddr = Address.fromHex(receiverAddrHex).bech32()
+  const receiverHex = toActionArgsTypedValue(args[3]).valueOf().toString('hex')
+  const receiverAddr = Address.fromHex(receiverHex).bech32()
 
   const cliffRelease = args[4]?.toString().slice(4)
 
