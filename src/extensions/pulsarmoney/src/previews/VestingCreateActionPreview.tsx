@@ -41,8 +41,8 @@ export const VestingCreateActionPreview = (props: Props) => {
     <>
       start a <strong>{displayableCancel}</strong> vesting of {value} {tokenId} to
       <AddressPresenter value={receiverAddr} trim={4} inline /> , with a cliff release at{' '}
-      <_Date value={new Date(startTimestamp * 1000)}></_Date>, ending on{' '}
-      <_Date value={new Date(endTimestamp * 1000)}></_Date>, receiving payment every {frequencyText(frequency)}
+      <_Date value={new Date(startTimestamp * 1000)} />, ending on <_Date value={new Date(endTimestamp * 1000)} />,
+      receiving payment every {frequencyText(frequency)}
     </>
   )
 }

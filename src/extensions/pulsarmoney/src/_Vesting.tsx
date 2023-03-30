@@ -39,27 +39,32 @@ export const _Vesting = () => {
     const totalAmount = +tokenPayment.amountAsBigInteger.dividedBy(10 ** tokenPayment.numDecimals).toString()
 
     if (cliffTimestampInMiliseconds < currentTimestamp) {
-      app.showToast('Cliff date must be set to the future.', 'error')
+      app.showToast('Cliff date must be set to the future', 'error')
+      return
+    }
+
+    if (endTimestampInMiliseconds < currentTimestamp) {
+      app.showToast('End date must be set to the future', 'error')
       return
     }
 
     if (endTimestampInMiliseconds < cliffTimestampInMiliseconds) {
-      app.showToast('End date must be set after the cliff date.', 'error')
+      app.showToast('End date must be set after the cliff date', 'error')
       return
     }
 
     if (name.length > MAX_NAME_LENGTH) {
-      app.showToast(`Name must not have more than ${MAX_NAME_LENGTH} characters. `, 'error')
+      app.showToast(`Name must not have more than ${MAX_NAME_LENGTH} characters`, 'error')
       return
     }
 
     if (totalAmount <= +cliffAmount) {
-      app.showToast('Total amount must be greater than the cliff amount.', 'error')
+      app.showToast('Total amount must be greater than the cliff amount', 'error')
       return
     }
 
     if (totalAmount < 0 || +cliffAmount < 0) {
-      app.showToast('Amounts must be greater than 0.', 'error')
+      app.showToast('Amounts must be greater than 0', 'error')
       return
     }
 
@@ -103,7 +108,7 @@ export const _Vesting = () => {
     )
   }
   return (
-    <form onSubmit={async (e) => await handleSubmit(e)}>
+    <form onSubmit={handleSubmit}>
       <PaymentSelector
         config={app.config.walletConfig}
         entity={app.config.entity}
@@ -131,7 +136,7 @@ export const _Vesting = () => {
           onChange={(val) => setCliffDate(val)}
           required
         />
-        <small className="block mt-2 pl-2 text-yellow-500 text-sm">
+        <small className="block mt-2 pl-2 text-yellow-500 text-sm mb-2">
           The proposal must be executed before the start date or it will fail.
         </small>
         <Input
@@ -164,7 +169,7 @@ export const _Vesting = () => {
           <span className="text-xl wrap text-gray-700 dark:text-gray-200">Can cancel?</span>
         </div>
         <div>
-          <Input type="text" value={name} onChange={(val) => setName(val)} placeholder="Vesting name"></Input>
+          <Input value={name} onChange={(val) => setName(val)} placeholder="Vesting name" />
         </div>
       </div>
       <div className="mb-4 flex items-center space-x-4 ">
@@ -174,7 +179,7 @@ export const _Vesting = () => {
           onChange={(val) => setFrequencyOption(val)}
           options={options}
           value={frequencyOption}
-        ></Dropdown>
+        />
       </div>
 
       <Button color="blue" className="block w-full" disabled={isSubmitDisabled} submit>
