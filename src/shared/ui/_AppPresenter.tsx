@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const _AppPresenter = (props: Props) => (
-  <AppContext.Provider value={toAppContextValue(props.config, props.onActionAddRequest)}>
+  <AppContext.Provider value={toAppContextValue(props.config, props.extension, props.onActionAddRequest)}>
     <header className="mb-4">
       <button
         onClick={props.onCloseRequest}
