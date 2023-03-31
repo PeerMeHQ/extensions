@@ -25,6 +25,9 @@ export const _BulkTransactions = () => {
   }, [userTxList])
 
   const createTokenPayment = (amount: string) => {
+    if (payment === null) {
+      throw Error('Payment is not set')
+    }
     if (payment.isEgld()) {
       return TokenPayment.egldFromAmount(amount)
     }
@@ -36,6 +39,9 @@ export const _BulkTransactions = () => {
   }
 
   const createTokenPaymentFromBigInteger = (amount: BigNumber) => {
+    if (payment === null) {
+      throw Error('Payment is not set')
+    }
     if (payment.isEgld()) {
       return TokenPayment.egldFromBigInteger(amount)
     }
@@ -48,7 +54,7 @@ export const _BulkTransactions = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    if (!payment) {
+    if (payment === null) {
       showToast('Please select a token', 'error')
       return
     }
