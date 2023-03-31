@@ -5,6 +5,7 @@ import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
 import { Button, Switch, Textarea, showToast, PaymentSelector, TokenSelector, FileSelector } from '@peerme/web-ui'
+import { createTokenPayment } from './Helpers'
 
 export const _BulkTransactions = () => {
   const app = useApp()
@@ -24,34 +25,6 @@ export const _BulkTransactions = () => {
     return true
   }, [userTxList])
 
-  const createTokenPayment = (amount: string) => {
-    if (payment === null) {
-      throw Error('Payment is not set')
-    }
-    if (payment.isEgld()) {
-      return TokenPayment.egldFromAmount(amount)
-    }
-    if (payment.isFungible()) {
-      return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
-    }
-    const tokenIdentifier = payment.tokenIdentifier.split('-')[0] + '-' + payment.tokenIdentifier.split('-')[1]
-    return TokenPayment.metaEsdtFromAmount(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
-  }
-
-  const createTokenPaymentFromBigInteger = (amount: BigNumber) => {
-    if (payment === null) {
-      throw Error('Payment is not set')
-    }
-    if (payment.isEgld()) {
-      return TokenPayment.egldFromBigInteger(amount)
-    }
-    if (payment.isFungible()) {
-      return TokenPayment.fungibleFromBigInteger(payment.tokenIdentifier, amount, payment.numDecimals)
-    }
-    const tokenIdentifier = payment.tokenIdentifier.split('-')[0] + '-' + payment.tokenIdentifier.split('-')[1]
-    return TokenPayment.metaEsdtFromBigInteger(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
-  }
-
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     if (payment === null) {
@@ -66,7 +39,7 @@ export const _BulkTransactions = () => {
 
     // Prepare the arguments for the transaction
     let callAmount = new BigNumber(0)
-    let args = Array<string>()
+    let args = Array<any>()
 
     lines.forEach((line, i) => {
       try {
@@ -78,9 +51,7 @@ export const _BulkTransactions = () => {
           throw Error(`"${amount}" is not a valid number`)
         }
 
-        const tp = useSameAmount
-          ? createTokenPaymentFromBigInteger(payment.amountAsBigInteger)
-          : createTokenPayment(amount)
+        const tp = createTokenPayment(payment, useSameAmount ? payment.amountAsBigInteger : amount)
         callAmount = callAmount.plus(tp.amountAsBigInteger)
 
         // Add the transaction to the list
@@ -100,7 +71,7 @@ export const _BulkTransactions = () => {
     }
 
     const value = payment.isEgld() ? callAmount : 0
-    const tokenPayments = payment.isEgld() ? [] : [createTokenPaymentFromBigInteger(callAmount)]
+    const tokenPayments = payment.isEgld() ? [] : [createTokenPayment(payment, callAmount)]
 
     app.requestProposalAction(
       XBulkConfig.ContractAddress(app.config.network),

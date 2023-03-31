@@ -1,25 +1,15 @@
 import React from 'react'
+import { BigNumber } from 'bignumber.js'
 import { TokenPayment } from '@multiversx/sdk-core'
 import { AddressPresenter } from '@peerme/web-ui'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
+import { createTokenPayment } from './../Helpers'
 
 type Props = {
   action: ProposalAction
 }
 
 export const BulkSendActionPreview = (props: Props) => {
-  const createTokenPayment = (amount: BigNumber) => {
-    if (totalPayment.isEgld()) {
-      return TokenPayment.egldFromBigInteger(amount)
-    }
-    if (totalPayment.isFungible()) {
-      return TokenPayment.fungibleFromBigInteger(totalPayment.tokenIdentifier, amount, totalPayment.numDecimals)
-    }
-    const tokenIdentifier =
-      totalPayment.tokenIdentifier.split('-')[0] + '-' + totalPayment.tokenIdentifier.split('-')[1]
-    return TokenPayment.metaEsdtFromBigInteger(tokenIdentifier, totalPayment.nonce, amount, totalPayment.numDecimals)
-  }
-
   //get all the arguments (addresses of the receivers and amounts)
   const args = props.action.arguments
   const nTransactions = args.length / 2
@@ -33,7 +23,10 @@ export const BulkSendActionPreview = (props: Props) => {
   //create an array of transactions
   let transactions = []
   for (let i = 0; i < args.length; i += 2) {
-    transactions.push({ address: args[i], amount: createTokenPayment(args[i + 1]) })
+    transactions.push({
+      address: args[i],
+      amount: createTokenPayment(totalPayment, new BigNumber(args[i + 1] as string).valueOf()),
+    })
   }
 
   return (
