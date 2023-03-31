@@ -8,7 +8,11 @@ import { ProposalAction, ProposalActionArg, toProposalActionPayment, toProposalA
 export const toExtensionName = (config: ExtensionConfig, extension: ExtensionInfo) =>
   extension.Name.replace(':entityName', config.entity.name)
 
-export const toAppContextValue = (config: ExtensionConfig, onActionAddRequest: (action: ProposalAction) => void) => {
+export const toAppContextValue = (
+  config: ExtensionConfig,
+  extension: ExtensionInfo,
+  onActionAddRequest: (action: ProposalAction) => void
+) => {
   const networkProvider = new ApiNetworkProvider(config.walletConfig.ApiAddress, {
     timeout: 10_000,
   })
@@ -28,18 +32,22 @@ export const toAppContextValue = (config: ExtensionConfig, onActionAddRequest: (
     value: BigNumber.Value,
     args: ProposalActionArg[] = [],
     payments: TokenPayment[] = []
-  ) =>
-    onActionAddRequest({
+  ) => {
+    const action: ProposalAction = {
       destination,
       endpoint: endpoint || '',
       value,
       arguments: args.map(toProposalActionArg),
       payments: payments.map(toProposalActionPayment),
       guards: [],
-    })
+    }
+
+    console.log(`[App Extension: ${extension.Name}] requests action:`, action)
+    onActionAddRequest(action)
+  }
 
   const showToast = (text: string, type?: AppToastType) => {
-    console.log(`[App] ${type}: ${text}`)
+    console.log(`[App Extension: ${extension.Name}] alerts ${type}:`, text)
     showAppToast(text, type)
   }
 
