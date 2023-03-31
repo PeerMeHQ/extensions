@@ -18,10 +18,14 @@ export const App = () => (
         </AppSection>
       </Tab.Panel>
       <Tab.Panel>
-        <AppSection title="Distribute NFTs">Coming soon.</AppSection>
+        <AppSection title="Distribute NFTs">
+          <label className="text-xl text-gray-700 dark:text-gray-200">Coming soon...</label>
+        </AppSection>
       </Tab.Panel>
       <Tab.Panel>
-        <AppSection title="Draw a winner">Coming soon.</AppSection>
+        <AppSection title="Make a draw">
+          <label className="text-xl text-gray-700 dark:text-gray-200">Coming soon...</label>
+        </AppSection>
       </Tab.Panel>
     </Tab.Panels>
   </Tab.Group>

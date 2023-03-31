@@ -1,9 +1,11 @@
 import { BigNumber } from 'bignumber.js'
 import { XBulkConfig } from './config'
+import { XBulkContracts } from './contracts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
 import { Button, Switch, Textarea, showToast, PaymentSelector, TokenSelector, FileSelector } from '@peerme/web-ui'
+import { createTokenPayment } from './Helpers'
 
 export const _BulkTransactions = () => {
   const app = useApp()
@@ -23,25 +25,9 @@ export const _BulkTransactions = () => {
     return true
   }, [userTxList])
 
-  // TODO
-  // const createTokenPayment = (amount) => {
-  //   if (useSameAmount) {
-  //     if (payment.isEgld()) {
-  //       return TokenPayment.egldFromAmount(amount)
-  //     }
-  //     return TokenPayment.fungibleFromAmount(payment.tokenIdentifier, amount, payment.numDecimals)
-  //   } else {
-  //     if (token === 'EGLD') {
-  //       return TokenPayment.egldFromAmount(amount)
-  //     } else {
-  //       return TokenPayment.fungibleFromAmount(token, amount, 18)
-  //     }
-  //   }
-  // }
-
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    if (!payment) {
+    if (payment === null) {
       showToast('Please select a token', 'error')
       return
     }
@@ -53,7 +39,7 @@ export const _BulkTransactions = () => {
 
     // Prepare the arguments for the transaction
     let callAmount = new BigNumber(0)
-    let args = Array<string>()
+    let args = Array<any>()
 
     lines.forEach((line, i) => {
       try {
@@ -65,12 +51,13 @@ export const _BulkTransactions = () => {
           throw Error(`"${amount}" is not a valid number`)
         }
 
+        const tp = createTokenPayment(payment, useSameAmount ? payment.amountAsBigInteger : amount)
+        callAmount = callAmount.plus(tp.amountAsBigInteger)
+
         // Add the transaction to the list
         args.push(address.bech32())
         if (!useSameAmount) {
-          callAmount = callAmount.plus(amount)
-          args.push(amount)
-        } else {
+          args.push(tp.amountAsBigInteger.toNumber()) // TODO check if it possible to remove the toNumber
         }
       } catch (error: any) {
         errors += `Line ${i + 1}: ${error.message}\n`
@@ -83,12 +70,14 @@ export const _BulkTransactions = () => {
       return
     }
 
-    const value = payment.isEgld() ? payment.amountAsBigInteger : 0
-    const tokenPayments = payment.isEgld() ? [] : [payment]
+    const value = payment.isEgld() ? callAmount : 0
+    const tokenPayments = payment.isEgld() ? [] : [createTokenPayment(payment, callAmount)]
 
     app.requestProposalAction(
       XBulkConfig.ContractAddress(app.config.network),
-      useSameAmount ? XBulkConfig.Endpoints.BulkSendSameAmount : XBulkConfig.Endpoints.BulkSend,
+      useSameAmount
+        ? XBulkContracts(app.config).BulkSendSameAmount.Endpoint
+        : XBulkContracts(app.config).BulkSend.Endpoint,
       value,
       args,
       tokenPayments
@@ -145,7 +134,7 @@ export const _BulkTransactions = () => {
       )}
 
       <label htmlFor="transactions" className="text-xl text-gray-700 dark:text-gray-200 mb-4">
-        Enter the list of the transactions:
+        Enter the list of the transactions (max 100):
       </label>
       <Textarea
         placeholder={'address' + (useSameAmount ? '' : ';amount')}

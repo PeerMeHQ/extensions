@@ -1,5 +1,6 @@
 import { App } from './src/App'
 import Logo from './meta/logo.svg'
+import { XBulkContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
@@ -12,7 +13,7 @@ export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Dark: Logo,
   },
   Tags: ['defi'],
-  Contracts: {},
+  Contracts: XBulkContracts(config),
   AppRoot: App,
   WidgetRoots: {
     Info: null,
