@@ -134,7 +134,7 @@ export const _BulkTransactions = () => {
       )}
 
       <label htmlFor="transactions" className="text-xl text-gray-700 dark:text-gray-200 mb-4">
-        Enter the list of the transactions:
+        Enter the list of the transactions (max 100):
       </label>
       <Textarea
         placeholder={'address' + (useSameAmount ? '' : ';amount')}
