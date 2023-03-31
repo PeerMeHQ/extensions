@@ -5,5 +5,10 @@ export const createTokenPayment = (payment: TokenPayment, amount: string | BigNu
   const newAmount =
     amount instanceof BigNumber ? amount : new BigNumber(amount).shiftedBy(payment.numDecimals).decimalPlaces(0)
 
-  return new TokenPayment(payment.tokenIdentifier, payment.nonce, newAmount, payment.numDecimals)
+  let tokenIdentifier = payment.tokenIdentifier
+  if (tokenIdentifier.split('-').length === 3) {
+    tokenIdentifier = tokenIdentifier.split('-')[0] + '-' + tokenIdentifier.split('-')[1]
+  }
+
+  return new TokenPayment(tokenIdentifier, payment.nonce, newAmount, payment.numDecimals)
 }

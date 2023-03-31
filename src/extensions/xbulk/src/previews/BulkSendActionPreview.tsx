@@ -25,7 +25,7 @@ export const BulkSendActionPreview = (props: Props) => {
   for (let i = 0; i < args.length; i += 2) {
     transactions.push({
       address: args[i],
-      amount: createTokenPayment(totalPayment, new BigNumber(args[i + 1] as string).valueOf()),
+      amount: createTokenPayment(totalPayment, new BigNumber(args[i + 1] as string)),
     })
   }
 
