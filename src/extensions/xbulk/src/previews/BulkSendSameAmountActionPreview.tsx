@@ -30,8 +30,8 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
       Send {toFormattedTokenPayment(singleAmount)} each to:
       <br />
       <br />
-      {args.map((arg) => {
-        return <AddressPresenter value={arg?.toString() || ''} trim={5} />
+      {args.map((arg, i) => {
+        return <AddressPresenter key={i} value={arg?.toString() || ''} trim={5} />
       })}
     </>
   )

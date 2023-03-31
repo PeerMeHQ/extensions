@@ -35,13 +35,13 @@ export const BulkSendActionPreview = (props: Props) => {
       <strong>{toFormattedTokenPayment(totalPayment)}</strong>.<br />
       <strong>Transactions:</strong>
       <br />
-      {transactions.map((transaction) => {
+      {transactions.map((transaction, i) => {
         return (
-          <>
+          <React.Fragment key={i}>
             <br />
             <AddressPresenter value={transaction.address?.toString() || ''} trim={5} inline /> -{' '}
             {toFormattedTokenPayment(transaction.amount)}
-          </>
+          </React.Fragment>
         )
       })}
     </>
