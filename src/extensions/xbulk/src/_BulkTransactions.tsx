@@ -4,7 +4,7 @@ import { XBulkContracts } from './contracts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
-import { Button, Switch, Textarea, showToast, PaymentSelector, TokenSelector, FileSelector } from '@peerme/web-ui'
+import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector } from '@peerme/web-ui'
 import { createTokenPayment } from './Helpers'
 
 export const _BulkTransactions = () => {
@@ -105,33 +105,18 @@ export const _BulkTransactions = () => {
         <span className="text-xl text-gray-700 dark:text-gray-200">Use the same amount for each transaction</span>
       </div>
 
-      {useSameAmount ? (
-        <>
-          <label htmlFor="recipient" className="text-xl text-gray-700 dark:text-gray-200">
-            Select the token and amount you want to send:
-          </label>
-          <PaymentSelector
-            config={app.config.walletConfig}
-            entity={app.config.entity}
-            permissions={[]}
-            onSelected={(val) => setPayment(val)}
-            className="mb-4 mt-2"
-          />
-        </>
-      ) : (
-        <>
-          <label htmlFor="recipient" className="text-xl text-gray-700 dark:text-gray-200">
-            Select the token you want to send:
-          </label>
-          <TokenSelector
-            config={app.config.walletConfig}
-            entity={app.config.entity}
-            permissions={[]}
-            onSelected={(val) => setPayment(val)}
-            className="mb-4 mt-2"
-          />
-        </>
-      )}
+      <label htmlFor="recipient" className="text-xl text-gray-700 dark:text-gray-200">
+        {useSameAmount ? 'Select the token and amount you want to send:' : 'Select the token you want to send:'}
+      </label>
+      <PaymentSelector
+        config={app.config.walletConfig}
+        entity={app.config.entity}
+        permissions={[]}
+        onSelected={(val) => setPayment(val)}
+        className="mb-4 mt-2"
+        skipTokenTypes={['nft']}
+        skipAmount={!useSameAmount}
+      />
 
       <label htmlFor="transactions" className="text-xl text-gray-700 dark:text-gray-200 mb-4">
         Enter the list of the transactions (max 100):
