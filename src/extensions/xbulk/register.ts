@@ -5,7 +5,7 @@ import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
   Name: 'xBulk',
-  Description: "Making your DAO's life easier with lots of transactions",
+  Description: 'Making Bulk-Sending of Transactions easy for DAOs',
   Website: 'https://xbulk.app',
   Logo: {
     Light: '/images/extensions/xbulk-logo.png',
