@@ -1,5 +1,4 @@
 import { App } from './src/App'
-import Logo from './meta/logo.svg'
 import { XBulkContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
@@ -9,8 +8,8 @@ export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Description: "Making your DAO's life easier with lots of transactions",
   Website: 'https://xbulk.app',
   Logo: {
-    Light: Logo,
-    Dark: Logo,
+    Light: '/images/extensions/xbulk-logo.png',
+    Dark: '/images/extensions/xbulk-logo.png',
   },
   Tags: ['defi'],
   Contracts: XBulkContracts(config),
