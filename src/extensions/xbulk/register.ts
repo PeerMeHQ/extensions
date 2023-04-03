@@ -3,7 +3,7 @@ import { XBulkContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
-  Enabled: false,
+  Enabled: true,
   Name: 'xBulk',
   Description: 'Making Bulk-Sending of Transactions easy for DAOs',
   Website: 'https://xbulk.app',
