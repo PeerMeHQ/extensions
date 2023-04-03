@@ -1,12 +1,11 @@
-import { TokenPayment } from '@multiversx/sdk-core/out/tokenPayment'
-import { Button, Input, PaymentSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
-import React, { SyntheticEvent, useState } from 'react'
-import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
 import * as sdk from './sdk'
-import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
-import BigNumber from 'bignumber.js'
-import { BytesValue } from '@multiversx/sdk-core/out'
+import { BigNumber } from 'bignumber.js'
 import { useApp } from '../../../shared/hooks/useApp'
+import React, { SyntheticEvent, useState } from 'react'
+import { TokenPayment, BytesValue } from '@multiversx/sdk-core'
+import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
+import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
+import { Button, Input, PaymentSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
 
 export const _Vesting = () => {
   const app = useApp()
