@@ -1,11 +1,12 @@
+import { Config } from './config'
+import { Contracts } from './contracts'
 import { BigNumber } from 'bignumber.js'
-import { XBulkConfig } from './config'
-import { XBulkContracts } from './contracts'
+import { useDebounce } from '@peerme/core-ts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
-import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector } from '@peerme/web-ui'
-import { createTokenPayment } from './Helpers'
+import { createTokenPayment, toPreparedCsvLines } from './helpers'
+import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector, Alert } from '@peerme/web-ui'
 
 export const _BulkTransactions = () => {
   const app = useApp()
@@ -13,17 +14,15 @@ export const _BulkTransactions = () => {
   const [userTxList, setUserTxList] = useState<string>('')
   const [useSameAmount, setUseSameAmount] = useState<boolean>(false)
 
-  const isValid = useMemo(() => {
-    // Get an array containing all the lines of the user input
-    if (userTxList.trim() === '') {
-      return false
-    }
-    const lines = userTxList.trim().split(/[\r\n]+/)
-    if (lines.length > 100) {
-      return false
-    }
+  const debouncedUserTxList = useDebounce(userTxList, 500)
+
+  const preparedLines = useMemo(() => toPreparedCsvLines(debouncedUserTxList), [debouncedUserTxList])
+
+  const isValidInput = useMemo(() => {
+    if (!userTxList.length) return false
+    if (preparedLines.length > Config.MaxTransactionAmount) return false
     return true
-  }, [userTxList])
+  }, [preparedLines])
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -34,16 +33,13 @@ export const _BulkTransactions = () => {
 
     let errors = ''
 
-    // Get an array containing all the lines of the user input
-    const lines = userTxList.trim().split(/[\r\n]+/)
-
     // Prepare the arguments for the transaction
     let callAmount = new BigNumber(0)
     let args = Array<any>()
 
-    lines.forEach((line, i) => {
+    preparedLines.forEach((line, i) => {
       try {
-        const [receiver, amount] = line.split(';')
+        const [receiver, amount] = line.split(Config.PrimaryCsvDelimiter)
 
         // Check if the address and amount are valid
         const address = Address.fromBech32(receiver)
@@ -57,7 +53,7 @@ export const _BulkTransactions = () => {
         // Add the transaction to the list
         args.push(address.bech32())
         if (!useSameAmount) {
-          args.push(tp.amountAsBigInteger.toNumber()) // TODO check if it possible to remove the toNumber
+          args.push(tp.amountAsBigInteger)
         }
       } catch (error: any) {
         errors += `Line ${i + 1}: ${error.message}\n`
@@ -72,16 +68,9 @@ export const _BulkTransactions = () => {
 
     const value = payment.isEgld() ? callAmount : 0
     const tokenPayments = payment.isEgld() ? [] : [createTokenPayment(payment, callAmount)]
+    const contract = useSameAmount ? Contracts(app.config).BulkSendSameAmount : Contracts(app.config).BulkSend
 
-    app.requestProposalAction(
-      XBulkConfig.ContractAddress(app.config.network),
-      useSameAmount
-        ? XBulkContracts(app.config).BulkSendSameAmount.Endpoint
-        : XBulkContracts(app.config).BulkSend.Endpoint,
-      value,
-      args,
-      tokenPayments
-    )
+    app.requestProposalAction(contract.Address, contract.Endpoint, value, args, tokenPayments)
   }
 
   const handleCsvSelect = (files: File[]) => {
@@ -131,7 +120,13 @@ export const _BulkTransactions = () => {
 
       <FileSelector accept={{ 'text/*': ['.csv'] }} onSelect={handleCsvSelect} className="mb-8" />
 
-      <Button color="blue" className="block w-full" disabled={!isValid} submit>
+      {preparedLines.length > Config.MaxTransactionAmount && (
+        <Alert type="warning">
+          The transaction amount must not exceed <strong>{Config.MaxTransactionAmount}</strong>, which is a blockchain
+          limit.
+        </Alert>
+      )}
+      <Button color="blue" className="block w-full" disabled={!isValidInput} submit>
         Add Bulk transaction
       </Button>
     </form>

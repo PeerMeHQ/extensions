@@ -10,7 +10,7 @@ const getContractAddress = (network: Network) => {
   return 'erd1qqqqqqqqqqqqqpgqwcv369k9x49ve3qlu0h5qe949w7m6gcxh42scqtdpf'
 }
 
-export const XBulkContracts = (config: ExtensionConfig): ExtensionScInfo => ({
+export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   BulkSend: {
     Address: getContractAddress(config.network),
     Endpoint: 'bulksend',
