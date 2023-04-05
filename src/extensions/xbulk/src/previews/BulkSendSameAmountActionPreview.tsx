@@ -2,7 +2,7 @@ import React from 'react'
 import { TokenPayment } from '@multiversx/sdk-core'
 import { AddressPresenter } from '@peerme/web-ui'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
-import { createTokenPayment } from './../Helpers'
+import { createTokenPayment } from '../helpers'
 
 type Props = {
   action: ProposalAction

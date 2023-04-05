@@ -1,11 +1,11 @@
+import { Config } from './config'
+import { Contracts } from './contracts'
 import { BigNumber } from 'bignumber.js'
-import { XBulkConfig } from './config'
-import { XBulkContracts } from './contracts'
+import { createTokenPayment } from './helpers'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
 import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector } from '@peerme/web-ui'
-import { createTokenPayment } from './Helpers'
 
 export const _BulkTransactions = () => {
   const app = useApp()
@@ -19,7 +19,7 @@ export const _BulkTransactions = () => {
       return false
     }
     const lines = userTxList.trim().split(/[\r\n]+/)
-    if (lines.length > 100) {
+    if (lines.length > Config.MaxTransactions) {
       return false
     }
     return true
@@ -72,16 +72,9 @@ export const _BulkTransactions = () => {
 
     const value = payment.isEgld() ? callAmount : 0
     const tokenPayments = payment.isEgld() ? [] : [createTokenPayment(payment, callAmount)]
+    const contract = useSameAmount ? Contracts(app.config).BulkSendSameAmount : Contracts(app.config).BulkSend
 
-    app.requestProposalAction(
-      XBulkConfig.ContractAddress(app.config.network),
-      useSameAmount
-        ? XBulkContracts(app.config).BulkSendSameAmount.Endpoint
-        : XBulkContracts(app.config).BulkSend.Endpoint,
-      value,
-      args,
-      tokenPayments
-    )
+    app.requestProposalAction(contract.Address, contract.Endpoint, value, args, tokenPayments)
   }
 
   const handleCsvSelect = (files: File[]) => {
