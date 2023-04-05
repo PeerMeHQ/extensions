@@ -25,8 +25,8 @@ export const ActionPreview = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <h3 className="text-2xl text-gray-800 dark:text-gray-200">
-        <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-400">Use App</span>{' '}
+      <h3 className="inline text-2xl text-gray-800 dark:text-gray-200 text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-400">
+        Use App{' '}
         <a
           href={props.extension.Website}
           target="_blank"
@@ -54,13 +54,13 @@ export const ActionPreview = (props: Props) => {
           )}
           <span className="inline-block ml-1">{props.extension.Name}</span>
         </a>
-        {!!scInfo?.ActionPreview && (
-          <span className="text-gray-600 dark:text-gray-400">
-            <span> to </span>
-            {scInfo?.ActionPreview?.(props.action)}
-          </span>
-        )}
       </h3>
+      {!!scInfo?.ActionPreview && (
+        <span className="text-gray-600 dark:text-gray-400">
+          <span className="text-2xl "> to </span>
+          {scInfo?.ActionPreview?.(props.action)}
+        </span>
+      )}
       {hasValue && (
         <span className="block pl-4 text-sm text-yellow-600 dark:text-yellow-500 mb-4">
           <FontAwesomeIcon icon={faInfoCircle} className="inline-block mr-1 opacity-80" />
