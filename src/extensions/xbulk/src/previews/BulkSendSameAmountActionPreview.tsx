@@ -1,8 +1,9 @@
 import React from 'react'
-import { TokenPayment } from '@multiversx/sdk-core'
-import { AddressPresenter } from '@peerme/web-ui'
-import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 import { createTokenPayment } from '../helpers'
+import { AddressPresenter } from '@peerme/web-ui'
+import { TokenPayment } from '@multiversx/sdk-core'
+import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
+import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
@@ -24,15 +25,19 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
 
   return (
     <>
-      send a total of <strong>{toFormattedTokenPayment(totalPayment)}</strong> to <strong>{nTransactions}</strong>{' '}
-      addresses.
-      <br />
-      Send {toFormattedTokenPayment(singleAmount)} each to:
-      <br />
-      <br />
-      {args.map((arg, i) => {
-        return <AddressPresenter key={i} value={arg?.toString() || ''} trim={5} />
-      })}
+      <ActionPreviewHighlight className="mb-4">
+        send a total of <strong>{toFormattedTokenPayment(totalPayment)}</strong> to <strong>{nTransactions}</strong>{' '}
+        addresses.
+      </ActionPreviewHighlight>
+      <h4 className="mb-2">Send {toFormattedTokenPayment(singleAmount)} each to:</h4>
+      <ul className="flex flex-wrap gap-2 mb-4">
+        {args.map((arg, i) => (
+          <li key={i}>
+            <AddressPresenter value={arg?.toString() || ''} trim={4} className="mb-0" inline />
+            {' , '}
+          </li>
+        ))}
+      </ul>
     </>
   )
 }

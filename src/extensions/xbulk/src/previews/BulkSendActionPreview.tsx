@@ -1,9 +1,10 @@
 import React from 'react'
 import { BigNumber } from 'bignumber.js'
+import { createTokenPayment } from '../helpers'
 import { TokenPayment } from '@multiversx/sdk-core'
 import { AddressPresenter } from '@peerme/web-ui'
+import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
-import { createTokenPayment } from '../helpers'
 
 type Props = {
   action: ProposalAction
@@ -31,19 +32,31 @@ export const BulkSendActionPreview = (props: Props) => {
 
   return (
     <>
-      send <strong>{nTransactions}</strong> transactions for a total of{' '}
-      <strong>{toFormattedTokenPayment(totalPayment)}</strong>.<br />
-      <strong>Transactions:</strong>
-      <br />
-      {transactions.map((transaction, i) => {
-        return (
-          <React.Fragment key={i}>
-            <br />
-            <AddressPresenter value={transaction.address?.toString() || ''} trim={5} inline /> -{' '}
-            {toFormattedTokenPayment(transaction.amount)}
-          </React.Fragment>
-        )
-      })}
+      <ActionPreviewHighlight className="mb-4">
+        send <strong>{nTransactions}</strong> transactions for a total of{' '}
+        <strong>{toFormattedTokenPayment(totalPayment)}</strong>.
+      </ActionPreviewHighlight>
+      <h4 className="mb-2">Transactions:</h4>
+      <table className="w-full border-2 border-gray-300 dark:border-gray-700 mb-4">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 dark:border-gray-700 text-left px-4 py-2 rounded-tl">Receiver</th>
+            <th className="border border-gray-300 dark:border-gray-700 text-left px-4 py-2 rounded-tr">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map((tx, i) => (
+            <tr key={i}>
+              <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
+                <AddressPresenter value={tx.address as string} trim={8} className="mb-0" inline />
+              </td>
+              <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
+                {toFormattedTokenPayment(tx.amount)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   )
 }
