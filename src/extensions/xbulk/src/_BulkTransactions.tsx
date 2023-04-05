@@ -57,7 +57,7 @@ export const _BulkTransactions = () => {
         // Add the transaction to the list
         args.push(address.bech32())
         if (!useSameAmount) {
-          args.push(tp.amountAsBigInteger.toNumber()) // TODO check if it possible to remove the toNumber
+          args.push(tp.amountAsBigInteger)
         }
       } catch (error: any) {
         errors += `Line ${i + 1}: ${error.message}\n`
