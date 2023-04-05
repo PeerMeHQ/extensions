@@ -1,3 +1,5 @@
 export const Config = {
-  MaxTransactions: 100,
+  PrimaryCsvDelimiter: ';',
+
+  MaxTransactionAmount: 100,
 }
