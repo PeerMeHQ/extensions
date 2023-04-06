@@ -2,6 +2,7 @@ import React from 'react'
 import BigNumber from 'bignumber.js'
 import { Address } from '@multiversx/sdk-core'
 import { AddressPresenter, Tooltip } from '@peerme/web-ui'
+import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { Constants, ProposalAction, toActionArgsTypedValue } from '@peerme/core-ts'
 
 type Props = {
@@ -38,12 +39,12 @@ export const VestingCreateActionPreview = (props: Props) => {
   const frequency = parseInt(vestRelease?.slice(32, 48) || '1', 16)
 
   return (
-    <>
+    <ActionPreviewHighlight>
       start a <strong>{displayableCancel}</strong> vesting of {value} {tokenId} to
       <AddressPresenter value={receiverAddr} trim={4} inline /> , with a cliff release at{' '}
       <_Date value={new Date(startTimestamp * 1000)} />, ending on <_Date value={new Date(endTimestamp * 1000)} />,
-      receiving payment every {frequencyText(frequency)}
-    </>
+      receiving payment every {frequencyText(frequency)}.
+    </ActionPreviewHighlight>
   )
 }
 

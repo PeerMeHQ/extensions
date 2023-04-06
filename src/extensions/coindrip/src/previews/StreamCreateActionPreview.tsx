@@ -1,6 +1,7 @@
 import React from 'react'
 import { TokenPayment } from '@multiversx/sdk-core'
 import { AddressPresenter, Tooltip } from '@peerme/web-ui'
+import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {
@@ -21,11 +22,11 @@ export const StreamCreateActionPreview = (props: Props) => {
       : toFormattedTokenPayment(TokenPayment.egldFromBigInteger(props.action.value))
 
   return (
-    <>
+    <ActionPreviewHighlight>
       create a <strong>{displayableCancel}</strong> token stream of <strong>{displayablePayments}</strong> to{' '}
       <AddressPresenter value={receiver?.toString() || ''} trim={4} inline /> starting at <_Date value={startsAt} />{' '}
       until <_Date value={endsAt} />.
-    </>
+    </ActionPreviewHighlight>
   )
 }
 

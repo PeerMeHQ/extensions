@@ -32,7 +32,7 @@ export const BulkSendActionPreview = (props: Props) => {
 
   return (
     <>
-      <ActionPreviewHighlight className="mb-4">
+      <ActionPreviewHighlight>
         send <strong>{nTransactions}</strong> transactions for a total of{' '}
         <strong>{toFormattedTokenPayment(totalPayment)}</strong>.
       </ActionPreviewHighlight>

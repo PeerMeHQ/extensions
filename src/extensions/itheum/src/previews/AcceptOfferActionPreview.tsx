@@ -3,6 +3,7 @@ import Link from 'next/link'
 import pluralize from 'pluralize'
 import { Config } from '../config'
 import { ExtensionConfig } from '../../../../shared/types'
+import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {
@@ -24,12 +25,12 @@ export const AcceptOfferActionPreview = (props: Props) => {
       : 'which is free'
 
   return (
-    <>
+    <ActionPreviewHighlight>
       procure {quantity} {pluralize('pieces', quantity)} of this{' '}
       <Link href={offerUrl} target="_blank" rel="noopener" className="text-blue-500 hover:text-blue-400">
         marketplace offer
       </Link>{' '}
       <strong>{displayableCostPayments}</strong>.
-    </>
+    </ActionPreviewHighlight>
   )
 }

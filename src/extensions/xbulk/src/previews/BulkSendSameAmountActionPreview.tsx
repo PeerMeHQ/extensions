@@ -25,7 +25,7 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
 
   return (
     <>
-      <ActionPreviewHighlight className="mb-4">
+      <ActionPreviewHighlight>
         send a total of <strong>{toFormattedTokenPayment(totalPayment)}</strong> to <strong>{nTransactions}</strong>{' '}
         addresses.
       </ActionPreviewHighlight>

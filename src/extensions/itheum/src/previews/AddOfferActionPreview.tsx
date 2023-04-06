@@ -1,5 +1,6 @@
 import React from 'react'
 import { TokenPayment } from '@multiversx/sdk-core'
+import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {
@@ -18,8 +19,8 @@ export const AddOfferActionPreview = (props: Props) => {
       : toFormattedTokenPayment(TokenPayment.egldFromBigInteger(props.action.value))
 
   return (
-    <>
+    <ActionPreviewHighlight>
       list <strong>{displayableOfferPayments}</strong> on marketplace for {paymentToken} with Fee {paymentFee}.
-    </>
+    </ActionPreviewHighlight>
   )
 }
