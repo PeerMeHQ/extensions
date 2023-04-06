@@ -1,6 +1,6 @@
 {
   "name": "@peerme/extensions",
-  "version": "1.5.7",
+  "version": "1.6.0",
   "description": "Extensions to use on PeerMe.io",
   "type": "module",
   "main": "lib/index.js",
