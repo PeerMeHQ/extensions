@@ -36,27 +36,29 @@ export const BulkSendActionPreview = (props: Props) => {
         send <strong>{nTransactions}</strong> transactions for a total of{' '}
         <strong>{toFormattedTokenPayment(totalPayment)}</strong>.
       </ActionPreviewHighlight>
-      <h4 className="mb-2">Transactions:</h4>
-      <table className="w-full border-2 border-gray-300 dark:border-gray-700 mb-4">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 dark:border-gray-700 text-left px-4 py-2 rounded-tl">Receiver</th>
-            <th className="border border-gray-300 dark:border-gray-700 text-left px-4 py-2 rounded-tr">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((tx, i) => (
-            <tr key={i}>
-              <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
-                <AddressPresenter value={tx.address as string} trim={8} className="mb-0" inline />
-              </td>
-              <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
-                {toFormattedTokenPayment(tx.amount)}
-              </td>
+      <section className="mt-4">
+        <h4 className="mb-2">Transactions:</h4>
+        <table className="w-full border-2 border-gray-300 dark:border-gray-700 mb-4">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 dark:border-gray-700 text-left px-4 py-2 rounded-tl">Receiver</th>
+              <th className="border border-gray-300 dark:border-gray-700 text-left px-4 py-2 rounded-tr">Amount</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {transactions.map((tx, i) => (
+              <tr key={i}>
+                <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
+                  <AddressPresenter value={tx.address as string} trim={8} className="mb-0" inline />
+                </td>
+                <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
+                  {toFormattedTokenPayment(tx.amount)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     </>
   )
 }

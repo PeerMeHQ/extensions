@@ -29,15 +29,17 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
         send a total of <strong>{toFormattedTokenPayment(totalPayment)}</strong> to <strong>{nTransactions}</strong>{' '}
         addresses.
       </ActionPreviewHighlight>
-      <h4 className="mb-2">Send {toFormattedTokenPayment(singleAmount)} each to:</h4>
-      <ul className="flex flex-wrap gap-2 mb-4">
-        {args.map((arg, i) => (
-          <li key={i}>
-            <AddressPresenter value={arg?.toString() || ''} trim={4} className="mb-0" inline />
-            {' , '}
-          </li>
-        ))}
-      </ul>
+      <section className="mt-4">
+        <h4 className="mb-2">Send {toFormattedTokenPayment(singleAmount)} each to:</h4>
+        <ul className="flex flex-wrap gap-2 mb-4">
+          {args.map((arg, i) => (
+            <li key={i}>
+              <AddressPresenter value={arg?.toString() || ''} trim={4} className="mb-0" inline />
+              {' , '}
+            </li>
+          ))}
+        </ul>
+      </section>
     </>
   )
 }
