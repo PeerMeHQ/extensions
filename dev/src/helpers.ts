@@ -1,6 +1,6 @@
 import { DevServerConfig } from './config'
 import { AccountType } from '@multiversx/sdk-dapp/types'
-import { ProposalAction, toActionArgsTypedValue, toSanitizedProposalPaymentAmount } from '@peerme/core-ts'
+import { ProposalAction, toActionArgsTypedValue, toActionArgsBigNumber } from '@peerme/core-ts'
 import { Address, ContractFunction, Interaction, SmartContract, TokenPayment } from '@multiversx/sdk-core'
 
 export const toDemoTransaction = (action: ProposalAction, account: AccountType) => {
@@ -20,7 +20,7 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
     const tokenPayment = new TokenPayment(
       payment.tokenId,
       payment.tokenNonce,
-      toSanitizedProposalPaymentAmount(payment.amount),
+      toActionArgsBigNumber(payment.amount),
       payment.tokenDecimals!
     )
     const isFungible = payment.tokenNonce === 0
@@ -30,7 +30,7 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
       : interaction.withSingleESDTNFTTransfer(tokenPayment, new Address(account.address))
   } else if (action.payments.length > 1) {
     const tokenPayments = action.payments.map(
-      (p) => new TokenPayment(p.tokenId, p.tokenNonce, toSanitizedProposalPaymentAmount(p.amount), p.tokenDecimals!)
+      (p) => new TokenPayment(p.tokenId, p.tokenNonce, toActionArgsBigNumber(p.amount), p.tokenDecimals!)
     )
     interaction = interaction.withMultiESDTNFTTransfer(tokenPayments, new Address(account.address))
   }
