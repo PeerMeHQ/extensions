@@ -5,8 +5,8 @@ import { useDebounce } from '@peerme/core-ts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenPayment, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
-import { createTokenPayment, toPreparedCsvLines } from './helpers'
 import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector, Alert } from '@peerme/web-ui'
+import { createTokenPaymentFromAmount, createTokenPaymentFromBigInteger, toPreparedCsvLines } from './helpers'
 
 export const _BulkTransactions = () => {
   const app = useApp()
@@ -47,7 +47,7 @@ export const _BulkTransactions = () => {
           throw Error(`"${amount}" is not a valid number`)
         }
 
-        const tp = createTokenPayment(payment, useSameAmount ? payment.amountAsBigInteger : amount)
+        const tp = useSameAmount ? payment : createTokenPaymentFromAmount(payment, amount)
         callAmount = callAmount.plus(tp.amountAsBigInteger)
 
         // Add the transaction to the list
@@ -67,7 +67,7 @@ export const _BulkTransactions = () => {
     }
 
     const value = payment.isEgld() ? callAmount : 0
-    const tokenPayments = payment.isEgld() ? [] : [createTokenPayment(payment, callAmount)]
+    const tokenPayments = payment.isEgld() ? [] : [createTokenPaymentFromBigInteger(payment, callAmount)]
     const contract = useSameAmount ? Contracts(app.config).BulkSendSameAmount : Contracts(app.config).BulkSend
 
     app.requestProposalAction(contract.Address, contract.Endpoint, value, args, tokenPayments)

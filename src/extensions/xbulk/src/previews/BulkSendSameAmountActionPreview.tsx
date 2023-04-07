@@ -1,7 +1,7 @@
 import React from 'react'
-import { createTokenPayment } from '../helpers'
 import { AddressPresenter } from '@peerme/web-ui'
 import { TokenPayment } from '@multiversx/sdk-core'
+import { createTokenPaymentFromBigInteger } from '../helpers'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
@@ -21,7 +21,10 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
       : TokenPayment.egldFromBigInteger(props.action.value)
 
   //calculate the amount to send to each address
-  const singleAmount = createTokenPayment(totalPayment, totalPayment.amountAsBigInteger.div(nTransactions))
+  const singleAmount = createTokenPaymentFromBigInteger(
+    totalPayment,
+    totalPayment.amountAsBigInteger.div(nTransactions)
+  )
 
   return (
     <>

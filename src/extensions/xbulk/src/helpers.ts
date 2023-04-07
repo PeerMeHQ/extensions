@@ -1,16 +1,22 @@
 import { BigNumber } from 'bignumber.js'
-import { isBigNumber } from '@peerme/core-ts'
 import { TokenPayment } from '@multiversx/sdk-core'
 
 export const toPreparedCsvLines = (plainText: string) => plainText.trim().split(/[\r\n]+/)
 
-export const createTokenPayment = (payment: TokenPayment, amount: string | BigNumber) => {
-  const newAmount = isBigNumber(amount) ? amount : new BigNumber(amount).shiftedBy(payment.numDecimals).decimalPlaces(0)
+export const createTokenPaymentFromBigInteger = (payment: TokenPayment, amount: BigNumber.Value) => {
+  const tokenIdentifier = sanitizeTokenIdentifier(payment.tokenIdentifier)
 
-  let tokenIdentifier = payment.tokenIdentifier
-  if (tokenIdentifier.split('-').length === 3) {
-    tokenIdentifier = tokenIdentifier.split('-')[0] + '-' + tokenIdentifier.split('-')[1]
-  }
+  return new TokenPayment(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
+}
 
-  return new TokenPayment(tokenIdentifier, payment.nonce, newAmount, payment.numDecimals)
+export const createTokenPaymentFromAmount = (payment: TokenPayment, amount: BigNumber.Value) => {
+  const amountAsBigInteger = new BigNumber(amount).shiftedBy(payment.numDecimals).decimalPlaces(0)
+
+  return createTokenPaymentFromBigInteger(payment, amountAsBigInteger)
+}
+
+const sanitizeTokenIdentifier = (tokenIdentifier: string) => {
+  const parts = tokenIdentifier.split('-')
+
+  return parts.length === 3 ? parts[0] + '-' + parts[1] : tokenIdentifier
 }
