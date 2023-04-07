@@ -1,10 +1,14 @@
 import React from 'react'
-import { BigNumber } from 'bignumber.js'
 import { createTokenPayment } from '../helpers'
-import { TokenPayment } from '@multiversx/sdk-core'
 import { AddressPresenter } from '@peerme/web-ui'
+import { TokenPayment } from '@multiversx/sdk-core'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
+import {
+  ProposalAction,
+  toActionArgsBigNumber,
+  toFormattedTokenPayment,
+  toTokenPaymentFromProposalPayment,
+} from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
@@ -26,7 +30,7 @@ export const BulkSendActionPreview = (props: Props) => {
   for (let i = 0; i < args.length; i += 2) {
     transactions.push({
       address: args[i],
-      amount: createTokenPayment(totalPayment, new BigNumber(args[i + 1] as string)),
+      amount: createTokenPayment(totalPayment, toActionArgsBigNumber(args[i + 1]) as any), // 'any' needed because of multiple BigNumber resolutions
     })
   }
 
