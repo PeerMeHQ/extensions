@@ -8,7 +8,7 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 
 - Coindrip: [coindrip.finance](https://coindrip.finance)
 - MultiversX Staking: [multiversx.com](https://multiversx.com) (in progress)
-- xBulk: [xbulk.app](https://xbulk.app) (in progress)
+- xBulk: [xbulk.app](https://xbulk.app)
 - Itheum: [itheum.io](https://www.itheum.io) (in progress)
 - PulsarMoney: [pulsar.money](https://pulsar.money) (in progress)
 
