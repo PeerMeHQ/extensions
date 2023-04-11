@@ -1,7 +1,7 @@
 # Peerme Extensions
 
 [![npm (scoped)](https://img.shields.io/npm/v/@peerme/extensions?style=for-the-badge)](https://www.npmjs.com/package/@peerme/extensions)
-![Twitter Follow](https://img.shields.io/twitter/follow/PeerMeHQ?color=%23555555&label=Follow%20PeerMe&logo=twitter&style=for-the-badge)
+[![](https://img.shields.io/twitter/follow/PeerMeHQ?color=%23555555&label=Follow%20PeerMe&logo=twitter&style=for-the-badge)](https://twitter.com/PeerMeHQ)
 [![](https://dcbadge.vercel.app/api/server/sDeejyk3VR)](https://discord.gg/sDeejyk3VR)
 
 Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For a general overview, please visit our [Knowledge Base](https://know.peerme.io/developers/extensions.html).
