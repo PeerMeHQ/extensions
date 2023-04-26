@@ -11,6 +11,7 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
 
   let interaction = new Interaction(sc, new ContractFunction(action.endpoint), typedArgs)
     .withChainID(DevServerConfig.ChainId)
+    .withSender(new Address(account.address))
     .withGasLimit(50_000_000)
     .withNonce(account.nonce)
     .withValue(action.value)
