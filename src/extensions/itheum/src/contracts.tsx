@@ -32,11 +32,6 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     AbiContent: JsonAbiClaims as any,
   },
   // Market
-  GetMarketRequirements: {
-    Address: getMarketContractAddress(config.network),
-    Endpoint: 'getRequirements',
-    AbiContent: JsonAbiMarket as any,
-  },
   AddOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'addOffer',

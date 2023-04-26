@@ -1,5 +1,8 @@
 import { Network } from '../../../shared/types'
 
+const DexDevnetUrl = 'https://stg.datadex.itheum.io'
+const DexMainnetUrl = 'https://datadex.itheum.io'
+
 export const Config = {
   TokenName: 'ITHEUM',
   TokenDecimals: 18,
@@ -18,10 +21,9 @@ export const Config = {
 
   Urls: {
     MarketplaceOffer: (network: Network, offerId: number) => {
-      if (network === 'devnet')
-        return `https://deploy-preview-309--frosty-hermann-85ca4f.netlify.app/dataNfts/marketplace/DATANFTFT2-71ac28-7e/offer-${offerId}`
+      if (network === 'devnet') return `${DexDevnetUrl}/dataNfts/marketplace/DATANFTFT2-71ac28-7e/offer-${offerId}`
       if (network === 'testnet') return '#'
-      return '#'
+      return `${DexMainnetUrl}/dataNfts/marketplace/DATANFTFT2-71ac28-7e/offer-${offerId}`
     },
   },
 

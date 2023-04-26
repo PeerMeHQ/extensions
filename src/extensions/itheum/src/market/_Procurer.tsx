@@ -35,7 +35,7 @@ export const _Procurer = (props: Props) => {
     const tokenPayments =
       wantsEgld || isFree ? [] : [toWantedTokenPayment(props.offer, wantedAmount, wantedTokenDecimals)]
 
-    app.requestProposalAction(contract.Address, contract.Endpoint, value, [props.offer.index, +quantity], tokenPayments)
+    app.requestProposalAction(contract.Address, contract.Endpoint, value, [props.offer.id, +quantity], tokenPayments)
   }
 
   return (

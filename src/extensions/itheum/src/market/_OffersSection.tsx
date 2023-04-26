@@ -42,7 +42,7 @@ export const _OffersSection = (props: Props) => {
       </header>
       <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {offers.map((offer) => (
-          <li key={offer.index}>
+          <li key={offer.id}>
             <_OfferPreview
               offer={offer}
               nft={findNftByOffer(offer, nfts)}

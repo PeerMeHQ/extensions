@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
+import { DataNftMetadata } from '../types'
 import { toDateDisplay } from '@peerme/core-ts'
 import { _MarketListSection } from './_MarketListSection'
 import { AddressPresenter, StickyModal } from '@peerme/web-ui'
-import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
   nft: DataNftMetadata
-  marketRequirements: MarketRequirements
 }
 
 export const _DataNftPreview = (props: Props) => {
@@ -49,7 +48,7 @@ export const _DataNftPreview = (props: Props) => {
             </ul>
           </div>
         </header>
-        <_MarketListSection nft={props.nft} marketRequirements={props.marketRequirements} />
+        <_MarketListSection nft={props.nft} />
       </StickyModal>
     </>
   )

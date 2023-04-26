@@ -14,7 +14,7 @@ type Props = {
 export const _OfferPreview = (props: Props) => {
   if (!props.nft) return null
   const app = useApp()
-  const linkUrl = Config.Urls.MarketplaceOffer(app.config.network, props.offer.index)
+  const linkUrl = Config.Urls.MarketplaceOffer(app.config.network, props.offer.id)
 
   return (
     <div className="block p-4 bg-gray-200 dark:bg-gray-900 rounded-xl">
