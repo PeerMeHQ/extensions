@@ -2,7 +2,7 @@ import * as sdk from './sdk'
 import { BigNumber } from 'bignumber.js'
 import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
-import { TokenPayment, BytesValue } from '@multiversx/sdk-core'
+import { TokenTransfer, BytesValue } from '@multiversx/sdk-core'
 import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
 import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
 import { Button, Input, PaymentSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
@@ -11,7 +11,7 @@ export const _Vesting = () => {
   const app = useApp()
 
   const [receiver, setReceiver] = useState('')
-  const [tokenPayment, setTokenPayment] = useState<TokenPayment | null>(null)
+  const [tokenTransfer, setTokenTransfer] = useState<TokenTransfer | null>(null)
   const [cliffAmount, setCliffAmount] = useState('')
 
   const [cliffDate, setCliffDate] = useState(INITIAL_CLIFF)
@@ -22,20 +22,20 @@ export const _Vesting = () => {
   const [cancellable, setCancellable] = useState(false)
   const [name, setName] = useState('')
 
-  const isSubmitDisabled = !receiver || !tokenPayment || !cliffDate || !endDate || !cliffAmount
+  const isSubmitDisabled = !receiver || !tokenTransfer || !cliffDate || !endDate || !cliffAmount
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
     const address = app?.config?.entity?.address
 
-    if (!tokenPayment) return
+    if (!tokenTransfer) return
     if (!address) return
     if (!receiver) return
 
     const cliffTimestampInMiliseconds = new Date(cliffDate).getTime()
     const endTimestampInMiliseconds = new Date(endDate).getTime()
-    const totalAmount = +tokenPayment.amountAsBigInteger.dividedBy(10 ** tokenPayment.numDecimals).toString()
+    const totalAmount = +tokenTransfer.amountAsBigInteger.dividedBy(10 ** tokenTransfer.numDecimals).toString()
 
     if (cliffTimestampInMiliseconds < currentTimestamp) {
       app.showToast('Cliff date must be set to the future', 'error')
@@ -76,26 +76,26 @@ export const _Vesting = () => {
       endTimestampInMiliseconds,
       +frequencyOption.identifier,
       cancellable,
-      tokenPayment.tokenIdentifier,
+      tokenTransfer.tokenIdentifier,
       name
     )
 
     const metadata = new TransactionDecoder().getTransactionMetadata(transaction)
-    const value = tokenPayment.isEgld() ? new BigNumber(metadata.value.toString()) : new BigNumber(0)
+    const value = tokenTransfer.isEgld() ? new BigNumber(metadata.value.toString()) : new BigNumber(0)
 
-    let payments: TokenPayment[] = []
+    let transfers: TokenTransfer[] = []
 
-    if (!tokenPayment.isEgld()) {
+    if (!tokenTransfer.isEgld()) {
       if (!metadata || !metadata.transfers || !metadata.transfers[0]) return
 
-      const token = new TokenPayment(
-        tokenPayment.tokenIdentifier,
-        tokenPayment.nonce,
+      const token = TokenTransfer.metaEsdtFromBigInteger(
+        tokenTransfer.tokenIdentifier,
+        tokenTransfer.nonce,
         new BigNumber(metadata.transfers[0].value.toString()),
-        tokenPayment.numDecimals
+        tokenTransfer.numDecimals
       )
 
-      payments.push(token)
+      transfers.push(token)
     }
 
     app.requestProposalAction(
@@ -103,7 +103,7 @@ export const _Vesting = () => {
       metadata.functionName || '',
       value,
       metadata.functionArgs.map((arg) => BytesValue.fromHex(arg)) || [],
-      payments
+      transfers
     )
   }
   return (
@@ -112,7 +112,7 @@ export const _Vesting = () => {
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}
-        onSelected={(val) => setTokenPayment(val)}
+        onSelected={(val) => setTokenTransfer(val)}
         className="mb-8"
       />
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AddressPresenter } from '@peerme/web-ui'
-import { TokenPayment } from '@multiversx/sdk-core'
-import { createTokenPaymentFromBigInteger } from '../helpers'
+import { TokenTransfer } from '@multiversx/sdk-core'
+import { createTokenTransferFromBigInteger } from '../helpers'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
@@ -15,21 +15,21 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
   const nTransactions = args.length
 
   //get the transaction payment
-  const totalPayment =
+  const totalTransfer =
     props.action.payments.length > 0
       ? toTokenPaymentFromProposalPayment(props.action.payments[0])
-      : TokenPayment.egldFromBigInteger(props.action.value)
+      : TokenTransfer.egldFromBigInteger(props.action.value)
 
   //calculate the amount to send to each address
-  const singleAmount = createTokenPaymentFromBigInteger(
-    totalPayment,
-    totalPayment.amountAsBigInteger.div(nTransactions)
+  const singleAmount = createTokenTransferFromBigInteger(
+    totalTransfer,
+    totalTransfer.amountAsBigInteger.div(nTransactions)
   )
 
   return (
     <>
       <ActionPreviewHighlight>
-        send a total of <strong>{toFormattedTokenPayment(totalPayment)}</strong> to <strong>{nTransactions}</strong>{' '}
+        send a total of <strong>{toFormattedTokenPayment(totalTransfer)}</strong> to <strong>{nTransactions}</strong>{' '}
         addresses.
       </ActionPreviewHighlight>
       <section className="mt-4">

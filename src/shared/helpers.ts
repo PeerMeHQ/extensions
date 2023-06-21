@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { showToast as showAppToast } from '@peerme/web-ui'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import { AppToastType, ExtensionConfig, ExtensionInfo } from './types'
@@ -24,16 +24,16 @@ export const toAppContextValue = (
    * @param {string | null} endpoint - The name of the endpoint to call on the destination smart contract.
    * @param {BigNumber.Value} value - The amount of EGLD to send.
    * @param {ProposalActionArg[]} args - The arguments to pass to the smart contract endpoint.
-   * @param {TokenPayment[]} payments - The payments to send to the smart contract endpoint.
+   * @param {TokenTransfer[]} transfers - The payments to send to the smart contract endpoint.
    */
   const requestProposalAction = (
     destination: string,
     endpoint: string | null,
     value: BigNumber.Value,
     args: ProposalActionArg[] = [],
-    payments: TokenPayment[] = []
+    transfers: TokenTransfer[] = []
   ) => {
-    const action = createAction(destination, endpoint || '', value, args, payments)
+    const action = createAction(destination, endpoint || '', value, args, transfers)
 
     console.log(`[App Extension: ${extension.Name}] requests action:`, action)
 

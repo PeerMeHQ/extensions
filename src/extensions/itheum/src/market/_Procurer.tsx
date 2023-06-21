@@ -1,7 +1,7 @@
 import { Config } from '../config'
 import { BigNumber } from 'bignumber.js'
 import { Contracts } from '../contracts'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { DataNftMetadata, OfferInfo } from '../types'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
@@ -32,10 +32,10 @@ export const _Procurer = (props: Props) => {
     }
     const contract = Contracts(app.config).AcceptOffer
     const value = wantsEgld ? wantedAmount : 0
-    const tokenPayments =
-      wantsEgld || isFree ? [] : [toWantedTokenPayment(props.offer, wantedAmount, wantedTokenDecimals)]
+    const tokenTransfers =
+      wantsEgld || isFree ? [] : [toWantedTokenTransfer(props.offer, wantedAmount, wantedTokenDecimals)]
 
-    app.requestProposalAction(contract.Address, contract.Endpoint, value, [props.offer.id, +quantity], tokenPayments)
+    app.requestProposalAction(contract.Address, contract.Endpoint, value, [props.offer.id, +quantity], tokenTransfers)
   }
 
   return (
@@ -94,5 +94,5 @@ const getWantedTokenDecimals = (app: AppContextValue, offer: OfferInfo) => {
   return 0
 }
 
-const toWantedTokenPayment = (offer: OfferInfo, amount: BigNumber.Value, tokenDecimals: number) =>
-  new TokenPayment(offer.wantedTokenIdentifier, offer.wantedTokenNonce, amount, tokenDecimals)
+const toWantedTokenTransfer = (offer: OfferInfo, amount: BigNumber.Value, tokenDecimals: number) =>
+  TokenTransfer.metaEsdtFromBigInteger(offer.wantedTokenIdentifier, offer.wantedTokenNonce, amount, tokenDecimals)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
@@ -16,7 +16,7 @@ export const AddOfferActionPreview = (props: Props) => {
       ? props.action.payments
           .map((payment) => toFormattedTokenPayment(toTokenPaymentFromProposalPayment(payment)))
           .join(', ')
-      : toFormattedTokenPayment(TokenPayment.egldFromBigInteger(props.action.value))
+      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value))
 
   return (
     <ActionPreviewHighlight>

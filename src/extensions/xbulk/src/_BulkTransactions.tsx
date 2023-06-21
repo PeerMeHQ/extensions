@@ -3,14 +3,14 @@ import { Contracts } from './contracts'
 import { BigNumber } from 'bignumber.js'
 import { useDebounce } from '@peerme/core-ts'
 import { useApp } from '../../../shared/hooks/useApp'
-import { TokenPayment, Address } from '@multiversx/sdk-core'
+import { TokenTransfer, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
 import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector, Alert } from '@peerme/web-ui'
-import { createTokenPaymentFromAmount, createTokenPaymentFromBigInteger, toPreparedCsvLines } from './helpers'
+import { createTokenTransferFromAmount, createTokenTransferFromBigInteger, toPreparedCsvLines } from './helpers'
 
 export const _BulkTransactions = () => {
   const app = useApp()
-  const [payment, setPayment] = useState<TokenPayment | null>(null)
+  const [transfer, setTransfer] = useState<TokenTransfer | null>(null)
   const [userTxList, setUserTxList] = useState<string>('')
   const [useSameAmount, setUseSameAmount] = useState<boolean>(false)
 
@@ -26,7 +26,7 @@ export const _BulkTransactions = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    if (payment === null) {
+    if (transfer === null) {
       showToast('Please select a token', 'error')
       return
     }
@@ -47,7 +47,7 @@ export const _BulkTransactions = () => {
           throw Error(`"${amount}" is not a valid number`)
         }
 
-        const tp = useSameAmount ? payment : createTokenPaymentFromAmount(payment, amount)
+        const tp = useSameAmount ? transfer : createTokenTransferFromAmount(transfer, amount)
         callAmount = callAmount.plus(tp.amountAsBigInteger)
 
         // Add the transaction to the list
@@ -66,8 +66,8 @@ export const _BulkTransactions = () => {
       return
     }
 
-    const value = payment.isEgld() ? callAmount : 0
-    const tokenPayments = payment.isEgld() ? [] : [createTokenPaymentFromBigInteger(payment, callAmount)]
+    const value = transfer.isEgld() ? callAmount : 0
+    const tokenPayments = transfer.isEgld() ? [] : [createTokenTransferFromBigInteger(transfer, callAmount)]
     const contract = useSameAmount ? Contracts(app.config).BulkSendSameAmount : Contracts(app.config).BulkSend
 
     app.requestProposalAction(contract.Address, contract.Endpoint, value, args, tokenPayments)
@@ -101,7 +101,12 @@ export const _BulkTransactions = () => {
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}
-        onSelected={(val) => setPayment(val)}
+        onSelected={
+          (val) =>
+            setTransfer(
+              val as any
+            ) /** TODO: "as any" because npm resolves to different versions: https://github.com/multiversx/mx-sdk-js-core/issues/290 */
+        }
         className="mb-4 mt-2"
         skipTokenTypes={['nft']}
         skipAmount={!useSameAmount}

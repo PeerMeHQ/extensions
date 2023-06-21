@@ -3,7 +3,7 @@ import { Contracts } from '../contracts'
 import { DataNftMetadata } from '../types'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
@@ -29,7 +29,7 @@ export const _MarketListSection = (props: Props) => {
       addOfferScInfo.Endpoint,
       0,
       [paymentTokenId, paymentTokenNonce, minAmountForSeller, +amount],
-      [TokenPayment.semiFungible(props.nft.collection, props.nft.nonce, +amount)]
+      [TokenTransfer.semiFungible(props.nft.collection, props.nft.nonce, +amount)]
     )
   }
 

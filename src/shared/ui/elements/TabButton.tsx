@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Tab } from '@headlessui/react'
 import { classNames } from '@peerme/core-ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const TabButton = (props: Props) => (
-  <Tab as={Fragment}>
+  <Tab>
     {({ selected }) => (
       <button
         className={classNames(

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AddressPresenter } from '@peerme/web-ui'
-import { TokenPayment } from '@multiversx/sdk-core'
-import { createTokenPaymentFromBigInteger } from '../helpers'
+import { TokenTransfer } from '@multiversx/sdk-core'
+import { createTokenTransferFromBigInteger } from '../helpers'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import {
   ProposalAction,
@@ -23,14 +23,14 @@ export const BulkSendActionPreview = (props: Props) => {
   const totalPayment =
     props.action.payments.length > 0
       ? toTokenPaymentFromProposalPayment(props.action.payments[0])
-      : TokenPayment.egldFromBigInteger(props.action.value)
+      : TokenTransfer.egldFromBigInteger(props.action.value)
 
   //create an array of transactions
   let transactions = []
   for (let i = 0; i < args.length; i += 2) {
     transactions.push({
       address: args[i],
-      amount: createTokenPaymentFromBigInteger(totalPayment, toActionArgsBigNumber(args[i + 1]) as any), // 'any' needed because of multiple BigNumber resolutions
+      amount: createTokenTransferFromBigInteger(totalPayment, toActionArgsBigNumber(args[i + 1]) as any), // 'any' needed because of multiple BigNumber resolutions
     })
   }
 

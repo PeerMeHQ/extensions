@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import { ScInfo, Entity, EntityTag, ChainWallet, ProposalActionArg, SearchServiceConfig } from '@peerme/core-ts'
 
@@ -56,7 +56,7 @@ export type AppContextValue = {
     endpoint: string | null,
     value: BigNumber.Value,
     args: ProposalActionArg[],
-    payments: TokenPayment[]
+    payments: TokenTransfer[]
   ) => void
   showToast: (text: string, type?: AppToastType) => void
 }

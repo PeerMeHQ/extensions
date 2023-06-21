@@ -1,5 +1,5 @@
 import { CoindripContracts } from './contracts'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
 import { Input, Button, UserSelector, PaymentSelector, Switch } from '@peerme/web-ui'
@@ -7,7 +7,7 @@ import { Input, Button, UserSelector, PaymentSelector, Switch } from '@peerme/we
 export const _StreamCreator = () => {
   const app = useApp()
   const [recipient, setRecipient] = useState('')
-  const [payment, setPayment] = useState<TokenPayment | null>(null)
+  const [payment, setPayment] = useState<TokenTransfer | null>(null)
   const [startsAt, setStartsAt] = useState('')
   const [endsAt, setEndsAt] = useState('')
   const [cancellable, setCancellable] = useState(true)
@@ -20,7 +20,7 @@ export const _StreamCreator = () => {
     const startsAtTs = Math.floor(new Date(startsAt).getTime() / 1000)
     const endsAtTs = Math.floor(new Date(endsAt).getTime() / 1000)
     const value = payment.isEgld() ? payment.amountAsBigInteger : 0
-    const tokenPayments = payment.isEgld() ? [] : [payment]
+    const tokenTransfers = payment.isEgld() ? [] : [payment]
 
     if (startsAtTs < nowTs) {
       app.showToast('Start date must be set to the future', 'error')
@@ -37,7 +37,7 @@ export const _StreamCreator = () => {
       CoindripContracts(app.config).StreamCreate.Endpoint,
       value,
       [recipient, startsAtTs, endsAtTs, cancellable],
-      tokenPayments
+      tokenTransfers
     )
   }
 

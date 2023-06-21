@@ -1,18 +1,18 @@
 import { BigNumber } from 'bignumber.js'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 
 export const toPreparedCsvLines = (plainText: string) => plainText.trim().split(/[\r\n]+/)
 
-export const createTokenPaymentFromBigInteger = (payment: TokenPayment, amount: BigNumber.Value) => {
+export const createTokenTransferFromBigInteger = (payment: TokenTransfer, amount: BigNumber.Value) => {
   const tokenIdentifier = sanitizeTokenIdentifier(payment.tokenIdentifier)
 
-  return new TokenPayment(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
+  return TokenTransfer.metaEsdtFromBigInteger(tokenIdentifier, payment.nonce, amount, payment.numDecimals)
 }
 
-export const createTokenPaymentFromAmount = (payment: TokenPayment, amount: BigNumber.Value) => {
+export const createTokenTransferFromAmount = (payment: TokenTransfer, amount: BigNumber.Value) => {
   const amountAsBigInteger = new BigNumber(amount).shiftedBy(payment.numDecimals).decimalPlaces(0)
 
-  return createTokenPaymentFromBigInteger(payment, amountAsBigInteger)
+  return createTokenTransferFromBigInteger(payment, amountAsBigInteger)
 }
 
 const sanitizeTokenIdentifier = (tokenIdentifier: string) => {

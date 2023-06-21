@@ -1,7 +1,7 @@
 import { GraphQl } from './graphql'
 import { BigNumber } from 'bignumber.js'
 import { PaymentSelector } from '@peerme/web-ui'
-import { TokenPayment } from '@multiversx/sdk-core'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client'
@@ -12,7 +12,7 @@ type Props = {
 
 export const _Swaps = (props: Props) => {
   const app = useApp()
-  const [payment, setPayment] = useState<TokenPayment | null>(null)
+  const [transfer, setTransfer] = useState<TokenTransfer | null>(null)
   const [tokenWantedId, _] = useState('')
   const [predictedOutAmount, setPredictedOutAmount] = useState<BigNumber>(new BigNumber(0))
 
@@ -20,13 +20,13 @@ export const _Swaps = (props: Props) => {
 
   const { loading, data: dexSwapData } = useQuery(GraphQl.Queries.xExchangeSwap, {
     variables: {
-      amountIn: payment?.amountAsBigInteger.toString(),
-      tokenInID: payment?.tokenIdentifier,
+      amountIn: transfer?.amountAsBigInteger.toString(),
+      tokenInID: transfer?.tokenIdentifier,
       tokenOutID: tokenWantedId,
       tolerance: 0.01,
     },
     errorPolicy: 'ignore',
-    skip: !payment || !tokenWantedId,
+    skip: !transfer || !tokenWantedId,
     client: props.apolloClient,
   })
 
@@ -38,9 +38,9 @@ export const _Swaps = (props: Props) => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    if (!payment) return
+    if (!transfer) return
 
-    app.requestProposalAction('', '', 0, [], [payment])
+    app.requestProposalAction('', '', 0, [], [transfer])
   }
 
   return (
@@ -49,7 +49,7 @@ export const _Swaps = (props: Props) => {
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}
-        onSelected={(val) => setPayment(val)}
+        onSelected={(val) => setTransfer(val)}
         className="mb-8"
       />
     </form>
