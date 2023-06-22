@@ -5,7 +5,7 @@ import { useDebounce } from '@peerme/core-ts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenTransfer, Address } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
-import { Button, Switch, Textarea, showToast, PaymentSelector, FileSelector, Alert } from '@peerme/web-ui'
+import { Button, Switch, Textarea, showToast, EntityTransferSelector, FileSelector, Alert } from '@peerme/web-ui'
 import { createTokenTransferFromAmount, createTokenTransferFromBigInteger, toPreparedCsvLines } from './helpers'
 
 export const _BulkTransactions = () => {
@@ -97,7 +97,7 @@ export const _BulkTransactions = () => {
       <label htmlFor="recipient" className="text-xl text-gray-700 dark:text-gray-200">
         {useSameAmount ? 'Select the token and amount you want to send:' : 'Select the token you want to send:'}
       </label>
-      <PaymentSelector
+      <EntityTransferSelector
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}

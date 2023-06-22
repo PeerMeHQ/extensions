@@ -2,7 +2,7 @@ import { CoindripContracts } from './contracts'
 import { TokenTransfer } from '@multiversx/sdk-core'
 import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
-import { Input, Button, UserSelector, PaymentSelector, Switch } from '@peerme/web-ui'
+import { Input, Button, UserSelector, EntityTransferSelector, Switch } from '@peerme/web-ui'
 
 export const _StreamCreator = () => {
   const app = useApp()
@@ -53,7 +53,7 @@ export const _StreamCreator = () => {
         onSelect={(val) => setRecipient(val.address)}
         className="mb-8"
       />
-      <PaymentSelector
+      <EntityTransferSelector
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}

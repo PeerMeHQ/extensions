@@ -5,7 +5,7 @@ import React, { SyntheticEvent, useState } from 'react'
 import { TokenTransfer, BytesValue } from '@multiversx/sdk-core'
 import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
 import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
-import { Button, Input, PaymentSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
+import { Button, Input, EntityTransferSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
 
 export const _Vesting = () => {
   const app = useApp()
@@ -108,7 +108,7 @@ export const _Vesting = () => {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <PaymentSelector
+      <EntityTransferSelector
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}

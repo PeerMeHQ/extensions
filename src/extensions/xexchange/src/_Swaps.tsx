@@ -1,8 +1,8 @@
 import { GraphQl } from './graphql'
 import { BigNumber } from 'bignumber.js'
-import { PaymentSelector } from '@peerme/web-ui'
 import { TokenTransfer } from '@multiversx/sdk-core'
 import { useApp } from '../../../shared/hooks/useApp'
+import { EntityTransferSelector } from '@peerme/web-ui'
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client'
 
@@ -45,7 +45,7 @@ export const _Swaps = (props: Props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PaymentSelector
+      <EntityTransferSelector
         config={app.config.walletConfig}
         entity={app.config.entity}
         permissions={[]}
