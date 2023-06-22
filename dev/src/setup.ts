@@ -33,7 +33,6 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
     name: 'MyDAO',
     description: 'A DAO for testing purposes.',
     avatarUrl: '#',
-    isAvatarNft: false,
     headerImageUrl: null,
     verified: false,
     private: false,
@@ -55,12 +54,14 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
       votingPeriodMinutes: null,
       rolesRestrictPropose: [],
     },
+    leaders: 1,
     level: 0,
     credits: null,
     callerRoles: [],
     parent: null,
     children: [],
     extra: [],
+    favorited: false,
   },
 })
 
