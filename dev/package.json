@@ -15,7 +15,7 @@
     "@multiversx/sdk-dapp": "2.12.1",
     "@elrondnetwork/transaction-decoder": "^1.0.0",
     "@peerme/extensions": "*",
-    "@peerme/web-ui": "^1.10.0",
+    "@peerme/web-ui": "^1.11.0",
     "axios": "^1.3.6",
     "collect.js": "^4.36.1",
     "graphql": "^16.6.0",
