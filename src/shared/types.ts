@@ -1,3 +1,4 @@
+import React, { SVGProps } from 'react'
 import { BigNumber } from 'bignumber.js'
 import { TokenTransfer } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
@@ -28,8 +29,8 @@ export type ExtensionInfo = {
   Description: string
   Website: string
   Logo: {
-    Light: string
-    Dark: string
+    Light: React.FC<SVGProps<SVGSVGElement>> | string
+    Dark: React.FC<SVGProps<SVGSVGElement>> | string
   }
   Tags: EntityTag[]
   Contracts: ExtensionScInfo

@@ -1,6 +1,6 @@
 import React from 'react'
-import Image from 'next/image'
 import BigNumber from 'bignumber.js'
+import { _AppLogo } from './_AppLogo'
 import { ExtensionConfig, ExtensionInfo } from '../types'
 import { classNames, ProposalAction } from '@peerme/core-ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -34,25 +34,7 @@ export const ActionPreview = (props: Props) => {
             rel="noopener nofollow noreferrer"
             className="hover:text-blue-400 transition duration-200"
           >
-            {props.config.dark ? (
-              <Image
-                src={props.extension.Logo.Dark}
-                alt={props.extension.Name + ' Logo'}
-                className="inline-block w-6 sm:w-8 md:w-10"
-                width={50}
-                height={50}
-                unoptimized
-              />
-            ) : (
-              <Image
-                src={props.extension.Logo.Light}
-                alt={props.extension.Name + ' Logo'}
-                className="inline-block w-6 sm:w-8 md:w-10"
-                width={50}
-                height={50}
-                unoptimized
-              />
-            )}
+            <_AppLogo config={props.config} extension={props.extension} className="w-10 sm:w-12 md:w-14" size={50} />
             <span className="inline-block ml-1">{props.extension.Name}</span>
           </a>
         </h3>

@@ -1,5 +1,5 @@
 import { App } from './src/App'
-import Logo from './meta/logo.svg'
+import { Logo } from './meta/Logo'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const StakingExtension = (config: ExtensionConfig): ExtensionInfo => ({

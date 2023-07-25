@@ -1,7 +1,6 @@
 import { App } from './src/App'
 import { PulsarMoneyContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
-import Logo from './meta/logo.svg'
 
 export const PulsarMoneyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false, // leave this as false, we'll enable it after the review process
@@ -9,8 +8,8 @@ export const PulsarMoneyExtension = (config: ExtensionConfig): ExtensionInfo => 
   Description: 'Send instant and transparent payments',
   Website: 'https://app.pulsar.money',
   Logo: {
-    Light: Logo,
-    Dark: Logo,
+    Light: '/images/extensions/pulsar-logo.webp',
+    Dark: '/images/extensions/pulsar-logo.webp',
   },
   Tags: ['defi'],
   Contracts: PulsarMoneyContracts(config),

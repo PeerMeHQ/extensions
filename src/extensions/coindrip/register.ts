@@ -1,5 +1,5 @@
 import { App } from './src/App'
-import Logo from './meta/logo.svg'
+import { Logo } from './meta/Logo'
 import { CoindripContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
