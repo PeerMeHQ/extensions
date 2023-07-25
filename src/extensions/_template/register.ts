@@ -1,6 +1,7 @@
 import { App } from './src/App'
-import Logo from './meta/logo.svg'
 import { Contracts } from './src/contracts'
+import { LogoBlack } from './meta/LogoBlack'
+import { LogoWhite } from './meta/LogoWhite'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
@@ -9,8 +10,8 @@ export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Description: '<describe your extension in a few words>',
   Website: '<your app website>',
   Logo: {
-    Light: Logo,
-    Dark: Logo,
+    Light: LogoBlack,
+    Dark: LogoWhite,
   },
   Tags: [],
   Contracts: Contracts(config),
