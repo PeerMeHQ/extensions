@@ -3,8 +3,8 @@
   "version": "1.7.0",
   "description": "Extensions to use on PeerMe.io",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/peermehq/extensions#readme",
   "scripts": {
-    "build": "tsup index.ts --format cjs,esm --dts --minify",
+    "build": "tsup index.ts --format esm,cjs --dts --minify --external react next",
     "watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc --noEmit",
