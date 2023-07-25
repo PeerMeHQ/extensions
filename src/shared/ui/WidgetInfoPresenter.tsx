@@ -1,8 +1,6 @@
 import { Config } from '../../config'
 import React, { useMemo } from 'react'
 import { ExtensionConfig } from '../types'
-import { _AppPresenter } from './_AppPresenter'
-import { _AppSelectorItem } from './_AppSelectorItem'
 
 type Props = {
   config: ExtensionConfig
