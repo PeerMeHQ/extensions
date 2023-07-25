@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/peermehq/extensions#readme",
   "scripts": {
-    "build": "tsup index.ts --format cjs,esm --dts",
+    "build": "tsup index.ts --format cjs,esm --dts --minify",
     "watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc --noEmit",
