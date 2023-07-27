@@ -10,13 +10,13 @@ import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types
 const getClaimsContractAddress = (network: Network) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqd8vswwygp8sgmm6rd2x4rfgxjvv4fa93fsxsks7y6q'
   if (network === 'testnet') return '#'
-  return '#'
+  return 'erd1qqqqqqqqqqqqqpgqnsmrn5q08eqth3fy8el87sgdj0mkhwdwl2jqnf59cg'
 }
 
 const getMarketContractAddress = (network: Network) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqca3crd27vj8cruuxzkkma548fy8q69hxfsxsw2wxwy'
   if (network === 'testnet') return '#'
-  return '#'
+  return 'erd1qqqqqqqqqqqqqpgqay2r64l9nhhvmaqw4qanywfd0954w2m3c77qm7drxc'
 }
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
