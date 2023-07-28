@@ -5,7 +5,7 @@ import { LogoWhite } from './meta/LogoWhite'
 import type { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const ItheumExtension = (config: ExtensionConfig): ExtensionInfo => ({
-  Enabled: false,
+  Enabled: true,
   Name: 'Itheum',
   Description: 'Truly own and trade your data',
   Website: 'https://www.itheum.io',
