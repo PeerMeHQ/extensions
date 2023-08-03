@@ -14,7 +14,7 @@ export const Config = {
   },
 
   DataNftCollection: (network: Network) => {
-    if (network === 'devnet') return 'DATANFTFT2-71ac28'
+    if (network === 'devnet') return 'DATANFTFT4-3ba099'
     if (network === 'testnet') return '#'
     return 'DATANFTFT-e936d4'
   },
