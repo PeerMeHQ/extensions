@@ -34,7 +34,12 @@ export const ActionPreview = (props: Props) => {
             rel="noopener nofollow noreferrer"
             className="hover:text-blue-400 transition duration-200"
           >
-            <_AppLogo config={props.config} extension={props.extension} className="w-10 sm:w-12 md:w-14" size={50} />
+            <_AppLogo
+              config={props.config}
+              extension={props.extension}
+              className="inline-block w-10 sm:w-12 md:w-14"
+              size={50}
+            />
             <span className="inline-block ml-1">{props.extension.Name}</span>
           </a>
         </h3>
