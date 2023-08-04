@@ -13,7 +13,7 @@ type Props = {
   className?: string
 }
 
-export const _ProcureSection = (props: Props) => {
+export function _ProcureSection(props: Props) {
   const app = useApp()
   const [activeOffer, setActiveOffer] = useState<OfferInfo | null>(props.procurable || null)
   const [url, setUrl] = useState('')

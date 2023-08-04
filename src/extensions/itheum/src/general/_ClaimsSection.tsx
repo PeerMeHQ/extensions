@@ -7,7 +7,7 @@ import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { classNames, toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 
-export const _ClaimsSection = () => {
+export function _ClaimsSection() {
   const app = useApp()
   const [claimInfos, setClaimInfos] = React.useState<ClaimInfo[]>([])
   const contracts = Contracts(app.config)

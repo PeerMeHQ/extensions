@@ -7,7 +7,7 @@ type Props = {
   action: ProposalAction
 }
 
-export const AddOfferActionPreview = (props: Props) => {
+export function AddOfferActionPreview(props: Props) {
   const paymentToken = props.action.arguments[0] as string
   const paymentFee = props.action.arguments[2] as string
 

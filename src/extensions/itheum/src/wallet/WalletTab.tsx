@@ -1,11 +1,15 @@
-import { DataNftMetadata } from '../types'
 import { fetchDataNftsOfAccount } from '../api'
 import React, { useEffect, useState } from 'react'
 import { _DataNftPreview } from './_DataNftPreview'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
+import { DataNftMetadata, MarketRequirements } from '../types'
 
-export const WalletTab = () => {
+type Props = {
+  marketRequirements: MarketRequirements | null
+}
+
+export function WalletTab(props: Props) {
   const app = useApp()
   const [nfts, setNfts] = useState<DataNftMetadata[]>([])
 
@@ -19,7 +23,7 @@ export const WalletTab = () => {
         <ul className="flex flex-wrap gap-4">
           {nfts.map((nft) => (
             <li key={nft.id}>
-              <_DataNftPreview nft={nft} />
+              <_DataNftPreview nft={nft} marketRequirements={props.marketRequirements} />
             </li>
           ))}
         </ul>
