@@ -1,18 +1,19 @@
 import { Config } from '../config'
 import { Contracts } from '../contracts'
-import { DataNftMetadata } from '../types'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
 import { TokenTransfer } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
+import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
   nft: DataNftMetadata
+  marketRequirements: MarketRequirements | null
 }
 
-export const _MarketListSection = (props: Props) => {
+export function _MarketListSection(props: Props) {
   const app = useApp()
   const [amount, setAmount] = useState('1')
   const [price, setPrice] = useState('10')
@@ -28,7 +29,7 @@ export const _MarketListSection = (props: Props) => {
       addOfferScInfo.Address,
       addOfferScInfo.Endpoint,
       0,
-      [paymentTokenId, paymentTokenNonce, minAmountForSeller, +amount],
+      [paymentTokenId, paymentTokenNonce, +price, minAmountForSeller, +amount],
       [TokenTransfer.semiFungible(props.nft.collection, props.nft.nonce, +amount)]
     )
   }
@@ -65,9 +66,11 @@ export const _MarketListSection = (props: Props) => {
           />
         </div>
         <ul className="text-gray-700 dark:text-gray-200 text-lg pl-2 mb-8">
-          <li>
-            Seller Tax (per NFT): <strong>{minAmountForSeller}</strong>
-          </li>
+          {!!props.marketRequirements && (
+            <li>
+              Seller Tax (per NFT): <strong>{props.marketRequirements.sellerFee / 100}%</strong>
+            </li>
+          )}
         </ul>
         <Button color="blue" className="block w-full" submit>
           List {amount} NFT for {totalPrice} {Config.TokenName}

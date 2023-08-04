@@ -12,7 +12,7 @@ type Props = {
   offer: OfferInfo
 }
 
-export const _OfferProcureDetails = (props: Props) => {
+export function _OfferProcureDetails(props: Props) {
   const app = useApp()
   const [nft, setNft] = useState<DataNftMetadata | null>(null)
 

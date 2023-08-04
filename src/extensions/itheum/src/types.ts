@@ -1,5 +1,17 @@
 import { BigNumber } from 'bignumber.js'
 
+export type MarketRequirements = {
+  acceptedTokens: string[]
+  acceptedPayments: string[]
+  maximumPaymentFees: BigNumber[]
+  discountFeePercentageBuyer: number
+  discountFeePercentageSeller: number
+  percentageCutFromBuyer: number
+  percentageCutFromSeller: number
+  buyerFee: number
+  sellerFee: number
+}
+
 export type ClaimInfo = {
   amount: BigNumber
   lastModified: number

@@ -2,8 +2,20 @@ import BigNumber from 'bignumber.js'
 import { numberToPaddedHex } from '@peerme/core-ts'
 import JsonAbiNftMint from '../meta/datanftmint.abi.json'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
-import { ClaimInfo, DataNftMetadata, OfferInfo } from './types'
+import { ClaimInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
+
+export const toTypedMarketRequirements = (value: any): MarketRequirements => ({
+  acceptedTokens: value.accepted_tokens.map((v: any) => v.toString()),
+  acceptedPayments: value.accepted_payments.map((v: any) => v.toString()),
+  maximumPaymentFees: value.maximum_payment_fees.map((v: any) => new BigNumber(v)),
+  discountFeePercentageBuyer: value.discount_fee_percentage_buyer.toNumber(),
+  discountFeePercentageSeller: value.discount_fee_percentage_seller.toNumber(),
+  percentageCutFromBuyer: value.percentage_cut_from_buyer.toNumber(),
+  percentageCutFromSeller: value.percentage_cut_from_seller.toNumber(),
+  buyerFee: value.percentage_cut_from_buyer.toNumber() - value.discount_fee_percentage_buyer.toNumber(),
+  sellerFee: value.percentage_cut_from_seller.toNumber() - value.discount_fee_percentage_seller.toNumber(),
+})
 
 export const toTypedClaimInfo = (value: any): ClaimInfo =>
   ({

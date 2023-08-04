@@ -11,7 +11,7 @@ type Props = {
   onProcureRequest?: () => void
 }
 
-export const _OfferPreview = (props: Props) => {
+export function _OfferPreview(props: Props) {
   if (!props.nft) return null
   const app = useApp()
   const linkUrl = Config.Urls.MarketplaceOffer(app.config.network, props.offer.id)

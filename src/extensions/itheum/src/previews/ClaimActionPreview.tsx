@@ -7,7 +7,7 @@ type Props = {
   action: ProposalAction
 }
 
-export const ClaimActionPreview = (props: Props) => {
+export function ClaimActionPreview(props: Props) {
   const typeIndex = props.action.arguments[0] as number
   const displayableTypeName = Config.Claims.OrderedTypeNames[typeIndex] || '-'
 

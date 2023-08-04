@@ -14,7 +14,7 @@ type Props = {
   onProcureRequest?: (offer: OfferInfo) => void
 }
 
-export const _OffersSection = (props: Props) => {
+export function _OffersSection(props: Props) {
   const app = useApp()
   const [nfts, setNfts] = useState<DataNftMetadata[]>([])
   const [offers, setOffers] = useState<OfferInfo[]>([])

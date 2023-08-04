@@ -14,7 +14,7 @@ type Props = {
   nft: DataNftMetadata
 }
 
-export const _Procurer = (props: Props) => {
+export function _Procurer(props: Props) {
   const app = useApp()
   const [isOpen, setIsOpen] = useState(false)
   const [quantity, setQuantity] = useState('1')
