@@ -1,5 +1,6 @@
 import { Config } from '../config'
 import { Contracts } from '../contracts'
+import { BigNumber } from 'bignumber.js'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
 import { TokenTransfer } from '@multiversx/sdk-core'
@@ -25,11 +26,12 @@ export function _MarketListSection(props: Props) {
     const addOfferScInfo = Contracts(app.config).AddOffer
     const paymentTokenId = Config.TokenId(app.config.network)
     const paymentTokenNonce = 0
+    const priceBig = new BigNumber(price).shiftedBy(Config.TokenDecimals)
     app.requestProposalAction(
       addOfferScInfo.Address,
       addOfferScInfo.Endpoint,
       0,
-      [paymentTokenId, paymentTokenNonce, +price, minAmountForSeller, +amount],
+      [paymentTokenId, paymentTokenNonce, priceBig, minAmountForSeller, +amount],
       [TokenTransfer.semiFungible(props.nft.collection, props.nft.nonce, +amount)]
     )
   }
