@@ -55,7 +55,7 @@ export const decodeNftMetadata = (nft: NonFungibleTokenOfAccountOnNetwork, index
     royalties: nft.royalties ? nft.royalties.toNumber() / 100 : 0,
     nonce: nft.nonce,
     collection: nft.collection,
-    balance: 0,
+    balance: nft.balance.toNumber(),
   }
 }
 
