@@ -44,7 +44,7 @@ export function _DataNftPreview(props: Props) {
                 Total Supply: <strong>{props.nft.supply}</strong>
               </li>
               <li>
-                Royalty: <strong>{props.nft.royalties * 100}%</strong>
+                Royalty: <strong>{toDisplayablePercentage(props.nft.royalties)}</strong>
               </li>
             </ul>
           </div>
@@ -54,3 +54,5 @@ export function _DataNftPreview(props: Props) {
     </>
   )
 }
+
+const toDisplayablePercentage = (value: number) => parseFloat((value * 100).toFixed(2)) + '%'
