@@ -1,7 +1,5 @@
 import React from 'react'
 import { ProposalAction } from '@peerme/core-ts'
-import JsonAbiClaims from '../meta/claims.abi.json'
-import JsonAbiMarket from '../meta/data_market.abi.json'
 import { ClaimActionPreview } from './previews/ClaimActionPreview'
 import { AddOfferActionPreview } from './previews/AddOfferActionPreview'
 import { AcceptOfferActionPreview } from './previews/AcceptOfferActionPreview'
@@ -29,34 +27,34 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   ViewClaimWithDate: {
     Address: getClaimsContractAddress(config.network),
     Endpoint: 'viewClaimWithDate',
-    AbiContent: JsonAbiClaims as any,
+    AbiUrl: 'https://peerme.io/abis/itheum/claims.abi.json',
   },
   // Market
   AddOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'addOffer',
-    AbiContent: JsonAbiMarket as any,
+    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
     ActionPreview: (action: ProposalAction) => <AddOfferActionPreview action={action} />,
   },
   AcceptOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'acceptOffer',
-    AbiContent: JsonAbiMarket as any,
+    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
     ActionPreview: (action: ProposalAction) => <AcceptOfferActionPreview action={action} config={config} />,
   },
   ViewMarketRequirements: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewRequirements',
-    AbiContent: JsonAbiMarket as any,
+    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
   },
   ViewOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewOffer',
-    AbiContent: JsonAbiMarket as any,
+    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
   },
   ViewPagedOffers: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewPagedOffers',
-    AbiContent: JsonAbiMarket as any,
+    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
   },
 })
