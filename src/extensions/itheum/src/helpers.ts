@@ -1,4 +1,3 @@
-import { Config } from './config'
 import BigNumber from 'bignumber.js'
 import { numberToPaddedHex } from '@peerme/core-ts'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
