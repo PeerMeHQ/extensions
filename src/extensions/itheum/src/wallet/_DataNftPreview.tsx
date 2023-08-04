@@ -23,7 +23,7 @@ export const _DataNftPreview = (props: Props) => {
       </button>
       <StickyModal open={showDetails} onClose={() => setShowDetails(false)}>
         <header className="flex gap-8 mb-4 p-4">
-          <div className="flex items-center">
+          <div className="flex-shrink-0 flex items-center">
             <img src={props.nft.nftImgUrl} alt="NFT Preview" className="w-32 h-32 sm:w-40 sm:h-40" />
           </div>
           <div className="flex-grow">
