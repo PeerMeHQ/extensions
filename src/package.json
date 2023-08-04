@@ -1,6 +1,6 @@
 {
   "name": "@peerme/extensions",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "Extensions to use on PeerMe.io",
   "type": "module",
   "main": "dist/index.cjs",
