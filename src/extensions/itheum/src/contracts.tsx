@@ -14,7 +14,7 @@ const getClaimsContractAddress = (network: Network) => {
 }
 
 const getMarketContractAddress = (network: Network) => {
-  if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqca3crd27vj8cruuxzkkma548fy8q69hxfsxsw2wxwy'
+  if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqrwtl03qdxjv2e52ta5ry4rg0z7l95neqfsxsp4y4xh'
   if (network === 'testnet') return '#'
   return 'erd1qqqqqqqqqqqqqpgqay2r64l9nhhvmaqw4qanywfd0954w2m3c77qm7drxc'
 }
