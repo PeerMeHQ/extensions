@@ -1,6 +1,6 @@
+import { Config } from './config'
 import BigNumber from 'bignumber.js'
 import { numberToPaddedHex } from '@peerme/core-ts'
-import JsonAbiNftMint from '../meta/datanftmint.abi.json'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
 import { ClaimInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
@@ -45,8 +45,12 @@ export const toTypedOfferInfo = (value: any): OfferInfo => ({
   quantity: value.quantity.toNumber(),
 })
 
-export const decodeNftMetadata = (nft: NonFungibleTokenOfAccountOnNetwork, index?: number): DataNftMetadata => {
-  const abiRegistry = AbiRegistry.create(JsonAbiNftMint)
+export const decodeNftMetadata = (
+  nftMintAbiContent: string,
+  nft: NonFungibleTokenOfAccountOnNetwork,
+  index?: number
+): DataNftMetadata => {
+  const abiRegistry = AbiRegistry.create(nftMintAbiContent as any)
   const dataNftAttributes = abiRegistry.getStruct('DataNftAttributes')
   const decodedAttributes = new BinaryCodec().decodeTopLevel(nft.attributes, dataNftAttributes).valueOf()
 

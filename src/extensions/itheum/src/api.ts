@@ -18,13 +18,16 @@ export const fetchDataNftsOfAccount = async (app: AppContextValue) => {
   const url = `accounts/${app.config.entity.address}/nfts?size=10000&collections=${collection}&withSupply=true`
   const res: any[] = await app.networkProvider.doGetGeneric(url)
 
+  const nftMintAbiRes = await fetch(Config.Abis.DataNft)
+  const nftMintAbiContent = await nftMintAbiRes.json()
+
   return res
     .map((item) => {
       let nft = NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item) as any
       nft.rawResponse = item // TODO: remove once merged: https://github.com/multiversx/mx-sdk-js-network-providers/pull/38
       return nft
     })
-    .map((item) => decodeNftMetadata(item))
+    .map((item) => decodeNftMetadata(nftMintAbiContent, item))
 }
 
 export const fetchDataNftsByIds = async (app: AppContextValue, tokenIds: string[]) => {
@@ -32,11 +35,14 @@ export const fetchDataNftsByIds = async (app: AppContextValue, tokenIds: string[
   const url = `nfts?withSupply=true&identifiers=${tokenIds.join(',')}`
   const res: any[] = await app.networkProvider.doGetGeneric(url)
 
+  const nftMintAbiRes = await fetch(Config.Abis.DataNft)
+  const nftMintAbiContent = await nftMintAbiRes.json()
+
   return res
     .map((item) => {
       let nft = NonFungibleTokenOfAccountOnNetwork.fromApiHttpResponse(item) as any
       nft.rawResponse = item // TODO: remove once merged: https://github.com/multiversx/mx-sdk-js-network-providers/pull/38
       return nft
     })
-    .map((item) => decodeNftMetadata(item))
+    .map((item) => decodeNftMetadata(nftMintAbiContent, item))
 }

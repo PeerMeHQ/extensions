@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Config } from '../config'
 import { fetchDataNfts } from '../api'
 import { _Procurer } from './_Procurer'
 import { decodeNftMetadata } from '../helpers'
@@ -17,9 +18,11 @@ export function _OfferProcureDetails(props: Props) {
   const [nft, setNft] = useState<DataNftMetadata | null>(null)
 
   useEffect(() => {
-    fetchDataNfts(app, props.offer.offeredTokenIdentifier, props.offer.offeredTokenNonce).then((val) =>
-      setNft(decodeNftMetadata(val))
-    )
+    fetchDataNfts(app, props.offer.offeredTokenIdentifier, props.offer.offeredTokenNonce).then(async (val) => {
+      const nftMintAbiRes = await fetch(Config.Abis.DataNft)
+      const nftMintAbiContent = await nftMintAbiRes.json()
+      setNft(decodeNftMetadata(nftMintAbiContent, val))
+    })
   }, [props.offer])
 
   if (!nft) return null

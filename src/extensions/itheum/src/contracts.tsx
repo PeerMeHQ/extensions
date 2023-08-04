@@ -1,4 +1,5 @@
 import React from 'react'
+import { Config } from './config'
 import { ProposalAction } from '@peerme/core-ts'
 import { ClaimActionPreview } from './previews/ClaimActionPreview'
 import { AddOfferActionPreview } from './previews/AddOfferActionPreview'
@@ -27,34 +28,34 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   ViewClaimWithDate: {
     Address: getClaimsContractAddress(config.network),
     Endpoint: 'viewClaimWithDate',
-    AbiUrl: 'https://peerme.io/abis/itheum/claims.abi.json',
+    AbiUrl: Config.Abis.Claims,
   },
   // Market
   AddOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'addOffer',
-    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
+    AbiUrl: Config.Abis.Marketplace,
     ActionPreview: (action: ProposalAction) => <AddOfferActionPreview action={action} />,
   },
   AcceptOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'acceptOffer',
-    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
+    AbiUrl: Config.Abis.Marketplace,
     ActionPreview: (action: ProposalAction) => <AcceptOfferActionPreview action={action} config={config} />,
   },
   ViewMarketRequirements: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewRequirements',
-    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
+    AbiUrl: Config.Abis.Marketplace,
   },
   ViewOffer: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewOffer',
-    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
+    AbiUrl: Config.Abis.Marketplace,
   },
   ViewPagedOffers: {
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewPagedOffers',
-    AbiUrl: 'https://peerme.io/abis/itheum/data_market.abi.json',
+    AbiUrl: Config.Abis.Marketplace,
   },
 })

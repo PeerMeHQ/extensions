@@ -7,6 +7,12 @@ export const Config = {
   TokenName: 'ITHEUM',
   TokenDecimals: 18,
 
+  Abis: {
+    Claims: 'https://peerme.io/abis/itheum/claims.abi.json',
+    Marketplace: 'https://peerme.io/abis/itheum/data_market.abi.json',
+    DataNft: 'https://peerme.io/abis/itheum/datanftmint.abi.json',
+  },
+
   TokenId: (network: Network) => {
     if (network === 'devnet') return 'ITHEUM-a61317'
     if (network === 'testnet') return '#'
