@@ -1,6 +1,6 @@
 {
   "name": "@peerme/extensions",
-  "version": "1.8.5",
+  "version": "1.8.8",
   "description": "Extensions to use on PeerMe.io",
   "type": "module",
   "main": "dist/index.cjs",
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/peermehq/extensions#readme",
   "scripts": {
-    "build": "tsup index.ts --format esm,cjs --dts --minify --external react next",
+    "build": "npm run lint && rollup -c --bundleConfigAsCjs",
     "watch": "npm run build -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc --noEmit",
@@ -63,6 +63,10 @@
     "@multiversx/sdk-network-providers": "^1.5.0",
     "@peerme/core-ts": ">=1.16.1",
     "@peerme/web-ui": "*",
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-image": "^3.0.2",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "@types/pluralize": "^0.0.30",
     "@types/react": "^18.2.16",
     "@types/react-modal": "^3.16.0",
@@ -73,7 +77,11 @@
     "postcss": "^8.4.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tsup": "^7.1.0",
+    "rollup": "^3.25.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "^5.1.6"
   }
 }
