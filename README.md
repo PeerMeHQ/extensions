@@ -8,6 +8,7 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 
 ## Available Extensions
 
+- Hatom: [hatom.com](https://hatom.com) (in progress)
 - Itheum: [itheum.io](https://www.itheum.io)
 - Coindrip: [coindrip.finance](https://coindrip.finance)
 - MultiversX Staking: [multiversx.com](https://multiversx.com) (in progress)
