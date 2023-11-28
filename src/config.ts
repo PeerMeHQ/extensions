@@ -8,6 +8,7 @@ import { CoindripExtension } from './extensions/coindrip/register'
 import { XExchangeExtension } from './extensions/xexchange/register'
 import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
 import { AshSwapExtension } from './extensions/ashswap/register'
+import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [
@@ -21,6 +22,7 @@ export const Config = (config: ExtensionConfig) => ({
     PulsarMoneyExtension(config),
     HatomExtension(config),
     AshSwapExtension(config),
+    ArtCpaClubExtension(config),
   ],
 
   KnowledgeBase: {
