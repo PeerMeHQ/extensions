@@ -1,36 +1,46 @@
 import { BigNumber } from 'bignumber.js'
 
 export type DelegationProvider = {
-  identity: {
-    key: string
-    name: string
-    avatar: string
-    description: string
-    location: string
-    url: string
-  }
-  contract: string
-  explorerURL: string
-  featured: boolean
-  owner: string
-  serviceFee: string
-  maxDelegationCap: BigNumber
-  initialOwnerFunds: string
-  automaticActivation: boolean
-  withDelegationCap: boolean
-  changeableServiceFee: boolean
-  checkCapOnRedelegate: boolean
-  createdNonce: number
-  unBondPeriod: number
-  apr: string
-  aprValue: number
-  totalActiveStake: BigNumber
-  totalUnStaked: string
-  totalCumulatedRewards: string
-  numUsers: number
   numNodes: number
-  maxDelegateAmountAllowed: BigNumber
-  ownerBelowRequiredBalanceThreshold: boolean
+  stake: BigNumber
+  topUp: string
+  locked: string
+  provider: string
+  owner: string
+  featured: boolean
+  serviceFee: number
+  delegationCap: BigNumber
+  apr: number
+  numUsers: number
+  cumulatedRewards: string
+  identity: string
+  automaticActivation: boolean
+  checkCapOnRedelegate: boolean
+  githubProfileValidated: boolean
+  githubProfileValidatedAt: string
+  githubKeysValidated: boolean
+  githubKeysValidatedAt: string
+  identityInfo: ProviderIdentity
+}
+
+type ProviderIdentity = {
+  identity: string
+  locked: string
+  distribution: { [key: string]: number }
+  avatar: string
+  description: string
+  name: string
+  website: string
+  twitter: string
+  location: string
+  score: number
+  validators: number
+  stake: string
+  topUp: string
+  providers: string[]
+  stakePercent: number
+  apr: number
+  rank: number
 }
 
 export type DelegationInfo = {

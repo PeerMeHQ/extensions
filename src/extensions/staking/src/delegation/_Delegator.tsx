@@ -27,28 +27,28 @@ export const _Delegator = (props: Props) => {
       app.showToast('Insufficient balance', 'error')
       return
     }
-    app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueBig, [], [])
+    app.requestProposalAction(props.provider.provider, Config.Endpoints.Delegate, valueBig, [], [])
   }
 
   return (
     <div className="relative pt-2">
-      <h2 className="sr-only">Stake with {props.provider.identity.name}</h2>
+      <h2 className="sr-only">Stake with {props.provider.identityInfo.name}</h2>
       <a
-        href={props.provider.identity.url}
+        href={props.provider.identityInfo.website}
         target="_blank"
         rel="noopener"
         className="flex px-6 py-3 bg-gray-200 dark:bg-gray-900 rounded-xl mb-4"
       >
         <div className="flex items-center">
           <img
-            src={props.provider.identity.avatar}
-            alt={props.provider.identity.name + ' Staking Provider Avatar'}
+            src={props.provider.identityInfo.avatar}
+            alt={props.provider.identityInfo.name + ' Staking Provider Avatar'}
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-4"
           />
         </div>
         <div className="flex-grow text-left">
-          <h3 className="text-lg text-black dark:text-white">{props.provider.identity.name}</h3>
-          <span className="text-sm text-gray-500">{props.provider.identity.url}</span>
+          <h3 className="text-lg text-black dark:text-white">{props.provider.identityInfo.name}</h3>
+          <span className="text-sm text-gray-500">{props.provider.identityInfo.website}</span>
         </div>
       </a>
       <label htmlFor="amount" className="pl-1 text-xl mb-2 text-gray-800 dark:text-gray-200">

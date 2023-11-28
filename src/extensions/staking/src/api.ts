@@ -3,25 +3,25 @@ import { DelegationInfo, DelegationProvider } from './types'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 
 export const getDelegationProvidersRequest = async (provider: ApiNetworkProvider): Promise<DelegationProvider[]> => {
-  const res = await provider.doGetGeneric('providers?size=10000')
-
-  return res.map(
+  const res = await provider.doGetGeneric('providers?withIdentityInfo=true&size=10000')
+  const providers: DelegationProvider[] = res.map(
     (r: any) =>
       ({
         ...r,
-        totalActiveStake: new BigNumber(res.totalActiveStake || 0),
-        maxDelegationCap: new BigNumber(res.maxDelegationCap || 0),
-        maxDelegateAmountAllowed: new BigNumber(res.maxDelegateAmountAllowed || 0),
+        stake: new BigNumber(res.stake || 0),
+        delegationCap: new BigNumber(res.delegationCap || 0),
       } as DelegationProvider)
   )
+
+  return providers.filter((p) => !!p.identityInfo)
 }
 
 export const getDelegationInfoRequest = async (
   provider: ApiNetworkProvider,
   address: string
 ): Promise<DelegationInfo[]> => {
-  const res = await provider.doGetGeneric(`accounts/${address}/delegations?size=10000`)
-
+  const res = await provider.doGetGeneric(`accounts/${address}/delegation?size=10000`)
+  console.log('del', res)
   return res.map(
     (r: any) =>
       ({

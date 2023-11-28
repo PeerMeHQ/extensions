@@ -24,12 +24,12 @@ export const _DelegationsRow = (props: Props) => {
 
   const handleRewardClaim = (e: SyntheticEvent) => {
     e.stopPropagation()
-    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ClaimRewards, 0, [], [])
+    app.requestProposalAction(props.provider!.provider, Config.Endpoints.ClaimRewards, 0, [], [])
   }
 
   const handleRewardStake = (e: SyntheticEvent) => {
     e.stopPropagation()
-    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ReDelegateRewards, 0, [], [])
+    app.requestProposalAction(props.provider!.provider, Config.Endpoints.ReDelegateRewards, 0, [], [])
   }
 
   return (
@@ -43,13 +43,13 @@ export const _DelegationsRow = (props: Props) => {
           <div className="flex">
             <div className="flex items-center">
               <img
-                src={props.provider.identity.avatar}
-                alt={props.provider.identity.name + ' Staking Provider Avatar'}
+                src={props.provider.identityInfo.avatar}
+                alt={props.provider.identityInfo.name + ' Staking Provider Avatar'}
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-4"
               />
             </div>
             <div className="flex-grow text-left">
-              <h3 className="text-lg text-black dark:text-white">{props.provider.identity.name}</h3>
+              <h3 className="text-lg text-black dark:text-white">{props.provider.identityInfo.name}</h3>
               <span className="text-sm text-gray-500">APR: {props.provider.apr}%</span>
             </div>
           </div>
