@@ -7,6 +7,7 @@ import { StakingExtension } from './extensions/staking/register'
 import { CoindripExtension } from './extensions/coindrip/register'
 import { XExchangeExtension } from './extensions/xexchange/register'
 import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
+import { AshSwapExtension } from './extensions/ashswap/register'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [
@@ -19,6 +20,7 @@ export const Config = (config: ExtensionConfig) => ({
     XBulkExtension(config),
     PulsarMoneyExtension(config),
     HatomExtension(config),
+    AshSwapExtension(config),
   ],
 
   KnowledgeBase: {
