@@ -22,7 +22,7 @@ export const getDelegationInfoRequest = async (
   address: string
 ): Promise<DelegationInfo[]> => {
   const res = await provider.doGetGeneric(`accounts/${address}/delegation?size=10000`)
-  console.log('del', res)
+
   return res.map(
     (r: any) =>
       ({
