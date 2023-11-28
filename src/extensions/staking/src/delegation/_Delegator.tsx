@@ -27,7 +27,7 @@ export const _Delegator = (props: Props) => {
       app.showToast('Insufficient balance', 'error')
       return
     }
-    app.requestProposalAction(props.provider.provider, Config.Endpoints.Delegate, valueBig, [], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueBig, [], [])
   }
 
   return (

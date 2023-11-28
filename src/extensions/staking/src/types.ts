@@ -5,7 +5,7 @@ export type DelegationProvider = {
   stake: BigNumber
   topUp: string
   locked: string
-  provider: string
+  contract: string
   owner: string
   featured: boolean
   serviceFee: number

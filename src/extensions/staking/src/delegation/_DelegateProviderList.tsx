@@ -34,7 +34,7 @@ export const _DelegateProviderList = (props: Props) => (
     <tbody className="block divide-y divide-gray-200 dark:divide-gray-700 max-h-80 overflow-y-auto">
       {props.providers.map((provider) => (
         <tr
-          key={provider.provider}
+          key={provider.contract}
           role="button"
           onClick={() => props.onSelect(provider)}
           className="flex w-full hover:bg-gray-200 dark:hover:bg-gray-700"

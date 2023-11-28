@@ -22,7 +22,7 @@ export const _Withdrawer = (props: Props) => {
       app.showToast('Can not unstake more than is staked', 'error')
       return
     }
-    app.requestProposalAction(props.provider.provider, Config.Endpoints.UnDelegate, 0, [valueBig], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0, [valueBig], [])
   }
 
   return (

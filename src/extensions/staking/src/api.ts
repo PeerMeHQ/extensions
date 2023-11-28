@@ -8,6 +8,7 @@ export const getDelegationProvidersRequest = async (provider: ApiNetworkProvider
     (r: any) =>
       ({
         ...r,
+        contract: r.provider,
         stake: new BigNumber(res.stake || 0),
         delegationCap: new BigNumber(res.delegationCap || 0),
       } as DelegationProvider)

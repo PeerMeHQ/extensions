@@ -42,4 +42,4 @@ export const DelegationsSection = (props: Props) => (
 )
 
 const findProvider = (providers: DelegationProvider[], contract: string) =>
-  providers.find((provider) => provider.provider === contract) || null
+  providers.find((provider) => provider.contract === contract) || null
