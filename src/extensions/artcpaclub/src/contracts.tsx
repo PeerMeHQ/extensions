@@ -11,4 +11,8 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     Address: getContractAddress(config.network),
     Endpoint: 'userStake',
   },
+  UserUnstake: {
+    Address: getContractAddress(config.network),
+    Endpoint: 'userUnstake',
+  },
 })
