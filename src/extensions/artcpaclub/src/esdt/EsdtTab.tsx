@@ -26,7 +26,7 @@ export function EsdtTab() {
 
   useEffect(() => {
     if (!poolId) return
-    fetch(Config.Urls.ApiBase + '/tokenstaking/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(app.config.network) + '/tokenstaking/' + poolId).then(async (res) => {
       const data = await res.json()
       setSelectedPool(data)
     })
@@ -57,14 +57,21 @@ export function EsdtTab() {
   ) : (
     <>
       <a
-        href={Config.Urls.Marketplace + '/staking/token/' + selectedPool.pool_id}
+        href={Config.MarketplaceUrl(app.config.network) + '/staking/token/' + selectedPool.pool_id}
         target="_blank"
         rel="noopener"
         className="flex px-6 py-3 bg-gray-200 dark:bg-gray-800 rounded-xl mb-4"
       >
         <div className="flex-grow text-left">
-          <h3 className="text-lg text-black dark:text-white">{selectedPool.title}</h3>
-          <span className="text-sm text-gray-500">Token: {selectedPool.stake_token_id}</span>
+          <h3 className="text-lg text-black dark:text-white mb-2">{selectedPool.title}</h3>
+          <ul className="text-base text-gray-500 list-disc pl-4">
+            <li>
+              Stake Token: <strong>{selectedPool.stake_token_id}</strong>
+            </li>
+            <li>
+              Reward Token: <strong>{selectedPool.reward_token_id}</strong>
+            </li>
+          </ul>
         </div>
       </a>
       <_Staker pool={selectedPool} className="mb-4" />

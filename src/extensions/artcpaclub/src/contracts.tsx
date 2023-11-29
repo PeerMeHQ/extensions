@@ -1,3 +1,7 @@
+import React from 'react'
+import { ProposalAction } from '@peerme/core-ts'
+import { StakeEsdtActionPreview } from './previews/StakeEsdtActionPreview'
+import { UnstakeEsdtActionPreview } from './previews/UnstakeEsdtActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: Network) => {
@@ -10,9 +14,11 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   UserStake: {
     Address: getContractAddress(config.network),
     Endpoint: 'userStake',
+    ActionPreview: (action: ProposalAction) => <StakeEsdtActionPreview action={action} config={config} />,
   },
   UserUnstake: {
     Address: getContractAddress(config.network),
     Endpoint: 'userUnstake',
+    ActionPreview: (action: ProposalAction) => <UnstakeEsdtActionPreview action={action} config={config} />,
   },
 })

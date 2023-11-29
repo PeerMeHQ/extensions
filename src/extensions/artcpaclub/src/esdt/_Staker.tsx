@@ -14,7 +14,7 @@ type Props = {
 export function _Staker(props: Props) {
   const app = useApp()
   const [payment, setPayment] = useState<TokenTransfer | null>(null)
-  const isSubmitDisabled = !payment
+  const isSubmitDisabled = !payment || payment.amountAsBigInteger.isZero()
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -37,13 +37,13 @@ export function _Staker(props: Props) {
         <EntityTransferSelector
           config={app.config.walletConfig}
           entity={app.config.entity}
-          permissions={[]}
+          permissions={[{ name: '*', value: '0', destination: '', endpoint: '', arguments: [], payments: [] }]}
           onSelected={(val) => setPayment(val)}
-          tokenIdWhitelist={[props.pool.stake_token_id]}
+          tokenIdWhitelist={['EGLD', props.pool.stake_token_id]}
           className="mb-8"
         />
         <Button color="blue" className="block w-full" disabled={isSubmitDisabled} submit>
-          Add Stake Action to Proposal
+          Add Stake Action
         </Button>
       </form>
     </AppSection>
