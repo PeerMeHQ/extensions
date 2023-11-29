@@ -44,7 +44,7 @@ export const DelegateSection = (props: Props) => {
 
 const filterProviders = (providers: DelegationProvider[], query: string) =>
   providers
-    .filter((p) => p.identity.name && p.identity.url)
-    .filter((p) => p.identity.name.toLowerCase().includes(query.toLowerCase()))
-    .sort((a, b) => (a.identity.name > b.identity.name ? 1 : -1))
+    .filter((p) => p.identityInfo.name && p.identityInfo.website)
+    .filter((p) => p.identityInfo.name.toLowerCase().includes(query.toLowerCase()))
+    .sort((a, b) => (a.identityInfo.name > b.identityInfo.name ? 1 : -1))
     .sort((a, b) => (a.featured ? -1 : 1))

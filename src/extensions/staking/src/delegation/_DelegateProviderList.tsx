@@ -42,33 +42,26 @@ export const _DelegateProviderList = (props: Props) => (
           <td className="flex-grow flex px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
             <div className="flex items-center">
               <img
-                src={provider.identity.avatar}
-                alt={provider.identity.name + ' Staking Provider Avatar'}
+                src={provider.identityInfo.avatar}
+                alt={provider.identityInfo.name + ' Staking Provider Avatar'}
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-4"
               />
             </div>
             <div className="text-left">
-              <h3 className="text-lg text-black dark:text-white">{provider.identity.name}</h3>
-              <span className="text-sm text-gray-500">{provider.identity.url}</span>
+              <h3 className="text-lg text-black dark:text-white">{provider.identityInfo.name}</h3>
+              <span className="text-sm text-gray-500">{provider.identityInfo.website}</span>
             </div>
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{provider.apr}%</td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{+provider.serviceFee / 100}%</td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            {provider.maxDelegationCap.isZero()
-              ? 'Uncapped'
-              : calculateProviderFilledPercentage(provider).toFixed(2) + '%'}
+            {provider.delegationCap.isZero() ? 'Uncapped' : provider.identityInfo.stakePercent + '%'}
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            {provider.maxDelegateAmountAllowed.isZero()
-              ? 'Uncapped'
-              : toEgldDisplayAmount(provider.maxDelegateAmountAllowed)}
+            {provider.stake.isZero() ? 'Uncapped' : toEgldDisplayAmount(provider.stake)}
           </td>
         </tr>
       ))}
     </tbody>
   </table>
 )
-
-const calculateProviderFilledPercentage = (provider: DelegationProvider) =>
-  provider.totalActiveStake.div(provider.maxDelegationCap).times(100)
