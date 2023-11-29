@@ -67,8 +67,8 @@ export function EsdtTab() {
           <span className="text-sm text-gray-500">Token: {selectedPool.stake_token_id}</span>
         </div>
       </a>
-      <_Staker pool={selectedPool} />
-      <_Unstaker pool={selectedPool} />
+      <_Staker pool={selectedPool} className="mb-4" />
+      <_Unstaker pool={selectedPool} className="mb-4" />
     </>
   )
 }

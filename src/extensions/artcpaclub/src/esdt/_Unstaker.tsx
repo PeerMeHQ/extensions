@@ -26,11 +26,11 @@ export function _Unstaker(props: Props) {
   }
 
   return (
-    <AppSection title="Stake now" className={props.className}>
+    <AppSection title="Unstake" className={props.className}>
       <form onSubmit={handleSubmit}>
         <p>Work in progress.</p>
         <Button color="blue" className="block w-full" submit>
-          Add Stake Action to Proposal
+          Add Unstake Action to Proposal
         </Button>
       </form>
     </AppSection>
