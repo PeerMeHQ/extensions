@@ -3,7 +3,7 @@ import { Contracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const ArtCpaClubExtension = (config: ExtensionConfig): ExtensionInfo => ({
-  Enabled: false, // leave this as false, we'll enable it after the review process
+  Enabled: true,
   Name: 'ArtCPAClub',
   Description: 'NFT Staking & ESDT Staking Platform',
   Website: 'https://marketplace.artcpaclub.com',
