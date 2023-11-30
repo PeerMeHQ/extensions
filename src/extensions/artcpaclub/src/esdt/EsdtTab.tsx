@@ -42,8 +42,6 @@ export function EsdtTab() {
     })
   }, [poolId])
 
-  console.log('selectedPool', selectedPool)
-
   return selectedPool === null ? (
     <AppSection title="Paste the link of a Pool">
       <label htmlFor="starting_date" className="pl-1 text-xl mb-2 text-gray-800 dark:text-gray-200">
@@ -59,10 +57,10 @@ export function EsdtTab() {
     <>
       {!!selectedPool && <_PoolInfo app={app} pool={selectedPool} />}
       {!!selectedPool && !!selectedPoolOnChain && (
-        <_PoolOnChainInfo pool={selectedPool} poolOnChain={selectedPoolOnChain} />
+        <_PoolOnChainInfo app={app} pool={selectedPool} poolOnChain={selectedPoolOnChain} />
       )}
       <_Staker pool={selectedPool} className="mb-4" />
-      {!!selectedPoolOnChain && !selectedPoolOnChain.user_stake_amount.isZero() && (
+      {!!selectedPoolOnChain && selectedPoolOnChain.user_stake_amount.isGreaterThan(0) && (
         <_Unstaker pool={selectedPool} className="mb-4" />
       )}
     </>
@@ -92,7 +90,16 @@ function _PoolInfo(props: { app: AppContextValue; pool: EsdtPool }) {
   )
 }
 
-function _PoolOnChainInfo(props: { pool: EsdtPool; poolOnChain: EsdtPoolOnChain }) {
+function _PoolOnChainInfo(props: { app: AppContextValue; pool: EsdtPool; poolOnChain: EsdtPoolOnChain }) {
+  const handleRewardClaim = () =>
+    props.app.requestProposalAction(
+      Contracts(props.app.config).UserClaim.Address,
+      Contracts(props.app.config).UserClaim.Endpoint,
+      0,
+      [props.pool.pool_id],
+      []
+    )
+
   return (
     <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none mb-4">
       <li className="col-span-1">
@@ -109,6 +116,11 @@ function _PoolOnChainInfo(props: { pool: EsdtPool; poolOnChain: EsdtPoolOnChain 
           <strong className="block font-head text-4xl text-primary-500 dark:text-primary-400">
             {toFormattedTokenAmount(props.poolOnChain.user_reward_amount, props.pool.reward_token_decimal)}
           </strong>
+          {props.poolOnChain.user_reward_amount.isGreaterThan(0) && (
+            <button onClick={handleRewardClaim} className="text-blue-500">
+              Claim Rewards
+            </button>
+          )}
         </div>
       </li>
     </ul>
