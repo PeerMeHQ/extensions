@@ -14,13 +14,13 @@ export const Config = {
   },
 
   TokenId: (network: Network) => {
-    if (network === 'devnet') return 'ITHEUM-a61317'
+    if (network === 'devnet') return 'ITHEUM-fce905'
     if (network === 'testnet') return '#'
     return 'ITHEUM-df6f26'
   },
 
   DataNftCollection: (network: Network) => {
-    if (network === 'devnet') return 'DATANFTFT4-3ba099'
+    if (network === 'devnet') return 'DATANFTFT-e0b917'
     if (network === 'testnet') return '#'
     return 'DATANFTFT-e936d4'
   },
