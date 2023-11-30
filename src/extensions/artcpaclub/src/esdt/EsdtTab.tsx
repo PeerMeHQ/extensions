@@ -61,7 +61,7 @@ export function EsdtTab() {
       )}
       <_Staker pool={selectedPool} className="mb-4" />
       {!!selectedPoolOnChain && selectedPoolOnChain.user_stake_amount.isGreaterThan(0) && (
-        <_Unstaker pool={selectedPool} className="mb-4" />
+        <_Unstaker pool={selectedPool} poolOnChain={selectedPoolOnChain} className="mb-4" />
       )}
     </>
   )
