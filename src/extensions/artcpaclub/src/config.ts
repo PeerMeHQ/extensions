@@ -10,4 +10,8 @@ export const Config = {
     if (network === 'devnet') return 'https://devnet-marketplace.artcpaclub.com'
     return 'https://marketplace.artcpaclub.com'
   },
+
+  Abis: {
+    EsdtStaking: 'https://marketplace.artcpaclub.com/peerme-extension/esdt-staking.abi.json',
+  },
 }

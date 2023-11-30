@@ -1,4 +1,5 @@
 import React from 'react'
+import { Config } from './config'
 import { ProposalAction } from '@peerme/core-ts'
 import { StakeEsdtActionPreview } from './previews/StakeEsdtActionPreview'
 import { UnstakeEsdtActionPreview } from './previews/UnstakeEsdtActionPreview'
@@ -20,5 +21,10 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     Address: getContractAddress(config.network),
     Endpoint: 'userUnstake',
     ActionPreview: (action: ProposalAction) => <UnstakeEsdtActionPreview action={action} config={config} />,
+  },
+  ViewPool: {
+    Address: getContractAddress(config.network),
+    Endpoint: 'viewPool',
+    AbiUrl: Config.Abis.EsdtStaking,
   },
 })
