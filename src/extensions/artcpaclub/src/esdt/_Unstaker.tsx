@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js'
 import { Contracts } from '../contracts'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
@@ -19,12 +20,12 @@ export function _Unstaker(props: Props) {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-
+    const amountBig = new BigNumber(amount).shiftedBy(props.pool.stake_token_decimal)
     app.requestProposalAction(
       Contracts(app.config).UserUnstake.Address,
       Contracts(app.config).UserUnstake.Endpoint,
       0,
-      [props.pool.pool_id],
+      [props.pool.pool_id, amountBig],
       []
     )
   }
@@ -57,7 +58,7 @@ export function _Unstaker(props: Props) {
             </div>
           )}
         </div>
-        <Button color="blue" className="block w-full" submit>
+        <Button color="blue" className="block w-full" disabled={+amount === 0} submit>
           Add Unstake Action
         </Button>
       </form>
