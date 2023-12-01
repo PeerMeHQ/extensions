@@ -31,7 +31,7 @@ export function EsdtTab() {
   }, [poolUrl])
 
   useEffect(() => {
-    if (!poolId) return
+    if (poolId === null) return
     fetch(Config.ApiBaseUrl(app.config.network) + '/tokenstaking/' + poolId).then(async (res) => {
       const data = (await res.json()) as EsdtPool
       setSelectedPool(data)
