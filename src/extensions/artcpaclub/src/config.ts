@@ -13,5 +13,6 @@ export const Config = {
 
   Abis: {
     EsdtStaking: 'https://marketplace.artcpaclub.com/peerme-extension/esdt-staking.abi.json',
+    NftStaking: 'https://marketplace.artcpaclub.com/peerme-extension/nft-staking.abi.json',
   },
 }

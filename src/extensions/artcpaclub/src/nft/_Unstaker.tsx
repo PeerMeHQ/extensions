@@ -2,33 +2,35 @@ import BigNumber from 'bignumber.js'
 import { Contracts } from '../contracts'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
-import { EsdtPool, EsdtPoolOnChain } from '../types'
+import { NftPool, NftPoolOnChain } from '../types'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 
 type Props = {
-  pool: EsdtPool
-  poolOnChain: EsdtPoolOnChain
+  pool: NftPool
+  poolOnChain: NftPoolOnChain
   className?: string
 }
 
 export function _Unstaker(props: Props) {
   const app = useApp()
   const [amount, setAmount] = useState('0')
-  const balanceDenominated = props.poolOnChain.user_stake_amount.shiftedBy(-props.pool.stake_token_decimal)
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    const amountBig = new BigNumber(amount).shiftedBy(props.pool.stake_token_decimal)
+    const amountBig = new BigNumber(amount)
     app.requestProposalAction(
-      Contracts(app.config).EsdtUserUnstake.Address,
-      Contracts(app.config).EsdtUserUnstake.Endpoint,
+      Contracts(app.config).NftUserUnstake.Address,
+      Contracts(app.config).NftUserUnstake.Endpoint,
       0,
       [props.pool.pool_id, amountBig],
       []
     )
   }
+
+  // TODO: implement unstaking
+  return null
 
   return (
     <AppSection title="Unstake" className={props.className}>
@@ -46,11 +48,11 @@ export function _Unstaker(props: Props) {
             className="mb-2"
             autoComplete="off"
           />
-          {+amount !== +balanceDenominated && (
+          {+amount !== +props.poolOnChain.user_stake_amount && (
             <div className="absolute bottom-1/2 right-4 translate-y-1/2 transform">
               <button
                 type="button"
-                onClick={() => setAmount(balanceDenominated.toString())}
+                onClick={() => setAmount(props.poolOnChain.user_stake_amount.toString())}
                 className="rounded-xl bg-gray-800 px-3 py-1 uppercase text-gray-100 shadow-lg transition duration-300 hover:bg-gray-900"
               >
                 Max
