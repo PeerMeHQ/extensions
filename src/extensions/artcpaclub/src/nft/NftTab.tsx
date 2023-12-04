@@ -4,25 +4,25 @@ import { Input } from '@peerme/web-ui'
 import { _Unstaker } from './_Unstaker'
 import { Contracts } from '../contracts'
 import React, { useEffect, useState } from 'react'
-import { toTypedEsdtPoolOnChain } from '../helpers'
-import { EsdtPool, EsdtPoolOnChain } from '../types'
+import { toTypedNftPoolOnChain } from '../helpers'
+import { NftPoolOnChain, NftPool } from '../types'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
 import { AppSection } from '../../../../shared/ui/elements'
 import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 
-export function EsdtTab() {
+export function NftTab() {
   const app = useApp()
   const [poolUrl, setPoolUrl] = useState('')
   const [poolId, setPoolId] = useState<number | null>(null)
-  const [selectedPool, setSelectedPool] = useState<EsdtPool | null>(null)
-  const [selectedPoolOnChain, setSelectedPoolOnChain] = useState<EsdtPoolOnChain | null>(null)
-  const poolScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).EsdtViewPool)
+  const [selectedPool, setSelectedPool] = useState<any | null>(null)
+  const [selectedPoolOnChain, setSelectedPoolOnChain] = useState<NftPoolOnChain | null>(null)
+  const poolScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).NftViewPool)
 
   useEffect(() => {
     if (!poolUrl) return
-    const match = poolUrl.match(/\/staking\/token\/(\d+)/)
-    if (match) {
+    const match = poolUrl.match(/\/staking\/nft\/(\d+)/)
+    if (match && match[1] !== undefined) {
       setPoolId(parseInt(match[1]))
     } else {
       app.showToast('Invalid pool URL', 'error')
@@ -32,12 +32,12 @@ export function EsdtTab() {
 
   useEffect(() => {
     if (poolId === null) return
-    fetch(Config.ApiBaseUrl(app.config.network) + '/tokenstaking/' + poolId).then(async (res) => {
-      const data = (await res.json()) as EsdtPool
+    fetch(Config.ApiBaseUrl(app.config.network) + '/nftstaking/' + poolId).then(async (res) => {
+      const data = (await res.json()) as NftPool
       setSelectedPool(data)
       poolScQuery.query([data.pool_id, app.config.entity.address]).then((data) => {
         const poolData = data.firstValue?.valueOf() || {}
-        setSelectedPoolOnChain(toTypedEsdtPoolOnChain(poolData))
+        setSelectedPoolOnChain(toTypedNftPoolOnChain(poolData))
       })
     })
   }, [poolId])
@@ -45,10 +45,10 @@ export function EsdtTab() {
   return selectedPool === null ? (
     <AppSection title="Paste the link of a Pool">
       <label htmlFor="starting_date" className="pl-1 text-xl mb-2 text-gray-800 dark:text-gray-200">
-        Link to ESDT Staking Pool
+        Link to NFT Staking Pool
       </label>
       <Input
-        placeholder="https://marketplace.artcpaclub.com/staking/token/x"
+        placeholder="https://marketplace.artcpaclub.com/nft/token/x"
         value={poolUrl}
         onChange={(val) => setPoolUrl(val)}
       />
@@ -67,7 +67,7 @@ export function EsdtTab() {
   )
 }
 
-function _PoolInfo(props: { app: AppContextValue; pool: EsdtPool }) {
+function _PoolInfo(props: { app: AppContextValue; pool: NftPool }) {
   return (
     <a
       href={Config.MarketplaceUrl(props.app.config.network) + '/staking/token/' + props.pool.pool_id}
@@ -90,11 +90,11 @@ function _PoolInfo(props: { app: AppContextValue; pool: EsdtPool }) {
   )
 }
 
-function _PoolOnChainInfo(props: { app: AppContextValue; pool: EsdtPool; poolOnChain: EsdtPoolOnChain }) {
+function _PoolOnChainInfo(props: { app: AppContextValue; pool: NftPool; poolOnChain: NftPoolOnChain }) {
   const handleRewardClaim = () =>
     props.app.requestProposalAction(
-      Contracts(props.app.config).EsdtUserClaim.Address,
-      Contracts(props.app.config).EsdtUserClaim.Endpoint,
+      Contracts(props.app.config).NftUserClaim.Address,
+      Contracts(props.app.config).NftUserClaim.Endpoint,
       0,
       [props.pool.pool_id],
       []
@@ -106,7 +106,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: EsdtPool; poolOnC
         <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl px-6 py-4">
           <h2 className="text-base mb-1">Our Stake</h2>
           <strong className="font-head text-4xl text-primary-500 dark:text-primary-400">
-            {toFormattedTokenAmount(props.poolOnChain.user_stake_amount, props.pool.stake_token_decimal)}
+            {props.poolOnChain.user_stake_amount.toNumber()}
           </strong>
         </div>
       </li>

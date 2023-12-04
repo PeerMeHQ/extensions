@@ -1,4 +1,4 @@
-import { EsdtPool } from '../types'
+import { NftPool } from '../types'
 import { Contracts } from '../contracts'
 import React, { SyntheticEvent, useState } from 'react'
 import { TokenTransfer } from '@multiversx/sdk-core/out'
@@ -7,7 +7,7 @@ import { AppSection } from '../../../../shared/ui/elements'
 import { Button, EntityTransferSelector } from '@peerme/web-ui'
 
 type Props = {
-  pool: EsdtPool
+  pool: NftPool
   className?: string
 }
 
@@ -23,8 +23,8 @@ export function _Staker(props: Props) {
     const tokenTransfers = payment.isEgld() ? [] : [payment]
 
     app.requestProposalAction(
-      Contracts(app.config).EsdtUserStake.Address,
-      Contracts(app.config).EsdtUserStake.Endpoint,
+      Contracts(app.config).NftUserStake.Address,
+      Contracts(app.config).NftUserStake.Endpoint,
       value,
       [props.pool.pool_id],
       tokenTransfers
@@ -39,7 +39,7 @@ export function _Staker(props: Props) {
           entity={app.config.entity}
           permissions={[{ name: '*', value: '0', destination: '', endpoint: '', arguments: [], payments: [] }]}
           onSelected={(val) => setPayment(val)}
-          tokenIdWhitelist={['EGLD', props.pool.stake_token_id]}
+          tokenIdWhitelist={['egld', props.pool.stake_token_id]}
           className="mb-8"
         />
         <Button color="blue" className="block w-full" disabled={isSubmitDisabled} submit>

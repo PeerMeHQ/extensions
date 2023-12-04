@@ -1,4 +1,5 @@
 import React from 'react'
+import { NftTab } from './nft/NftTab'
 import { Tab } from '@headlessui/react'
 import { EsdtTab } from './esdt/EsdtTab'
 import { TabButton } from '../../../shared/ui/elements'
@@ -16,7 +17,7 @@ export const App = () => {
           <EsdtTab />
         </Tab.Panel>
         <Tab.Panel>
-          <p>Coming soon.</p>
+          <NftTab />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
