@@ -83,8 +83,13 @@ export type NftPoolOnChain = {
   staker_count: string
   user_stake_amount: BigNumber
   user_reward_amount: BigNumber
-  user_stake_amount_per_nonce: any[]
+  user_stake_amount_per_nonce: StakedNftInfo[]
   is_paired: boolean
   pair_token_id: string
   stake_capacity_max: string
+}
+
+export type StakedNftInfo = {
+  nonce: number
+  amount: number
 }
