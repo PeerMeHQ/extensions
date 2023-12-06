@@ -27,14 +27,20 @@ export function _Unstaker(props: Props) {
     app.networkProvider.doGetGeneric(`nfts?size=500&identifiers=${identifiers}`).then((data) => setNfts(data))
   }, [props.poolOnChain.user_stake_amount_per_nonce])
 
+  const handleSelectUnstakable = (u: StakedNftInfo) => {
+    setUnstakableInfo(u)
+    setAmount(u.amount.toString())
+  }
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
+    if (!unstakableInfo) return
     const amountBig = new BigNumber(amount)
     app.requestProposalAction(
       Contracts(app.config).NftUserUnstake.Address,
       Contracts(app.config).NftUserUnstake.Endpoint,
       0,
-      [props.pool.pool_id, amountBig],
+      [props.pool.pool_id, unstakableInfo.nonce, amountBig],
       []
     )
   }
@@ -46,7 +52,7 @@ export function _Unstaker(props: Props) {
           {props.poolOnChain.user_stake_amount_per_nonce.map((unstakableInfo) => (
             <li key={unstakableInfo.nonce}>
               <_UnstakablePreview
-                onClick={() => setUnstakableInfo(unstakableInfo)}
+                onClick={() => handleSelectUnstakable(unstakableInfo)}
                 unstakableInfo={unstakableInfo}
                 nft={nfts.find((n) => n.nonce === unstakableInfo.nonce)}
               />
