@@ -1,9 +1,9 @@
 import React from 'react'
 import { Config } from './config'
 import { ProposalAction } from '@peerme/core-ts'
-import { StakeEsdtActionPreview } from './previews/StakeEsdtActionPreview'
-import { ClaimEsdtActionPreview } from './previews/ClaimEsdtActionPreview'
-import { UnstakeEsdtActionPreview } from './previews/UnstakeEsdtActionPreview'
+import { StakeActionPreview } from './previews/StakeActionPreview'
+import { ClaimActionPreview } from './previews/ClaimActionPreview'
+import { UnstakeActionPreview } from './previews/UnstakeActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getEsdtPoolContractAddress = (network: Network) => {
@@ -22,17 +22,17 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   EsdtUserStake: {
     Address: getEsdtPoolContractAddress(config.network),
     Endpoint: 'userStake',
-    ActionPreview: (action: ProposalAction) => <StakeEsdtActionPreview action={action} config={config} />,
+    ActionPreview: (action: ProposalAction) => <StakeActionPreview action={action} config={config} />,
   },
   EsdtUserUnstake: {
     Address: getEsdtPoolContractAddress(config.network),
     Endpoint: 'userUnstake',
-    ActionPreview: (action: ProposalAction) => <UnstakeEsdtActionPreview action={action} config={config} />,
+    ActionPreview: (action: ProposalAction) => <UnstakeActionPreview action={action} config={config} />,
   },
   EsdtUserClaim: {
     Address: getEsdtPoolContractAddress(config.network),
     Endpoint: 'userClaim',
-    ActionPreview: (action: ProposalAction) => <ClaimEsdtActionPreview action={action} config={config} />,
+    ActionPreview: (action: ProposalAction) => <ClaimActionPreview action={action} config={config} />,
   },
   EsdtViewPool: {
     Address: getEsdtPoolContractAddress(config.network),
@@ -42,17 +42,17 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   NftUserStake: {
     Address: getNftPoolContractAddress(config.network),
     Endpoint: 'userStake',
-    ActionPreview: (action: ProposalAction) => <StakeEsdtActionPreview action={action} config={config} />,
+    ActionPreview: (action: ProposalAction) => <StakeActionPreview action={action} config={config} />,
   },
   NftUserUnstake: {
     Address: getNftPoolContractAddress(config.network),
     Endpoint: 'userUnstake',
-    ActionPreview: (action: ProposalAction) => <UnstakeEsdtActionPreview action={action} config={config} />,
+    ActionPreview: (action: ProposalAction) => <UnstakeActionPreview action={action} config={config} />,
   },
   NftUserClaim: {
     Address: getNftPoolContractAddress(config.network),
     Endpoint: 'userClaim',
-    ActionPreview: (action: ProposalAction) => <ClaimEsdtActionPreview action={action} config={config} />,
+    ActionPreview: (action: ProposalAction) => <ClaimActionPreview action={action} config={config} />,
   },
   NftViewPool: {
     Address: getNftPoolContractAddress(config.network),

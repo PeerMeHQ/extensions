@@ -1,26 +1,18 @@
 import { Config } from '../config'
 import { EsdtPool } from '../types'
+import { ProposalAction } from '@peerme/core-ts'
 import React, { useEffect, useState } from 'react'
-import { TokenTransfer } from '@multiversx/sdk-core/out'
 import { ExtensionConfig } from '../../../../shared/types'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
   config: ExtensionConfig
 }
 
-export function StakeEsdtActionPreview(props: Props) {
+export function ClaimActionPreview(props: Props) {
   const poolId = props.action.arguments[0] as number
   const [selectedPool, setSelectedPool] = useState<EsdtPool | null>(null)
-
-  const displayablePayments =
-    props.action.payments.length > 0
-      ? props.action.payments
-          .map((payment) => toFormattedTokenPayment(toTokenPaymentFromProposalPayment(payment)))
-          .join(', ')
-      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value))
 
   useEffect(() => {
     if (!poolId) return
@@ -32,8 +24,7 @@ export function StakeEsdtActionPreview(props: Props) {
 
   return (
     <ActionPreviewHighlight>
-      stake <strong>{displayablePayments}</strong>{' '}
-      {selectedPool ? `in pool ${selectedPool.title}` : `in pool with id ${poolId}`}.
+      claim rewards {selectedPool ? `from pool ${selectedPool.title}` : `from pool with id ${poolId}`}.
     </ActionPreviewHighlight>
   )
 }
