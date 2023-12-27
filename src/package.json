@@ -35,6 +35,7 @@
     "preversion": "npm run lint && npm run build"
   },
   "peerDependencies": {
+    "dayjs": "^1.11.10",
     "@apollo/client": ">=3.7.7",
     "@elrondnetwork/transaction-decoder": ">=1.0.0",
     "@fortawesome/fontawesome-svg-core": ">=6.1.1",
@@ -46,11 +47,11 @@
     "@peerme/core-ts": ">=1.15.0",
     "@peerme/web-ui": ">=1.15.0",
     "axios": "^1.3.4",
+    "clsx": "^2.0.0",
     "next": ">=13.0.0",
     "pluralize": "^8.0.0",
     "react": ">=18.2.0",
-    "react-dom": ">=18.2.0",
-    "clsx": "^2.0.0"
+    "react-dom": ">=18.2.0"
   },
   "devDependencies": {
     "@apollo/client": "^3.8.8",
