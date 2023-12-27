@@ -51,7 +51,9 @@ export function DashboardWidget(props: WidgetRootProps) {
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Data Categories</h3>
-          <strong className={clsx(Theme.TextSize.Huge, Theme.TextColor.Intense)}>-</strong>
+          <strong className={clsx(Theme.TextSize.Huge, Theme.TextColor.Intense)}>
+            {info?.categories !== undefined ? info.categories.length : '-'}
+          </strong>
         </div>
       </div>
     </section>
