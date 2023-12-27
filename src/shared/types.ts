@@ -36,7 +36,8 @@ export type ExtensionInfo = {
   Contracts: ExtensionScInfo
   AppRoot: React.FC | null
   WidgetRoots: {
-    Info: React.FC<WidgetRootProps> | null
+    Dashboard?: React.FC<WidgetRootProps> | null
+    Info?: React.FC<WidgetRootProps> | null
   }
   Developer: {
     Name: string
