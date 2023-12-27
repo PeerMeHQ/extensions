@@ -14,8 +14,8 @@
     "package:publish": "cd src && npm publish"
   },
   "devDependencies": {
-    "eslint": "^8.45.0",
+    "eslint": "^8.56.0",
     "eslint-config-turbo": "latest",
-    "turbo": "^1.10.11"
+    "turbo": "^1.11.2"
   }
 }
