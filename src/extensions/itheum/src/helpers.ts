@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js'
 import { numberToPaddedHex } from '@peerme/core-ts'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
-import { ClaimInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
+import { ClaimInfo, CoalitionInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 
 export const toTypedMarketRequirements = (value: any): MarketRequirements => ({
   acceptedTokens: value.accepted_tokens.map((v: any) => v.toString()),
@@ -21,6 +21,13 @@ export const toTypedClaimInfo = (value: any): ClaimInfo =>
     amount: new BigNumber(value.amount),
     lastModified: value.date.toNumber() * 1000,
   } as ClaimInfo)
+
+export const toTypedCoalitionInfo = (value: any): CoalitionInfo => ({
+  aggregator: value.aggregator.toString(),
+  categories: value.categories.map((v: any) => v.toString()),
+  admins: value.admins.map((v: any) => v.toString()),
+  delegators: value.delegators.toNumber(),
+})
 
 export const isValidItheumMarketplaceUrl = (str: string) => {
   const pattern = /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[\:?\d]*)\S*$/

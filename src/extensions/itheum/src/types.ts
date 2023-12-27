@@ -47,3 +47,10 @@ export type DataNftMetadata = {
   nonce: number
   collection: string
 }
+
+export type CoalitionInfo = {
+  aggregator: string
+  categories: string[]
+  admins: string[]
+  delegators: number
+}

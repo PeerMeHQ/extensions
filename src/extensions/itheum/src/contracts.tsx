@@ -6,16 +6,22 @@ import { AddOfferActionPreview } from './previews/AddOfferActionPreview'
 import { AcceptOfferActionPreview } from './previews/AcceptOfferActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
-const getClaimsContractAddress = (network: Network) => {
+export const getClaimsContractAddress = (network: Network) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqwu6qz3skzzdnmvnkknjngvrprpt4fwzffsxsr8ecca'
   if (network === 'testnet') return '#'
   return 'erd1qqqqqqqqqqqqqpgqnsmrn5q08eqth3fy8el87sgdj0mkhwdwl2jqnf59cg'
 }
 
-const getMarketContractAddress = (network: Network) => {
+export const getMarketContractAddress = (network: Network) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqlhewm06p4c9qhq32p239hs45dvry948tfsxshx3e0l'
   if (network === 'testnet') return '#'
   return 'erd1qqqqqqqqqqqqqpgqay2r64l9nhhvmaqw4qanywfd0954w2m3c77qm7drxc'
+}
+
+export const getCoalitionContractAddress = (network: Network) => {
+  if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqv9w6vmvtqjrscx00swr6n8exwkn7vpsdl3ts6xxuqh'
+  if (network === 'testnet') return '#'
+  return '#'
 }
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
@@ -57,5 +63,11 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     Address: getMarketContractAddress(config.network),
     Endpoint: 'viewPagedOffers',
     AbiUrl: Config.Abis.Marketplace,
+  },
+  // Coalition
+  GetInfo: {
+    Address: getCoalitionContractAddress(config.network),
+    Endpoint: 'getInfo',
+    AbiUrl: Config.Abis.Coalition,
   },
 })
