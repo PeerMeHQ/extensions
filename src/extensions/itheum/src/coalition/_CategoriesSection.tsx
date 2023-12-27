@@ -15,9 +15,6 @@ export function _CategoriesSection(props: Props) {
   const app = useApp()
   const [name, setName] = useState('')
 
-  // @ts-ignore
-  props.info.categories = ['test', 'test2']
-
   const handleAdd = () =>
     app.requestProposalAction(
       Contracts(app.config).AddCategory.Address,
