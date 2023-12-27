@@ -54,6 +54,6 @@ export type CoalitionInfo = {
   categories: string[]
   delegators: number
   boardStakeAmount: BigNumber
-  boardStakeDuration: BigNumber
-  stakeLockTime: BigNumber
+  boardStakeDurationSeconds: number
+  stakeLockTimeSeconds: number
 }

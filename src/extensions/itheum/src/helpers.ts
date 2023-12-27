@@ -27,9 +27,9 @@ export const toTypedCoalitionInfo = (value: any): CoalitionInfo => ({
   aggregator: value.aggregator.toString(),
   categories: value.categories.map((v: any) => v.toString()),
   delegators: value.delegators.toNumber(),
-  boardStakeAmount: new BigNumber(value.board_stake_amount),
-  boardStakeDuration: new BigNumber(value.board_stake_duration),
-  stakeLockTime: new BigNumber(value.stake_lock_time),
+  boardStakeAmount: value.board_stake_amount,
+  boardStakeDurationSeconds: value.board_stake_duration.toNumber(),
+  stakeLockTimeSeconds: value.stake_lock_time.toNumber(),
 })
 
 export const isValidItheumMarketplaceUrl = (str: string) => {

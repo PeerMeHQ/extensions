@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { Config } from '../config'
 import { CoalitionInfo } from '../types'
+import { Staker } from '../coalition/Staker'
 import { useScQuery } from '@peerme/core-ts'
 import { toTypedCoalitionInfo } from '../helpers'
 import React, { useEffect, useState } from 'react'
@@ -48,7 +49,7 @@ export function DashboardWidget(props: WidgetRootProps) {
             Stake
           </_Button>
           <StickyModal open={showStaking} onClose={() => setShowStaking(false)}>
-            <p>Coming soon</p>
+            {!!info && <Staker info={info} />}
           </StickyModal>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
