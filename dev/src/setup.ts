@@ -1,3 +1,4 @@
+import { UserPrivate } from '@peerme/core-ts'
 import { ExtensionConfig } from '@peerme/extensions'
 
 const DemoDaoScAddress = 'erd1qqqqqqqqqqqqqpgqg8t3yh3hr5vxpgsrwwqf3qh0v7e6ydd327rschchqc'
@@ -65,6 +66,27 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
     extra: [],
     favorited: false,
   },
+
+  user: {
+    address: currentUserAddress,
+    username: null,
+    name: 'Alice',
+    email: null,
+    hasVerifiedEmail: false,
+    hasProfileImage: false,
+    profileImageUrl: '',
+    connections: {} as any,
+    power: 0,
+    country: null,
+    timezone: null,
+    justCreated: false,
+    boosterUntil: null,
+    experience: {
+      level: 0,
+      levelUpperLimit: '100',
+      levelProgressPercent: 0,
+    },
+  } as UserPrivate,
 })
 
 export const Setup = (dark: boolean, currentUserAddress: string | null) => ({

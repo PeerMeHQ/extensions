@@ -3,9 +3,10 @@ import { useMemo, useState } from 'react'
 import { toDemoTransaction } from '@/helpers'
 import * as Extensions from '../../../src/index'
 import { BaseLayout } from '@/layouts/BaseLayout'
+import { Transaction } from '@multiversx/sdk-core'
+import { EntityTag, ProposalAction } from '@peerme/core-ts'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks'
 import { sendTransactions } from '@multiversx/sdk-dapp/services'
-import { EntityTag, ProposalAction, UserPrivate } from '@peerme/core-ts'
 
 export default function Home() {
   const [dark, setDark] = useState(false)
@@ -14,30 +15,12 @@ export default function Home() {
   const [selectedExtension, setSelectedExtension] = useState<Extensions.ExtensionInfo | null>(null)
   const [activeProposalAction, setActiveProposalAction] = useState<ProposalAction | null>(null)
 
-  const user = useMemo(
-    () =>
-      ({
-        address,
-        username: null,
-        name: 'Alice',
-        email: null,
-        hasVerifiedEmail: false,
-        hasProfileImage: false,
-        profileImageUrl: '',
-        connections: {} as any,
-        power: 0,
-        country: null,
-        timezone: null,
-        justCreated: false,
-        boosterUntil: null,
-        experience: {
-          level: 0,
-          levelUpperLimit: '100',
-          levelProgressPercent: 0,
-        },
-      } as UserPrivate),
-    [address]
-  )
+  const handleUserActionRequest = (tx: Transaction) => {
+    const result = window.confirm('Do you want to execute the transaction requested by the app?')
+    if (result) {
+      sendTransactions({ transactions: [tx] })
+    }
+  }
 
   return (
     <BaseLayout onDarkModeChange={(val) => setDark(val)} onEntityTagChange={(val) => setEntityTag(val)}>
@@ -46,10 +29,7 @@ export default function Home() {
         <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
         <section className="p-8 rounded-2xl bg-gray-50 dark:bg-gray-900">
           <Extensions.AppSelector
-            config={{
-              user,
-              ...Setup(dark, address).Config,
-            }}
+            config={Setup(dark, address).Config}
             onActionAddRequest={(action) => {
               setActiveProposalAction(action)
               if (address) {
@@ -61,12 +41,7 @@ export default function Home() {
                 alert('Action added. Connect your wallet to simulate the transaction.')
               }
             }}
-            onUserActionRequest={(tx) => {
-              const result = window.confirm('Do you want to execute the transaction requested by the app?')
-              if (result) {
-                sendTransactions({ transactions: [tx] })
-              }
-            }}
+            onUserActionRequest={handleUserActionRequest}
             onNotificationRequest={(text, type) => alert(`${type} -> ${text}`)}
             onAppSelected={(val) => setSelectedExtension(val)}
           />
@@ -104,6 +79,7 @@ export default function Home() {
                 tags: [entityTag as EntityTag],
               },
             }}
+            onUserActionRequest={handleUserActionRequest}
           />
         </section>
       </div>
@@ -121,6 +97,7 @@ export default function Home() {
                 tags: [entityTag as EntityTag],
               },
             }}
+            onUserActionRequest={handleUserActionRequest}
           />
         </section>
       </div>
