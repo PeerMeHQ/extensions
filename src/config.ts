@@ -9,6 +9,7 @@ import { XExchangeExtension } from './extensions/xexchange/register'
 import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
 import { AshSwapExtension } from './extensions/ashswap/register'
 import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
+import { Sense4fitExtension } from './extensions/sense4fit/register'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [
@@ -22,6 +23,7 @@ export const Config = (config: ExtensionConfig) => ({
     PulsarMoneyExtension(config),
     HatomExtension(config),
     AshSwapExtension(config),
+    Sense4fitExtension(config),
     ArtCpaClubExtension(config),
   ],
 
