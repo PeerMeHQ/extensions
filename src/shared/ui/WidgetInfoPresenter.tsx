@@ -1,6 +1,8 @@
 import { Config } from '../../config'
 import React, { useMemo } from 'react'
 import { ExtensionConfig } from '../types'
+import { toAppContextValue } from '../helpers'
+import { AppContext } from '../contexts/AppContext'
 
 type Props = {
   config: ExtensionConfig
@@ -17,7 +19,9 @@ export const WidgetInfoPresenter = (props: Props) => {
         {applicable.map((extension) =>
           extension.WidgetRoots.Info ? (
             <li key={extension.Name}>
-              <extension.WidgetRoots.Info config={props.config} />
+              <AppContext.Provider value={toAppContextValue(props.config, extension)}>
+                <extension.WidgetRoots.Info config={props.config} />
+              </AppContext.Provider>
             </li>
           ) : null
         )}
