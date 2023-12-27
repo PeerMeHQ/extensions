@@ -1,4 +1,4 @@
-import { NetworkId } from '@peerme/core-ts'
+import { NetworkId, EntityTag } from '@peerme/core-ts'
 
 export const DevServerConfig = {
   Network: 'devnet' as NetworkId,
@@ -8,4 +8,6 @@ export const DevServerConfig = {
   ExplorerUrl: 'https://devnet-explorer.multiversx.com',
 
   ChainId: 'D',
+
+  AvailableEntityTags: ['defi', 'gaming', 'art', 'itheum'] as EntityTag[],
 }

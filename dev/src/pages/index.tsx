@@ -10,12 +10,12 @@ import { sendTransactions } from '@multiversx/sdk-dapp/services'
 export default function Home() {
   const [dark, setDark] = useState(false)
   const { address, account } = useGetAccountInfo()
-  const [entityTag, setEntityTag] = useState('')
+  const [entityTag, setEntityTag] = useState<EntityTag | null>(null)
   const [selectedExtension, setSelectedExtension] = useState<Extensions.ExtensionInfo | null>(null)
   const [activeProposalAction, setActiveProposalAction] = useState<ProposalAction | null>(null)
 
   return (
-    <BaseLayout onDarkModeChange={(val) => setDark(val)}>
+    <BaseLayout onDarkModeChange={(val) => setDark(val)} onEntityTagChange={(val) => setEntityTag(val)}>
       <div className="mb-8">
         <h2 className="block rounded-xl lg:-ml-16 mb-2">App Selector 👇</h2>
         <p className="mb-2">Shown in the app gallery while creating a proposal.</p>
