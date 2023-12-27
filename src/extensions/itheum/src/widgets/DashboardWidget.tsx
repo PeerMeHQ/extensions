@@ -1,15 +1,17 @@
 import clsx from 'clsx'
 import { Config } from '../config'
-import { Theme } from '@peerme/web-ui'
 import { CoalitionInfo } from '../types'
 import { useScQuery } from '@peerme/core-ts'
 import { toTypedCoalitionInfo } from '../helpers'
 import React, { useEffect, useState } from 'react'
+import { StickyModal, Theme } from '@peerme/web-ui'
 import { WidgetRootProps } from '../../../../shared/types'
 import { Contracts, getCoalitionContractAddress } from '../contracts'
 
 export function DashboardWidget(props: WidgetRootProps) {
   const [info, setInfo] = useState<CoalitionInfo | null>(null)
+  const [showDelegating, setShowDelegating] = useState(false)
+  const [showStaking, setShowStaking] = useState(false)
   const infoQuery = useScQuery(props.config.walletConfig, Contracts(props.config).GetInfo)
 
   useEffect(() => {
@@ -33,15 +35,21 @@ export function DashboardWidget(props: WidgetRootProps) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>My Data NFTs</h3>
-          <_Button onClick={() => {}} inverted>
+          <_Button onClick={() => setShowDelegating(true)} inverted>
             View
           </_Button>
+          <StickyModal open={showDelegating} onClose={() => setShowDelegating(false)}>
+            <p>Coming soon</p>
+          </StickyModal>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
-          <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Stake Itheum</h3>
-          <_Button onClick={() => {}} inverted>
+          <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Stake {info?.nativeToken.split('-')[0]}</h3>
+          <_Button onClick={() => setShowStaking(true)} inverted>
             Stake
           </_Button>
+          <StickyModal open={showStaking} onClose={() => setShowStaking(false)}>
+            <p>Coming soon</p>
+          </StickyModal>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-1', Theme.TextSize.Base)}>Data Providers</h3>

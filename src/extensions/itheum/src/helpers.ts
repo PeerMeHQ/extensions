@@ -23,10 +23,13 @@ export const toTypedClaimInfo = (value: any): ClaimInfo =>
   } as ClaimInfo)
 
 export const toTypedCoalitionInfo = (value: any): CoalitionInfo => ({
+  nativeToken: value.native_token.toString(),
   aggregator: value.aggregator.toString(),
   categories: value.categories.map((v: any) => v.toString()),
-  admins: value.admins.map((v: any) => v.toString()),
   delegators: value.delegators.toNumber(),
+  boardStakeAmount: new BigNumber(value.board_stake_amount),
+  boardStakeDuration: new BigNumber(value.board_stake_duration),
+  stakeLockTime: new BigNumber(value.stake_lock_time),
 })
 
 export const isValidItheumMarketplaceUrl = (str: string) => {
