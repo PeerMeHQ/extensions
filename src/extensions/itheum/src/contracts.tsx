@@ -5,6 +5,8 @@ import { ClaimActionPreview } from './previews/ClaimActionPreview'
 import { AddOfferActionPreview } from './previews/AddOfferActionPreview'
 import { AcceptOfferActionPreview } from './previews/AcceptOfferActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
+import { AddCategoryActionPreview } from './previews/coalition/AddCategoryActionPreview'
+import { RemoveCategoryActionPreview } from './previews/coalition/RemoveCategoryActionPreview'
 
 export const getClaimsContractAddress = (network: Network) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqwu6qz3skzzdnmvnkknjngvrprpt4fwzffsxsr8ecca'
@@ -69,5 +71,17 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     Address: getCoalitionContractAddress(config.network),
     Endpoint: 'getInfo',
     AbiUrl: Config.Abis.Coalition,
+  },
+  AddCategory: {
+    Address: getCoalitionContractAddress(config.network),
+    Endpoint: 'addCategory',
+    AbiUrl: Config.Abis.Coalition,
+    ActionPreview: (action: ProposalAction) => <AddCategoryActionPreview action={action} />,
+  },
+  RemoveCategory: {
+    Address: getCoalitionContractAddress(config.network),
+    Endpoint: 'removeCategory',
+    AbiUrl: Config.Abis.Coalition,
+    ActionPreview: (action: ProposalAction) => <RemoveCategoryActionPreview action={action} />,
   },
 })
