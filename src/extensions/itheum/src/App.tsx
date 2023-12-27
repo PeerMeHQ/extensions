@@ -10,7 +10,8 @@ import React, { useEffect, useState } from 'react'
 import { toTypedMarketRequirements } from './helpers'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TabButton } from '../../../shared/ui/elements'
-import { faHandshakeSimple, faHome, faShop, faWallet } from '@fortawesome/free-solid-svg-icons'
+import { CoalitionTab } from './coalition/CoalitionTab'
+import { faHandshakeSimple, faHome, faShop, faUsers, faWallet } from '@fortawesome/free-solid-svg-icons'
 
 export function App() {
   const app = useApp()
@@ -27,6 +28,7 @@ export function App() {
     <Tab.Group>
       <Tab.List className="flex items-center space-x-2 md:space-x-4 mb-4">
         <TabButton icon={faHome}>General</TabButton>
+        <TabButton icon={faUsers}>Coalition</TabButton>
         <TabButton icon={faWallet}>Wallet</TabButton>
         <TabButton icon={faHandshakeSimple}>Trade</TabButton>
         <TabButton icon={faShop}>Market</TabButton>
@@ -34,6 +36,9 @@ export function App() {
       <Tab.Panels>
         <Tab.Panel>
           <GeneralTab />
+        </Tab.Panel>
+        <Tab.Panel>
+          <CoalitionTab />
         </Tab.Panel>
         <Tab.Panel>
           <WalletTab marketRequirements={marketRequirements} />
