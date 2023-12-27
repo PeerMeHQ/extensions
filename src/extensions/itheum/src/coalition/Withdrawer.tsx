@@ -23,6 +23,7 @@ export function Withdrawer(props: Props) {
   const lockedUntilDate = dayjs.unix(props.info.userStakeUnlocksAt)
   const isLocked = dayjs().isBefore(lockedUntilDate)
   const stakeTokenDecimals = 18 // TODO
+  const balanceDenominated = props.info.userStake.shiftedBy(-stakeTokenDecimals)
 
   const handleWithdraw = () => {
     if (!app.config.user) return
@@ -63,19 +64,19 @@ export function Withdrawer(props: Props) {
           autoFocus
           autoComplete="off"
         />
-        {/* {+stakeAmount !== +balanceDenominated && (
+        {+withdrawAmount !== +balanceDenominated && (
           <div className="absolute bottom-1/2 right-4 translate-y-1/2 transform">
             <button
               type="button"
-              onClick={() => setStakeAmount(balanceDenominated.toString())}
+              onClick={() => setWithdrawAmount(balanceDenominated.toString())}
               className="rounded-xl bg-gray-800 px-3 py-1 uppercase text-gray-100 shadow-lg transition duration-300 hover:bg-gray-900"
             >
               Max
             </button>
           </div>
-        )} */}
+        )}
       </div>
-      {/* <p className="mb-4 text-right">Balance: {balanceDenominated.toFormat(4)}</p> */}
+      <p className="mb-4 text-right">Balance: {balanceDenominated.toFormat(4)}</p>
       <Button
         onClick={handleWithdraw}
         color="blue"

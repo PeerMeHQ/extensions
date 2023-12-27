@@ -9,12 +9,12 @@ import { getCoalitionContractAddress } from '../contracts'
 import { faWarning } from '@fortawesome/free-solid-svg-icons'
 import {
   Address,
+  U64Value,
   Interaction,
   AddressValue,
   SmartContract,
   TokenTransfer,
   ContractFunction,
-  U64Value,
 } from '@multiversx/sdk-core/out'
 
 dayjs.extend(daysjsRelative)
@@ -29,6 +29,7 @@ export function Staker(props: Props) {
   const [stakeAmount, setStakeAmount] = useState('')
   const lockedFor = dayjs().to(dayjs().add(props.info.stakeLockTimeSeconds, 'seconds'), true)
   const stakeTokenDecimals = 18 // TODO
+  const balanceDenominated = props.info.userStake.shiftedBy(-stakeTokenDecimals)
 
   const handleStake = () => {
     if (!app.config.user) return
@@ -64,7 +65,7 @@ export function Staker(props: Props) {
           autoFocus
           autoComplete="off"
         />
-        {/* {+stakeAmount !== +balanceDenominated && (
+        {+stakeAmount !== +balanceDenominated && (
           <div className="absolute bottom-1/2 right-4 translate-y-1/2 transform">
             <button
               type="button"
@@ -74,9 +75,9 @@ export function Staker(props: Props) {
               Max
             </button>
           </div>
-        )} */}
+        )}
       </div>
-      {/* <p className="mb-4 text-right">Balance: {balanceDenominated.toFormat(4)}</p> */}
+      <p className="mb-4 text-right">Balance: {balanceDenominated.toFormat(4)}</p>
       <Alert type="warning" icon={faWarning}>
         Staked tokens will be locked for <strong>{lockedFor}</strong>.
       </Alert>
