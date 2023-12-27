@@ -14,9 +14,7 @@ export const AshSwapExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Tags: [],
   Contracts: Contracts(config),
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: 'PeerMe',
     Website: 'https://peerme.io',

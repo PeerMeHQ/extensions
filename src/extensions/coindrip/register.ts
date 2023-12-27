@@ -15,9 +15,7 @@ export const CoindripExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Tags: ['defi'],
   Contracts: CoindripContracts(config),
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: 'PeerMe',
     Website: 'https://peerme.io',

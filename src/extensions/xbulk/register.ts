@@ -14,9 +14,7 @@ export const XBulkExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Tags: ['defi'],
   Contracts: Contracts(config),
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: 'Tortuga Staking',
     Website: 'https://tortuga-staking.com',

@@ -17,7 +17,6 @@ export const ItheumExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Contracts: Contracts(config),
   AppRoot: App,
   WidgetRoots: {
-    Info: null,
   },
   Developer: {
     Name: 'PeerMe',

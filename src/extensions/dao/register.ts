@@ -15,9 +15,7 @@ export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Tags: [],
   Contracts: {},
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: 'PeerMe',
     Website: 'https://peerme.io',

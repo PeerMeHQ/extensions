@@ -16,9 +16,7 @@ export const MyExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Tags: [],
   Contracts: Contracts(config),
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: '<your name>',
     Website: '<your website>',

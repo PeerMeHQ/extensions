@@ -14,9 +14,7 @@ export const PulsarMoneyExtension = (config: ExtensionConfig): ExtensionInfo => 
   Tags: ['defi'],
   Contracts: PulsarMoneyContracts(config),
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: 'Astrarizon',
     Website: 'https://astrarizon.netlify.app',

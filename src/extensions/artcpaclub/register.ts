@@ -14,9 +14,7 @@ export const ArtCpaClubExtension = (config: ExtensionConfig): ExtensionInfo => (
   Tags: [],
   Contracts: Contracts(config),
   AppRoot: App,
-  WidgetRoots: {
-    Info: null,
-  },
+  WidgetRoots: {},
   Developer: {
     Name: 'ArtCPAClub',
     Website: 'https://artcpaclub.com/',
