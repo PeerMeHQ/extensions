@@ -13,7 +13,6 @@ export const WidgetDashboardPresenter = (props: Props) => {
 
   return (
     <section>
-      <span>Widgets found: {applicable.map((a) => a.Name).join(', ')}</span>
       <ul>
         {applicable.map((extension) =>
           extension.WidgetRoots.Dashboard ? (
