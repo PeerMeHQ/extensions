@@ -1,10 +1,10 @@
+import clsx from 'clsx'
 import React, { useState } from 'react'
 import { CoalitionInfo } from '../types'
 import { Contracts } from '../contracts'
+import { Button, Input, Theme } from '@peerme/web-ui'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { capitalizeFirstLetter } from '@peerme/core-ts'
-import { Button, Input } from '@peerme/web-ui'
 
 type Props = {
   info: CoalitionInfo
@@ -14,6 +14,9 @@ type Props = {
 export function _CategoriesSection(props: Props) {
   const app = useApp()
   const [name, setName] = useState('')
+
+  // @ts-ignore
+  props.info.categories = ['test', 'test2']
 
   const handleAdd = () =>
     app.requestProposalAction(
@@ -48,14 +51,27 @@ export function _CategoriesSection(props: Props) {
         )}
       </AppSection>
       <AppSection title="Our Categories">
-        <ul>
-          {props.info.categories.map((category) => (
-            <li key={category} className="flex items-center justify-between">
-              <span>{capitalizeFirstLetter(category)}</span>
-              <button onClick={() => handleRemove(category)}>Remove</button>
-            </li>
-          ))}
-        </ul>
+        {props.info.categories.length > 0 ? (
+          <ul>
+            {props.info.categories.map((category) => (
+              <li
+                key={category}
+                className={clsx(
+                  'flex justify-between items-center gap-4 px-4 py-2 mb-2',
+                  Theme.Background.Moderate,
+                  Theme.BorderRadius.Subtle
+                )}
+              >
+                <span className="text-gray-800 dark:text-gray-100">{category}</span>
+                <button onClick={() => handleRemove(category)} className="text-red-500 dark:text-red-400">
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No categories created yet.</p>
+        )}
       </AppSection>
     </div>
   )
