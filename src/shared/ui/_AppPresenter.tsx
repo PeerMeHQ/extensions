@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProposalAction } from '@peerme/core-ts'
+import { Transaction } from '@multiversx/sdk-core'
 import { AppContext } from '../contexts/AppContext'
 import { ExtensionInfo, ExtensionConfig } from '../types'
 import { toAppContextValue, toExtensionName } from '../helpers'
@@ -11,10 +12,13 @@ type Props = {
   extension: ExtensionInfo
   onCloseRequest: () => void
   onActionAddRequest: (action: ProposalAction) => void
+  onUserActionRequest: (tx: Transaction) => void
 }
 
 export const _AppPresenter = (props: Props) => (
-  <AppContext.Provider value={toAppContextValue(props.config, props.extension, props.onActionAddRequest)}>
+  <AppContext.Provider
+    value={toAppContextValue(props.config, props.extension, props.onActionAddRequest, props.onUserActionRequest)}
+  >
     <header className="mb-4">
       <button
         onClick={props.onCloseRequest}

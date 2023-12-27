@@ -3,6 +3,7 @@ import { Config } from '../../config'
 import { Input } from '@peerme/web-ui'
 import { useEffect, useState } from 'react'
 import { _AppPresenter } from './_AppPresenter'
+import { Transaction } from '@multiversx/sdk-core'
 import { _AppSelectorItem } from './_AppSelectorItem'
 import { ExtensionInfo, ExtensionConfig } from '../types'
 import { ProposalAction, useDebounce } from '@peerme/core-ts'
@@ -13,6 +14,7 @@ type Props = {
   config: ExtensionConfig
   onAppSelected?: (app: ExtensionInfo | null) => void
   onActionAddRequest: (action: ProposalAction) => void
+  onUserActionRequest: (tx: Transaction) => void
   onNotificationRequest: (text: string, type: NotificationType) => void
 }
 

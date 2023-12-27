@@ -1,8 +1,16 @@
 import React, { SVGProps } from 'react'
 import { BigNumber } from 'bignumber.js'
-import { TokenTransfer } from '@multiversx/sdk-core'
+import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
-import { ScInfo, Entity, EntityTag, ChainWallet, ProposalActionArg, SearchServiceConfig } from '@peerme/core-ts'
+import {
+  ScInfo,
+  Entity,
+  EntityTag,
+  UserPrivate,
+  ChainWallet,
+  ProposalActionArg,
+  SearchServiceConfig,
+} from '@peerme/core-ts'
 
 export type Network = 'devnet' | 'testnet' | 'mainnet'
 
@@ -13,6 +21,7 @@ export type Network = 'devnet' | 'testnet' | 'mainnet'
 export type ExtensionConfig = {
   network: Network
   entity: Entity
+  user: UserPrivate | null
   walletConfig: ChainWallet
   searchConfig: SearchServiceConfig
   hasEarlyAccess: boolean
@@ -60,6 +69,7 @@ export type AppContextValue = {
     args: ProposalActionArg[],
     payments: TokenTransfer[]
   ) => void
+  requestUserAction: (tx: Transaction) => void
   showToast: (text: string, type?: AppToastType) => void
 }
 

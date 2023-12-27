@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { TokenTransfer } from '@multiversx/sdk-core'
 import { showToast as showAppToast } from '@peerme/web-ui'
+import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import { AppToastType, ExtensionConfig, ExtensionInfo } from './types'
 import { ProposalAction, ProposalActionArg, createAction } from '@peerme/core-ts'
@@ -11,7 +11,8 @@ export const toExtensionName = (config: ExtensionConfig, extension: ExtensionInf
 export const toAppContextValue = (
   config: ExtensionConfig,
   extension: ExtensionInfo,
-  onActionAddRequest: (action: ProposalAction) => void
+  onActionAddRequest?: (action: ProposalAction) => void,
+  onUserActionRequest?: (tx: Transaction) => void
 ) => {
   const networkProvider = new ApiNetworkProvider(config.walletConfig.ApiAddress, {
     timeout: 10_000,
@@ -34,10 +35,18 @@ export const toAppContextValue = (
     transfers: TokenTransfer[] = []
   ) => {
     const action = createAction(destination, endpoint || '', value, args, transfers)
+    console.log(`[App Extension: ${extension.Name}] requests dao action:`, action)
+    onActionAddRequest?.(action)
+  }
 
-    console.log(`[App Extension: ${extension.Name}] requests action:`, action)
-
-    onActionAddRequest(action)
+  /**
+   * Creates a user action request.
+   *
+   * @param {Transaction} tx - The transaction to send.
+   */
+  const requestUserAction = (tx: Transaction) => {
+    console.log(`[App Extension: ${extension.Name}] requests user action:`, tx.toPlainObject())
+    onUserActionRequest?.(tx)
   }
 
   const showToast = (text: string, type?: AppToastType) => {
@@ -49,6 +58,7 @@ export const toAppContextValue = (
     config,
     networkProvider,
     requestProposalAction,
+    requestUserAction,
     showToast,
   }
 }
