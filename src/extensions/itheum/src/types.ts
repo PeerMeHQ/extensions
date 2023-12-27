@@ -56,4 +56,6 @@ export type CoalitionInfo = {
   boardStakeAmount: BigNumber
   boardStakeDurationSeconds: number
   stakeLockTimeSeconds: number
+  userStake: BigNumber
+  userStakeUnlocksAt: number
 }

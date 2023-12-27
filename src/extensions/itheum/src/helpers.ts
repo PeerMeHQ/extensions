@@ -30,6 +30,8 @@ export const toTypedCoalitionInfo = (value: any): CoalitionInfo => ({
   boardStakeAmount: value.board_stake_amount,
   boardStakeDurationSeconds: value.board_stake_duration.toNumber(),
   stakeLockTimeSeconds: value.stake_lock_time.toNumber(),
+  userStake: value.user_stake,
+  userStakeUnlocksAt: value.user_stake_unlocks_at.toNumber(),
 })
 
 export const isValidItheumMarketplaceUrl = (str: string) => {

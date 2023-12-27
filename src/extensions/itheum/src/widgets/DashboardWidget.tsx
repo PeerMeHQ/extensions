@@ -6,13 +6,15 @@ import { useScQuery } from '@peerme/core-ts'
 import { toTypedCoalitionInfo } from '../helpers'
 import React, { useEffect, useState } from 'react'
 import { StickyModal, Theme } from '@peerme/web-ui'
+import { Withdrawer } from '../coalition/Withdrawer'
 import { WidgetRootProps } from '../../../../shared/types'
 import { Contracts, getCoalitionContractAddress } from '../contracts'
 
 export function DashboardWidget(props: WidgetRootProps) {
   const [info, setInfo] = useState<CoalitionInfo | null>(null)
-  const [showDelegating, setShowDelegating] = useState(false)
-  const [showStaking, setShowStaking] = useState(false)
+  const [isDelegating, setIsDelegating] = useState(false)
+  const [isStaking, setIsStaking] = useState(false)
+  const [isWithdrawing, setIsWithdrawing] = useState(false)
   const infoQuery = useScQuery(props.config.walletConfig, Contracts(props.config).GetInfo)
 
   useEffect(() => {
@@ -36,20 +38,28 @@ export function DashboardWidget(props: WidgetRootProps) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>My Data NFTs</h3>
-          <_Button onClick={() => setShowDelegating(true)} inverted>
+          <_Button onClick={() => setIsDelegating(true)} inverted>
             View
           </_Button>
-          <StickyModal open={showDelegating} onClose={() => setShowDelegating(false)}>
+          <StickyModal open={isDelegating} onClose={() => setIsDelegating(false)}>
             <p>Coming soon</p>
           </StickyModal>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Stake {info?.nativeToken.split('-')[0]}</h3>
-          <_Button onClick={() => setShowStaking(true)} inverted>
+          <_Button onClick={() => setIsStaking(true)} inverted>
             Stake
           </_Button>
-          <StickyModal open={showStaking} onClose={() => setShowStaking(false)}>
+          {!!info && !info.userStake.isZero() && (
+            <_Button onClick={() => setIsWithdrawing(true)} inverted>
+              Withdraw
+            </_Button>
+          )}
+          <StickyModal open={isStaking} onClose={() => setIsStaking(false)}>
             {!!info && <Staker info={info} />}
+          </StickyModal>
+          <StickyModal open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
+            {!!info && <Withdrawer info={info} />}
           </StickyModal>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
