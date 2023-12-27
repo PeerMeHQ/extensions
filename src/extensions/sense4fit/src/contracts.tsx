@@ -1,5 +1,3 @@
-import React from 'react'
-import { ProposalAction } from '@peerme/core-ts'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: Network) => {
