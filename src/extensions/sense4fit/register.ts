@@ -8,8 +8,8 @@ export const Sense4fitExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Description: 'Fit2Earn Lifestyle app',
   Website: 'https://sense4fit.io',
   Logo: {
-    Light: '/images/extensions/sense4fit-logo.svg',
-    Dark: '/images/extensions/sense4fit-logo.svg',
+    Light: '/images/extensions/sense4fit-logo.png',
+    Dark: '/images/extensions/sense4fit-logo.png',
   },
   Tags: [],
   Contracts: Contracts(config),
