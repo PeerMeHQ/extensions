@@ -15,12 +15,7 @@ export default function Home() {
   const [selectedExtension, setSelectedExtension] = useState<Extensions.ExtensionInfo | null>(null)
   const [activeProposalAction, setActiveProposalAction] = useState<ProposalAction | null>(null)
 
-  const handleUserActionRequest = (tx: Transaction) => {
-    const result = window.confirm('Do you want to execute the transaction requested by the app?')
-    if (result) {
-      sendTransactions({ transactions: [tx] })
-    }
-  }
+  const handleUserActionRequest = (tx: Transaction) => sendTransactions({ transactions: [tx] })
 
   return (
     <BaseLayout onDarkModeChange={(val) => setDark(val)} onEntityTagChange={(val) => setEntityTag(val)}>
