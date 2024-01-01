@@ -1,8 +1,8 @@
 import { DevServerConfig } from '@/config'
 import { useEffect, useState } from 'react'
 import { DocsNotice } from '@/components/DocsNotice'
-import { Button, Select, Switch } from '@peerme/web-ui'
 import { classNames, trimHash, EntityTag } from '@peerme/core-ts'
+import { Button, Select, SelectOption, Switch } from '@peerme/web-ui'
 import { useExtensionLogin, useGetAccountInfo } from '@multiversx/sdk-dapp/hooks'
 
 type Props = {
@@ -38,7 +38,7 @@ export const BaseLayout = (props: Props) => {
           <div className="flex items-center gap-2">
             <span className="text-xl text-gray-500">Tag</span>
             <Select
-              options={DevServerConfig.AvailableEntityTags.map((tag) => ({ name: tag, value: tag }))}
+              options={toTagSelectOptions(DevServerConfig.AvailableEntityTags)}
               onSelect={(val) => props.onEntityTagChange?.(val as EntityTag)}
               className="w-48"
             />
@@ -66,4 +66,10 @@ export const BaseLayout = (props: Props) => {
       </div>
     </div>
   )
+}
+
+const toTagSelectOptions = (tags: EntityTag[]): SelectOption[] => {
+  const options = tags.map((tag) => ({ name: tag, value: tag }))
+
+  return [{ name: 'Select', value: '-' }, ...options]
 }
