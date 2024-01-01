@@ -13,10 +13,13 @@ export const fetchDataNfts = async (app: AppContextValue, collectionId: string, 
   return nft
 }
 
-export const fetchDataNftsOfAccount = async (app: AppContextValue) => {
-  const collection = Config.DataNftCollection(app.config.network)
-  const url = `accounts/${app.config.entity.address}/nfts?size=10000&collections=${collection}&withSupply=true`
-  const res: any[] = await app.networkProvider.doGetGeneric(url)
+export const fetchDataNftsOfAccount = async (app: AppContextValue, customCollections: string[] = []) => {
+  const defaultCollection = Config.DataNftCollection(app.config.network)
+  const collections = [defaultCollection, ...customCollections]
+
+  const res: any[] = await app.networkProvider.doGetGeneric(
+    `accounts/${app.config.entity.address}/nfts?size=10000&collections=${collections.join(',')}&withSupply=true`
+  )
 
   const nftMintAbiRes = await fetch(Config.Abis.DataNft)
   const nftMintAbiContent = await nftMintAbiRes.json()

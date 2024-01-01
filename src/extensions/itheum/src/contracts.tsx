@@ -84,4 +84,15 @@ export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
     AbiUrl: Config.Abis.Coalition,
     ActionPreview: (action: ProposalAction) => <RemoveCategoryActionPreview action={action} />,
   },
+  // Aggregator
+  GetAppInfo: {
+    Address: '#',
+    Endpoint: 'getAppInfo',
+    AbiUrl: Config.Abis.Aggregator,
+  },
+  GetDelegationsByUser: {
+    Address: '#',
+    Endpoint: 'getDelegationsByUser',
+    AbiUrl: Config.Abis.Aggregator,
+  },
 })

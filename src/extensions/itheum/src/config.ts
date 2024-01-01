@@ -12,6 +12,7 @@ export const Config = {
     Marketplace: 'https://peerme.io/abis/itheum/data_market.abi.json',
     DataNft: 'https://peerme.io/abis/itheum/datanftmint.abi.json',
     Coalition: 'https://peerme.io/abis/itheum/data-coalition.abi.json',
+    Aggregator: 'https://peerme.io/abis/itheum/data-aggregator.abi.json',
   },
 
   TokenId: (network: Network) => {

@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { numberToPaddedHex } from '@peerme/core-ts'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
-import { ClaimInfo, CoalitionInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
+import { AggregatorAppInfo, ClaimInfo, CoalitionInfo, DataNftMetadata, MarketRequirements, OfferInfo } from './types'
 
 export const toTypedMarketRequirements = (value: any): MarketRequirements => ({
   acceptedTokens: value.accepted_tokens.map((v: any) => v.toString()),
@@ -25,6 +25,7 @@ export const toTypedClaimInfo = (value: any): ClaimInfo =>
 export const toTypedCoalitionInfo = (value: any): CoalitionInfo => ({
   nativeToken: value.native_token.toString(),
   aggregator: value.aggregator.toString(),
+  aggregatorApp: value.aggregator_app.toString(),
   categories: value.categories.map((v: any) => v.toString()),
   delegators: value.delegators.toNumber(),
   boardStakeAmount: value.board_stake_amount,
@@ -32,6 +33,14 @@ export const toTypedCoalitionInfo = (value: any): CoalitionInfo => ({
   stakeLockTimeSeconds: value.stake_lock_time.toNumber(),
   userStake: value.user_stake,
   userStakeUnlocksAt: value.user_stake_unlocks_at.toNumber(),
+})
+
+export const toTypedAggregatorAppInfo = (value: any): AggregatorAppInfo => ({
+  name: value.name.toString(),
+  creator: value.creator.toString(),
+  createdAt: value.created_at.toNumber(),
+  contract: value.contract.toString(),
+  dataCollections: value.data_collections.map((v: any) => v.toString()),
 })
 
 export const isValidItheumMarketplaceUrl = (str: string) => {

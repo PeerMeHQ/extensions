@@ -51,6 +51,7 @@ export type DataNftMetadata = {
 export type CoalitionInfo = {
   nativeToken: string
   aggregator: string
+  aggregatorApp: number
   categories: string[]
   delegators: number
   boardStakeAmount: BigNumber
@@ -58,4 +59,12 @@ export type CoalitionInfo = {
   stakeLockTimeSeconds: number
   userStake: BigNumber
   userStakeUnlocksAt: number
+}
+
+export type AggregatorAppInfo = {
+  name: string
+  creator: string
+  createdAt: number
+  contract: string
+  dataCollections: string[]
 }
