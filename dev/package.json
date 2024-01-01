@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.8",
+    "dayjs": "^1.11.10",
     "@headlessui/react": "^1.7.17",
     "@multiversx/sdk-core": "^12.17.0",
     "@multiversx/sdk-dapp": "2.26.2",
