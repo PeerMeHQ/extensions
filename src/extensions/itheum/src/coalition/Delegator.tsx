@@ -46,9 +46,7 @@ export function Delegator(props: Props) {
       setAppInfo(toTypedAggregatorAppInfo(value))
     })
     delegationsQuery.query([props.info.aggregatorApp, app.config.user.address]).then((data) => {
-      const value = data.firstValue?.valueOf()
-      if (!value) return
-      setDelegations(value.map(toTypedAggregatorDelegation))
+      setDelegations(data.firstValue?.valueOf()?.map(toTypedAggregatorDelegation) || [])
     })
   }, [app.config.user])
 
