@@ -4,8 +4,8 @@ import { fetchDataNftsOfAccount } from '../api'
 import React, { useEffect, useState } from 'react'
 import { ScInfo, useScQuery } from '@peerme/core-ts'
 import { useApp } from '../../../../shared/hooks/useApp'
-import { Button, Select, SelectOption, Theme } from '@peerme/web-ui'
 import { Contracts, getCoalitionContractAddress } from '../contracts'
+import { Button, Select, SelectOption, Theme, Tooltip } from '@peerme/web-ui'
 import { toTypedAggregatorAppInfo, toTypedAggregatorDelegation } from '../helpers'
 import { AggregatorAppInfo, AggregatorDelegation, CoalitionInfo, DataNftMetadata } from '../types'
 import {
@@ -136,15 +136,17 @@ export function Delegator(props: Props) {
 function _Delegatable(props: { nft: DataNftMetadata; delegated?: boolean; selected?: boolean; onClick: () => void }) {
   return (
     <button type="button" onClick={props.onClick}>
-      <img
-        src={props.nft.nftImgUrl}
-        alt={props.nft.title}
-        className={clsx(
-          'duration-400 h-16 w-16 transform rounded-lg transition active:translate-y-1 cursor-pointer hover:shadow-lg',
-          props.delegated ? 'opacity-50 grayscale' : '',
-          props.selected ? 'shadow-xl' : 'opacity-40 shadow-inner'
-        )}
-      />
+      <Tooltip tip={props.nft.title}>
+        <img
+          src={props.nft.nftImgUrl}
+          alt={props.nft.title}
+          className={clsx(
+            'duration-400 h-16 w-16 transform rounded-lg transition active:translate-y-1 cursor-pointer hover:shadow-lg',
+            props.delegated ? 'opacity-50 grayscale' : '',
+            props.selected ? 'shadow-xl' : 'opacity-40 shadow-inner'
+          )}
+        />
+      </Tooltip>
     </button>
   )
 }
