@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 import collect from 'collect.js'
 import { fetchDataNftsOfAccount } from '../api'
-import { ScInfo, useScQuery } from '@peerme/core-ts'
 import React, { useEffect, useState } from 'react'
-import { toTypedAggregatorAppInfo } from '../helpers'
+import { ScInfo, useScQuery } from '@peerme/core-ts'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { Button, Select, SelectOption, Theme } from '@peerme/web-ui'
 import { Contracts, getCoalitionContractAddress } from '../contracts'
-import { AggregatorAppInfo, CoalitionInfo, DataNftMetadata } from '../types'
+import { toTypedAggregatorAppInfo, toTypedAggregatorDelegation } from '../helpers'
+import { AggregatorAppInfo, AggregatorDelegation, CoalitionInfo, DataNftMetadata } from '../types'
 import {
   Address,
   BytesValue,
@@ -27,6 +27,7 @@ export function Delegator(props: Props) {
   const app = useApp()
   const [appInfo, setAppInfo] = useState<AggregatorAppInfo | null>(null)
   const [selected, setSelected] = useState<Record<string, DataNftMetadata[]>>({})
+  const [delegations, setDelegations] = useState<AggregatorDelegation[]>([])
   const [userCollections, setUserCollections] = useState<Record<string, DataNftMetadata[]>>({})
   const [category, setCategory] = useState<string | null>(null)
 
@@ -46,7 +47,8 @@ export function Delegator(props: Props) {
     })
     delegationsQuery.query([props.info.aggregatorApp, app.config.user.address]).then((data) => {
       const value = data.firstValue?.valueOf()
-      console.log('user delegations', value)
+      if (!value) return
+      setDelegations(value.map(toTypedAggregatorDelegation))
     })
   }, [app.config.user])
 
@@ -103,17 +105,7 @@ export function Delegator(props: Props) {
             <ul className="flex flex-wrap gap-2">
               {nfts.map((nft) => (
                 <li key={nft.nonce}>
-                  <button type="button" onClick={() => toggleSelected(nft)}>
-                    <img
-                      src={nft.nftImgUrl}
-                      alt={nft.title}
-                      className={clsx(
-                        'duration-400 h-16 w-16 transform rounded-lg transition active:translate-y-1 cursor-pointer hover:shadow-lg',
-                        true /* delegated */ ? '' : 'opacity-50 grayscale',
-                        isSelected(nft) ? 'shadow-xl' : 'opacity-25 shadow-inner'
-                      )}
-                    />
-                  </button>
+                  <_Delegatable nft={nft} selected={isSelected(nft)} onClick={() => toggleSelected(nft)} />
                 </li>
               ))}
             </ul>
@@ -141,6 +133,22 @@ export function Delegator(props: Props) {
         </div>
       )}
     </div>
+  )
+}
+
+function _Delegatable(props: { nft: DataNftMetadata; delegated?: boolean; selected?: boolean; onClick: () => void }) {
+  return (
+    <button type="button" onClick={props.onClick}>
+      <img
+        src={props.nft.nftImgUrl}
+        alt={props.nft.title}
+        className={clsx(
+          'duration-400 h-16 w-16 transform rounded-lg transition active:translate-y-1 cursor-pointer hover:shadow-lg',
+          props.delegated ? 'opacity-50 grayscale' : '',
+          props.selected ? 'shadow-xl' : 'opacity-40 shadow-inner'
+        )}
+      />
+    </button>
   )
 }
 

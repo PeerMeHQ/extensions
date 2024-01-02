@@ -63,8 +63,13 @@ export type CoalitionInfo = {
 
 export type AggregatorAppInfo = {
   name: string
-  creator: string
+  manager: string
   createdAt: number
-  contract: string
   dataCollections: string[]
+}
+
+export type AggregatorDelegation = {
+  id: string
+  nonce: number
+  segment: string
 }
