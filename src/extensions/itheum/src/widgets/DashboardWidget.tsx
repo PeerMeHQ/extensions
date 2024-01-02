@@ -55,15 +55,12 @@ export function DashboardWidget(props: WidgetRootProps) {
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Stake {info?.nativeToken.split('-')[0]}</h3>
           <div className="flex flex-col lg:flex-row gap-2">
             <_Button onClick={() => setIsStaking(true)}>Stake</_Button>
-            <_Button onClick={() => setIsWithdrawing(true)} inverted>
-              Withdraw
-            </_Button>
+            {!!info && !info.userStake.isZero() && (
+              <_Button onClick={() => setIsWithdrawing(true)} inverted>
+                Withdraw
+              </_Button>
+            )}
           </div>
-          {!!info && !info.userStake.isZero() && (
-            <_Button onClick={() => setIsWithdrawing(true)} inverted>
-              Withdraw
-            </_Button>
-          )}
           <StickyModal open={isStaking} onClose={() => setIsStaking(false)}>
             {!!info && <Staker info={info} />}
           </StickyModal>
