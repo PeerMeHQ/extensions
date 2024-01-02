@@ -60,12 +60,12 @@ export function Delegator(props: Props) {
   }, [app.config.user])
 
   useEffect(() => {
-    if (!appInfo) return
-    fetchDataNftsOfAccount(app, appInfo?.dataCollections).then((data) => {
+    if (!appInfo || !app.config.user) return
+    fetchDataNftsOfAccount(app, app.config.user.address, appInfo?.dataCollections).then((data) => {
       const allowed = collect(data).filter((x) => appInfo.dataCollections.includes(x.collection))
       setUserCollections(allowed.groupBy('collection').all() as any)
     })
-  }, [appInfo])
+  }, [appInfo, app.config.user])
 
   const toggleDelegate = (nft: DataNftMetadata) => {
     setSelectedUndelegate({})

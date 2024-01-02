@@ -14,7 +14,7 @@ export function WalletTab(props: Props) {
   const [nfts, setNfts] = useState<DataNftMetadata[]>([])
 
   useEffect(() => {
-    fetchDataNftsOfAccount(app).then((nfts) => setNfts(nfts))
+    fetchDataNftsOfAccount(app, app.config.entity.address).then((nfts) => setNfts(nfts))
   }, [])
 
   return (
