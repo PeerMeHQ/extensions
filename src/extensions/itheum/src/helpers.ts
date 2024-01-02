@@ -54,6 +54,7 @@ export const toTypedAggregatorDelegation = (value: any): AggregatorDelegation =>
   collection: value.collection.toString(),
   nonce: value.nonce.toNumber(),
   segment: value.segment.toString(),
+  metadata: null,
 })
 
 export const isValidItheumMarketplaceUrl = (str: string) => {

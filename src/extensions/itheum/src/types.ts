@@ -72,4 +72,5 @@ export type AggregatorDelegation = {
   collection: string
   nonce: number
   segment: string
+  metadata: DataNftMetadata | null
 }
