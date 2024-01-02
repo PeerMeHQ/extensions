@@ -70,9 +70,7 @@ export function Delegator(props: Props) {
   const isSelected = (nft: DataNftMetadata) => !!selected[nft.collection]?.find((d) => d.nonce === nft.nonce)
 
   const handleDelegate = () => {
-    console.log('delegate', app.config.user, category, selected)
     if (!app.config.user || !category || !Object.keys(selected).length) return
-    console.log('aaa')
     const amount = 1 // default for NFTs, and for SFTs only 1 is allowed since data stream is equal
     const nfts = Object.values(selected).flat(1)
     const transferables = nfts.map((nft) => TokenTransfer.semiFungible(nft.collection, nft.nonce, amount))
