@@ -51,7 +51,7 @@ export const toTypedAggregatorAppInfo = (value: any): AggregatorAppInfo => ({
 })
 
 export const toTypedAggregatorDelegation = (value: any): AggregatorDelegation => ({
-  id: value.id.toString(),
+  collection: value.collection.toString(),
   nonce: value.nonce.toNumber(),
   segment: value.segment.toString(),
 })

@@ -53,7 +53,8 @@ export function Delegator(props: Props) {
   useEffect(() => {
     if (!appInfo) return
     fetchDataNftsOfAccount(app, appInfo?.dataCollections).then((data) => {
-      setUserCollections(collect(data).groupBy('collection').all() as any)
+      const allowed = collect(data).filter((x) => appInfo.dataCollections.includes(x.collection))
+      setUserCollections(allowed.groupBy('collection').all() as any)
     })
   }, [appInfo])
 

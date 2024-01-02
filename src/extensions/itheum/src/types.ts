@@ -69,7 +69,7 @@ export type AggregatorAppInfo = {
 }
 
 export type AggregatorDelegation = {
-  id: string
+  collection: string
   nonce: number
   segment: string
 }
