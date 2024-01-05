@@ -1,6 +1,7 @@
 import { DevServerConfig } from '@/config'
 import { useEffect, useState } from 'react'
 import { DocsNotice } from '@/components/DocsNotice'
+import { SimulationNotice } from '@/components/SimulationNotice'
 import { classNames, trimHash, EntityTag } from '@peerme/core-ts'
 import { Button, Select, SelectOption, Switch } from '@peerme/web-ui'
 import { useExtensionLogin, useGetAccountInfo } from '@multiversx/sdk-dapp/hooks'
@@ -60,6 +61,7 @@ export const BaseLayout = (props: Props) => {
           </div>
         </header>
         <div>
+          {!address && <SimulationNotice className="mb-4" />}
           <DocsNotice />
         </div>
         <main className="rounded-2xl mt-8">{props.children}</main>
