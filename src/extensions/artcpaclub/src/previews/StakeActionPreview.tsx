@@ -24,7 +24,9 @@ export function StakeActionPreview(props: Props) {
 
   useEffect(() => {
     if (!poolId) return
-    fetch(Config.ApiBaseUrl(props.config.network) + '/tokenstaking/' + poolId).then(async (res) => {
+    const isNft = props.action.payments.some((p) => p.tokenNonce !== 0)
+    const endpoint = isNft ? 'nftstaking' : 'tokenstaking'
+    fetch(`${Config.ApiBaseUrl(props.config.network)}/${endpoint}/${poolId}`).then(async (res) => {
       const data = await res.json()
       setSelectedPool(data)
     })
