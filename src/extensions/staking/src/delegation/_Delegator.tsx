@@ -18,7 +18,9 @@ export const _Delegator = (props: Props) => {
   const [entityBalance, setEntityBalance] = useState<BigNumber>(new BigNumber(0))
 
   useEffect(() => {
-    app.networkProvider.getAccount(new Address(app.config.entity.address)).then((acc) => setEntityBalance(acc.balance))
+    app.networkProvider
+      .getAccount(new Address(app.config.entity.address))
+      .then((acc) => setEntityBalance(acc.balance as any))
   }, [])
 
   const handleAdd = () => {

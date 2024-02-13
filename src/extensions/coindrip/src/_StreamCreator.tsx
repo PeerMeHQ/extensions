@@ -93,7 +93,7 @@ export const _StreamCreator = () => {
         <Switch label="Cancellable" checked={cancellable} onChange={(val) => setCancellable(val)} />
         <span className="text-xl text-gray-700 dark:text-gray-200">Can cancel?</span>
       </div>
-      <Button color="blue" className="block w-full" disabled={isSubmitDisabled} submit>
+      <Button color="blue" className="block w-full" disabled={isSubmitDisabled} type="submit">
         Create Stream
       </Button>
     </form>

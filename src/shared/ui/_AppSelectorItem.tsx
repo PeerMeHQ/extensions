@@ -1,7 +1,7 @@
 import React from 'react'
+import { clsx } from 'clsx'
 import { _AppLogo } from './_AppLogo'
 import { toExtensionName } from '../helpers'
-import { classNames } from '@peerme/core-ts'
 import { ExtensionConfig, ExtensionInfo } from '../types'
 
 type Props = {
@@ -15,7 +15,7 @@ export const _AppSelectorItem = (props: Props) => (
   <button
     type="button"
     onClick={() => props.onClick(props.extension)}
-    className={classNames(
+    className={clsx(
       'flex items-center gap-4 w-full text-left px-6 py-4 rounded-2xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200',
       props.className
     )}

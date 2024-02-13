@@ -7,7 +7,7 @@ import { useScQuery } from '@peerme/core-ts'
 import { toTypedCoalitionInfo } from '../helpers'
 import React, { useEffect, useState } from 'react'
 import { Delegator } from '../coalition/Delegator'
-import { StickyModal, Theme } from '@peerme/web-ui'
+import { Dialog, Theme } from '@peerme/web-ui'
 import { Withdrawer } from '../coalition/Withdrawer'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { WidgetRootProps } from '../../../../shared/types'
@@ -47,9 +47,9 @@ export function DashboardWidget(props: WidgetRootProps) {
               View
             </_Button>
           </div>
-          <StickyModal open={isDelegating} onClose={() => setIsDelegating(false)}>
+          <Dialog open={isDelegating} onClose={() => setIsDelegating(false)}>
             {!!info && <Delegator info={info} />}
-          </StickyModal>
+          </Dialog>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Stake {info?.nativeToken.split('-')[0]}</h3>
@@ -61,12 +61,12 @@ export function DashboardWidget(props: WidgetRootProps) {
               </_Button>
             )}
           </div>
-          <StickyModal open={isStaking} onClose={() => setIsStaking(false)}>
+          <Dialog open={isStaking} onClose={() => setIsStaking(false)}>
             {!!info && <Staker info={info} />}
-          </StickyModal>
-          <StickyModal open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
+          </Dialog>
+          <Dialog open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
             {!!info && <Withdrawer info={info} />}
-          </StickyModal>
+          </Dialog>
         </div>
         <div className={clsx('px-4 py-2', Theme.Background.Subtle, Theme.BorderRadius.Subtle)}>
           <h3 className={clsx('mb-1', Theme.TextSize.Base)}>Data Providers</h3>

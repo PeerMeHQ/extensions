@@ -1,8 +1,10 @@
+'use client'
+import { clsx } from 'clsx'
 import { DevServerConfig } from '@/config'
 import { useEffect, useState } from 'react'
 import { DocsNotice } from '@/components/DocsNotice'
+import { trimHash, EntityTag } from '@peerme/core-ts'
 import { SimulationNotice } from '@/components/SimulationNotice'
-import { classNames, trimHash, EntityTag } from '@peerme/core-ts'
 import { Button, Select, SelectOption, Switch } from '@peerme/web-ui'
 import { useExtensionLogin, useGetAccountInfo } from '@multiversx/sdk-dapp/hooks'
 
@@ -30,7 +32,7 @@ export const BaseLayout = (props: Props) => {
 
   return (
     <div className={dark ? 'dark bg-gray-800' : 'bg-gray-100'}>
-      <div className={classNames('min-h-screen w-screen max-w-4xl mx-auto pb-4')}>
+      <div className={clsx('min-h-screen w-screen max-w-4xl mx-auto pb-4')}>
         <header className="px-8 py-4 flex gap-8">
           <div className="flex items-center space-x-2">
             <span className="text-xl text-gray-500">Dark Mode</span>
@@ -54,7 +56,7 @@ export const BaseLayout = (props: Props) => {
                 {trimHash(address, 8)}
               </a>
             ) : (
-              <Button onClick={initExtensionLogin} color="black" inverted>
+              <Button onClick={initExtensionLogin} color="blue" outline>
                 Connect via DeFi Extension
               </Button>
             )}

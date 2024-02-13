@@ -63,6 +63,7 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
     callerRoles: [],
     parent: null,
     children: [],
+    pipeline: null,
     extra: [],
     favorited: false,
   },

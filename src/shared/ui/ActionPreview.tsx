@@ -1,8 +1,9 @@
 import React from 'react'
+import { clsx } from 'clsx'
 import BigNumber from 'bignumber.js'
 import { _AppLogo } from './_AppLogo'
+import { ProposalAction } from '@peerme/core-ts'
 import { ExtensionConfig, ExtensionInfo } from '../types'
-import { classNames, ProposalAction } from '@peerme/core-ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -24,7 +25,7 @@ export const ActionPreview = (props: Props) => {
   const showRawTransaction = () => alert(JSON.stringify(props.action, null, 2))
 
   return (
-    <div className={classNames('space-y-4', props.className)}>
+    <div className={clsx('space-y-4', props.className)}>
       <div>
         <h3 className="inline text-xl sm:text-2xl text-gray-800 dark:text-gray-200 text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-400">
           Use App{' '}

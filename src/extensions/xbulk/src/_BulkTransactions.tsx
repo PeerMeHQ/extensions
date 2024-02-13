@@ -131,7 +131,7 @@ export const _BulkTransactions = () => {
           limit.
         </Alert>
       )}
-      <Button color="blue" className="block w-full" disabled={!isValidInput} submit>
+      <Button color="blue" className="block w-full" disabled={!isValidInput} type="submit">
         Add Bulk transaction
       </Button>
     </form>

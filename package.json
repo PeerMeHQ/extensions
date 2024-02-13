@@ -16,6 +16,6 @@
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-turbo": "latest",
-    "turbo": "^1.11.2"
+    "turbo": "^1.12.3"
   }
 }

@@ -1,6 +1,6 @@
 import { Config } from '../config'
+import { Dialog } from '@peerme/web-ui'
 import { _Withdrawer } from './_Withdrawer'
-import { StickyModal } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
@@ -67,9 +67,9 @@ export const _DelegationsRow = (props: Props) => {
             </button>
           </div>
         )}
-        <StickyModal open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
+        <Dialog open={isWithdrawing} onClose={() => setIsWithdrawing(false)}>
           <_Withdrawer provider={props.provider} delegation={props.delegation} />
-        </StickyModal>
+        </Dialog>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {toEgldDisplayAmount(props.delegation.userActiveStake)}

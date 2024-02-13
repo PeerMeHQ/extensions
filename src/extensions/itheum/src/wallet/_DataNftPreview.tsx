@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { toDateDisplay } from '@peerme/core-ts'
 import { _MarketListSection } from './_MarketListSection'
-import { AddressPresenter, StickyModal } from '@peerme/web-ui'
+import { AddressPresenter, Dialog } from '@peerme/web-ui'
 import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
@@ -22,7 +22,7 @@ export function _DataNftPreview(props: Props) {
         </div>
         <h3 className="text-lg">{props.nft.title}</h3>
       </button>
-      <StickyModal open={showDetails} onClose={() => setShowDetails(false)}>
+      <Dialog open={showDetails} onClose={() => setShowDetails(false)}>
         <header className="flex gap-8 mb-4 p-4">
           <div className="flex-shrink-0 flex items-center">
             <img src={props.nft.nftImgUrl} alt="NFT Preview" className="w-32 h-32 sm:w-40 sm:h-40" />
@@ -50,7 +50,7 @@ export function _DataNftPreview(props: Props) {
           </div>
         </header>
         <_MarketListSection nft={props.nft} marketRequirements={props.marketRequirements} />
-      </StickyModal>
+      </Dialog>
     </>
   )
 }

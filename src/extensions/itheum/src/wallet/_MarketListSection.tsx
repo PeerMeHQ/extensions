@@ -74,7 +74,7 @@ export function _MarketListSection(props: Props) {
             </li>
           )}
         </ul>
-        <Button color="blue" className="block w-full" submit>
+        <Button color="blue" className="block w-full" type="submit">
           List {amount} NFT for {totalPrice} {Config.TokenName}
         </Button>
       </form>

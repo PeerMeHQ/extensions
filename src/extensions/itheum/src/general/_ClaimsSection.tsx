@@ -1,3 +1,4 @@
+import { clsx } from 'clsx'
 import { Config } from '../config'
 import { ClaimInfo } from '../types'
 import React, { useEffect } from 'react'
@@ -5,7 +6,7 @@ import { Contracts } from '../contracts'
 import { toTypedClaimInfo } from '../helpers'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { classNames, toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
+import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 
 export function _ClaimsSection() {
   const app = useApp()
@@ -33,7 +34,7 @@ export function _ClaimsSection() {
             <div className="bg-gray-100 dark:bg-gray-700 rounded-2xl px-6 py-4">
               <h2 className="text-base mb-1">{Config.Claims.OrderedTypeNames[index]}</h2>
               <strong
-                className={classNames(
+                className={clsx(
                   'font-head text-4xl',
                   claimInfo.amount.isZero()
                     ? 'text-gray-600 dark:text-gray-400'

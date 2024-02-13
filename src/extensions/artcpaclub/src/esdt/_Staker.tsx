@@ -42,7 +42,7 @@ export function _Staker(props: Props) {
           tokenIdWhitelist={['EGLD', props.pool.stake_token_id]}
           className="mb-8"
         />
-        <Button color="blue" className="block w-full" disabled={isSubmitDisabled} submit>
+        <Button color="blue" className="block w-full" disabled={isSubmitDisabled} type="submit">
           Add Stake Action
         </Button>
       </form>

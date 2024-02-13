@@ -58,7 +58,7 @@ export function _Unstaker(props: Props) {
             </div>
           )}
         </div>
-        <Button color="blue" className="block w-full" disabled={+amount === 0} submit>
+        <Button color="blue" className="block w-full" disabled={+amount === 0} type="submit">
           Add Unstake Action
         </Button>
       </form>

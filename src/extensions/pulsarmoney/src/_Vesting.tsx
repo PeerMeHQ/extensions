@@ -181,7 +181,7 @@ export const _Vesting = () => {
         />
       </div>
 
-      <Button color="blue" className="block w-full" disabled={isSubmitDisabled} submit>
+      <Button color="blue" className="block w-full" disabled={isSubmitDisabled} type="submit">
         Create Vesting
       </Button>
     </form>

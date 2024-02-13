@@ -6,8 +6,8 @@ import { DataNftMetadata, OfferInfo } from '../types'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
 import React, { SyntheticEvent, useMemo, useState } from 'react'
+import { Button, Input, Dialog, TextBadge } from '@peerme/web-ui'
 import { Constants, toFormattedTokenAmount } from '@peerme/core-ts'
-import { Button, Input, StickyModal, TextBadge } from '@peerme/web-ui'
 
 type Props = {
   offer: OfferInfo
@@ -43,7 +43,7 @@ export function _Procurer(props: Props) {
       <Button onClick={() => setIsOpen(true)} color="blue">
         Procure
       </Button>
-      <StickyModal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
         <form onSubmit={handleSubmit}>
           <ul className="list-none text-gray-900 dark:text-gray-100 text-xl bg-gray-100 dark:bg-gray-800 rounded-xl px-4 py-2 mb-4">
             <li>
@@ -79,11 +79,11 @@ export function _Procurer(props: Props) {
             onChange={(val) => setQuantity(val)}
             className="mb-4"
           />
-          <Button color="blue" submit className="block w-full">
+          <Button color="blue" type="submit" className="block w-full">
             Add Procure Action to Proposal
           </Button>
         </form>
-      </StickyModal>
+      </Dialog>
     </>
   )
 }
