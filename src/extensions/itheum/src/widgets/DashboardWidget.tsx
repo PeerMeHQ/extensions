@@ -32,7 +32,7 @@ export function DashboardWidget(props: WidgetRootProps) {
     <section>
       <h2 className={clsx(Theme.TextSize.Large)}>Data Coalition</h2>
       <p className="mb-2">
-        This Peering is a Data Coalition utilizing the{' '}
+        Delegate your data and engage with {props.config.entity.name}, powered by the{' '}
         <a href={Config.Urls.Web} target="_blank" rel="noopener">
           Itheum
         </a>{' '}
