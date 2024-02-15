@@ -47,7 +47,7 @@ export function DashboardWidget(props: WidgetRootProps) {
               View
             </_Button>
           </div>
-          <Dialog open={isDelegating} onClose={() => setIsDelegating(false)}>
+          <Dialog open={isDelegating} onClose={() => setIsDelegating(false)} size="4xl">
             {!!info && <Delegator info={info} />}
           </Dialog>
         </div>
