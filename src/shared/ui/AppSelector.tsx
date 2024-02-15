@@ -1,4 +1,5 @@
 import React from 'react'
+import pluralize from 'pluralize'
 import { Config } from '../../config'
 import { Input } from '@peerme/web-ui'
 import { useEffect, useState } from 'react'
@@ -6,7 +7,7 @@ import { _AppPresenter } from './_AppPresenter'
 import { Transaction } from '@multiversx/sdk-core'
 import { _AppSelectorItem } from './_AppSelectorItem'
 import { ExtensionInfo, ExtensionConfig } from '../types'
-import { ProposalAction, useDebounce } from '@peerme/core-ts'
+import { ProposalAction, useDebounce, EntityConfig } from '@peerme/core-ts'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'vibe'
 
@@ -37,7 +38,9 @@ export const AppSelector = (props: Props) => {
       {activeApp === null && (
         <header className="mb-4">
           <h2 className="mb-1">Apps</h2>
-          <p className="text-xl mb-2">Peering DAOs can easily interact with the apps you love the most.</p>
+          <p className="text-xl mb-2">
+            {pluralize(EntityConfig.ProductName)} can easily interact with the apps you love the most.
+          </p>
           {props.config.hasEarlyAccess && (
             <Input
               placeholder="Search Apps ..."
