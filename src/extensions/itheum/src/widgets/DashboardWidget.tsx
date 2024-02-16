@@ -30,7 +30,7 @@ export function DashboardWidget(props: WidgetRootProps) {
 
   return (
     <section>
-      <h2 className={clsx(Theme.TextSize.Large)}>Data Coalition</h2>
+      <h2 className={clsx(Theme.TextSize.Huge)}>Data Coalition</h2>
       <p className="mb-2">
         Delegate your data and engage with {props.config.entity.name}, powered by the{' '}
         <a href={Config.Urls.Web} target="_blank" rel="noopener">
