@@ -8,6 +8,7 @@ import { AppContext } from '../contexts/AppContext'
 type Props = {
   config: ExtensionConfig
   onUserActionRequest?: (tx: Transaction) => void
+  className?: string
 }
 
 export const WidgetDashboardPresenter = (props: Props) => {
@@ -16,7 +17,7 @@ export const WidgetDashboardPresenter = (props: Props) => {
   if (applicable.length === 0) return null
 
   return (
-    <section>
+    <section className={props.className}>
       <ul>
         {applicable.map((extension) =>
           extension.WidgetRoots.Dashboard ? (
