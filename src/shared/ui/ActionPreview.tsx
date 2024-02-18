@@ -27,7 +27,7 @@ export const ActionPreview = (props: Props) => {
   return (
     <div className={clsx('space-y-4', props.className)}>
       <div>
-        <h3 className="inline text-xl sm:text-2xl text-gray-800 dark:text-gray-200 text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-400">
+        <h3 className="inline text-xl sm:text-2xl text-gray-800 dark:text-gray-200 text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400">
           Use App{' '}
           <a
             href={props.extension.Website}
