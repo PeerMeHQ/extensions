@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { ScInfo, useScQuery } from '@peerme/core-ts'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
+import { Button, Select, Theme, Tooltip } from '@peerme/web-ui'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fetchDataNftsByIds, fetchDataNftsOfAccount } from '../api'
 import { Contracts, getCoalitionContractAddress } from '../contracts'
 import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
-import { Button, Select, SelectOption, Theme, Tooltip } from '@peerme/web-ui'
 import { toNftId, toTypedAggregatorAppInfo, toTypedAggregatorDelegation } from '../helpers'
 import { AggregatorAppInfo, AggregatorDelegation, CoalitionInfo, DataNftMetadata } from '../types'
 import {
@@ -174,11 +174,14 @@ export function Delegator(props: Props) {
           >
             Category
           </label>
-          <Select
-            id="category"
-            options={toCategoryOptions(props.info.categories)}
-            onSelect={(val) => setCategory(val)}
-          />
+          <Select id="category" onChange={(val) => setCategory(val)}>
+            <option value="-">Select Category ...</option>
+            {props.info.categories.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </Select>
         </div>
       )}
       {hasSelectedDelegate && (
@@ -229,13 +232,4 @@ const getPopulatedDelegations = async (app: AppContextValue, delegations: Aggreg
     d.metadata = nftsMetadata.find((n) => n.collection === d.collection && n.nonce == d.nonce) || null
   })
   return delegations.filter((d) => !!d.metadata)
-}
-
-const toCategoryOptions = (categories: string[]): SelectOption[] => {
-  const options = categories.map((category) => ({
-    value: category,
-    name: category,
-  }))
-
-  return [{ value: '-', name: 'Select Category' }, ...options]
 }
