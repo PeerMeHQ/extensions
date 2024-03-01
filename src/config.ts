@@ -4,12 +4,13 @@ import { XBulkExtension } from './extensions/xbulk/register'
 import { HatomExtension } from './extensions/hatom/register'
 import { ItheumExtension } from './extensions/itheum/register'
 import { StakingExtension } from './extensions/staking/register'
-import { CoindripExtension } from './extensions/coindrip/register'
-import { XExchangeExtension } from './extensions/xexchange/register'
-import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
 import { AshSwapExtension } from './extensions/ashswap/register'
-import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
+import { CoindripExtension } from './extensions/coindrip/register'
+import { LunarPayExtension } from './extensions/lunarpay/register'
 import { Sense4fitExtension } from './extensions/sense4fit/register'
+import { XExchangeExtension } from './extensions/xexchange/register'
+import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
+import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [
@@ -25,6 +26,7 @@ export const Config = (config: ExtensionConfig) => ({
     AshSwapExtension(config),
     Sense4fitExtension(config),
     ArtCpaClubExtension(config),
+    LunarPayExtension(config),
   ],
 
   KnowledgeBase: {

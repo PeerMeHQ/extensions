@@ -16,6 +16,7 @@ Extensions (Apps & Widgets) for the DAOs on [peerme.io](https://peerme.io). For 
 - xBulk: [xbulk.app](https://xbulk.app)
 - AshSwap: [ashswap.io](https://ashswap.io) (in progress)
 - ArtCPAClub [artcpaclub.com](https://marketplace.artcpaclub.com)
+- LunarPay [lunarpay.finance](https://lunarpay.finance) (in progress)
 
 ## Create your App
 
