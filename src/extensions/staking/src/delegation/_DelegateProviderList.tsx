@@ -40,7 +40,7 @@ export const _DelegateProviderList = (props: Props) => (
           className="flex w-full hover:bg-gray-200 dark:hover:bg-gray-700"
         >
           <td className="flex-grow flex px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-            <div className="flex items-center">
+            <div className="flex-shrink-0 flex items-center">
               <img
                 src={provider.identityInfo.avatar}
                 alt={provider.identityInfo.name + ' Staking Provider Avatar'}
@@ -53,7 +53,7 @@ export const _DelegateProviderList = (props: Props) => (
             </div>
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{provider.apr}%</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{+provider.serviceFee / 100}%</td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{provider.serviceFee}%</td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
             {provider.delegationCap.isZero() ? 'Uncapped' : provider.identityInfo.stakePercent + '%'}
           </td>
