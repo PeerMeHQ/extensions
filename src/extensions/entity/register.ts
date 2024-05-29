@@ -1,7 +1,8 @@
 import { App } from './src/EntityApp'
-import { EntityConfig } from '@peerme/core-ts'
 import { LogoBlack } from './meta/LogoBlack'
 import { LogoWhite } from './meta/LogoWhite'
+import { EntityConfig } from '@peerme/core-ts'
+import { EntityContracts } from './src/contracts'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
@@ -14,7 +15,7 @@ export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
     Dark: LogoWhite,
   },
   Tags: [],
-  Contracts: {},
+  Contracts: EntityContracts(config),
   AppRoot: App,
   WidgetRoots: {},
   Developer: {

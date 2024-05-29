@@ -1,3 +1,6 @@
+import React from 'react'
+import { ProposalAction } from '@peerme/core-ts'
+import { BoostActionPreview } from './previews/BoostActionPreview'
 import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: Network) => {
@@ -7,8 +10,9 @@ const getContractAddress = (network: Network) => {
 }
 
 export const EntityContracts = (config: ExtensionConfig): ExtensionScInfo => ({
-  StreamCreate: {
+  Boost: {
     Address: getContractAddress(config.network),
     Endpoint: 'boost',
+    ActionPreview: (action: ProposalAction) => <BoostActionPreview action={action} />,
   },
 })

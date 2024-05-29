@@ -23,8 +23,8 @@ export function BoostSection(props: Props) {
     const tokenTransfers = payment.isEgld() ? [] : [payment]
 
     app.requestProposalAction(
-      EntityContracts(app.config).StreamCreate.Address,
-      EntityContracts(app.config).StreamCreate.Endpoint,
+      EntityContracts(app.config).Boost.Address,
+      EntityContracts(app.config).Boost.Endpoint,
       value,
       [app.config.entity.address],
       tokenTransfers
