@@ -18,7 +18,11 @@ export function BoostSection(props: Props) {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    if (!payment) return
+    if (!payment || payment.amountAsBigInteger.isZero()) {
+      app.showToast('Can not boost with zero', 'error')
+      return
+    }
+
     const value = payment.isEgld() ? payment.amountAsBigInteger : 0
     const tokenTransfers = payment.isEgld() ? [] : [payment]
 
