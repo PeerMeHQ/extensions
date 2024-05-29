@@ -1,4 +1,3 @@
-'use client'
 import { EntityConfig } from './config'
 import { EntityContracts } from './contracts'
 import { useApp } from '../../../shared/hooks/useApp'
