@@ -1,5 +1,5 @@
 import { ExtensionConfig, ExtensionInfo } from './shared/types'
-import { DaoExtension } from './extensions/dao/register'
+import { DaoExtension } from './extensions/entity/register'
 import { XBulkExtension } from './extensions/xbulk/register'
 import { HatomExtension } from './extensions/hatom/register'
 import { ItheumExtension } from './extensions/itheum/register'

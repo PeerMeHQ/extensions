@@ -1,12 +1,13 @@
-import { App } from './src/DaoApp'
+import { App } from './src/EntityApp'
+import { EntityConfig } from '@peerme/core-ts'
 import { LogoBlack } from './meta/LogoBlack'
 import { LogoWhite } from './meta/LogoWhite'
 import { ExtensionConfig, ExtensionInfo } from '../../shared/types'
 
 export const DaoExtension = (config: ExtensionConfig): ExtensionInfo => ({
   Enabled: false,
-  Name: 'Configure :entityName',
-  Description: 'Configure your DAO on peerme.io',
+  Name: ':entityName on PeerMe',
+  Description: `Configure and interact with your ${EntityConfig.ProductName} on PeerMe.`,
   Website: 'https://peerme.io',
   Logo: {
     Light: LogoBlack,
