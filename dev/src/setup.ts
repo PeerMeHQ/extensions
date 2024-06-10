@@ -37,6 +37,7 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
     headerImageUrl: null,
     verified: false,
     private: false,
+    template: 'default',
     specialization: null,
     justCreated: false,
     tags: [],
