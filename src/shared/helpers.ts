@@ -40,6 +40,16 @@ export const toAppContextValue = (
   }
 
   /**
+   * Requests a direct proposal action.
+   *
+   * @param {ProposalAction} action - The proposal action to request.
+   */
+  const requestDirectProposalAction = (action: ProposalAction) => {
+    console.log(`[App Extension: ${extension.Name}] requests direct dao action:`, action)
+    onActionAddRequest?.(action)
+  }
+
+  /**
    * Creates a user action request.
    *
    * @param {Transaction} tx - The transaction to send.
@@ -58,6 +68,7 @@ export const toAppContextValue = (
     config,
     networkProvider,
     requestProposalAction,
+    requestDirectProposalAction,
     requestUserAction,
     showToast,
   }

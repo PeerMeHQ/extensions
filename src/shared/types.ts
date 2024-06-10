@@ -8,6 +8,7 @@ import {
   EntityTag,
   UserPrivate,
   ChainWallet,
+  ProposalAction,
   ProposalActionArg,
   SearchServiceConfig,
 } from '@peerme/core-ts'
@@ -69,6 +70,7 @@ export type AppContextValue = {
     args: ProposalActionArg[],
     payments: TokenTransfer[]
   ) => void
+  requestDirectProposalAction: (action: ProposalAction) => void
   requestUserAction: (tx: Transaction) => void
   showToast: (text: string, type?: AppToastType) => void
 }
