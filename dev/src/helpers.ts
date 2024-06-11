@@ -28,12 +28,12 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
 
     interaction = isFungible
       ? interaction.withSingleESDTTransfer(tokenTransfer)
-      : interaction.withSingleESDTNFTTransfer(tokenTransfer, new Address(account.address))
+      : interaction.withSingleESDTNFTTransfer(tokenTransfer)
   } else if (action.payments.length > 1) {
     const tokenTransfer = action.payments.map((p) =>
       TokenTransfer.metaEsdtFromBigInteger(p.tokenId, p.tokenNonce, toActionArgsBigNumber(p.amount), p.tokenDecimals!)
     )
-    interaction = interaction.withMultiESDTNFTTransfer(tokenTransfer, new Address(account.address))
+    interaction = interaction.withMultiESDTNFTTransfer(tokenTransfer)
   }
 
   return interaction.buildTransaction()
