@@ -12,12 +12,12 @@ const getContractAddress = (network: AppEnv) => {
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   BulkSend: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'bulksend',
     ActionPreview: (action: ProposalAction) => <BulkSendActionPreview action={action} />,
   },
   BulkSendSameAmount: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'bulksendSameAmount',
     ActionPreview: (action: ProposalAction) => <BulkSendSameAmountActionPreview action={action} />,
   },

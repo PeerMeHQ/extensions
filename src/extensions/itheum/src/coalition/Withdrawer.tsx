@@ -27,7 +27,9 @@ export function Withdrawer(props: Props) {
   const handleWithdraw = () => {
     if (!app.config.user) return
     const amount = shiftBigint(withdrawAmount, stakeTokenDecimals)
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.env)) })
+    const contract = new SmartContract({
+      address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
+    })
     const tx = new Interaction(contract, new ContractFunction('unstake'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       new U64Value(amount),

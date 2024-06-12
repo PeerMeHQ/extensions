@@ -29,57 +29,57 @@ export const getCoalitionContractAddress = (network: AppEnv) => {
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   // Claims
   Claim: {
-    Address: getClaimsContractAddress(config.env),
+    Address: getClaimsContractAddress(config.network.env),
     Endpoint: 'claim',
     ActionPreview: (action: ProposalAction) => <ClaimActionPreview action={action} />,
   },
   ViewClaimWithDate: {
-    Address: getClaimsContractAddress(config.env),
+    Address: getClaimsContractAddress(config.network.env),
     Endpoint: 'viewClaimWithDate',
     AbiUrl: Config.Abis.Claims,
   },
   // Market
   AddOffer: {
-    Address: getMarketContractAddress(config.env),
+    Address: getMarketContractAddress(config.network.env),
     Endpoint: 'addOffer',
     AbiUrl: Config.Abis.Marketplace,
     ActionPreview: (action: ProposalAction) => <AddOfferActionPreview action={action} />,
   },
   AcceptOffer: {
-    Address: getMarketContractAddress(config.env),
+    Address: getMarketContractAddress(config.network.env),
     Endpoint: 'acceptOffer',
     AbiUrl: Config.Abis.Marketplace,
     ActionPreview: (action: ProposalAction) => <AcceptOfferActionPreview action={action} config={config} />,
   },
   ViewMarketRequirements: {
-    Address: getMarketContractAddress(config.env),
+    Address: getMarketContractAddress(config.network.env),
     Endpoint: 'viewRequirements',
     AbiUrl: Config.Abis.Marketplace,
   },
   ViewOffer: {
-    Address: getMarketContractAddress(config.env),
+    Address: getMarketContractAddress(config.network.env),
     Endpoint: 'viewOffer',
     AbiUrl: Config.Abis.Marketplace,
   },
   ViewPagedOffers: {
-    Address: getMarketContractAddress(config.env),
+    Address: getMarketContractAddress(config.network.env),
     Endpoint: 'viewPagedOffers',
     AbiUrl: Config.Abis.Marketplace,
   },
   // Coalition
   GetInfo: {
-    Address: getCoalitionContractAddress(config.env),
+    Address: getCoalitionContractAddress(config.network.env),
     Endpoint: 'getInfo',
     AbiUrl: Config.Abis.Coalition,
   },
   AddCategory: {
-    Address: getCoalitionContractAddress(config.env),
+    Address: getCoalitionContractAddress(config.network.env),
     Endpoint: 'addCategory',
     AbiUrl: Config.Abis.Coalition,
     ActionPreview: (action: ProposalAction) => <AddCategoryActionPreview action={action} />,
   },
   RemoveCategory: {
-    Address: getCoalitionContractAddress(config.env),
+    Address: getCoalitionContractAddress(config.network.env),
     Endpoint: 'removeCategory',
     AbiUrl: Config.Abis.Coalition,
     ActionPreview: (action: ProposalAction) => <RemoveCategoryActionPreview action={action} />,

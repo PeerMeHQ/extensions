@@ -8,11 +8,11 @@ const getContractAddress = (network: AppEnv) => {
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   Stake: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'createNewStake',
   },
   ClaimRewards: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'claimRewards',
   },
 })

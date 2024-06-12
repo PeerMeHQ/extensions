@@ -12,7 +12,10 @@ const DefaultSlippage = 100 // 1% = 1_000
 
 export function SwapTab() {
   const app = useApp()
-  const aggregator = useMemo(() => new Aggregator({ chainId: getAshswapChainId(app.config.env) }), [app.config.env])
+  const aggregator = useMemo(
+    () => new Aggregator({ chainId: getAshswapChainId(app.config.network.env) }),
+    [app.config.network.env]
+  )
   const [payment, setPayment] = useState<TokenTransfer | null>(null)
   const [availableTokens, setAvailableTokens] = useState<AshswapToken[]>([])
   const availableTokensSorted = useMemo(

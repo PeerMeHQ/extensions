@@ -14,7 +14,7 @@ export function CoalitionTab() {
 
   useEffect(() => {
     infoQuery
-      .query([getCoalitionContractAddress(app.config.env)])
+      .query([getCoalitionContractAddress(app.config.network.env)])
       .then((data) => setInfo(toTypedCoalitionInfo(data.firstValue?.valueOf())))
   }, [])
 

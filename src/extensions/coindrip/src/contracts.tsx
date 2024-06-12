@@ -11,7 +11,7 @@ const getContractAddress = (network: AppEnv) => {
 
 export const CoindripContracts = (config: ExtensionConfig): ExtensionScInfo => ({
   StreamCreate: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'createStream',
     ActionPreview: (action: ProposalAction) => <StreamCreateActionPreview action={action} />,
   },

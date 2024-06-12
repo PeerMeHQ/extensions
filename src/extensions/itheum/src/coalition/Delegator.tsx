@@ -106,7 +106,9 @@ export function Delegator(props: Props) {
     const amount = 1 // default for NFTs, and for SFTs only 1 is allowed since data stream is equal
     const nfts = Object.values(selectedDelegate).flat(1)
     const transferables = nfts.map((nft) => TokenTransfer.semiFungible(nft.collection, nft.nonce, amount))
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.env)) })
+    const contract = new SmartContract({
+      address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
+    })
     const tx = new Interaction(contract, new ContractFunction('grantAccess'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       BytesValue.fromUTF8(category),
@@ -123,7 +125,9 @@ export function Delegator(props: Props) {
     if (!app.config.user || !hasSelectedUndelegate) return
     const nfts = Object.values(selectedUndelegate).flat(1)
     const nftsArg = nfts.map((nft) => [BytesValue.fromUTF8(nft.collection), new U64Value(nft.nonce)]).flat(1)
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.env)) })
+    const contract = new SmartContract({
+      address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
+    })
     const tx = new Interaction(contract, new ContractFunction('revokeAccess'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       ...nftsArg,

@@ -20,42 +20,42 @@ const getNftPoolContractAddress = (network: AppEnv) => {
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   EsdtUserStake: {
-    Address: getEsdtPoolContractAddress(config.env),
+    Address: getEsdtPoolContractAddress(config.network.env),
     Endpoint: 'userStake',
     ActionPreview: (action: ProposalAction) => <StakeActionPreview action={action} config={config} />,
   },
   EsdtUserUnstake: {
-    Address: getEsdtPoolContractAddress(config.env),
+    Address: getEsdtPoolContractAddress(config.network.env),
     Endpoint: 'userUnstake',
     ActionPreview: (action: ProposalAction) => <UnstakeActionPreview action={action} config={config} />,
   },
   EsdtUserClaim: {
-    Address: getEsdtPoolContractAddress(config.env),
+    Address: getEsdtPoolContractAddress(config.network.env),
     Endpoint: 'userClaim',
     ActionPreview: (action: ProposalAction) => <ClaimActionPreview action={action} config={config} />,
   },
   EsdtViewPool: {
-    Address: getEsdtPoolContractAddress(config.env),
+    Address: getEsdtPoolContractAddress(config.network.env),
     Endpoint: 'viewPool',
     AbiUrl: Config.Abis.EsdtStaking,
   },
   NftUserStake: {
-    Address: getNftPoolContractAddress(config.env),
+    Address: getNftPoolContractAddress(config.network.env),
     Endpoint: 'userStake',
     ActionPreview: (action: ProposalAction) => <StakeActionPreview action={action} config={config} />,
   },
   NftUserUnstake: {
-    Address: getNftPoolContractAddress(config.env),
+    Address: getNftPoolContractAddress(config.network.env),
     Endpoint: 'userUnstake',
     ActionPreview: (action: ProposalAction) => <UnstakeActionPreview action={action} config={config} />,
   },
   NftUserClaim: {
-    Address: getNftPoolContractAddress(config.env),
+    Address: getNftPoolContractAddress(config.network.env),
     Endpoint: 'userClaim',
     ActionPreview: (action: ProposalAction) => <ClaimActionPreview action={action} config={config} />,
   },
   NftViewPool: {
-    Address: getNftPoolContractAddress(config.env),
+    Address: getNftPoolContractAddress(config.network.env),
     Endpoint: 'viewPool',
     AbiUrl: Config.Abis.NftStaking,
   },

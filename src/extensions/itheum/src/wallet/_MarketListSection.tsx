@@ -23,7 +23,7 @@ export function _MarketListSection(props: Props) {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     const addOfferScInfo = Contracts(app.config).AddOffer
-    const paymentTokenId = Config.TokenId(app.config.env)
+    const paymentTokenId = Config.TokenId(app.config.network.env)
     const paymentTokenNonce = 0
     const priceBig = shiftBigint(price, Config.TokenDecimals)
     app.requestProposalAction(

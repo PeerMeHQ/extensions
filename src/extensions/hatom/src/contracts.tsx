@@ -8,7 +8,7 @@ const getContractAddress = (network: AppEnv) => {
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   YourCustomScEndpoint: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'yourCustomScEndpoint',
   },
 })

@@ -32,7 +32,7 @@ export function EsdtTab() {
 
   useEffect(() => {
     if (poolId === null) return
-    fetch(Config.ApiBaseUrl(app.config.env) + '/tokenstaking/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(app.config.network.env) + '/tokenstaking/' + poolId).then(async (res) => {
       const data = (await res.json()) as EsdtPool
       setSelectedPool(data)
       poolScQuery.query([data.pool_id, app.config.entity.address]).then((data) => {
@@ -70,7 +70,7 @@ export function EsdtTab() {
 function _PoolInfo(props: { app: AppContextValue; pool: EsdtPool }) {
   return (
     <a
-      href={Config.MarketplaceUrl(props.app.config.env) + '/staking/token/' + props.pool.pool_id}
+      href={Config.MarketplaceUrl(props.app.config.network.env) + '/staking/token/' + props.pool.pool_id}
       target="_blank"
       rel="noopener"
       className="flex px-6 py-3 bg-gray-200 dark:bg-gray-800 rounded-xl mb-4"

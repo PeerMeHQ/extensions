@@ -13,7 +13,7 @@ export function BoostSection(props: Props) {
   const [payment, setPayment] = useState<TokenTransfer | null>(null)
 
   const isInvalidPayment =
-    !!payment && !payment.isEgld() && payment.tokenIdentifier !== EntityConfig.StableTokenId(app.config.env)
+    !!payment && !payment.isEgld() && payment.tokenIdentifier !== EntityConfig.StableTokenId(app.config.network.env)
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()

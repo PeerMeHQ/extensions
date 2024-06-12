@@ -12,7 +12,7 @@ const getContractAddress = (network: AppEnv) => {
 
 export const PulsarMoneyContracts = (config: ExtensionConfig): ExtensionScInfo => ({
   CreateVesting: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'create',
     ActionPreview: (action: ProposalAction) => <VestingCreateActionPreview action={action} />,
   },

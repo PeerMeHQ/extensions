@@ -20,7 +20,6 @@ export type AppEnv = 'devnet' | 'testnet' | 'mainnet'
 
 export type ExtensionConfig = {
   network: AppNetwork
-  env: AppEnv
   entity: Entity
   user: UserPrivate | null
   searchConfig: SearchServiceConfig

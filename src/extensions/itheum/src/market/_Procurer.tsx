@@ -61,7 +61,7 @@ export function _Procurer(props: Props) {
                 Price:{' '}
                 <strong>
                   {toFormattedTokenAmount(wantedAmount, 18)}{' '}
-                  {props.offer.wantedTokenIdentifier === Config.TokenId(app.config.env)
+                  {props.offer.wantedTokenIdentifier === Config.TokenId(app.config.network.env)
                     ? Config.TokenName
                     : props.offer.wantedTokenIdentifier}
                 </strong>
@@ -89,7 +89,7 @@ export function _Procurer(props: Props) {
 
 const getWantedTokenDecimals = (app: AppContextValue, offer: OfferInfo) => {
   if (offer.wantedTokenIdentifier == Constants.Egld.Id) return Constants.Egld.Decimals
-  if (offer.wantedTokenIdentifier == Config.TokenId(app.config.env)) return Config.TokenDecimals
+  if (offer.wantedTokenIdentifier == Config.TokenId(app.config.network.env)) return Config.TokenDecimals
   return 0
 }
 

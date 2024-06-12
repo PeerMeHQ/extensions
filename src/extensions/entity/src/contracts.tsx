@@ -11,7 +11,7 @@ const getContractAddress = (network: AppEnv) => {
 
 export const EntityContracts = (config: ExtensionConfig): ExtensionScInfo => ({
   Boost: {
-    Address: getContractAddress(config.env),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'boost',
     ActionPreview: (action: ProposalAction) => <BoostActionPreview action={action} />,
   },
