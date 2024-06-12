@@ -33,7 +33,7 @@ export function Staker(props: Props) {
 
   const handleStake = () => {
     if (!app.config.user) return
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.network)) })
+    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.env)) })
     const tx = new Interaction(contract, new ContractFunction('stake'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       new U64Value(0),

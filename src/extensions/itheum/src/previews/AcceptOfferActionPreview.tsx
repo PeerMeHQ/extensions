@@ -14,7 +14,7 @@ type Props = {
 export function AcceptOfferActionPreview(props: Props) {
   const offerId = props.action.arguments[0] as number
   const quantity = props.action.arguments[1] as number
-  const offerUrl = Config.Urls.MarketplaceOffer(props.config.network, offerId)
+  const offerUrl = Config.Urls.MarketplaceOffer(props.config.env, offerId)
 
   const displayableCostPayments =
     props.action.payments.length > 0

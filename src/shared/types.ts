@@ -13,17 +13,17 @@ import {
   SearchServiceConfig,
 } from '@peerme/core-ts'
 
-export type Network = 'devnet' | 'testnet' | 'mainnet'
+export type AppEnv = 'devnet' | 'testnet' | 'mainnet'
 
 /**
  * Extension
  */
 
 export type ExtensionConfig = {
-  network: Network
+  network: AppNetwork
+  env: AppEnv
   entity: Entity
   user: UserPrivate | null
-  walletConfig: ChainWallet
   searchConfig: SearchServiceConfig
   hasEarlyAccess: boolean
   dark: boolean

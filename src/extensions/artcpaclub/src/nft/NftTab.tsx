@@ -32,7 +32,7 @@ export function NftTab() {
 
   useEffect(() => {
     if (poolId === null) return
-    fetch(Config.ApiBaseUrl(app.config.network) + '/nftstaking/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(app.config.env) + '/nftstaking/' + poolId).then(async (res) => {
       const data = (await res.json()) as NftPool
       setSelectedPool(data)
       poolScQuery.query([data.pool_id, app.config.entity.address]).then((data) => {
@@ -70,7 +70,7 @@ export function NftTab() {
 function _PoolInfo(props: { app: AppContextValue; pool: NftPool }) {
   return (
     <a
-      href={Config.MarketplaceUrl(props.app.config.network) + '/staking/token/' + props.pool.pool_id}
+      href={Config.MarketplaceUrl(props.app.config.env) + '/staking/token/' + props.pool.pool_id}
       target="_blank"
       rel="noopener"
       className="flex px-6 py-3 bg-gray-200 dark:bg-gray-800 rounded-xl mb-4"

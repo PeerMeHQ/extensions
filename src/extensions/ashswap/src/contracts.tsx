@@ -1,6 +1,6 @@
-import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
+import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
-const getContractAddress = (network: Network) => {
+const getContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return '#'
   if (network === 'testnet') return '#'
   return '#'
@@ -8,7 +8,7 @@ const getContractAddress = (network: Network) => {
 
 export const Contracts = (config: ExtensionConfig): ExtensionScInfo => ({
   YourCustomScEndpoint: {
-    Address: getContractAddress(config.network),
+    Address: getContractAddress(config.env),
     Endpoint: 'yourCustomScEndpoint',
   },
 })

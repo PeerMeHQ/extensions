@@ -1,4 +1,4 @@
-import { Network } from '../../../shared/types'
+import { AppEnv } from '../../../shared/types'
 
 const DexDevnetUrl = 'https://stg.datadex.itheum.io'
 const DexMainnetUrl = 'https://datadex.itheum.io'
@@ -15,13 +15,13 @@ export const Config = {
     Aggregator: 'https://peerme.io/abis/itheum/data-aggregator.abi.json',
   },
 
-  TokenId: (network: Network) => {
+  TokenId: (network: AppEnv) => {
     if (network === 'devnet') return 'ITHEUM-fce905'
     if (network === 'testnet') return '#'
     return 'ITHEUM-df6f26'
   },
 
-  DataNftCollection: (network: Network) => {
+  DataNftCollection: (network: AppEnv) => {
     if (network === 'devnet') return 'DATANFTFT-e0b917'
     if (network === 'testnet') return '#'
     return 'DATANFTFT-e936d4'
@@ -29,7 +29,7 @@ export const Config = {
 
   Urls: {
     Web: 'https://itheum.io',
-    MarketplaceOffer: (network: Network, offerId: number) => {
+    MarketplaceOffer: (network: AppEnv, offerId: number) => {
       if (network === 'devnet') return `${DexDevnetUrl}/dataNfts/marketplace/DATANFTFT2-71ac28-7e/offer-${offerId}`
       if (network === 'testnet') return '#'
       return `${DexMainnetUrl}/dataNfts/marketplace/DATANFTFT2-71ac28-7e/offer-${offerId}`

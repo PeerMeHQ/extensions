@@ -18,7 +18,7 @@ export const fetchDataNftsOfAccount = async (
   address: string,
   customCollections: string[] = []
 ) => {
-  const defaultCollection = Config.DataNftCollection(app.config.network)
+  const defaultCollection = Config.DataNftCollection(app.config.env)
   const collections = [...new Set([defaultCollection, ...customCollections])]
 
   const res: any[] = await app.networkProvider.doGetGeneric(
