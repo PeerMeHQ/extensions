@@ -1,4 +1,3 @@
-import BigNumber from 'bignumber.js'
 import { Contracts } from '../contracts'
 import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
@@ -35,11 +34,11 @@ export function _Unstaker(props: Props) {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     if (!unstakableInfo) return
-    const amountBig = new BigNumber(amount)
+    const amountBig = BigInt(amount)
     app.requestProposalAction(
       Contracts(app.config).NftUserUnstake.Address,
       Contracts(app.config).NftUserUnstake.Endpoint,
-      0,
+      0n,
       [props.pool.pool_id, unstakableInfo.nonce, amountBig],
       []
     )

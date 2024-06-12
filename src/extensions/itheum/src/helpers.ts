@@ -1,4 +1,3 @@
-import BigNumber from 'bignumber.js'
 import { numberToPaddedHex } from '@peerme/core-ts'
 import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
 import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
@@ -15,7 +14,7 @@ import {
 export const toTypedMarketRequirements = (value: any): MarketRequirements => ({
   acceptedTokens: value.accepted_tokens.map((v: any) => v.toString()),
   acceptedPayments: value.accepted_payments.map((v: any) => v.toString()),
-  maximumPaymentFees: value.maximum_payment_fees.map((v: any) => new BigNumber(v)),
+  maximumPaymentFees: value.maximum_payment_fees.map((v: any) => BigInt(v)),
   discountFeePercentageBuyer: value.discount_fee_percentage_buyer.toNumber(),
   discountFeePercentageSeller: value.discount_fee_percentage_seller.toNumber(),
   percentageCutFromBuyer: value.percentage_cut_from_buyer.toNumber(),
@@ -26,7 +25,7 @@ export const toTypedMarketRequirements = (value: any): MarketRequirements => ({
 
 export const toTypedClaimInfo = (value: any): ClaimInfo =>
   ({
-    amount: new BigNumber(value.amount),
+    amount: BigInt(value.amount),
     lastModified: value.date.toNumber() * 1000,
   } as ClaimInfo)
 
@@ -72,10 +71,10 @@ export const toTypedOfferInfo = (value: any): OfferInfo => ({
   owner: value.owner.toString(),
   offeredTokenIdentifier: value.offered_token_identifier.toString(),
   offeredTokenNonce: value.offered_token_nonce.toNumber(),
-  offeredTokenAmount: new BigNumber(value.offered_token_amount),
+  offeredTokenAmount: BigInt(value.offered_token_amount),
   wantedTokenIdentifier: value.wanted_token_identifier.toString(),
   wantedTokenNonce: value.wanted_token_nonce.toNumber(),
-  wantedTokenAmount: new BigNumber(value.wanted_token_amount),
+  wantedTokenAmount: BigInt(value.wanted_token_amount),
   quantity: value.quantity.toNumber(),
 })
 

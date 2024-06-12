@@ -1,22 +1,24 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
 import { Address } from '@multiversx/sdk-core'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { AddressPresenter, Tooltip } from '@peerme/web-ui'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { Constants, ProposalAction, toActionArgsTypedValue } from '@peerme/core-ts'
+import { Constants, ProposalAction, transformActionArgToTypedValue } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
 }
 
 export const VestingCreateActionPreview = (props: Props) => {
+  const app = useApp()
   const args = props.action.arguments
   const payments = props.action.payments
-  const tokenId = payments.length > 0 ? payments[0].tokenId : Constants.EgldTokenIdentifier
+  const tokenId = payments.length > 0 ? payments[0].tokenId : Constants.Egld.Id
 
   const value =
-    tokenId === Constants.EgldTokenIdentifier
-      ? new BigNumber(props.action.value)
+    tokenId === Constants.Egld.Id
+      ? new BigNumber(props.action.value.toString())
           .dividedBy(10 ** 18)
           .toFixed(2)
           .toString()
@@ -25,7 +27,7 @@ export const VestingCreateActionPreview = (props: Props) => {
           .toFixed(2)
           .toString()
 
-  const receiverHex = toActionArgsTypedValue(args[3]).valueOf().toString('hex')
+  const receiverHex = transformActionArgToTypedValue(args[3]).valueOf().toString('hex')
   const receiverAddr = Address.fromHex(receiverHex).bech32()
 
   const cliffRelease = args[4]?.toString().slice(4)
@@ -41,7 +43,7 @@ export const VestingCreateActionPreview = (props: Props) => {
   return (
     <ActionPreviewHighlight>
       start a <strong>{displayableCancel}</strong> vesting of {value} {tokenId} to
-      <AddressPresenter value={receiverAddr} trim={4} inline /> , with a cliff release at{' '}
+      <AddressPresenter network={app.config.network} value={receiverAddr} trim={4} inline /> , with a cliff release at{' '}
       <_Date value={new Date(startTimestamp * 1000)} />, ending on <_Date value={new Date(endTimestamp * 1000)} />,
       receiving payment every {frequencyText(frequency)}.
     </ActionPreviewHighlight>

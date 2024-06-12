@@ -39,10 +39,10 @@ export function Delegator(props: Props) {
   const hasSelectedUndelegate = Object.keys(selectedUndelegate).length > 0
 
   const appInfoScInfo: ScInfo = { ...Contracts(app.config).GetAppInfo, Address: props.info.aggregator }
-  const appInfoScQuery = useScQuery(app.config.walletConfig, appInfoScInfo)
+  const appInfoScQuery = useScQuery(app.config.network, appInfoScInfo)
 
   const delegationsScInfo: ScInfo = { ...Contracts(app.config).GetDelegationsByUser, Address: props.info.aggregator }
-  const delegationsQuery = useScQuery(app.config.walletConfig, delegationsScInfo)
+  const delegationsQuery = useScQuery(app.config.network, delegationsScInfo)
 
   // fetch aggregator data
   useEffect(() => {
@@ -111,7 +111,7 @@ export function Delegator(props: Props) {
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       BytesValue.fromUTF8(category),
     ])
-      .withChainID(app.config.walletConfig.ChainId)
+      .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
       .withGasLimit(50_000_000)
       .withMultiESDTNFTTransfer(transferables)
@@ -128,7 +128,7 @@ export function Delegator(props: Props) {
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       ...nftsArg,
     ])
-      .withChainID(app.config.walletConfig.ChainId)
+      .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
       .withGasLimit(50_000_000)
       .buildTransaction()

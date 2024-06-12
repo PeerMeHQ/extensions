@@ -1,6 +1,5 @@
 import { Config } from './config'
 import { Contracts } from './contracts'
-import { BigNumber } from 'bignumber.js'
 import { useDebounce } from '@peerme/core-ts'
 import { useApp } from '../../../shared/hooks/useApp'
 import { TokenTransfer, Address } from '@multiversx/sdk-core'
@@ -34,7 +33,7 @@ export const _BulkTransactions = () => {
     let errors = ''
 
     // Prepare the arguments for the transaction
-    let callAmount = new BigNumber(0)
+    let callAmount = BigInt(0)
     let args = Array<any>()
 
     preparedLines.forEach((line, i) => {
@@ -47,8 +46,8 @@ export const _BulkTransactions = () => {
           throw Error(`"${amount}" is not a valid number`)
         }
 
-        const tp = useSameAmount ? transfer : createTokenTransferFromAmount(transfer, amount)
-        callAmount = callAmount.plus(tp.amountAsBigInteger)
+        const tp = useSameAmount ? transfer : createTokenTransferFromAmount(transfer, BigInt(amount))
+        callAmount = callAmount + tp.amount
 
         // Add the transaction to the list
         args.push(address.bech32())
@@ -70,7 +69,7 @@ export const _BulkTransactions = () => {
     const tokenPayments = transfer.isEgld() ? [] : [createTokenTransferFromBigInteger(transfer, callAmount)]
     const contract = useSameAmount ? Contracts(app.config).BulkSendSameAmount : Contracts(app.config).BulkSend
 
-    app.requestProposalAction(contract.Address, contract.Endpoint, value, args, tokenPayments)
+    app.requestProposalAction(contract.Address, contract.Endpoint, BigInt(value.toString()), args, tokenPayments)
   }
 
   const handleCsvSelect = (files: File[]) => {
@@ -98,15 +97,10 @@ export const _BulkTransactions = () => {
         {useSameAmount ? 'Select the token and amount you want to send:' : 'Select the token you want to send:'}
       </label>
       <EntityTransferSelector
-        config={app.config.walletConfig}
+        network={app.config.network}
         entity={app.config.entity}
         permissions={[]}
-        onSelected={
-          (val) =>
-            setTransfer(
-              val as any
-            ) /** TODO: "as any" because npm resolves to different versions: https://github.com/multiversx/mx-sdk-js-core/issues/290 */
-        }
+        onSelected={(val) => setTransfer(val)}
         className="mb-4 mt-2"
         skipTokenTypes={['nft']}
         skipAmount={!useSameAmount}

@@ -19,7 +19,7 @@ export const _StreamCreator = () => {
     const nowTs = Math.floor(Date.now() / 1000)
     const startsAtTs = Math.floor(new Date(startsAt).getTime() / 1000)
     const endsAtTs = Math.floor(new Date(endsAt).getTime() / 1000)
-    const value = payment.isEgld() ? payment.amountAsBigInteger : 0
+    const value = payment.isEgld() ? payment.amount : 0n
     const tokenTransfers = payment.isEgld() ? [] : [payment]
 
     if (startsAtTs < nowTs) {
@@ -54,7 +54,7 @@ export const _StreamCreator = () => {
         className="mb-8"
       />
       <EntityTransferSelector
-        config={app.config.walletConfig}
+        network={app.config.network}
         entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setPayment(val)}

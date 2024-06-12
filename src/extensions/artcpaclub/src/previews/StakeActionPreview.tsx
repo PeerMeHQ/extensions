@@ -20,7 +20,7 @@ export function StakeActionPreview(props: Props) {
       ? props.action.payments
           .map((payment) => toFormattedTokenPayment(toTokenPaymentFromProposalPayment(payment)))
           .join(', ')
-      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value))
+      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value.toString()))
 
   useEffect(() => {
     if (!poolId) return

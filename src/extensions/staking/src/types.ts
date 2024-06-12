@@ -1,15 +1,13 @@
-import { BigNumber } from 'bignumber.js'
-
 export type DelegationProvider = {
   numNodes: number
-  stake: BigNumber
+  stake: bigint
   topUp: string
   locked: string
   contract: string
   owner: string
   featured: boolean
   serviceFee: number
-  delegationCap: BigNumber
+  delegationCap: bigint
   apr: number
   numUsers: number
   cumulatedRewards: string
@@ -46,8 +44,8 @@ type ProviderIdentity = {
 export type DelegationInfo = {
   address: string
   contract: string
-  userUnBondable: BigNumber
-  userActiveStake: BigNumber
-  claimableRewards: BigNumber
+  userUnBondable: bigint
+  userActiveStake: bigint
+  claimableRewards: bigint
   userUndelegatedList: string[]
 }

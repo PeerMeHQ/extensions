@@ -22,9 +22,9 @@ export function AddOfferActionPreview(props: Props) {
       ? props.action.payments
           .map((payment) => toFormattedTokenPayment(toTokenPaymentFromProposalPayment(payment)))
           .join(', ')
-      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value))
+      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value.toString()))
 
-  const displayablePrice = toFormattedTokenAmount(price, Config.TokenDecimals)
+  const displayablePrice = toFormattedTokenAmount(BigInt(price), Config.TokenDecimals)
 
   return (
     <ActionPreviewHighlight>

@@ -10,7 +10,7 @@ import { Contracts, getCoalitionContractAddress } from '../contracts'
 export function CoalitionTab() {
   const app = useApp()
   const [info, setInfo] = useState<CoalitionInfo | null>(null)
-  const infoQuery = useScQuery(app.config.walletConfig, Contracts(app.config).GetInfo)
+  const infoQuery = useScQuery(app.config.network, Contracts(app.config).GetInfo)
 
   useEffect(() => {
     infoQuery

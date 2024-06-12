@@ -1,8 +1,8 @@
 import * as sdk from './sdk'
 import { BigNumber } from 'bignumber.js'
+import { TokenTransfer } from '@multiversx/sdk-core'
 import { useApp } from '../../../shared/hooks/useApp'
 import React, { SyntheticEvent, useState } from 'react'
-import { TokenTransfer, BytesValue } from '@multiversx/sdk-core'
 import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
 import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
 import { Button, Input, EntityTransferSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
@@ -81,7 +81,7 @@ export const _Vesting = () => {
     )
 
     const metadata = new TransactionDecoder().getTransactionMetadata(transaction)
-    const value = tokenTransfer.isEgld() ? new BigNumber(metadata.value.toString()) : new BigNumber(0)
+    const value = tokenTransfer.isEgld() ? BigInt(metadata.value.toString()) : BigInt(0)
 
     let transfers: TokenTransfer[] = []
 
@@ -100,16 +100,16 @@ export const _Vesting = () => {
 
     app.requestProposalAction(
       metadata.receiver,
-      metadata.functionName || '',
-      value,
-      metadata.functionArgs.map((arg) => BytesValue.fromHex(arg)) || [],
+      metadata.functionName || null,
+      BigInt(value.toString()),
+      metadata.functionArgs,
       transfers
     )
   }
   return (
     <form onSubmit={handleSubmit}>
       <EntityTransferSelector
-        config={app.config.walletConfig}
+        network={app.config.network}
         entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setTokenTransfer(val)}

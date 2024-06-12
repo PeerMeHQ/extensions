@@ -1,6 +1,7 @@
 import React from 'react'
 import { AddressPresenter } from '@peerme/web-ui'
 import { TokenTransfer } from '@multiversx/sdk-core'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { createTokenTransferFromBigInteger } from '../helpers'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
@@ -10,6 +11,7 @@ type Props = {
 }
 
 export const BulkSendSameAmountActionPreview = (props: Props) => {
+  const app = useApp()
   //get all the arguments (addresses of the receivers)
   const args = props.action.arguments
   const nTransactions = args.length
@@ -18,13 +20,10 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
   const totalTransfer =
     props.action.payments.length > 0
       ? toTokenPaymentFromProposalPayment(props.action.payments[0])
-      : TokenTransfer.egldFromBigInteger(props.action.value)
+      : TokenTransfer.egldFromBigInteger(props.action.value.toString())
 
   //calculate the amount to send to each address
-  const singleAmount = createTokenTransferFromBigInteger(
-    totalTransfer,
-    totalTransfer.amountAsBigInteger.div(nTransactions)
-  )
+  const singleAmount = createTokenTransferFromBigInteger(totalTransfer, totalTransfer.amount / BigInt(nTransactions))
 
   return (
     <>
@@ -37,7 +36,13 @@ export const BulkSendSameAmountActionPreview = (props: Props) => {
         <ul className="flex flex-wrap gap-2 mb-4">
           {args.map((arg, i) => (
             <li key={i}>
-              <AddressPresenter value={arg?.toString() || ''} trim={4} className="mb-0" inline />
+              <AddressPresenter
+                network={app.config.network}
+                value={arg?.toString() || ''}
+                trim={4}
+                className="mb-0"
+                inline
+              />
               {' , '}
             </li>
           ))}

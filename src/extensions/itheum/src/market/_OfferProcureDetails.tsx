@@ -33,7 +33,7 @@ export function _OfferProcureDetails(props: Props) {
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl">{nft?.title}</h2>
         <Link
-          href={app.config.walletConfig.Explorer + '/nfts/' + nft.id}
+          href={app.config.network.urls.explorer + '/nfts/' + nft.id}
           target="_blank"
           rel="noreferrer"
           className="text-blue-500 hover:text-blue-400"

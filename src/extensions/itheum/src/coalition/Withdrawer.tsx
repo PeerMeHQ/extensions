@@ -1,8 +1,7 @@
 import dayjs from 'dayjs'
-import BigNumber from 'bignumber.js'
 import React, { useState } from 'react'
 import { CoalitionInfo } from '../types'
-import { sanitizeNumeric } from '@peerme/core-ts'
+import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
 import { Alert, Button, Input } from '@peerme/web-ui'
 import daysjsRelative from 'dayjs/plugin/relativeTime'
 import { useApp } from '../../../../shared/hooks/useApp'
@@ -23,17 +22,17 @@ export function Withdrawer(props: Props) {
   const lockedUntilDate = dayjs.unix(props.info.userStakeUnlocksAt)
   const isLocked = dayjs().isBefore(lockedUntilDate)
   const stakeTokenDecimals = 18 // TODO
-  const balanceDenominated = props.info.userStake.shiftedBy(-stakeTokenDecimals)
+  const balanceDenominated = shiftBigint(props.info.userStake, -stakeTokenDecimals)
 
   const handleWithdraw = () => {
     if (!app.config.user) return
-    const amount = new BigNumber(withdrawAmount).shiftedBy(stakeTokenDecimals)
+    const amount = shiftBigint(withdrawAmount, stakeTokenDecimals)
     const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.env)) })
     const tx = new Interaction(contract, new ContractFunction('unstake'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       new U64Value(amount),
     ])
-      .withChainID(app.config.walletConfig.ChainId)
+      .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
       .withGasLimit(10_000_000)
       .buildTransaction()
@@ -64,7 +63,7 @@ export function Withdrawer(props: Props) {
           autoFocus
           autoComplete="off"
         />
-        {+withdrawAmount !== +balanceDenominated && (
+        {BigInt(withdrawAmount) !== balanceDenominated && (
           <div className="absolute bottom-1/2 right-4 translate-y-1/2 transform">
             <button
               type="button"
@@ -76,7 +75,7 @@ export function Withdrawer(props: Props) {
           </div>
         )}
       </div>
-      <p className="mb-4 text-right">Balance: {balanceDenominated.toFormat(4)}</p>
+      <p className="mb-4 text-right">Balance: TODO</p>
       <Button
         onClick={handleWithdraw}
         color="blue"

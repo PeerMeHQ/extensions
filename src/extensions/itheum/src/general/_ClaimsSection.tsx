@@ -13,7 +13,7 @@ export function _ClaimsSection() {
   const [claimInfos, setClaimInfos] = React.useState<ClaimInfo[]>([])
   const contracts = Contracts(app.config)
 
-  const claimsScQuery = useScQuery(app.config.walletConfig, contracts.ViewClaimWithDate)
+  const claimsScQuery = useScQuery(app.config.network, contracts.ViewClaimWithDate)
 
   useEffect(() => {
     claimsScQuery.query([app.config.entity.address]).then((bundle) => {
@@ -24,7 +24,7 @@ export function _ClaimsSection() {
   }, [])
 
   const handleClaim = (index: number) =>
-    app.requestProposalAction(contracts.Claim.Address, contracts.Claim.Endpoint, 0, [index], [])
+    app.requestProposalAction(contracts.Claim.Address, contracts.Claim.Endpoint, 0n, [index], [])
 
   return (
     <AppSection title="Claims">
@@ -36,14 +36,14 @@ export function _ClaimsSection() {
               <strong
                 className={clsx(
                   'font-head text-4xl',
-                  claimInfo.amount.isZero()
+                  claimInfo.amount === 0n
                     ? 'text-gray-600 dark:text-gray-400'
                     : 'text-primary-500 dark:text-primary-400'
                 )}
               >
                 {toFormattedTokenAmount(claimInfo.amount, Config.TokenDecimals)}
               </strong>
-              {!claimInfo.amount.isZero() && (
+              {claimInfo.amount > 0 && (
                 <button
                   onClick={() => handleClaim(index)}
                   className="block text-base text-primary-400 hover:text-primary-500 px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-lg mt-2"

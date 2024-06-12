@@ -22,7 +22,7 @@ export function BoostSection(props: Props) {
       return
     }
 
-    const value = payment.isEgld() ? payment.amountAsBigInteger : 0
+    const value = payment.isEgld() ? payment.amount : 0n
     const tokenTransfers = payment.isEgld() ? [] : [payment]
 
     app.requestProposalAction(
@@ -41,7 +41,7 @@ export function BoostSection(props: Props) {
     >
       <form onSubmit={handleSubmit}>
         <EntityTransferSelector
-          config={app.config.walletConfig}
+          network={app.config.network}
           entity={app.config.entity}
           permissions={[]}
           onSelected={(val) => setPayment(val)}

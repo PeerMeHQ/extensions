@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { toDateDisplay } from '@peerme/core-ts'
 import { _MarketListSection } from './_MarketListSection'
 import { AddressPresenter, Dialog } from '@peerme/web-ui'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 }
 
 export function _DataNftPreview(props: Props) {
+  const app = useApp()
   const [showDetails, setShowDetails] = useState(false)
 
   return (
@@ -32,7 +34,13 @@ export function _DataNftPreview(props: Props) {
             <p className="mb-2">{props.nft.description}</p>
             <ul className="text-gray-800 dark:text-gray-100 text-base">
               <li>
-                Creator: <AddressPresenter value={props.nft.creator} trim={4} className="inline-flex" />
+                Creator:{' '}
+                <AddressPresenter
+                  network={app.config.network}
+                  value={props.nft.creator}
+                  trim={4}
+                  className="inline-flex"
+                />
               </li>
               <li>
                 Created At: <strong>{toDateDisplay(props.nft.creationTime.toString())}</strong>

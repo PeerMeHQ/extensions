@@ -19,7 +19,7 @@ export function _Staker(props: Props) {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     if (!payment) return
-    const value = payment.isEgld() ? payment.amountAsBigInteger : 0
+    const value = payment.isEgld() ? payment.amount : 0n
     const tokenTransfers = payment.isEgld() ? [] : [payment]
 
     app.requestProposalAction(
@@ -35,9 +35,9 @@ export function _Staker(props: Props) {
     <AppSection title="Stake now" className={props.className}>
       <form onSubmit={handleSubmit}>
         <EntityTransferSelector
-          config={app.config.walletConfig}
+          network={app.config.network}
           entity={app.config.entity}
-          permissions={[{ name: '*', value: '0', destination: '', endpoint: '', arguments: [], payments: [] }]}
+          permissions={[]}
           onSelected={(val) => setPayment(val)}
           tokenIdWhitelist={['EGLD', props.pool.stake_token_id]}
           className="mb-8"

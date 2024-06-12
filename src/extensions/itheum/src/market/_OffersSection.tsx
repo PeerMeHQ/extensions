@@ -19,7 +19,7 @@ export function _OffersSection(props: Props) {
   const [nfts, setNfts] = useState<DataNftMetadata[]>([])
   const [offers, setOffers] = useState<OfferInfo[]>([])
   const [showOurs, setShowOurs] = useState(false)
-  const pagedOffersScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).ViewPagedOffers)
+  const pagedOffersScQuery = useScQuery(app.config.network, Contracts(app.config).ViewPagedOffers)
 
   useEffect(() => {
     const args = showOurs ? [0, 10, app.config.entity.address] : [0, 10]

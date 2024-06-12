@@ -18,7 +18,7 @@ export function DashboardWidget(props: WidgetRootProps) {
   const [isDelegating, setIsDelegating] = useState(false)
   const [isStaking, setIsStaking] = useState(false)
   const [isWithdrawing, setIsWithdrawing] = useState(false)
-  const infoQuery = useScQuery(props.config.walletConfig, Contracts(props.config).GetInfo)
+  const infoQuery = useScQuery(props.config.network, Contracts(props.config).GetInfo)
 
   useEffect(() => {
     infoQuery.query([app.config.entity.address, app.config.user?.address]).then((data) => {
@@ -55,7 +55,7 @@ export function DashboardWidget(props: WidgetRootProps) {
           <h3 className={clsx('mb-2', Theme.TextSize.Base)}>Stake {info?.nativeToken.split('-')[0]}</h3>
           <div className="flex flex-col lg:flex-row gap-2">
             <_Button onClick={() => setIsStaking(true)}>Stake</_Button>
-            {!!info && !info.userStake.isZero() && (
+            {!!info && info.userStake !== 0n && (
               <_Button onClick={() => setIsWithdrawing(true)} inverted>
                 Withdraw
               </_Button>
