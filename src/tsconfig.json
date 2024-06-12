@@ -6,7 +6,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "declaration": true,
     "declarationDir": "dist",
-    "allowJs": true,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "moduleResolution": "node",
