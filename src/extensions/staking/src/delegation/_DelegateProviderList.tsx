@@ -55,10 +55,10 @@ export const _DelegateProviderList = (props: Props) => (
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{provider.apr}%</td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{+provider.serviceFee * 100}%</td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            {provider.delegationCap.isZero() ? 'Uncapped' : provider.identityInfo.stakePercent + '%'}
+            {provider.delegationCap === 0n ? 'Uncapped' : provider.identityInfo.stakePercent + '%'}
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            {provider.stake.isZero() ? 'Uncapped' : toEgldDisplayAmount(provider.stake)}
+            {provider.stake === 0n ? 'Uncapped' : toEgldDisplayAmount(provider.stake)}
           </td>
         </tr>
       ))}

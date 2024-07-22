@@ -18,7 +18,7 @@ export function BoostActionPreview(props: Props) {
       ? props.action.payments
           .map((payment) => toFormattedTokenPayment(toTokenPaymentFromProposalPayment(payment)))
           .join(', ')
-      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value))
+      : toFormattedTokenPayment(TokenTransfer.egldFromBigInteger(props.action.value.toString()))
 
   return (
     <ActionPreviewHighlight>

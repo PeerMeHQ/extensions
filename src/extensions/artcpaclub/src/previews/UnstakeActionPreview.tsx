@@ -1,10 +1,9 @@
 import { Config } from '../config'
 import { EsdtPool, NftPool } from '../types'
-import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
 import { ExtensionConfig } from '../../../../shared/types'
-import { ProposalAction, toActionArgsBigNumber, toFormattedTokenAmount } from '@peerme/core-ts'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
+import { ProposalAction, toActionArgsBigInt, toFormattedTokenAmount } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
@@ -17,12 +16,12 @@ export function UnstakeActionPreview(props: Props) {
   const poolId = props.action.arguments[0] as number
   const nonce = (isNft ? props.action.arguments[1] : null) as number | null
   const optAmount = (isNft ? props.action.arguments[2] : props.action.arguments[1]) as number | null
-  const amountBig = optAmount ? toActionArgsBigNumber(optAmount) : new BigNumber(0)
+  const amountBig = optAmount ? toActionArgsBigInt(optAmount) : BigInt(0)
 
   useEffect(() => {
     if (!poolId) return
     const apiEndpoint = isNft ? 'nftstaking' : 'tokenstaking'
-    fetch(Config.ApiBaseUrl(props.config.network) + '/' + apiEndpoint + '/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(props.config.network.env) + '/' + apiEndpoint + '/' + poolId).then(async (res) => {
       const data = await res.json()
       setSelectedPool(data)
     })
@@ -33,7 +32,7 @@ export function UnstakeActionPreview(props: Props) {
       <ActionPreviewHighlight>
         unstake{' '}
         <strong>
-          {amountBig.toNumber()} {selectedPool ? selectedPool.stake_token_id : ''}
+          {amountBig.toString()} {selectedPool ? selectedPool.stake_token_id : ''}
         </strong>{' '}
         with Nonce <strong>{nonce}</strong>{' '}
         {selectedPool ? `from pool ${selectedPool.title}` : `from pool with id ${poolId}`}.

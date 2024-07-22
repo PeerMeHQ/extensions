@@ -40,13 +40,13 @@ export const _Swaps = (props: Props) => {
     e.preventDefault()
     if (!transfer) return
 
-    app.requestProposalAction('', '', 0, [], [transfer])
+    app.requestProposalAction('', '', 0n, [], [transfer])
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <EntityTransferSelector
-        config={app.config.walletConfig}
+        network={app.config.network}
         entity={app.config.entity}
         permissions={[]}
         onSelected={(val) => setTransfer(val)}

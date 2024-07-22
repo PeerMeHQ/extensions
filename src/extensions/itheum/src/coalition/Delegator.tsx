@@ -39,10 +39,10 @@ export function Delegator(props: Props) {
   const hasSelectedUndelegate = Object.keys(selectedUndelegate).length > 0
 
   const appInfoScInfo: ScInfo = { ...Contracts(app.config).GetAppInfo, Address: props.info.aggregator }
-  const appInfoScQuery = useScQuery(app.config.walletConfig, appInfoScInfo)
+  const appInfoScQuery = useScQuery(app.config.network, appInfoScInfo)
 
   const delegationsScInfo: ScInfo = { ...Contracts(app.config).GetDelegationsByUser, Address: props.info.aggregator }
-  const delegationsQuery = useScQuery(app.config.walletConfig, delegationsScInfo)
+  const delegationsQuery = useScQuery(app.config.network, delegationsScInfo)
 
   // fetch aggregator data
   useEffect(() => {
@@ -106,12 +106,14 @@ export function Delegator(props: Props) {
     const amount = 1 // default for NFTs, and for SFTs only 1 is allowed since data stream is equal
     const nfts = Object.values(selectedDelegate).flat(1)
     const transferables = nfts.map((nft) => TokenTransfer.semiFungible(nft.collection, nft.nonce, amount))
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.network)) })
+    const contract = new SmartContract({
+      address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
+    })
     const tx = new Interaction(contract, new ContractFunction('grantAccess'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       BytesValue.fromUTF8(category),
     ])
-      .withChainID(app.config.walletConfig.ChainId)
+      .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
       .withGasLimit(50_000_000)
       .withMultiESDTNFTTransfer(transferables)
@@ -123,12 +125,14 @@ export function Delegator(props: Props) {
     if (!app.config.user || !hasSelectedUndelegate) return
     const nfts = Object.values(selectedUndelegate).flat(1)
     const nftsArg = nfts.map((nft) => [BytesValue.fromUTF8(nft.collection), new U64Value(nft.nonce)]).flat(1)
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.network)) })
+    const contract = new SmartContract({
+      address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
+    })
     const tx = new Interaction(contract, new ContractFunction('revokeAccess'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       ...nftsArg,
     ])
-      .withChainID(app.config.walletConfig.ChainId)
+      .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
       .withGasLimit(50_000_000)
       .buildTransaction()

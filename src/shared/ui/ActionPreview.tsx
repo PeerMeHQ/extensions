@@ -1,6 +1,5 @@
 import React from 'react'
 import { clsx } from 'clsx'
-import BigNumber from 'bignumber.js'
 import { _AppLogo } from './_AppLogo'
 import { toExtensionName } from '../helpers'
 import { ProposalAction } from '@peerme/core-ts'
@@ -16,7 +15,7 @@ type Props = {
 }
 
 export const ActionPreview = (props: Props) => {
-  const hasValue = !new BigNumber(props.action.value).isZero()
+  const hasValue = props.action.value > 0n
   const hasPayment = props.action.payments.length > 0
 
   const scInfo = Object.values(props.extension.Contracts)

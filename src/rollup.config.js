@@ -31,7 +31,7 @@ export default {
     postcss({
       extensions: ['.css'],
     }),
-    // terser(),
+    terser(),
   ],
   external: ['react', 'next', 'bignumber.js'],
 }

@@ -19,7 +19,7 @@ export function _CategoriesSection(props: Props) {
     app.requestProposalAction(
       Contracts(app.config).AddCategory.Address,
       Contracts(app.config).AddCategory.Endpoint,
-      0,
+      0n,
       [name],
       []
     )
@@ -28,7 +28,7 @@ export function _CategoriesSection(props: Props) {
     app.requestProposalAction(
       Contracts(app.config).RemoveCategory.Address,
       Contracts(app.config).RemoveCategory.Endpoint,
-      0,
+      0n,
       [name],
       []
     )

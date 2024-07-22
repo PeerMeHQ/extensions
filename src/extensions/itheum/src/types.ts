@@ -1,9 +1,7 @@
-import { BigNumber } from 'bignumber.js'
-
 export type MarketRequirements = {
   acceptedTokens: string[]
   acceptedPayments: string[]
-  maximumPaymentFees: BigNumber[]
+  maximumPaymentFees: bigint[]
   discountFeePercentageBuyer: number
   discountFeePercentageSeller: number
   percentageCutFromBuyer: number
@@ -13,7 +11,7 @@ export type MarketRequirements = {
 }
 
 export type ClaimInfo = {
-  amount: BigNumber
+  amount: bigint
   lastModified: number
 }
 
@@ -22,10 +20,10 @@ export type OfferInfo = {
   owner: string
   offeredTokenIdentifier: string
   offeredTokenNonce: number
-  offeredTokenAmount: BigNumber
+  offeredTokenAmount: bigint
   wantedTokenIdentifier: string
   wantedTokenNonce: number
-  wantedTokenAmount: BigNumber
+  wantedTokenAmount: bigint
   quantity: number
 }
 
@@ -54,10 +52,10 @@ export type CoalitionInfo = {
   aggregatorApp: number
   categories: string[]
   delegators: number
-  boardStakeAmount: BigNumber
+  boardStakeAmount: bigint
   boardStakeDurationSeconds: number
   stakeLockTimeSeconds: number
-  userStake: BigNumber
+  userStake: bigint
   userStakeUnlocksAt: number
 }
 

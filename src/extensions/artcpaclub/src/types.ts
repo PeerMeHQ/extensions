@@ -1,5 +1,3 @@
-import BigNumber from 'bignumber.js'
-
 export type EsdtPool = {
   id: number
   pool_id: number
@@ -34,8 +32,8 @@ export type EsdtPoolOnChain = {
   total_stake_amount: string
   reward_pool_size: string
   staker_count: string
-  user_stake_amount: BigNumber
-  user_reward_amount: BigNumber
+  user_stake_amount: bigint
+  user_reward_amount: bigint
   lock_time_seconds: string
   locked_until: string
   bonus_token_id: string
@@ -81,8 +79,8 @@ export type NftPoolOnChain = {
   total_stake_amount: string
   reward_pool_size: string
   staker_count: string
-  user_stake_amount: BigNumber
-  user_reward_amount: BigNumber
+  user_stake_amount: bigint
+  user_reward_amount: bigint
   user_stake_amount_per_nonce: StakedNftInfo[]
   is_paired: boolean
   pair_token_id: string

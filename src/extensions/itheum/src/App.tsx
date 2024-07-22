@@ -16,7 +16,7 @@ import { faHandshakeSimple, faHome, faShop, faUsers, faWallet } from '@fortaweso
 export function App() {
   const app = useApp()
   const [marketRequirements, setMarketRequirements] = useState<MarketRequirements | null>(null)
-  const marketRequirementsScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).ViewMarketRequirements)
+  const marketRequirementsScQuery = useScQuery(app.config.network, Contracts(app.config).ViewMarketRequirements)
 
   useEffect(() => {
     marketRequirementsScQuery

@@ -5,16 +5,16 @@ import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
 import { Address, TokenTransfer } from '@multiversx/sdk-core/out'
 import { Button, EntityTransferSelector, Select } from '@peerme/web-ui'
-import { Constants, ProposalAction, createAction } from '@peerme/core-ts'
 import React, { SyntheticEvent, useEffect, useMemo, useState } from 'react'
+import { Constants, ProposalAction, createAction, transformTypedValueToActionArg } from '@peerme/core-ts'
 
 const DefaultSlippage = 100 // 1% = 1_000
 
 export function SwapTab() {
   const app = useApp()
   const aggregator = useMemo(
-    () => new Aggregator({ chainId: getAshswapChainId(app.config.network) }),
-    [app.config.network]
+    () => new Aggregator({ chainId: getAshswapChainId(app.config.network.env) }),
+    [app.config.network.env]
   )
   const [payment, setPayment] = useState<TokenTransfer | null>(null)
   const [availableTokens, setAvailableTokens] = useState<AshswapToken[]>([])
@@ -22,7 +22,7 @@ export function SwapTab() {
     () => availableTokens.sort((a, b) => a.id.localeCompare(b.id)),
     [availableTokens]
   )
-  const [seletedToken, setSelectedToken] = useState<string | null>(Constants.EgldTokenIdentifier)
+  const [seletedToken, setSelectedToken] = useState<string | null>(Constants.Egld.Id)
   const [computedAction, setComputedAction] = useState<ProposalAction | null>(null)
 
   useEffect(() => {
@@ -52,8 +52,9 @@ export function SwapTab() {
     const contract = tx.getContractAddress().bech32()
     if (!contract) return
     const tokenTransfers = payment.isEgld() ? [] : [payment]
+    const args = tx.getArguments().map(transformTypedValueToActionArg as any) as any
     setComputedAction(
-      createAction(contract, tx.getFunction().toString(), tx.getValue().toString(), tx.getArguments() as any, tokenTransfers)
+      createAction(contract, tx.getFunction().toString(), BigInt(tx.getValue().toString()), args, tokenTransfers)
     )
   }
 
@@ -75,7 +76,7 @@ export function SwapTab() {
     <AppSection title="Swap">
       <form onSubmit={handleSubmit}>
         <EntityTransferSelector
-          config={app.config.walletConfig}
+          network={app.config.network}
           entity={app.config.entity}
           permissions={[]}
           onSelected={setPayment}
@@ -83,7 +84,7 @@ export function SwapTab() {
           className="mb-8"
         />
         <Select id="targetToken" onChange={setSelectedToken} className="mb-4">
-          <option value={Constants.EgldTokenIdentifier}>{Constants.EgldTokenIdentifier}</option>
+          <option value={Constants.Egld.Id}>{Constants.Egld.DisplayName}</option>
           {availableTokensSorted.map((token) => (
             <option key={token.id} value={token.id}>
               {token.id.split('-')[0]} ({token.id})

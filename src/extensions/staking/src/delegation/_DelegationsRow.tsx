@@ -24,12 +24,12 @@ export const _DelegationsRow = (props: Props) => {
 
   const handleRewardClaim = (e: SyntheticEvent) => {
     e.stopPropagation()
-    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ClaimRewards, 0, [], [])
+    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ClaimRewards, 0n, [], [])
   }
 
   const handleRewardStake = (e: SyntheticEvent) => {
     e.stopPropagation()
-    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ReDelegateRewards, 0, [], [])
+    app.requestProposalAction(props.provider!.contract, Config.Endpoints.ReDelegateRewards, 0n, [], [])
   }
 
   return (

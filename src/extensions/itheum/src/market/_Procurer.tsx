@@ -1,5 +1,4 @@
 import { Config } from '../config'
-import { BigNumber } from 'bignumber.js'
 import { Contracts } from '../contracts'
 import { TokenTransfer } from '@multiversx/sdk-core'
 import { DataNftMetadata, OfferInfo } from '../types'
@@ -18,9 +17,9 @@ export function _Procurer(props: Props) {
   const app = useApp()
   const [isOpen, setIsOpen] = useState(false)
   const [quantity, setQuantity] = useState('1')
-  const wantedAmount = props.offer.wantedTokenAmount.multipliedBy(+quantity || 1)
-  const wantsEgld = props.offer.wantedTokenIdentifier == Constants.EgldTokenIdentifier
-  const isFree = wantedAmount.isZero()
+  const wantedAmount = props.offer.wantedTokenAmount * BigInt(quantity || 1)
+  const wantsEgld = props.offer.wantedTokenIdentifier == Constants.Egld.Id
+  const isFree = wantedAmount === 0n
 
   const wantedTokenDecimals = useMemo(() => getWantedTokenDecimals(app, props.offer), [props.offer])
 
@@ -31,7 +30,7 @@ export function _Procurer(props: Props) {
       return
     }
     const contract = Contracts(app.config).AcceptOffer
-    const value = wantsEgld ? wantedAmount : 0
+    const value = wantsEgld ? wantedAmount : 0n
     const tokenTransfers =
       wantsEgld || isFree ? [] : [toWantedTokenTransfer(props.offer, wantedAmount, wantedTokenDecimals)]
 
@@ -62,7 +61,7 @@ export function _Procurer(props: Props) {
                 Price:{' '}
                 <strong>
                   {toFormattedTokenAmount(wantedAmount, 18)}{' '}
-                  {props.offer.wantedTokenIdentifier === Config.TokenId(app.config.network)
+                  {props.offer.wantedTokenIdentifier === Config.TokenId(app.config.network.env)
                     ? Config.TokenName
                     : props.offer.wantedTokenIdentifier}
                 </strong>
@@ -89,10 +88,15 @@ export function _Procurer(props: Props) {
 }
 
 const getWantedTokenDecimals = (app: AppContextValue, offer: OfferInfo) => {
-  if (offer.wantedTokenIdentifier == Constants.EgldTokenIdentifier) return Constants.EgldDecimals
-  if (offer.wantedTokenIdentifier == Config.TokenId(app.config.network)) return Config.TokenDecimals
+  if (offer.wantedTokenIdentifier == Constants.Egld.Id) return Constants.Egld.Decimals
+  if (offer.wantedTokenIdentifier == Config.TokenId(app.config.network.env)) return Config.TokenDecimals
   return 0
 }
 
-const toWantedTokenTransfer = (offer: OfferInfo, amount: BigNumber.Value, tokenDecimals: number) =>
-  TokenTransfer.metaEsdtFromBigInteger(offer.wantedTokenIdentifier, offer.wantedTokenNonce, amount, tokenDecimals)
+const toWantedTokenTransfer = (offer: OfferInfo, amount: bigint, tokenDecimals: number) =>
+  TokenTransfer.metaEsdtFromBigInteger(
+    offer.wantedTokenIdentifier,
+    offer.wantedTokenNonce,
+    amount.toString(),
+    tokenDecimals
+  )

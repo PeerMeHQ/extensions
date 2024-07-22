@@ -1,10 +1,9 @@
 import { Config } from '../config'
-import BigNumber from 'bignumber.js'
 import React, { useState } from 'react'
 import { Button, Input } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
 import { useApp } from '../../../../shared/hooks/useApp'
-import { Constants, sanitizeNumeric } from '@peerme/core-ts'
+import { Constants, sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
 import { DelegationInfo, DelegationProvider } from '../types'
 
 type Props = {
@@ -17,12 +16,13 @@ export const _Withdrawer = (props: Props) => {
   const [amount, setAmount] = useState('')
 
   const handleWithdraw = () => {
-    const valueBig = new BigNumber(amount).shiftedBy(Constants.EgldDecimals)
-    if (valueBig.isGreaterThan(props.delegation.userActiveStake)) {
+    // const valueBig = BigInt(amount).shiftedBy(Constants.Egld.Decimals)
+    const valueBig = BigInt(amount) * 10n ** BigInt(Constants.Egld.Decimals)
+    if (valueBig > props.delegation.userActiveStake) {
       app.showToast('Can not unstake more than is staked', 'error')
       return
     }
-    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0, [valueBig], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0n, [valueBig], [])
   }
 
   return (
@@ -60,11 +60,13 @@ export const _Withdrawer = (props: Props) => {
           autoFocus
           autoComplete="off"
         />
-        {+amount !== props.delegation.userActiveStake.shiftedBy(-Constants.EgldDecimals).toNumber() && (
+        {BigInt(amount) !== shiftBigint(props.delegation.userActiveStake, -Constants.Egld.Decimals) && (
           <div className="absolute bottom-1/2 right-4 transform translate-y-1/2">
             <button
               type="button"
-              onClick={() => setAmount(props.delegation.userActiveStake.shiftedBy(-Constants.EgldDecimals).toString())}
+              onClick={() =>
+                setAmount(shiftBigint(props.delegation.userActiveStake, -Constants.Egld.Decimals).toString())
+              }
               className="px-3 py-1 uppercase bg-gray-800 hover:bg-gray-900 text-gray-100 rounded-xl shadow-lg transition duration-300"
             >
               Max

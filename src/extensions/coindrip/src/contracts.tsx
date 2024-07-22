@@ -1,9 +1,9 @@
 import React from 'react'
 import { ProposalAction } from '@peerme/core-ts'
 import { StreamCreateActionPreview } from './previews/StreamCreateActionPreview'
-import { Network, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
+import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
-const getContractAddress = (network: Network) => {
+const getContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqlrveeg222qgjgk60h7waf8md2fehtv7dlpzq9knlxq'
   if (network === 'testnet') return '#'
   return 'erd1qqqqqqqqqqqqqpgqqnm3x37972323nuv3l3kywev0n8q5n6gyc8qwljqz9'
@@ -11,7 +11,7 @@ const getContractAddress = (network: Network) => {
 
 export const CoindripContracts = (config: ExtensionConfig): ExtensionScInfo => ({
   StreamCreate: {
-    Address: getContractAddress(config.network),
+    Address: getContractAddress(config.network.env),
     Endpoint: 'createStream',
     ActionPreview: (action: ProposalAction) => <StreamCreateActionPreview action={action} />,
   },

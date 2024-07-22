@@ -19,7 +19,7 @@ export function _ProcureSection(props: Props) {
   const [url, setUrl] = useState('')
   const debouncedUrl = useDebounce(url, 500)
 
-  const viewOfferScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).ViewOffer)
+  const viewOfferScQuery = useScQuery(app.config.network, Contracts(app.config).ViewOffer)
 
   useEffect(() => {
     if (!props.procurable) return

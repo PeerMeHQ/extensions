@@ -1,11 +1,12 @@
 import React from 'react'
 import { AddressPresenter } from '@peerme/web-ui'
 import { TokenTransfer } from '@multiversx/sdk-core'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { createTokenTransferFromBigInteger } from '../helpers'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
 import {
   ProposalAction,
-  toActionArgsBigNumber,
+  toActionArgsBigInt,
   toFormattedTokenPayment,
   toTokenPaymentFromProposalPayment,
 } from '@peerme/core-ts'
@@ -15,6 +16,7 @@ type Props = {
 }
 
 export const BulkSendActionPreview = (props: Props) => {
+  const app = useApp()
   //get all the arguments (addresses of the receivers and amounts)
   const args = props.action.arguments
   const nTransactions = args.length / 2
@@ -23,14 +25,14 @@ export const BulkSendActionPreview = (props: Props) => {
   const totalPayment =
     props.action.payments.length > 0
       ? toTokenPaymentFromProposalPayment(props.action.payments[0])
-      : TokenTransfer.egldFromBigInteger(props.action.value)
+      : TokenTransfer.egldFromBigInteger(props.action.value.toString())
 
   //create an array of transactions
   let transactions = []
   for (let i = 0; i < args.length; i += 2) {
     transactions.push({
       address: args[i],
-      amount: createTokenTransferFromBigInteger(totalPayment, toActionArgsBigNumber(args[i + 1]) as any), // 'any' needed because of multiple BigNumber resolutions
+      amount: createTokenTransferFromBigInteger(totalPayment, toActionArgsBigInt(args[i + 1]) as any), // 'any' needed because of multiple BigNumber resolutions
     })
   }
 
@@ -53,7 +55,13 @@ export const BulkSendActionPreview = (props: Props) => {
             {transactions.map((tx, i) => (
               <tr key={i}>
                 <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
-                  <AddressPresenter value={tx.address as string} trim={8} className="mb-0" inline />
+                  <AddressPresenter
+                    network={app.config.network}
+                    value={tx.address as string}
+                    trim={8}
+                    className="mb-0"
+                    inline
+                  />
                 </td>
                 <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
                   {toFormattedTokenPayment(tx.amount)}

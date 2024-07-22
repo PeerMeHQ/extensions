@@ -16,7 +16,7 @@ export function ClaimActionPreview(props: Props) {
 
   useEffect(() => {
     if (!poolId) return
-    fetch(Config.ApiBaseUrl(props.config.network) + '/tokenstaking/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(props.config.network.env) + '/tokenstaking/' + poolId).then(async (res) => {
       const data = await res.json()
       setSelectedPool(data)
     })

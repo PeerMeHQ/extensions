@@ -1,29 +1,27 @@
 import React, { SVGProps } from 'react'
-import { BigNumber } from 'bignumber.js'
 import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import {
   ScInfo,
   Entity,
   EntityTag,
+  AppNetwork,
   UserPrivate,
-  ChainWallet,
   ProposalAction,
   ProposalActionArg,
   SearchServiceConfig,
 } from '@peerme/core-ts'
 
-export type Network = 'devnet' | 'testnet' | 'mainnet'
+export type AppEnv = 'devnet' | 'testnet' | 'mainnet'
 
 /**
  * Extension
  */
 
 export type ExtensionConfig = {
-  network: Network
+  network: AppNetwork
   entity: Entity
   user: UserPrivate | null
-  walletConfig: ChainWallet
   searchConfig: SearchServiceConfig
   hasEarlyAccess: boolean
   dark: boolean
@@ -66,7 +64,7 @@ export type AppContextValue = {
   requestProposalAction: (
     destination: string,
     endpoint: string | null,
-    value: BigNumber.Value,
+    value: bigint,
     args: ProposalActionArg[],
     payments: TokenTransfer[]
   ) => void

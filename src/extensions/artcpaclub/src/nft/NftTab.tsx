@@ -17,7 +17,7 @@ export function NftTab() {
   const [poolId, setPoolId] = useState<number | null>(null)
   const [selectedPool, setSelectedPool] = useState<any | null>(null)
   const [selectedPoolOnChain, setSelectedPoolOnChain] = useState<NftPoolOnChain | null>(null)
-  const poolScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).NftViewPool)
+  const poolScQuery = useScQuery(app.config.network, Contracts(app.config).NftViewPool)
 
   useEffect(() => {
     if (!poolUrl) return
@@ -32,7 +32,7 @@ export function NftTab() {
 
   useEffect(() => {
     if (poolId === null) return
-    fetch(Config.ApiBaseUrl(app.config.network) + '/nftstaking/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(app.config.network.env) + '/nftstaking/' + poolId).then(async (res) => {
       const data = (await res.json()) as NftPool
       setSelectedPool(data)
       poolScQuery.query([data.pool_id, app.config.entity.address]).then((data) => {
@@ -60,7 +60,7 @@ export function NftTab() {
         <_PoolOnChainInfo app={app} pool={selectedPool} poolOnChain={selectedPoolOnChain} />
       )}
       <_Staker pool={selectedPool} className="mb-4" />
-      {!!selectedPoolOnChain && selectedPoolOnChain.user_stake_amount.isGreaterThan(0) && (
+      {!!selectedPoolOnChain && selectedPoolOnChain.user_stake_amount > 0 && (
         <_Unstaker pool={selectedPool} poolOnChain={selectedPoolOnChain} className="mb-4" />
       )}
     </>
@@ -70,7 +70,7 @@ export function NftTab() {
 function _PoolInfo(props: { app: AppContextValue; pool: NftPool }) {
   return (
     <a
-      href={Config.MarketplaceUrl(props.app.config.network) + '/staking/token/' + props.pool.pool_id}
+      href={Config.MarketplaceUrl(props.app.config.network.env) + '/staking/token/' + props.pool.pool_id}
       target="_blank"
       rel="noopener"
       className="flex px-6 py-3 bg-gray-200 dark:bg-gray-800 rounded-xl mb-4"
@@ -95,7 +95,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: NftPool; poolOnCh
     props.app.requestProposalAction(
       Contracts(props.app.config).NftUserClaim.Address,
       Contracts(props.app.config).NftUserClaim.Endpoint,
-      0,
+      0n,
       [props.pool.pool_id],
       []
     )
@@ -106,7 +106,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: NftPool; poolOnCh
         <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl px-6 py-4">
           <h2 className="text-base mb-1">Our Stake</h2>
           <strong className="font-head text-4xl text-primary-500 dark:text-primary-400">
-            {props.poolOnChain.user_stake_amount.toNumber()}
+            {props.poolOnChain.user_stake_amount.toString()}
           </strong>
         </div>
       </li>
@@ -114,9 +114,12 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: NftPool; poolOnCh
         <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl px-6 py-4">
           <h2 className="text-base mb-1">Claimable Rewards</h2>
           <strong className="block font-head text-4xl text-primary-500 dark:text-primary-400">
-            {toFormattedTokenAmount(props.poolOnChain.user_reward_amount, props.pool.reward_token_decimal)}
+            {toFormattedTokenAmount(
+              BigInt(props.poolOnChain.user_reward_amount.toString()),
+              props.pool.reward_token_decimal
+            )}
           </strong>
-          {props.poolOnChain.user_reward_amount.isGreaterThan(0) && (
+          {props.poolOnChain.user_reward_amount > 0 && (
             <button onClick={handleRewardClaim} className="text-blue-500">
               Claim Rewards
             </button>

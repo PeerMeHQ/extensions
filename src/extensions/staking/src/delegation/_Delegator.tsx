@@ -1,12 +1,11 @@
 import { Config } from '../config'
-import { BigNumber } from 'bignumber.js'
 import { DelegationProvider } from '../types'
 import { Address } from '@multiversx/sdk-core'
 import { Button, Input } from '@peerme/web-ui'
 import { toEgldDisplayAmount } from '../helpers'
 import React, { useEffect, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
-import { Constants, sanitizeNumeric } from '@peerme/core-ts'
+import { Constants, sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
 
 type Props = {
   provider: DelegationProvider
@@ -15,7 +14,7 @@ type Props = {
 export const _Delegator = (props: Props) => {
   const app = useApp()
   const [amount, setAmount] = useState('')
-  const [entityBalance, setEntityBalance] = useState<BigNumber>(new BigNumber(0))
+  const [entityBalance, setEntityBalance] = useState<bigint>(0n)
 
   useEffect(() => {
     app.networkProvider
@@ -24,8 +23,8 @@ export const _Delegator = (props: Props) => {
   }, [])
 
   const handleAdd = () => {
-    const valueBig = new BigNumber(amount).shiftedBy(Constants.EgldDecimals)
-    if (valueBig.isGreaterThan(entityBalance)) {
+    const valueBig = shiftBigint(amount, Constants.Egld.Decimals)
+    if (valueBig > entityBalance) {
       app.showToast('Insufficient balance', 'error')
       return
     }
@@ -67,11 +66,11 @@ export const _Delegator = (props: Props) => {
           autoFocus
           autoComplete="off"
         />
-        {+amount !== entityBalance.shiftedBy(-Constants.EgldDecimals).toNumber() && (
+        {BigInt(amount) !== shiftBigint(entityBalance, -Constants.Egld.Decimals) && (
           <div className="absolute bottom-1/2 right-4 transform translate-y-1/2">
             <button
               type="button"
-              onClick={() => setAmount(entityBalance.shiftedBy(-Constants.EgldDecimals).toString())}
+              onClick={() => setAmount(shiftBigint(entityBalance, -Constants.Egld.Decimals).toString())}
               className="px-3 py-1 uppercase bg-gray-800 hover:bg-gray-900 text-gray-100 rounded-xl shadow-lg transition duration-300"
             >
               Max

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { CoalitionInfo } from '../types'
-import { sanitizeNumeric } from '@peerme/core-ts'
+import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
 import { Alert, Button, Input } from '@peerme/web-ui'
 import daysjsRelative from 'dayjs/plugin/relativeTime'
 import { useApp } from '../../../../shared/hooks/useApp'
@@ -29,16 +29,18 @@ export function Staker(props: Props) {
   const [stakeAmount, setStakeAmount] = useState('')
   const lockedFor = dayjs().to(dayjs().add(props.info.stakeLockTimeSeconds, 'seconds'), true)
   const stakeTokenDecimals = 18 // TODO
-  const balanceDenominated = props.info.userStake.shiftedBy(-stakeTokenDecimals)
+  const balanceDenominated = shiftBigint(props.info.userStake, -stakeTokenDecimals)
 
   const handleStake = () => {
     if (!app.config.user) return
-    const contract = new SmartContract({ address: Address.fromBech32(getCoalitionContractAddress(app.config.network)) })
+    const contract = new SmartContract({
+      address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
+    })
     const tx = new Interaction(contract, new ContractFunction('stake'), [
       new AddressValue(Address.fromBech32(app.config.entity.address)),
       new U64Value(0),
     ])
-      .withChainID(app.config.walletConfig.ChainId)
+      .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
       .withGasLimit(10_000_000)
       .withSingleESDTTransfer(TokenTransfer.fungibleFromAmount(props.info.nativeToken, stakeAmount, stakeTokenDecimals))
@@ -65,7 +67,7 @@ export function Staker(props: Props) {
           autoFocus
           autoComplete="off"
         />
-        {+stakeAmount !== +balanceDenominated && (
+        {BigInt(stakeAmount) !== balanceDenominated && (
           <div className="absolute bottom-1/2 right-4 translate-y-1/2 transform">
             <button
               type="button"
@@ -77,7 +79,7 @@ export function Staker(props: Props) {
           </div>
         )}
       </div>
-      <p className="mb-4 text-right">Balance: {balanceDenominated.toFormat(4)}</p>
+      <p className="mb-4 text-right">Balance: TODO</p>
       <Alert type="warning" icon={faWarning}>
         Staked tokens will be locked for <strong>{lockedFor}</strong>.
       </Alert>

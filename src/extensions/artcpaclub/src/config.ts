@@ -1,12 +1,12 @@
-import { Network } from '../../../shared/types'
+import { AppEnv } from '../../../shared/types'
 
 export const Config = {
-  ApiBaseUrl: (network: Network) => {
+  ApiBaseUrl: (network: AppEnv) => {
     if (network === 'devnet') return 'https://devnet-api.artcpaclub.com/api'
     return 'https://api.artcpaclub.com/api'
   },
 
-  MarketplaceUrl: (network: Network) => {
+  MarketplaceUrl: (network: AppEnv) => {
     if (network === 'devnet') return 'https://devnet-marketplace.artcpaclub.com'
     return 'https://marketplace.artcpaclub.com'
   },

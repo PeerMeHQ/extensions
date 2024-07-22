@@ -1,7 +1,6 @@
-import BigNumber from 'bignumber.js'
 import { Contracts } from '../contracts'
 import { Button, Input } from '@peerme/web-ui'
-import { sanitizeNumeric } from '@peerme/core-ts'
+import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
 import { EsdtPool, EsdtPoolOnChain } from '../types'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
@@ -16,15 +15,15 @@ type Props = {
 export function _Unstaker(props: Props) {
   const app = useApp()
   const [amount, setAmount] = useState('0')
-  const balanceDenominated = props.poolOnChain.user_stake_amount.shiftedBy(-props.pool.stake_token_decimal)
+  const balanceDenominated = shiftBigint(props.poolOnChain.user_stake_amount, -props.pool.stake_token_decimal)
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    const amountBig = new BigNumber(amount).shiftedBy(props.pool.stake_token_decimal)
+    const amountBig = shiftBigint(amount, props.pool.stake_token_decimal)
     app.requestProposalAction(
       Contracts(app.config).EsdtUserUnstake.Address,
       Contracts(app.config).EsdtUserUnstake.Endpoint,
-      0,
+      0n,
       [props.pool.pool_id, amountBig],
       []
     )
@@ -46,7 +45,7 @@ export function _Unstaker(props: Props) {
             className="mb-2"
             autoComplete="off"
           />
-          {+amount !== +balanceDenominated && (
+          {BigInt(amount) !== balanceDenominated && (
             <div className="absolute bottom-1/2 right-4 translate-y-1/2 transform">
               <button
                 type="button"

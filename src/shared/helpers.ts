@@ -1,4 +1,3 @@
-import BigNumber from 'bignumber.js'
 import { showToast as showAppToast } from '@peerme/web-ui'
 import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
@@ -14,7 +13,7 @@ export const toAppContextValue = (
   onActionAddRequest?: (action: ProposalAction) => void,
   onUserActionRequest?: (tx: Transaction) => void
 ) => {
-  const networkProvider = new ApiNetworkProvider(config.walletConfig.ApiAddress, {
+  const networkProvider = new ApiNetworkProvider(config.network.urls.api, {
     timeout: 10_000,
   })
 
@@ -30,7 +29,7 @@ export const toAppContextValue = (
   const requestProposalAction = (
     destination: string,
     endpoint: string | null,
-    value: BigNumber.Value,
+    value: bigint,
     args: ProposalActionArg[] = [],
     transfers: TokenTransfer[] = []
   ) => {

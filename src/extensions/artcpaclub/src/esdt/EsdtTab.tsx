@@ -17,7 +17,7 @@ export function EsdtTab() {
   const [poolId, setPoolId] = useState<number | null>(null)
   const [selectedPool, setSelectedPool] = useState<EsdtPool | null>(null)
   const [selectedPoolOnChain, setSelectedPoolOnChain] = useState<EsdtPoolOnChain | null>(null)
-  const poolScQuery = useScQuery(app.config.walletConfig, Contracts(app.config).EsdtViewPool)
+  const poolScQuery = useScQuery(app.config.network, Contracts(app.config).EsdtViewPool)
 
   useEffect(() => {
     if (!poolUrl) return
@@ -32,7 +32,7 @@ export function EsdtTab() {
 
   useEffect(() => {
     if (poolId === null) return
-    fetch(Config.ApiBaseUrl(app.config.network) + '/tokenstaking/' + poolId).then(async (res) => {
+    fetch(Config.ApiBaseUrl(app.config.network.env) + '/tokenstaking/' + poolId).then(async (res) => {
       const data = (await res.json()) as EsdtPool
       setSelectedPool(data)
       poolScQuery.query([data.pool_id, app.config.entity.address]).then((data) => {
@@ -60,7 +60,7 @@ export function EsdtTab() {
         <_PoolOnChainInfo app={app} pool={selectedPool} poolOnChain={selectedPoolOnChain} />
       )}
       <_Staker pool={selectedPool} className="mb-4" />
-      {!!selectedPoolOnChain && selectedPoolOnChain.user_stake_amount.isGreaterThan(0) && (
+      {!!selectedPoolOnChain && selectedPoolOnChain.user_stake_amount > 0 && (
         <_Unstaker pool={selectedPool} poolOnChain={selectedPoolOnChain} className="mb-4" />
       )}
     </>
@@ -70,7 +70,7 @@ export function EsdtTab() {
 function _PoolInfo(props: { app: AppContextValue; pool: EsdtPool }) {
   return (
     <a
-      href={Config.MarketplaceUrl(props.app.config.network) + '/staking/token/' + props.pool.pool_id}
+      href={Config.MarketplaceUrl(props.app.config.network.env) + '/staking/token/' + props.pool.pool_id}
       target="_blank"
       rel="noopener"
       className="flex px-6 py-3 bg-gray-200 dark:bg-gray-800 rounded-xl mb-4"
@@ -95,7 +95,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: EsdtPool; poolOnC
     props.app.requestProposalAction(
       Contracts(props.app.config).EsdtUserClaim.Address,
       Contracts(props.app.config).EsdtUserClaim.Endpoint,
-      0,
+      0n,
       [props.pool.pool_id],
       []
     )
@@ -116,7 +116,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: EsdtPool; poolOnC
           <strong className="block font-head text-4xl text-primary-500 dark:text-primary-400">
             {toFormattedTokenAmount(props.poolOnChain.user_reward_amount, props.pool.reward_token_decimal)}
           </strong>
-          {props.poolOnChain.user_reward_amount.isGreaterThan(0) && (
+          {props.poolOnChain.user_reward_amount > 0 && (
             <button onClick={handleRewardClaim} className="text-blue-500">
               Claim Rewards
             </button>

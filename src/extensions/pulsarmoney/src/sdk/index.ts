@@ -17,7 +17,7 @@ const getPulsarPaymentTransaction = async (
 ) => {
   const createPulsarPaymentUrl = CREATE_PULSAR_PAYMENT
 
-  const token = tokenId === Constants.EgldTokenIdentifier ? '' : tokenId
+  const token = tokenId === Constants.Egld.Id ? '' : tokenId
 
   try {
     const { data: createPulsarPaymentTransaction } = await axios.post(createPulsarPaymentUrl, {

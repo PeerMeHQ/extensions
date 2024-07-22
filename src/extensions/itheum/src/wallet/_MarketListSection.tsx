@@ -1,12 +1,11 @@
 import { Config } from '../config'
 import { Contracts } from '../contracts'
-import { BigNumber } from 'bignumber.js'
 import { Button, Input } from '@peerme/web-ui'
-import { sanitizeNumeric } from '@peerme/core-ts'
 import { TokenTransfer } from '@multiversx/sdk-core'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
+import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
 import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
@@ -24,13 +23,13 @@ export function _MarketListSection(props: Props) {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     const addOfferScInfo = Contracts(app.config).AddOffer
-    const paymentTokenId = Config.TokenId(app.config.network)
+    const paymentTokenId = Config.TokenId(app.config.network.env)
     const paymentTokenNonce = 0
-    const priceBig = new BigNumber(price).shiftedBy(Config.TokenDecimals)
+    const priceBig = shiftBigint(price, Config.TokenDecimals)
     app.requestProposalAction(
       addOfferScInfo.Address,
       addOfferScInfo.Endpoint,
-      0,
+      0n,
       [paymentTokenId, paymentTokenNonce, priceBig, minAmountForSeller, +amount],
       [TokenTransfer.semiFungible(props.nft.collection, props.nft.nonce, +amount)]
     )
