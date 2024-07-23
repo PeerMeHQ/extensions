@@ -1,7 +1,7 @@
-import { DevServerConfig } from './config'
+import { Address, ContractFunction, Interaction, SmartContract, TokenTransfer } from '@multiversx/sdk-core'
 import { AccountType } from '@multiversx/sdk-dapp/types'
-import { ProposalAction, toActionArgsBigInt } from '@peerme/core-ts'
-import { Address, Interaction, SmartContract, TokenTransfer, ContractFunction } from '@multiversx/sdk-core'
+import { ProposalAction, toSerializableAction, transformActionArgToTypedValue } from '@peerme/core-ts'
+import { DevServerConfig } from './config'
 
 const GasLimit = 50_000_000
 
@@ -13,7 +13,7 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
 
   console.log('Actions [serialized]', toSerializableAction(action, GasLimit))
 
-  let interaction = new Interaction(sc, new ContractFunction(action.endpoint), typedArgs)
+  let interaction = new Interaction(sc, new ContractFunction(action.endpoint!), typedArgs)
     .withChainID(DevServerConfig.ChainId)
     .withSender(new Address(account.address))
     .withGasLimit(GasLimit)
@@ -25,7 +25,7 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
     const tokenTransfer = TokenTransfer.metaEsdtFromBigInteger(
       payment.tokenId,
       payment.tokenNonce,
-      toActionArgsBigInt(payment.amount),
+      payment.amount,
       payment.tokenDecimals!
     )
     const isFungible = payment.tokenNonce === 0
@@ -35,7 +35,7 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
       : interaction.withSingleESDTNFTTransfer(tokenTransfer)
   } else if (action.payments.length > 1) {
     const tokenTransfer = action.payments.map((p) =>
-      TokenTransfer.metaEsdtFromBigInteger(p.tokenId, p.tokenNonce, toActionArgsBigInt(p.amount), p.tokenDecimals!)
+      TokenTransfer.metaEsdtFromBigInteger(p.tokenId, p.tokenNonce, p.amount, p.tokenDecimals!)
     )
     interaction = interaction.withMultiESDTNFTTransfer(tokenTransfer)
   }

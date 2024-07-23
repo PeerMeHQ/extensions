@@ -1,7 +1,7 @@
-import { NetworkId, EntityTag } from '@peerme/core-ts'
+import { AppEnv, EntityTag } from '@peerme/core-ts'
 
 export const DevServerConfig = {
-  Network: 'devnet' as NetworkId,
+  Network: 'devnet' as AppEnv,
 
   WalletConnectProjectId: '9b1a9564f91cb659ffe21b73d5c4e2d8',
 

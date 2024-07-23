@@ -1,30 +1,34 @@
-import { UserPrivate } from '@peerme/core-ts'
+import { AppNetwork, UserPrivate } from '@peerme/core-ts'
 import { ExtensionConfig } from '@peerme/extensions'
 
 const DemoDaoScAddress = 'erd1qqqqqqqqqqqqqpgqg8t3yh3hr5vxpgsrwwqf3qh0v7e6ydd327rschchqc'
 
+const DefaultNetwork: AppNetwork = {
+  name: 'multiversx',
+  displayName: 'MultiversX',
+  env: 'devnet',
+  urls: {
+    api: 'https://devnet-api.multiversx.com',
+    explorer: 'https://devnet-explorer.multiversx.com',
+  },
+  chainId: 'D',
+  blockTimeMs: 6000,
+}
+
 const defaultConfig = (dark: boolean, currentUserAddress: string | null): ExtensionConfig => ({
-  network: 'devnet',
+  network: DefaultNetwork,
 
   dark,
 
   hasEarlyAccess: true,
 
-  walletConfig: {
-    Debug: true,
-    ApiAddress: 'https://devnet-api.multiversx.com',
-    Explorer: 'https://explorer.multiversx.com',
-    WalletConnectProjectId: 'b5682bd383460cd7c5c99f21c07d40ed',
-    ChainId: 'D',
-  },
-
   searchConfig: {
     HostUrl: '',
     ApiKey: '',
     Indexes: {
-      Users: 'users',
-      Entities: 'entities',
-      Proposals: 'proposals',
+      Users: () => 'users',
+      Entities: () => 'entities',
+      Proposals: () => 'proposals',
     },
   },
 
@@ -65,8 +69,9 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
     parent: null,
     children: [],
     pipeline: null,
-    extra: [],
     favorited: false,
+    network: DefaultNetwork,
+    kyc: null,
   },
 
   user: {
@@ -88,6 +93,8 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
       levelUpperLimit: '100',
       levelProgressPercent: 0,
     },
+    trust: 1,
+    affiliate: null,
   } as UserPrivate,
 })
 
