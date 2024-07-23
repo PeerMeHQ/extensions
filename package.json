@@ -5,7 +5,15 @@
     "dev",
     "src"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "npm run package:build",
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "package:build": "cd src && npm run build",
+    "package:publish": "cd src && npm publish"
+  },
   "devDependencies": {
     "eslint": "^9.7.0",
     "eslint-config-turbo": "latest",

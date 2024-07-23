@@ -2,7 +2,12 @@
   "name": "dev",
   "version": "0.1.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@apollo/client": "^3.11.0",
     "dayjs": "^1.11.12",
