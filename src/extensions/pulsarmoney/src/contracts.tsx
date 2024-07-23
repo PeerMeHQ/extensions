@@ -1,6 +1,6 @@
+import { AppEnv, ProposalAction } from '@peerme/core-ts'
 import React from 'react'
-import { ProposalAction } from '@peerme/core-ts'
-import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
+import { ExtensionConfig, ExtensionScInfo } from '../../../shared/types'
 import { VestingCreateActionPreview } from './previews/VestingCreateActionPreview'
 
 const getContractAddress = (network: AppEnv) => {

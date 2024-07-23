@@ -1,11 +1,24 @@
-import * as sdk from './sdk'
-import { BigNumber } from 'bignumber.js'
-import { TokenTransfer } from '@multiversx/sdk-core'
-import { useApp } from '../../../shared/hooks/useApp'
-import React, { SyntheticEvent, useState } from 'react'
 import { TransactionDecoder } from '@elrondnetwork/transaction-decoder'
+import { TokenTransfer } from '@multiversx/sdk-core'
+import { capitalizeFirstLetter } from '@peerme/core-ts'
+import {
+  Button,
+  Dropdown,
+  DropdownButton,
+  DropdownItem,
+  DropdownLabel,
+  DropdownMenu,
+  EntityTransferSelector,
+  Input,
+  Switch,
+  UserSelector,
+} from '@peerme/web-ui'
+import { BigNumber } from 'bignumber.js'
+import React, { SyntheticEvent, useState } from 'react'
+import { useApp } from '../../../shared/hooks/useApp'
+import * as sdk from './sdk'
+import { DropdownOption } from './types'
 import { currentTimestamp, INITIAL_CLIFF, INITIAL_END, MAX_NAME_LENGTH, options } from './utils'
-import { Button, Input, EntityTransferSelector, Switch, UserSelector, Dropdown, DropdownOption } from '@peerme/web-ui'
 
 export const _Vesting = () => {
   const app = useApp()
@@ -74,7 +87,7 @@ export const _Vesting = () => {
       cliffTimestampInMiliseconds,
       +cliffAmount,
       endTimestampInMiliseconds,
-      +frequencyOption.identifier,
+      frequencyOption.identifier,
       cancellable,
       tokenTransfer.tokenIdentifier,
       name
@@ -173,12 +186,16 @@ export const _Vesting = () => {
       </div>
       <div className="mb-4 flex items-center space-x-4 ">
         <label className="pl-1 text-xl mb-2 text-gray-800 dark:text-gray-200">Frequency</label>
-        <Dropdown
-          multiple={false}
-          onChange={(val) => setFrequencyOption(val)}
-          options={options}
-          value={frequencyOption}
-        />
+        <Dropdown>
+          <DropdownButton outline>{capitalizeFirstLetter(frequencyOption.text)}</DropdownButton>
+          <DropdownMenu>
+            {options.map((option) => (
+              <DropdownItem onClick={() => setFrequencyOption(option)}>
+                <DropdownLabel>{option.text}</DropdownLabel>
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </div>
 
       <Button color="blue" className="block w-full" disabled={isSubmitDisabled} type="submit">

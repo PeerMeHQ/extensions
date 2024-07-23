@@ -1,4 +1,5 @@
-import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
+import { AppEnv } from '@peerme/core-ts'
+import { ExtensionConfig, ExtensionScInfo } from '../../../shared/types'
 
 const getContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return '#'

@@ -1,4 +1,4 @@
-import { AppEnv } from '../../../shared/types'
+import { AppEnv } from '@peerme/core-ts'
 
 const DexDevnetUrl = 'https://stg.datadex.itheum.io'
 const DexMainnetUrl = 'https://datadex.itheum.io'

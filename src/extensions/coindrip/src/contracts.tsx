@@ -1,7 +1,7 @@
+import { AppEnv, ProposalAction } from '@peerme/core-ts'
 import React from 'react'
-import { ProposalAction } from '@peerme/core-ts'
+import { ExtensionConfig, ExtensionScInfo } from '../../../shared/types'
 import { StreamCreateActionPreview } from './previews/StreamCreateActionPreview'
-import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqlrveeg222qgjgk60h7waf8md2fehtv7dlpzq9knlxq'

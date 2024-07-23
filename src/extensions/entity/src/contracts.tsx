@@ -1,7 +1,7 @@
+import { AppEnv, ProposalAction } from '@peerme/core-ts'
 import React from 'react'
-import { ProposalAction } from '@peerme/core-ts'
+import { ExtensionConfig, ExtensionScInfo } from '../../../shared/types'
 import { BoostActionPreview } from './previews/BoostActionPreview'
-import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqxtccplxgycv25kjfude7mgwdm7znp9u4l3ts46euux'

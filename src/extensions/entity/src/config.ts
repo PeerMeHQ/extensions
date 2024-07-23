@@ -1,4 +1,4 @@
-import { AppEnv } from '../../../shared/types'
+import { AppEnv } from '@peerme/core-ts'
 
 export const EntityConfig = {
   StableTokenName: 'USDC',

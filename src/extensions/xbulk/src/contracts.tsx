@@ -1,8 +1,8 @@
+import { AppEnv, ProposalAction } from '@peerme/core-ts'
 import React from 'react'
-import { ProposalAction } from '@peerme/core-ts'
+import { ExtensionConfig, ExtensionScInfo } from '../../../shared/types'
 import { BulkSendActionPreview } from './previews/BulkSendActionPreview'
 import { BulkSendSameAmountActionPreview } from './previews/BulkSendSameAmountActionPreview'
-import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgq7qdqsuq4a4pga2hxa5h0gvluf7hlc6hndn3q32jth5'

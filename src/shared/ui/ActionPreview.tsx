@@ -1,11 +1,11 @@
-import React from 'react'
-import { clsx } from 'clsx'
-import { _AppLogo } from './_AppLogo'
-import { toExtensionName } from '../helpers'
-import { ProposalAction } from '@peerme/core-ts'
-import { ExtensionConfig, ExtensionInfo } from '../types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ProposalAction } from '@peerme/core-ts'
+import { clsx } from 'clsx'
+import React from 'react'
+import { toExtensionName } from '../helpers'
+import { ExtensionConfig, ExtensionInfo } from '../types'
+import { _AppLogo } from './_AppLogo'
 
 type Props = {
   config: ExtensionConfig
@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const ActionPreview = (props: Props) => {
-  const hasValue = props.action.value > 0n
+  const hasValue = BigInt(props.action.value) > 0n
   const hasPayment = props.action.payments.length > 0
 
   const scInfo = Object.values(props.extension.Contracts)

@@ -1,18 +1,16 @@
-import React, { SVGProps } from 'react'
 import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
 import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import {
-  ScInfo,
+  AppNetwork,
   Entity,
   EntityTag,
-  AppNetwork,
-  UserPrivate,
   ProposalAction,
   ProposalActionArg,
+  ScInfo,
   SearchServiceConfig,
+  UserPrivate,
 } from '@peerme/core-ts'
-
-export type AppEnv = 'devnet' | 'testnet' | 'mainnet'
+import React, { SVGProps } from 'react'
 
 /**
  * Extension

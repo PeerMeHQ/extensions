@@ -1,5 +1,5 @@
-import { DropdownOption } from '@peerme/web-ui'
 import { PaymentTypeAttributes } from './sdk/types'
+import { DropdownOption } from './types'
 
 export const VestingMessages = {
   successMessage: 'Vesting creation successful.',
@@ -21,15 +21,10 @@ export const INITIAL_END = INITIAL_END_STR.slice(0, INITIAL_END_STR.length - 8) 
 
 export const MAX_NAME_LENGTH = 30
 
-const createOption = (seconds: number, text: string) => {
-  const option: DropdownOption = {
-    identifier: seconds,
-    text: text,
-    description: '',
-  }
-
-  return option
-}
+const createOption = (seconds: number, text: string): DropdownOption => ({
+  identifier: seconds,
+  text: text,
+})
 
 export const options = [
   createOption(1, 'second'),

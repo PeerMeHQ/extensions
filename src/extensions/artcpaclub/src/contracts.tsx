@@ -1,10 +1,10 @@
+import { AppEnv, ProposalAction } from '@peerme/core-ts'
 import React from 'react'
+import { ExtensionConfig, ExtensionScInfo } from '../../../shared/types'
 import { Config } from './config'
-import { ProposalAction } from '@peerme/core-ts'
-import { StakeActionPreview } from './previews/StakeActionPreview'
 import { ClaimActionPreview } from './previews/ClaimActionPreview'
+import { StakeActionPreview } from './previews/StakeActionPreview'
 import { UnstakeActionPreview } from './previews/UnstakeActionPreview'
-import { AppEnv, ExtensionScInfo, ExtensionConfig } from '../../../shared/types'
 
 const getEsdtPoolContractAddress = (network: AppEnv) => {
   if (network === 'devnet') return 'erd1qqqqqqqqqqqqqpgqagtkct3gswr62z3p2qdqlf5l2ukseu2ql3tsjl02gh'
