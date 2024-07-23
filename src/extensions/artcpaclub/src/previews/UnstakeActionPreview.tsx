@@ -1,9 +1,9 @@
-import { Config } from '../config'
-import { EsdtPool, NftPool } from '../types'
+import { ProposalAction, toFormattedTokenAmount, transformActionArgToBigint } from '@peerme/core-ts'
 import React, { useEffect, useState } from 'react'
 import { ExtensionConfig } from '../../../../shared/types'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { ProposalAction, toActionArgsBigInt, toFormattedTokenAmount } from '@peerme/core-ts'
+import { Config } from '../config'
+import { EsdtPool, NftPool } from '../types'
 
 type Props = {
   action: ProposalAction
@@ -16,7 +16,7 @@ export function UnstakeActionPreview(props: Props) {
   const poolId = props.action.arguments[0] as number
   const nonce = (isNft ? props.action.arguments[1] : null) as number | null
   const optAmount = (isNft ? props.action.arguments[2] : props.action.arguments[1]) as number | null
-  const amountBig = optAmount ? toActionArgsBigInt(optAmount) : BigInt(0)
+  const amountBig = optAmount ? transformActionArgToBigint(optAmount) : BigInt(0)
 
   useEffect(() => {
     if (!poolId) return
