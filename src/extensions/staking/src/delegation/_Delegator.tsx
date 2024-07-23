@@ -1,11 +1,11 @@
-import { Config } from '../config'
-import { DelegationProvider } from '../types'
 import { Address } from '@multiversx/sdk-core'
+import { Constants, sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
 import { Button, Input } from '@peerme/web-ui'
-import { toEgldDisplayAmount } from '../helpers'
 import React, { useEffect, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
-import { Constants, sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
+import { Config } from '../config'
+import { toEgldDisplayAmount } from '../helpers'
+import { DelegationProvider } from '../types'
 
 type Props = {
   provider: DelegationProvider
@@ -13,17 +13,18 @@ type Props = {
 
 export const _Delegator = (props: Props) => {
   const app = useApp()
-  const [amount, setAmount] = useState('')
   const [entityBalance, setEntityBalance] = useState<bigint>(0n)
+  const [amount, setAmount] = useState('0')
+  const amountBig = 0n //  shiftedBy(amount, Constants.Egld.Decimals)
 
   useEffect(() => {
     app.networkProvider
       .getAccount(new Address(app.config.entity.address))
-      .then((acc) => setEntityBalance(acc.balance as any))
+      .then((acc) => setEntityBalance(BigInt(acc.balance?.toFixed() || 0)))
   }, [])
 
   const handleAdd = () => {
-    const valueBig = shiftBigint(amount, Constants.Egld.Decimals)
+    const valueBig = shiftedBy(amount, Constants.Egld.Decimals)
     if (valueBig > entityBalance) {
       app.showToast('Insufficient balance', 'error')
       return
@@ -66,11 +67,11 @@ export const _Delegator = (props: Props) => {
           autoFocus
           autoComplete="off"
         />
-        {BigInt(amount) !== shiftBigint(entityBalance, -Constants.Egld.Decimals) && (
+        {amountBig !== entityBalance && (
           <div className="absolute bottom-1/2 right-4 transform translate-y-1/2">
             <button
               type="button"
-              onClick={() => setAmount(shiftBigint(entityBalance, -Constants.Egld.Decimals).toString())}
+              onClick={() => setAmount(shiftedBy(entityBalance, -Constants.Egld.Decimals).toString())}
               className="px-3 py-1 uppercase bg-gray-800 hover:bg-gray-900 text-gray-100 rounded-xl shadow-lg transition duration-300"
             >
               Max

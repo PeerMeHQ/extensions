@@ -1,9 +1,9 @@
-import { Config } from '../config'
-import React, { useState } from 'react'
+import { Constants, sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
 import { Button, Input } from '@peerme/web-ui'
-import { toEgldDisplayAmount } from '../helpers'
+import React, { useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
-import { Constants, sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
+import { Config } from '../config'
+import { toEgldDisplayAmount } from '../helpers'
 import { DelegationInfo, DelegationProvider } from '../types'
 
 type Props = {
@@ -60,12 +60,12 @@ export const _Withdrawer = (props: Props) => {
           autoFocus
           autoComplete="off"
         />
-        {BigInt(amount) !== shiftBigint(props.delegation.userActiveStake, -Constants.Egld.Decimals) && (
+        {BigInt(amount) !== shiftedBy(props.delegation.userActiveStake, -Constants.Egld.Decimals) && (
           <div className="absolute bottom-1/2 right-4 transform translate-y-1/2">
             <button
               type="button"
               onClick={() =>
-                setAmount(shiftBigint(props.delegation.userActiveStake, -Constants.Egld.Decimals).toString())
+                setAmount(shiftedBy(props.delegation.userActiveStake, -Constants.Egld.Decimals).toString())
               }
               className="px-3 py-1 uppercase bg-gray-800 hover:bg-gray-900 text-gray-100 rounded-xl shadow-lg transition duration-300"
             >

@@ -1,13 +1,13 @@
-import dayjs from 'dayjs'
-import React, { useState } from 'react'
-import { CoalitionInfo } from '../types'
-import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
+import { faHourglass } from '@fortawesome/free-solid-svg-icons'
+import { Address, AddressValue, ContractFunction, Interaction, SmartContract, U64Value } from '@multiversx/sdk-core/out'
+import { sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
 import { Alert, Button, Input } from '@peerme/web-ui'
+import dayjs from 'dayjs'
 import daysjsRelative from 'dayjs/plugin/relativeTime'
+import React, { useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { getCoalitionContractAddress } from '../contracts'
-import { faHourglass } from '@fortawesome/free-solid-svg-icons'
-import { Address, U64Value, Interaction, AddressValue, SmartContract, ContractFunction } from '@multiversx/sdk-core/out'
+import { CoalitionInfo } from '../types'
 
 dayjs.extend(daysjsRelative)
 
@@ -22,11 +22,11 @@ export function Withdrawer(props: Props) {
   const lockedUntilDate = dayjs.unix(props.info.userStakeUnlocksAt)
   const isLocked = dayjs().isBefore(lockedUntilDate)
   const stakeTokenDecimals = 18 // TODO
-  const balanceDenominated = shiftBigint(props.info.userStake, -stakeTokenDecimals)
+  const balanceDenominated = shiftedBy(props.info.userStake, -stakeTokenDecimals)
 
   const handleWithdraw = () => {
     if (!app.config.user) return
-    const amount = shiftBigint(withdrawAmount, stakeTokenDecimals)
+    const amount = shiftedBy(withdrawAmount, stakeTokenDecimals)
     const contract = new SmartContract({
       address: Address.fromBech32(getCoalitionContractAddress(app.config.network.env)),
     })

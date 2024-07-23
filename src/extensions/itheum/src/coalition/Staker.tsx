@@ -1,21 +1,21 @@
-import dayjs from 'dayjs'
-import React, { useState } from 'react'
-import { CoalitionInfo } from '../types'
-import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
-import { Alert, Button, Input } from '@peerme/web-ui'
-import daysjsRelative from 'dayjs/plugin/relativeTime'
-import { useApp } from '../../../../shared/hooks/useApp'
-import { getCoalitionContractAddress } from '../contracts'
 import { faWarning } from '@fortawesome/free-solid-svg-icons'
 import {
   Address,
-  U64Value,
-  Interaction,
   AddressValue,
+  ContractFunction,
+  Interaction,
   SmartContract,
   TokenTransfer,
-  ContractFunction,
+  U64Value,
 } from '@multiversx/sdk-core/out'
+import { sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
+import { Alert, Button, Input } from '@peerme/web-ui'
+import dayjs from 'dayjs'
+import daysjsRelative from 'dayjs/plugin/relativeTime'
+import React, { useState } from 'react'
+import { useApp } from '../../../../shared/hooks/useApp'
+import { getCoalitionContractAddress } from '../contracts'
+import { CoalitionInfo } from '../types'
 
 dayjs.extend(daysjsRelative)
 
@@ -29,7 +29,7 @@ export function Staker(props: Props) {
   const [stakeAmount, setStakeAmount] = useState('')
   const lockedFor = dayjs().to(dayjs().add(props.info.stakeLockTimeSeconds, 'seconds'), true)
   const stakeTokenDecimals = 18 // TODO
-  const balanceDenominated = shiftBigint(props.info.userStake, -stakeTokenDecimals)
+  const balanceDenominated = shiftedBy(props.info.userStake, -stakeTokenDecimals)
 
   const handleStake = () => {
     if (!app.config.user) return

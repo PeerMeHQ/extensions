@@ -1,10 +1,10 @@
-import { Contracts } from '../contracts'
+import { sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
 import { Button, Input } from '@peerme/web-ui'
-import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
-import { EsdtPool, EsdtPoolOnChain } from '../types'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
+import { Contracts } from '../contracts'
+import { EsdtPool, EsdtPoolOnChain } from '../types'
 
 type Props = {
   pool: EsdtPool
@@ -15,11 +15,11 @@ type Props = {
 export function _Unstaker(props: Props) {
   const app = useApp()
   const [amount, setAmount] = useState('0')
-  const balanceDenominated = shiftBigint(props.poolOnChain.user_stake_amount, -props.pool.stake_token_decimal)
+  const balanceDenominated = shiftedBy(props.poolOnChain.user_stake_amount, -props.pool.stake_token_decimal)
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    const amountBig = shiftBigint(amount, props.pool.stake_token_decimal)
+    const amountBig = shiftedBy(amount, props.pool.stake_token_decimal)
     app.requestProposalAction(
       Contracts(app.config).EsdtUserUnstake.Address,
       Contracts(app.config).EsdtUserUnstake.Endpoint,

@@ -1,11 +1,11 @@
-import { Config } from '../config'
-import { Contracts } from '../contracts'
-import { Button, Input } from '@peerme/web-ui'
 import { TokenTransfer } from '@multiversx/sdk-core'
+import { sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
+import { Button, Input } from '@peerme/web-ui'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { sanitizeNumeric, shiftBigint } from '@peerme/core-ts'
+import { Config } from '../config'
+import { Contracts } from '../contracts'
 import { DataNftMetadata, MarketRequirements } from '../types'
 
 type Props = {
@@ -25,7 +25,7 @@ export function _MarketListSection(props: Props) {
     const addOfferScInfo = Contracts(app.config).AddOffer
     const paymentTokenId = Config.TokenId(app.config.network.env)
     const paymentTokenNonce = 0
-    const priceBig = shiftBigint(price, Config.TokenDecimals)
+    const priceBig = shiftedBy(price, Config.TokenDecimals)
     app.requestProposalAction(
       addOfferScInfo.Address,
       addOfferScInfo.Endpoint,

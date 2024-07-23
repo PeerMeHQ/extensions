@@ -1,5 +1,5 @@
-import { shiftBigint } from '@peerme/core-ts'
 import { Token, TokenTransfer } from '@multiversx/sdk-core'
+import { shiftedBy } from '@peerme/core-ts'
 
 export const toPreparedCsvLines = (plainText: string) => plainText.trim().split(/[\r\n]+/)
 
@@ -11,7 +11,7 @@ export const createTokenTransferFromBigInteger = (payment: TokenTransfer, amount
 }
 
 export const createTokenTransferFromAmount = (payment: TokenTransfer, amount: bigint) => {
-  const amountAsBigInt = shiftBigint(amount, payment.numDecimals)
+  const amountAsBigInt = shiftedBy(amount, payment.numDecimals)
 
   return createTokenTransferFromBigInteger(payment, amountAsBigInt)
 }
