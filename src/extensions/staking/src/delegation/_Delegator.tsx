@@ -15,7 +15,7 @@ export const _Delegator = (props: Props) => {
   const app = useApp()
   const [entityBalance, setEntityBalance] = useState<bigint>(0n)
   const [amount, setAmount] = useState('0')
-  const amountBig = 0n //  shiftedBy(amount, Constants.Egld.Decimals)
+  const amountBig = shiftedBy(amount, Constants.Egld.Decimals)
 
   useEffect(() => {
     app.networkProvider
@@ -24,12 +24,11 @@ export const _Delegator = (props: Props) => {
   }, [])
 
   const handleAdd = () => {
-    const valueBig = shiftedBy(amount, Constants.Egld.Decimals)
-    if (valueBig > entityBalance) {
+    if (amountBig > entityBalance) {
       app.showToast('Insufficient balance', 'error')
       return
     }
-    app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, valueBig, [], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.Delegate, amountBig, [], [])
   }
 
   return (

@@ -13,16 +13,15 @@ type Props = {
 
 export const _Withdrawer = (props: Props) => {
   const app = useApp()
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState('0')
+  const amountBig = shiftedBy(amount, Constants.Egld.Decimals)
 
   const handleWithdraw = () => {
-    // const valueBig = BigInt(amount).shiftedBy(Constants.Egld.Decimals)
-    const valueBig = BigInt(amount) * 10n ** BigInt(Constants.Egld.Decimals)
-    if (valueBig > props.delegation.userActiveStake) {
+    if (amountBig > props.delegation.userActiveStake) {
       app.showToast('Can not unstake more than is staked', 'error')
       return
     }
-    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0n, [valueBig], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0n, [amountBig], [])
   }
 
   return (
@@ -60,7 +59,7 @@ export const _Withdrawer = (props: Props) => {
           autoFocus
           autoComplete="off"
         />
-        {BigInt(amount) !== shiftedBy(props.delegation.userActiveStake, -Constants.Egld.Decimals) && (
+        {amountBig !== props.delegation.userActiveStake && (
           <div className="absolute bottom-1/2 right-4 transform translate-y-1/2">
             <button
               type="button"
@@ -74,7 +73,7 @@ export const _Withdrawer = (props: Props) => {
           </div>
         )}
       </div>
-      <p className="text-right mb-4">Balance: {toEgldDisplayAmount(props.delegation.userActiveStake)}</p>
+      <p className="text-right mb-4">Staked: {toEgldDisplayAmount(props.delegation.userActiveStake)}</p>
       <Button onClick={handleWithdraw} color="blue" disabled={+amount <= 0} className="block w-full">
         Add Unstake Action to Proposal
       </Button>
