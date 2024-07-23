@@ -1,6 +1,6 @@
 import React from 'react'
-import { DelegationProvider } from '../types'
 import { toEgldDisplayAmount } from '../helpers'
+import { DelegationProvider } from '../types'
 
 type Props = {
   providers: DelegationProvider[]
@@ -53,7 +53,9 @@ export const _DelegateProviderList = (props: Props) => (
             </div>
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{provider.apr}%</td>
-          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{+provider.serviceFee * 100}%</td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            {(+provider.serviceFee * 100).toFixed(2)}%
+          </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
             {provider.delegationCap === 0n ? 'Uncapped' : provider.identityInfo.stakePercent + '%'}
           </td>

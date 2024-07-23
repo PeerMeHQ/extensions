@@ -1,10 +1,10 @@
-import { Config } from '../config'
 import { Dialog } from '@peerme/web-ui'
-import { _Withdrawer } from './_Withdrawer'
-import { toEgldDisplayAmount } from '../helpers'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
+import { Config } from '../config'
+import { toEgldDisplayAmount } from '../helpers'
 import { DelegationInfo, DelegationProvider } from '../types'
+import { _Withdrawer } from './_Withdrawer'
 
 type Props = {
   delegation: DelegationInfo
@@ -50,7 +50,7 @@ export const _DelegationsRow = (props: Props) => {
             </div>
             <div className="flex-grow text-left">
               <h3 className="text-lg text-black dark:text-white">{props.provider.identityInfo.name}</h3>
-              <span className="text-sm text-gray-500">APR: {props.provider.apr}%</span>
+              <span className="text-sm text-gray-500">APR: {props.provider.apr.toFixed(2)}%</span>
             </div>
           </div>
         )}
