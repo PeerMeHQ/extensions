@@ -1,16 +1,17 @@
-import { ExtensionConfig, ExtensionInfo } from './shared/types'
-import { EntityExtension } from './extensions/entity/register'
-import { XBulkExtension } from './extensions/xbulk/register'
-import { HatomExtension } from './extensions/hatom/register'
-import { ItheumExtension } from './extensions/itheum/register'
-import { StakingExtension } from './extensions/staking/register'
+import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
 import { AshSwapExtension } from './extensions/ashswap/register'
 import { CoindripExtension } from './extensions/coindrip/register'
+import { EntityExtension } from './extensions/entity/register'
+import { HatomExtension } from './extensions/hatom/register'
+import { ItheumExtension } from './extensions/itheum/register'
 import { LunarPayExtension } from './extensions/lunarpay/register'
-import { Sense4fitExtension } from './extensions/sense4fit/register'
-import { XExchangeExtension } from './extensions/xexchange/register'
-import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
 import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
+import { Sense4fitExtension } from './extensions/sense4fit/register'
+import { StakingExtension } from './extensions/staking/register'
+import { XBulkExtension } from './extensions/xbulk/register'
+import { XExchangeExtension } from './extensions/xexchange/register'
+import { XMoneyExtension } from './extensions/xmoney/register'
+import { ExtensionConfig, ExtensionInfo } from './shared/types'
 
 export const Config = (config: ExtensionConfig) => ({
   Extensions: [
@@ -18,6 +19,7 @@ export const Config = (config: ExtensionConfig) => ({
     EntityExtension(config),
     StakingExtension(config),
     XExchangeExtension(config),
+    XMoneyExtension(config),
     CoindripExtension(config),
     ItheumExtension(config),
     XBulkExtension(config),
