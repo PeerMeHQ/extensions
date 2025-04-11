@@ -1,12 +1,7 @@
-import { ArtCpaClubExtension } from './extensions/artcpaclub/register'
 import { AshSwapExtension } from './extensions/ashswap/register'
 import { CoindripExtension } from './extensions/coindrip/register'
 import { EntityExtension } from './extensions/entity/register'
-import { HatomExtension } from './extensions/hatom/register'
 import { ItheumExtension } from './extensions/itheum/register'
-import { LunarPayExtension } from './extensions/lunarpay/register'
-import { PulsarMoneyExtension } from './extensions/pulsarmoney/register'
-import { Sense4fitExtension } from './extensions/sense4fit/register'
 import { StakingExtension } from './extensions/staking/register'
 import { XBulkExtension } from './extensions/xbulk/register'
 import { XExchangeExtension } from './extensions/xexchange/register'
@@ -23,12 +18,12 @@ export const Config = (config: ExtensionConfig) => ({
     CoindripExtension(config),
     ItheumExtension(config),
     XBulkExtension(config),
-    PulsarMoneyExtension(config),
-    HatomExtension(config),
+    // PulsarMoneyExtension(config),
+    // HatomExtension(config),
     AshSwapExtension(config),
-    Sense4fitExtension(config),
-    ArtCpaClubExtension(config),
-    LunarPayExtension(config),
+    // Sense4fitExtension(config),
+    // ArtCpaClubExtension(config),
+    // LunarPayExtension(config),
   ],
 
   KnowledgeBase: {

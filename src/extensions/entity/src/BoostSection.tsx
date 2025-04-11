@@ -1,11 +1,12 @@
-import { EntityConfig } from './config'
-import { Constants } from '@peerme/core-ts'
-import { EntityContracts } from './contracts'
-import { useApp } from '../../../shared/hooks/useApp'
-import React, { SyntheticEvent, useState } from 'react'
 import { TokenTransfer } from '@multiversx/sdk-core/out'
-import { AppSection } from '../../../shared/ui/elements/AppSection'
+import { Constants } from '@peerme/core-ts'
 import { Alert, Button, EntityTransferSelector } from '@peerme/web-ui'
+import { address } from '@vleap/warps'
+import React, { SyntheticEvent, useState } from 'react'
+import { useApp } from '../../../shared/hooks/useApp'
+import { AppSection } from '../../../shared/ui/elements/AppSection'
+import { EntityConfig } from './config'
+import { EntityContracts } from './contracts'
 
 type Props = {
   className?: string
@@ -32,7 +33,7 @@ export function BoostSection(props: Props) {
       EntityContracts(app.config).Boost.Address,
       EntityContracts(app.config).Boost.Endpoint,
       value,
-      [app.config.entity.address],
+      [address(app.config.entity.address)],
       tokenTransfers
     )
   }

@@ -20,7 +20,7 @@ export const _Delegator = (props: Props) => {
   useEffect(() => {
     app.networkProvider
       .getAccount(new Address(app.config.entity.address))
-      .then((acc) => setEntityBalance(BigInt(acc.balance?.toFixed() || 0)))
+      .then((acc) => setEntityBalance(BigInt(acc.balance?.toString() || 0)))
   }, [])
 
   const handleAdd = () => {

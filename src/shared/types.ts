@@ -1,11 +1,9 @@
-import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
-import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
+import { ApiNetworkProvider, TokenTransfer, Transaction, TypedValue } from '@multiversx/sdk-core'
 import {
   AppNetwork,
   Entity,
   EntityTag,
   ProposalAction,
-  ProposalActionArg,
   ScInfo,
   SearchServiceConfig,
   UserPrivate,
@@ -63,7 +61,7 @@ export type AppContextValue = {
     destination: string,
     endpoint: string | null,
     value: bigint,
-    args: ProposalActionArg[],
+    args: TypedValue[],
     payments: TokenTransfer[]
   ) => void
   requestDirectProposalAction: (action: ProposalAction) => void

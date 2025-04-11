@@ -1,10 +1,11 @@
-import React from 'react'
+import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
+import { WarpArgSerializer } from '@vleap/warps'
 import Link from 'next/link'
 import pluralize from 'pluralize'
-import { Config } from '../config'
+import React from 'react'
 import { ExtensionConfig } from '../../../../shared/types'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
+import { Config } from '../config'
 
 type Props = {
   action: ProposalAction
@@ -12,8 +13,9 @@ type Props = {
 }
 
 export function AcceptOfferActionPreview(props: Props) {
-  const offerId = props.action.arguments[0] as number
-  const quantity = props.action.arguments[1] as number
+  const was = new WarpArgSerializer()
+  const offerId = was.stringToNative(props.action.arguments[0])[1] as number
+  const quantity = was.stringToNative(props.action.arguments[1])[1] as number
   const offerUrl = Config.Urls.MarketplaceOffer(props.config.network.env, offerId)
 
   const displayableCostPayments =

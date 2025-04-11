@@ -33,6 +33,7 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
   },
 
   entity: {
+    id: '1',
     address: currentUserAddress || DemoDaoScAddress,
     slug: 'my-dao',
     name: 'MyDAO',
@@ -65,6 +66,7 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
     leaders: 1,
     level: 0,
     credits: null,
+    version: '1.0.0',
     callerRoles: [],
     parent: null,
     children: [],
@@ -75,6 +77,7 @@ const defaultConfig = (dark: boolean, currentUserAddress: string | null): Extens
   },
 
   user: {
+    id: '1',
     address: currentUserAddress,
     username: null,
     name: 'Alice',

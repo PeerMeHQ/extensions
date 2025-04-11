@@ -1,12 +1,13 @@
+import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
+import { u64 } from '@vleap/warps'
 import { clsx } from 'clsx'
-import { Config } from '../config'
-import { ClaimInfo } from '../types'
 import React, { useEffect } from 'react'
-import { Contracts } from '../contracts'
-import { toTypedClaimInfo } from '../helpers'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
+import { Config } from '../config'
+import { Contracts } from '../contracts'
+import { toTypedClaimInfo } from '../helpers'
+import { ClaimInfo } from '../types'
 
 export function _ClaimsSection() {
   const app = useApp()
@@ -24,7 +25,7 @@ export function _ClaimsSection() {
   }, [])
 
   const handleClaim = (index: number) =>
-    app.requestProposalAction(contracts.Claim.Address, contracts.Claim.Endpoint, 0n, [index], [])
+    app.requestProposalAction(contracts.Claim.Address, contracts.Claim.Endpoint, 0n, [u64(BigInt(index))], [])
 
   return (
     <AppSection title="Claims">

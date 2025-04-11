@@ -13,7 +13,7 @@ import {
   Switch,
   UserSelector,
 } from '@peerme/web-ui'
-import { BigNumber } from 'bignumber.js'
+import { string } from '@vleap/warps'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../shared/hooks/useApp'
 import * as sdk from './sdk'
@@ -115,7 +115,7 @@ export const _Vesting = () => {
       metadata.receiver,
       metadata.functionName || null,
       BigInt(value.toString()),
-      metadata.functionArgs,
+      metadata.functionArgs.map((arg) => string(arg)),
       transfers
     )
   }

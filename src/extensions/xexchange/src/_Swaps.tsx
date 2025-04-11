@@ -1,10 +1,9 @@
-import { GraphQl } from './graphql'
-import { BigNumber } from 'bignumber.js'
+import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client'
 import { TokenTransfer } from '@multiversx/sdk-core'
-import { useApp } from '../../../shared/hooks/useApp'
 import { EntityTransferSelector } from '@peerme/web-ui'
 import React, { SyntheticEvent, useEffect, useState } from 'react'
-import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client'
+import { useApp } from '../../../shared/hooks/useApp'
+import { GraphQl } from './graphql'
 
 type Props = {
   apolloClient: ApolloClient<NormalizedCacheObject>

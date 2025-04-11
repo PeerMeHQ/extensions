@@ -1,12 +1,12 @@
-import { AshswapToken } from '../types'
-import { getAshswapChainId } from '../helpers'
 import { Aggregator } from '@ashswap/ash-sdk-js/out'
-import { useApp } from '../../../../shared/hooks/useApp'
-import { AppSection } from '../../../../shared/ui/elements'
 import { Address, TokenTransfer } from '@multiversx/sdk-core/out'
+import { Constants, ProposalAction, createAction } from '@peerme/core-ts'
 import { Button, EntityTransferSelector, Select } from '@peerme/web-ui'
 import React, { SyntheticEvent, useEffect, useMemo, useState } from 'react'
-import { Constants, ProposalAction, createAction, transformTypedValueToActionArg } from '@peerme/core-ts'
+import { useApp } from '../../../../shared/hooks/useApp'
+import { AppSection } from '../../../../shared/ui/elements'
+import { getAshswapChainId } from '../helpers'
+import { AshswapToken } from '../types'
 
 const DefaultSlippage = 100 // 1% = 1_000
 
@@ -52,7 +52,7 @@ export function SwapTab() {
     const contract = tx.getContractAddress().bech32()
     if (!contract) return
     const tokenTransfers = payment.isEgld() ? [] : [payment]
-    const args = tx.getArguments().map(transformTypedValueToActionArg as any) as any
+    const args = tx.getArguments() as any
     setComputedAction(
       createAction(contract, tx.getFunction().toString(), BigInt(tx.getValue().toString()), args, tokenTransfers)
     )

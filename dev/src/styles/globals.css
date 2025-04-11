@@ -1,8 +1,6 @@
-@import 'tailwindcss/base';
+@import 'tailwindcss';
 
-@import 'tailwindcss/utilities';
-
-@import 'tailwindcss/components';
+@config '../../tailwind.config.js';
 
 h1,
 h2,

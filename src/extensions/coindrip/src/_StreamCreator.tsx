@@ -1,8 +1,9 @@
-import { CoindripContracts } from './contracts'
 import { TokenTransfer } from '@multiversx/sdk-core'
-import { useApp } from '../../../shared/hooks/useApp'
+import { Button, EntityTransferSelector, Input, Switch, UserSelector } from '@peerme/web-ui'
+import { address, boolean, u64 } from '@vleap/warps'
 import React, { SyntheticEvent, useState } from 'react'
-import { Input, Button, UserSelector, EntityTransferSelector, Switch } from '@peerme/web-ui'
+import { useApp } from '../../../shared/hooks/useApp'
+import { CoindripContracts } from './contracts'
 
 export const _StreamCreator = () => {
   const app = useApp()
@@ -36,7 +37,7 @@ export const _StreamCreator = () => {
       CoindripContracts(app.config).StreamCreate.Address,
       CoindripContracts(app.config).StreamCreate.Endpoint,
       value,
-      [recipient, startsAtTs, endsAtTs, cancellable],
+      [address(recipient), u64(BigInt(startsAtTs)), u64(BigInt(endsAtTs)), boolean(cancellable)],
       tokenTransfers
     )
   }

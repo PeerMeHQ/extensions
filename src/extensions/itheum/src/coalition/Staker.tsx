@@ -42,7 +42,7 @@ export function Staker(props: Props) {
     ])
       .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
-      .withGasLimit(10_000_000)
+      .withGasLimit(10_000_000n)
       .withSingleESDTTransfer(TokenTransfer.fungibleFromAmount(props.info.nativeToken, stakeAmount, stakeTokenDecimals))
       .buildTransaction()
     app.requestUserAction(tx)

@@ -1,8 +1,7 @@
+import { ApiNetworkProvider, TokenTransfer, Transaction, TypedValue } from '@multiversx/sdk-core'
+import { ProposalAction, createAction } from '@peerme/core-ts'
 import { showToast as showAppToast } from '@peerme/web-ui'
-import { TokenTransfer, Transaction } from '@multiversx/sdk-core'
-import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import { AppToastType, ExtensionConfig, ExtensionInfo } from './types'
-import { ProposalAction, ProposalActionArg, createAction } from '@peerme/core-ts'
 
 export const toExtensionName = (config: ExtensionConfig, extension: ExtensionInfo) =>
   extension.Name.replace(':entityName', config.entity.name)
@@ -30,7 +29,7 @@ export const toAppContextValue = (
     destination: string,
     endpoint: string | null,
     value: bigint,
-    args: ProposalActionArg[] = [],
+    args: TypedValue[] = [],
     transfers: TokenTransfer[] = []
   ) => {
     const action = createAction(destination, endpoint || '', value, args, transfers)

@@ -1,26 +1,26 @@
+import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  Address,
+  AddressValue,
+  BytesValue,
+  ContractFunction,
+  Interaction,
+  SmartContract,
+  TokenTransfer,
+  U64Value,
+} from '@multiversx/sdk-core'
+import { ScInfo, useScQuery } from '@peerme/core-ts'
+import { Button, Select, Theme, Tooltip } from '@peerme/web-ui'
 import clsx from 'clsx'
 import collect from 'collect.js'
 import React, { useEffect, useState } from 'react'
-import { ScInfo, useScQuery } from '@peerme/core-ts'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
-import { Button, Select, Theme, Tooltip } from '@peerme/web-ui'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fetchDataNftsByIds, fetchDataNftsOfAccount } from '../api'
 import { Contracts, getCoalitionContractAddress } from '../contracts'
-import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
 import { toNftId, toTypedAggregatorAppInfo, toTypedAggregatorDelegation } from '../helpers'
 import { AggregatorAppInfo, AggregatorDelegation, CoalitionInfo, DataNftMetadata } from '../types'
-import {
-  Address,
-  BytesValue,
-  Interaction,
-  AddressValue,
-  TokenTransfer,
-  SmartContract,
-  ContractFunction,
-  U64Value,
-} from '@multiversx/sdk-core'
 
 type Props = {
   info: CoalitionInfo
@@ -115,7 +115,7 @@ export function Delegator(props: Props) {
     ])
       .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
-      .withGasLimit(50_000_000)
+      .withGasLimit(50_000_000n)
       .withMultiESDTNFTTransfer(transferables)
       .buildTransaction()
     app.requestUserAction(tx)
@@ -134,7 +134,7 @@ export function Delegator(props: Props) {
     ])
       .withChainID(app.config.network.chainId)
       .withSender(new Address(app.config.user.address))
-      .withGasLimit(50_000_000)
+      .withGasLimit(50_000_000n)
       .buildTransaction()
     app.requestUserAction(tx)
   }

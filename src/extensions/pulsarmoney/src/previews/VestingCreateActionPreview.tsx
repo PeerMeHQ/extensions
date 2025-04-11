@@ -1,10 +1,9 @@
-import React from 'react'
-import BigNumber from 'bignumber.js'
 import { Address } from '@multiversx/sdk-core'
-import { useApp } from '../../../../shared/hooks/useApp'
+import { Constants, ProposalAction } from '@peerme/core-ts'
 import { AddressPresenter, Tooltip } from '@peerme/web-ui'
+import React from 'react'
+import { useApp } from '../../../../shared/hooks/useApp'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { Constants, ProposalAction, transformActionArgToTypedValue } from '@peerme/core-ts'
 
 type Props = {
   action: ProposalAction
@@ -27,7 +26,7 @@ export const VestingCreateActionPreview = (props: Props) => {
           .toFixed(2)
           .toString()
 
-  const receiverHex = transformActionArgToTypedValue(args[3]).valueOf().toString('hex')
+  const receiverHex = args[3]
   const receiverAddr = Address.fromHex(receiverHex).bech32()
 
   const cliffRelease = args[4]?.toString().slice(4)

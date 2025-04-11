@@ -1,4 +1,5 @@
-import { ProposalAction, toFormattedTokenAmount, transformActionArgToBigint } from '@peerme/core-ts'
+import { ProposalAction, toFormattedTokenAmount } from '@peerme/core-ts'
+import { WarpArgSerializer } from '@vleap/warps'
 import React, { useEffect, useState } from 'react'
 import { ExtensionConfig } from '../../../../shared/types'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
@@ -11,12 +12,15 @@ type Props = {
 }
 
 export function UnstakeActionPreview(props: Props) {
+  const was = new WarpArgSerializer()
   const [selectedPool, setSelectedPool] = useState<EsdtPool | NftPool | null>(null)
   const isNft = props.action.arguments.length === 3
-  const poolId = props.action.arguments[0] as number
-  const nonce = (isNft ? props.action.arguments[1] : null) as number | null
-  const optAmount = (isNft ? props.action.arguments[2] : props.action.arguments[1]) as number | null
-  const amountBig = optAmount ? transformActionArgToBigint(optAmount) : BigInt(0)
+  const poolId = was.stringToNative(props.action.arguments[0])[1] as number
+  const nonce = (isNft ? was.stringToNative(props.action.arguments[1])[1] : null) as number | null
+  const optAmount = (
+    isNft ? was.stringToNative(props.action.arguments[2])[1] : was.stringToNative(props.action.arguments[1])[1]
+  ) as number | null
+  const amountBig = optAmount ? BigInt(optAmount) : BigInt(0)
 
   useEffect(() => {
     if (!poolId) return

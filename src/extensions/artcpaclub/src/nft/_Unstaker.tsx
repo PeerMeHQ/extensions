@@ -1,10 +1,11 @@
-import { Contracts } from '../contracts'
-import { Button, Input } from '@peerme/web-ui'
 import { sanitizeNumeric } from '@peerme/core-ts'
+import { Button, Input } from '@peerme/web-ui'
+import { u64 } from '@vleap/warps'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
+import { Contracts } from '../contracts'
 import { NftPool, NftPoolOnChain, StakedNftInfo } from '../types'
-import React, { SyntheticEvent, useEffect, useState } from 'react'
 
 type Props = {
   pool: NftPool
@@ -39,7 +40,7 @@ export function _Unstaker(props: Props) {
       Contracts(app.config).NftUserUnstake.Address,
       Contracts(app.config).NftUserUnstake.Endpoint,
       0n,
-      [props.pool.pool_id, unstakableInfo.nonce, amountBig],
+      [u64(BigInt(props.pool.pool_id)), u64(BigInt(unstakableInfo.nonce)), u64(amountBig)],
       []
     )
   }

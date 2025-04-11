@@ -1,12 +1,12 @@
-import { Setup } from '@/setup'
-import { useMemo, useState } from 'react'
 import { toDemoTransaction } from '@/helpers'
-import * as Extensions from '../../../src/index'
 import { BaseLayout } from '@/layouts/BaseLayout'
+import { Setup } from '@/setup'
 import { Transaction } from '@multiversx/sdk-core'
-import { EntityTag, ProposalAction } from '@peerme/core-ts'
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks'
 import { sendTransactions } from '@multiversx/sdk-dapp/services'
+import { EntityTag, ProposalAction } from '@peerme/core-ts'
+import { useState } from 'react'
+import * as Extensions from '../../../src/index'
 
 export default function Home() {
   const [dark, setDark] = useState(false)
@@ -30,7 +30,9 @@ export default function Home() {
               if (address) {
                 const result = window.confirm('Do you want to simulate the action as if it was executed by the DAO?')
                 if (result) {
-                  sendTransactions({ transactions: [toDemoTransaction(action, account)] })
+                  sendTransactions({
+                    transactions: [toDemoTransaction(action, account)],
+                  })
                 }
               } else {
                 alert('Action added. Connect your wallet to simulate the transaction.')

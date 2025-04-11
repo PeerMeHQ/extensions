@@ -1,10 +1,11 @@
-import { EsdtPool } from '../types'
-import { Contracts } from '../contracts'
-import React, { SyntheticEvent, useState } from 'react'
 import { TokenTransfer } from '@multiversx/sdk-core/out'
+import { Button, EntityTransferSelector } from '@peerme/web-ui'
+import { u64 } from '@vleap/warps'
+import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
-import { Button, EntityTransferSelector } from '@peerme/web-ui'
+import { Contracts } from '../contracts'
+import { EsdtPool } from '../types'
 
 type Props = {
   pool: EsdtPool
@@ -26,7 +27,7 @@ export function _Staker(props: Props) {
       Contracts(app.config).EsdtUserStake.Address,
       Contracts(app.config).EsdtUserStake.Endpoint,
       value,
-      [props.pool.pool_id],
+      [u64(BigInt(props.pool.pool_id))],
       tokenTransfers
     )
   }

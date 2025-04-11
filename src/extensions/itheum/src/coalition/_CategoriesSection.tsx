@@ -1,10 +1,11 @@
+import { Button, Input, Theme } from '@peerme/web-ui'
+import { string } from '@vleap/warps'
 import clsx from 'clsx'
 import React, { useState } from 'react'
-import { CoalitionInfo } from '../types'
-import { Contracts } from '../contracts'
-import { Button, Input, Theme } from '@peerme/web-ui'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
+import { Contracts } from '../contracts'
+import { CoalitionInfo } from '../types'
 
 type Props = {
   info: CoalitionInfo
@@ -20,7 +21,7 @@ export function _CategoriesSection(props: Props) {
       Contracts(app.config).AddCategory.Address,
       Contracts(app.config).AddCategory.Endpoint,
       0n,
-      [name],
+      [string(name)],
       []
     )
 
@@ -29,7 +30,7 @@ export function _CategoriesSection(props: Props) {
       Contracts(app.config).RemoveCategory.Address,
       Contracts(app.config).RemoveCategory.Endpoint,
       0n,
-      [name],
+      [string(name)],
       []
     )
 

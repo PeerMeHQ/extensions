@@ -1,7 +1,7 @@
+import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-core'
+import { AppContextValue } from '../../../shared/types'
 import { Config } from './config'
 import { decodeNftMetadata, toNftId } from './helpers'
-import { AppContextValue } from '../../../shared/types'
-import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
 
 export const fetchDataNft = async (app: AppContextValue, collectionId: string, nonce: number) => {
   const url = `nfts/${toNftId(collectionId, nonce)}`

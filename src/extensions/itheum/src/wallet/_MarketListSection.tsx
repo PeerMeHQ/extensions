@@ -1,6 +1,7 @@
 import { TokenTransfer } from '@multiversx/sdk-core'
 import { sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
 import { Button, Input } from '@peerme/web-ui'
+import { string, u64 } from '@vleap/warps'
 import React, { SyntheticEvent, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppSection } from '../../../../shared/ui/elements'
@@ -30,7 +31,13 @@ export function _MarketListSection(props: Props) {
       addOfferScInfo.Address,
       addOfferScInfo.Endpoint,
       0n,
-      [paymentTokenId, paymentTokenNonce, priceBig, minAmountForSeller, +amount],
+      [
+        string(paymentTokenId),
+        u64(BigInt(paymentTokenNonce)),
+        u64(priceBig),
+        u64(BigInt(minAmountForSeller)),
+        u64(BigInt(+amount)),
+      ],
       [TokenTransfer.semiFungible(props.nft.collection, props.nft.nonce, +amount)]
     )
   }

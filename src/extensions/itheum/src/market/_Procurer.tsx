@@ -1,12 +1,13 @@
-import { Config } from '../config'
-import { Contracts } from '../contracts'
 import { TokenTransfer } from '@multiversx/sdk-core'
-import { DataNftMetadata, OfferInfo } from '../types'
+import { Constants, toFormattedTokenAmount } from '@peerme/core-ts'
+import { Button, Dialog, Input, TextBadge } from '@peerme/web-ui'
+import { u64 } from '@vleap/warps'
+import React, { SyntheticEvent, useMemo, useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
-import React, { SyntheticEvent, useMemo, useState } from 'react'
-import { Button, Input, Dialog, TextBadge } from '@peerme/web-ui'
-import { Constants, toFormattedTokenAmount } from '@peerme/core-ts'
+import { Config } from '../config'
+import { Contracts } from '../contracts'
+import { DataNftMetadata, OfferInfo } from '../types'
 
 type Props = {
   offer: OfferInfo
@@ -34,7 +35,13 @@ export function _Procurer(props: Props) {
     const tokenTransfers =
       wantsEgld || isFree ? [] : [toWantedTokenTransfer(props.offer, wantedAmount, wantedTokenDecimals)]
 
-    app.requestProposalAction(contract.Address, contract.Endpoint, value, [props.offer.id, +quantity], tokenTransfers)
+    app.requestProposalAction(
+      contract.Address,
+      contract.Endpoint,
+      value,
+      [u64(BigInt(props.offer.id)), u64(BigInt(quantity))],
+      tokenTransfers
+    )
   }
 
   return (

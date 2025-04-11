@@ -1,5 +1,5 @@
+import { ApiNetworkProvider } from '@multiversx/sdk-core'
 import { DelegationInfo, DelegationProvider } from './types'
-import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 
 export const getDelegationProvidersRequest = async (provider: ApiNetworkProvider): Promise<DelegationProvider[]> => {
   const res = await provider.doGetGeneric('providers?withIdentityInfo=true&size=10000')

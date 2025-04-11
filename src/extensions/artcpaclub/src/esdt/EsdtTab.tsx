@@ -1,15 +1,16 @@
-import { Config } from '../config'
-import { _Staker } from './_Staker'
+import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 import { Input } from '@peerme/web-ui'
-import { _Unstaker } from './_Unstaker'
-import { Contracts } from '../contracts'
+import { u64 } from '@vleap/warps'
 import React, { useEffect, useState } from 'react'
-import { toTypedEsdtPoolOnChain } from '../helpers'
-import { EsdtPool, EsdtPoolOnChain } from '../types'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
 import { AppSection } from '../../../../shared/ui/elements'
-import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
+import { Config } from '../config'
+import { Contracts } from '../contracts'
+import { toTypedEsdtPoolOnChain } from '../helpers'
+import { EsdtPool, EsdtPoolOnChain } from '../types'
+import { _Staker } from './_Staker'
+import { _Unstaker } from './_Unstaker'
 
 export function EsdtTab() {
   const app = useApp()
@@ -96,7 +97,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: EsdtPool; poolOnC
       Contracts(props.app.config).EsdtUserClaim.Address,
       Contracts(props.app.config).EsdtUserClaim.Endpoint,
       0n,
-      [props.pool.pool_id],
+      [u64(BigInt(props.pool.pool_id))],
       []
     )
 

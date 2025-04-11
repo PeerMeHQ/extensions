@@ -1,14 +1,13 @@
+import { AbiRegistry, BinaryCodec, NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-core'
 import { numberToPaddedHex } from '@peerme/core-ts'
-import { AbiRegistry, BinaryCodec } from '@multiversx/sdk-core'
-import { NonFungibleTokenOfAccountOnNetwork } from '@multiversx/sdk-network-providers'
 import {
+  AggregatorAppInfo,
+  AggregatorDelegation,
   ClaimInfo,
-  OfferInfo,
   CoalitionInfo,
   DataNftMetadata,
-  AggregatorAppInfo,
   MarketRequirements,
-  AggregatorDelegation,
+  OfferInfo,
 } from './types'
 
 export const toTypedMarketRequirements = (value: any): MarketRequirements => ({

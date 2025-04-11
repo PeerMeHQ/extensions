@@ -1,15 +1,16 @@
-import { Config } from '../config'
-import { _Staker } from './_Staker'
+import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
 import { Input } from '@peerme/web-ui'
-import { _Unstaker } from './_Unstaker'
-import { Contracts } from '../contracts'
+import { u64 } from '@vleap/warps'
 import React, { useEffect, useState } from 'react'
-import { toTypedNftPoolOnChain } from '../helpers'
-import { NftPoolOnChain, NftPool } from '../types'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { AppContextValue } from '../../../../shared/types'
 import { AppSection } from '../../../../shared/ui/elements'
-import { toFormattedTokenAmount, useScQuery } from '@peerme/core-ts'
+import { Config } from '../config'
+import { Contracts } from '../contracts'
+import { toTypedNftPoolOnChain } from '../helpers'
+import { NftPool, NftPoolOnChain } from '../types'
+import { _Staker } from './_Staker'
+import { _Unstaker } from './_Unstaker'
 
 export function NftTab() {
   const app = useApp()
@@ -96,7 +97,7 @@ function _PoolOnChainInfo(props: { app: AppContextValue; pool: NftPool; poolOnCh
       Contracts(props.app.config).NftUserClaim.Address,
       Contracts(props.app.config).NftUserClaim.Endpoint,
       0n,
-      [props.pool.pool_id],
+      [u64(BigInt(props.pool.pool_id))],
       []
     )
 

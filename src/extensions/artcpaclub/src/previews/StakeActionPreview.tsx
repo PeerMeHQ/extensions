@@ -1,10 +1,11 @@
-import { Config } from '../config'
-import { EsdtPool } from '../types'
-import React, { useEffect, useState } from 'react'
 import { TokenTransfer } from '@multiversx/sdk-core/out'
+import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
+import { WarpArgSerializer } from '@vleap/warps'
+import React, { useEffect, useState } from 'react'
 import { ExtensionConfig } from '../../../../shared/types'
 import { ActionPreviewHighlight } from '../../../../shared/ui/elements'
-import { ProposalAction, toFormattedTokenPayment, toTokenPaymentFromProposalPayment } from '@peerme/core-ts'
+import { Config } from '../config'
+import { EsdtPool } from '../types'
 
 type Props = {
   action: ProposalAction
@@ -12,7 +13,8 @@ type Props = {
 }
 
 export function StakeActionPreview(props: Props) {
-  const poolId = props.action.arguments[0] as number
+  const was = new WarpArgSerializer()
+  const poolId = was.stringToNative(props.action.arguments[0])[1] as number
   const [selectedPool, setSelectedPool] = useState<EsdtPool | null>(null)
 
   const displayablePayments =

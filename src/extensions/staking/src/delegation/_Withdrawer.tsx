@@ -1,5 +1,6 @@
 import { Constants, sanitizeNumeric, shiftedBy } from '@peerme/core-ts'
 import { Button, Input } from '@peerme/web-ui'
+import { u64 } from '@vleap/warps'
 import React, { useState } from 'react'
 import { useApp } from '../../../../shared/hooks/useApp'
 import { Config } from '../config'
@@ -21,7 +22,7 @@ export const _Withdrawer = (props: Props) => {
       app.showToast('Can not unstake more than is staked', 'error')
       return
     }
-    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0n, [amountBig], [])
+    app.requestProposalAction(props.provider.contract, Config.Endpoints.UnDelegate, 0n, [u64(amountBig)], [])
   }
 
   return (
