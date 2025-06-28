@@ -7,7 +7,7 @@ import { DevServerConfig } from './config'
 const GasLimit = 50_000_000
 
 export const toDemoTransaction = (action: ProposalAction, account: AccountType) => {
-  console.log('Creating transaction for action', action, 'with account', account)
+  console.log('Creating transaction for action', action)
   const was = new WarpArgSerializer()
   const config = new TransactionsFactoryConfig({ chainID: DevServerConfig.ChainId })
   const sender = Address.newFromBech32(account.address)
@@ -20,8 +20,6 @@ export const toDemoTransaction = (action: ProposalAction, account: AccountType) 
     tokenTransfers: action.payments.map(toTokenPaymentFromProposalPayment),
     nativeTransferAmount: BigInt(action.value),
   })
-
-  tx.nonce = BigInt(account.nonce)
 
   return tx
 }
